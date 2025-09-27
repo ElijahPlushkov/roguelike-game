@@ -1,5 +1,4 @@
 import { gameData, adventureLog } from "./gameData.js";
-import { adventureLog } from "./gameData.js";
 import { loadLevelData, loadDialogueData, loadEventData, loadDoorData, loadEnemyData } from "./dataLoaders.js";
 import { levelData, map, player, tileSet, dialogueData, eventData, doorData } from "./dataLoaders.js";
 import { initEvent } from "./eventHandler.js";
@@ -8,7 +7,6 @@ import { initDialogue } from "./dialogueHandler.js";
 import { initCombat } from "./combatHandler.js";
 import { accessDoor } from "./doorHandler.js";
 import {hasSeenEvent, markEventSeen, clearLocalStorage, clearStorage} from "./helperFunctions.js";
-
 
 document.addEventListener("DOMContentLoaded", () => {
     loadLevelData();
