@@ -55,6 +55,6 @@ require_once __DIR__ . "/../views/header.php";
 <br>
 <button id="clearStorage"></button>
 
-<script type="module" src="/roguelike-game/public/assets/map-handler.js"></script>
+<script type="module" src="/roguelike-game/public/assets/main.js"></script>
 </body>
 </html>
