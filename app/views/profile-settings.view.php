@@ -19,7 +19,7 @@ require_once __DIR__ . "/../views/header.php";
 
         <div class="button-group">
             <button type="submit" name="save-changes" class="menu__button">Save Changes</button>
-            <button type="button" class="menu__button">Cancel</button>
+            <a class="menu__button" href="main-menu">Cancel</a>
         </div>
     </form>
 </div>

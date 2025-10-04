@@ -84,6 +84,7 @@ function checkForAnyEvent(x, y) {
 
     if (newEvent) {
 
+        //an event cannot start unless the player meets its requirements
         if (!characteristicCheck(newEvent)) {
             return;
         }
@@ -114,7 +115,6 @@ function checkForAnyEvent(x, y) {
                 markEventSeen(enemySlug);
             }
         }
-
     }
 }
 
@@ -131,6 +131,7 @@ function isWalkable(x, y) {
         return false;
     }
     if (currentTile.type === "door") {
+        gameData.eventActive = true;
         return accessDoor(x, y);
     }
     return true;
@@ -147,6 +148,7 @@ function characteristicCheck(newEvent) {
     if (newEvent.type === "dialogue") {
         const dialogueSlug = newEvent.slug;
         const dialogue = dialogueData.dialogues.find(dialogue => dialogue.slug === dialogueSlug);
+        console.log(dialogue);
 
         if (!dialogue.requirements) {
             return true;

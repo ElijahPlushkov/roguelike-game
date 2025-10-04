@@ -20,8 +20,10 @@ export function accessDoor(x, y) {
 
         const door = doorData.doors.find(door => door.slug === doorSlug);
 
+        //check if the player can enter the door
         if (door) {
             for (const [charKey, requiredValue] of Object.entries(door.requirements)) {
+                //if not, the rejection appears and the tiletype sets to unwalkable
                 if ((gameData.playerCharacteristics[charKey] || 0) < requiredValue) {
                     doorTile.type = "unwalkable";
                     const rejection = document.createElement("div");

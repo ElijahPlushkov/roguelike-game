@@ -38,7 +38,7 @@ class Signup extends Dbh {
         $stmt = $this->connect()->prepare("SELECT id FROM users WHERE username = ?");
 
         if (!$stmt->execute([$username])) {
-            $_SESSION["error"] = "cannotgetuserid";
+            $_SESSION["error"] = "cannot get userid";
             $stmt = null;
             header("location: user-profile.php");
             exit();

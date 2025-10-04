@@ -13,16 +13,19 @@ export function initCombat(enemySlug) {
     const enemyDifficulty = enemy.difficulty;
     let isSuccessful;
 
+    //create a combat's description
     const newCombat = document.createElement("div");
     const eventType = newCombat;
     newCombat.className = "adventure-log__new-combat";
     newCombat.textContent = enemy.description;
     adventureLog.prepend(newCombat);
 
+    //create options
     const options = document.createElement("div");
     newCombat.append(options);
     options.innerHTML = '';
 
+    //add text to option buttons
     enemy.options.forEach(option => {
         const button = document.createElement("button");
         button.textContent = option.label;
@@ -31,6 +34,7 @@ export function initCombat(enemySlug) {
 
         button.addEventListener("click", () => {
 
+            //check fight outcome
             if (button.textContent === "fight") {
                 if (enemyChars.might - gameData.playerCharacteristics.might >= 2
                     && !["flimsy", "weak", "average"].includes(enemyDifficulty)) {
@@ -50,6 +54,7 @@ export function initCombat(enemySlug) {
                 appendContinueButton(eventType);
             }
 
+            //check negotiate outcome
             if (button.textContent === "negotiate") {
                 if (enemyChars.reputation - gameData.playerCharacteristics.reputation >= 2) {
                     options.innerHTML = '';
@@ -67,6 +72,7 @@ export function initCombat(enemySlug) {
                 appendContinueButton(eventType);
             }
 
+            //check flee outcome
             if (button.textContent === "flee") {
                 if (enemyDifficulty === "flimsy" || enemyDifficulty === "weak" || enemyDifficulty === "average") {
                     isSuccessful = false;
@@ -106,7 +112,11 @@ export function resolveCombat(enemyDifficulty, isSuccessful) {
 
     const displayCharacteristic = document.querySelector(`.${charKey}-characteristic-count`);
 
-    if (enemyDifficulty === "weak") {
+    if (enemyDifficulty === "flimsy") {
+        increase = 1;
+        decrease = -1;
+        gameData.pollenChange = Math.floor(Math.random() * 7) + 1;
+    } else if (enemyDifficulty === "weak") {
         increase = 1;
         decrease = -1;
         gameData.pollenChange = Math.floor(Math.random() * 10) + 1;

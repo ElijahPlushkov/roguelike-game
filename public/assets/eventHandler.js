@@ -29,12 +29,14 @@ export function registerEventOutcome(reward) {
 
             const charChange = document.createElement("p");
             charChange.className = "log-entry";
-            charChange.textContent = `Your reward: ${value} ${key} pollen grains`;
+            if (value === 1) {
+                charChange.textContent = `Your reward: ${value} pollen grain`;
+            }
+            charChange.textContent = `Your reward: ${value} pollen grains`;
             adventureLog.prepend(charChange);
         }
 
         else {
-
             gameData.playerCharacteristics[key] += value;
 
             const displayCharacteristic = document.querySelector(`.${key}-characteristic-count`);
