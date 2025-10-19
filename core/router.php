@@ -55,6 +55,14 @@ $router->add("GET", "/death-screen", [RouterController::class, "deathScreen"]);
 $router->add("POST", "/pages", [RouterController::class, "pages"]);
 $router->add("GET", "/pages", [RouterController::class, "pages"]);
 
+//save game
+$router->add("POST", "/saveGame", [RouterController::class, "saveGame"]);
+$router->add("GET", "/saveGame", [RouterController::class, "saveGame"]);
+
+//load game
+$router->add("POST", "/loadGame", [RouterController::class, "loadGame"]);
+$router->add("GET", "/loadGame", [RouterController::class, "loadGame"]);
+
 //initialization
 $basePath = '/roguelike-game';
 

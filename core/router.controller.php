@@ -56,4 +56,12 @@ class RouterController extends Router{
     public function pages() {
         require __DIR__ . "/../config/pages.php";
     }
+
+    public function saveGame() {
+        require __DIR__ . "/../app/controllers/save-game.controller.php";
+    }
+
+    public function loadGame() {
+        require __DIR__ . "/../app/controllers/load-game.controller.php";
+    }
 }

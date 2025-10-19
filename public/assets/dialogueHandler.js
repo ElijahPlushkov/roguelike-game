@@ -3,10 +3,13 @@ import {gameData} from "./gameData.js";
 import {adventureLog} from "./gameData.js";
 import {endEvent} from "./helperFunctions.js";
 import {handleDeath} from "./deathHandler.js";
+import {updateGameProgress} from "./saveGame.js";
 
 export function initDialogue(dialogueSlug, stateKey) {
 
+    //find the dialogue
     const dialogue = dialogueData.dialogues.find(dialogue => dialogue.slug === dialogueSlug);
+    //initiate the starting key
     const currentStateKey = stateKey || dialogue.start || "greetings";
     const currentState = dialogue[currentStateKey];
 
@@ -17,6 +20,7 @@ export function initDialogue(dialogueSlug, stateKey) {
 
     console.log(currentState);
 
+    //add dialogue state's description to the adventure log
     const description = document.createElement("p");
     description.textContent = currentState.description;
     description.className = "dialogue-color";
@@ -27,6 +31,7 @@ export function initDialogue(dialogueSlug, stateKey) {
     description.append(options);
     options.innerHTML = '';
 
+    //check for options, if no options left, the dialogue will end
     if (currentState.options && currentState.options.length > 0) {
         currentState.options.forEach(option => {
             const button = document.createElement("button");
@@ -37,6 +42,7 @@ export function initDialogue(dialogueSlug, stateKey) {
 
                 const optionData = option;
 
+                //if a certain option has a requirement, the function will check it
                 if (optionData.requirements) {
                     let canProceed = true;
 
@@ -62,6 +68,7 @@ export function initDialogue(dialogueSlug, stateKey) {
             });
             options.appendChild(button);
         });
+        //if no options left, register the final outcome
     } else {
 
         const finalState = dialogue[stateKey];
@@ -89,6 +96,8 @@ export function initDialogue(dialogueSlug, stateKey) {
         continueButton.addEventListener("click", () => {
             endEvent();
             options.removeChild(continueButton);
+            updateGameProgress(dialogueSlug, stateKey);
+            console.log(gameData.gameProgress.eventOutcomes);
             console.log("Final outcome registered:", dialogue.finalOutcome);
         });
     }

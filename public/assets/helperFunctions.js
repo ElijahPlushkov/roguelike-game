@@ -18,15 +18,20 @@ export function endEvent() {
 }
 
 export function hasSeenEvent(slug) {
-    return localStorage.getItem(`event_${slug}`) === "true";
+    // let requiredSlug = `event_${slug}`;
+    return gameData.gameProgress.seenEvents.includes(slug);
+    // return localStorage.getItem(`event_${slug}`) === "true";
 }
 
 export function markEventSeen(slug) {
-    localStorage.setItem(`event_${slug}`, "true");
+    gameData.gameProgress.seenEvents.push(slug);
+
+    // localStorage.setItem(`event_${slug}`, "true");
 }
 
 export function clearStorage() {
-    localStorage.clear();
+    gameData.gameProgress.seenEvents = [];
+    // localStorage.clear();
 }
 
 export const clearLocalStorage = document.getElementById("clearStorage");

@@ -6,7 +6,9 @@ import { mapRender } from "./mapRender.js";
 import { initDialogue } from "./dialogueHandler.js";
 import { initCombat } from "./combatHandler.js";
 import { accessDoor } from "./doorHandler.js";
-import {hasSeenEvent, markEventSeen, clearLocalStorage, clearStorage} from "./helperFunctions.js";
+import { hasSeenEvent, markEventSeen } from "./helperFunctions.js";
+import { saveGame } from "./saveGame.js";
+import { applySavedFile } from "./loadGame.js";
 
 document.addEventListener("DOMContentLoaded", () => {
     loadLevelData();
@@ -131,7 +133,7 @@ function isWalkable(x, y) {
         return false;
     }
     if (currentTile.type === "door") {
-        gameData.eventActive = true;
+        // gameData.eventActive = true;
         return accessDoor(x, y);
     }
     return true;
@@ -194,3 +196,10 @@ function characteristicCheck(newEvent) {
     }
     return true;
 }
+
+const saveGameButton = document.getElementById("saveGame");
+saveGameButton.addEventListener("click", saveGame);
+
+const loadGameButton = document.getElementById("loadGame");
+loadGameButton.addEventListener("click", applySavedFile);
+

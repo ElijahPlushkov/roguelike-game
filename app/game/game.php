@@ -20,8 +20,8 @@ require_once __DIR__ . "/../views/header.php";
     <div class="menu">
 
         <div class="menu__item"><a class="menu__link menu__link-ingame" href="main-menu">[Menu]</a></div>
-        <div class="menu__item">[Save]</div>
-        <div class="menu__item">[Load]</div>
+        <div class="menu__item" id="saveGame">[Save]</div>
+        <div class="menu__item" id="loadGame">[Load]</div>
         <div class="menu__item">[Settings]</div>
         <div class="menu__item">[Quit]</div>
     </div>

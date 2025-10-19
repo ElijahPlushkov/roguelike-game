@@ -43,7 +43,7 @@ export function accessDoor(x, y) {
             const reward = door.reward;
             registerEventOutcome(reward);
 
-            appendContinueButton(eventType);
+            // appendContinueButton(eventType);
             markEventSeen(doorSlug);
         }
         return true;

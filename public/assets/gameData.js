@@ -23,11 +23,25 @@ export const gameData = {
     playerCharacteristics: {
         reputation: 0,
         might: 0,
-        prayer: 0,
+        prayer: 0
     },
 
     pollen: 0,
+
+    // Game progress
+    gameProgress: {
+        currentCoordinates: {x: 0, y: 0},
+        currentCharacteristics: {
+            reputation: 0,
+            might: 0,
+            prayer: 0
+        },
+        currentPollen: 0,
+        seenEvents: [],
+        eventOutcomes: []
+    }
 };
+
 
 const adventureLog = document.querySelector(".adventure-log");
 
