@@ -56,9 +56,16 @@ body {
 }
 
 .map-display {
-    width: 1024px;
+    width: 420px;
+    height: 420px;
+    overflow: hidden;
+    position: relative;
     border-radius: 5px;
-    overflow-y: scroll;
+}
+
+#game {
+    position: absolute;
+    transition: transform 0.25s ease-in-out;
 }
 
 .adventure-log {
@@ -186,3 +193,5 @@ body {
 .player {
     background-color: #4E9B31;
 }
+
+

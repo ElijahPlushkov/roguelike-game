@@ -35,7 +35,6 @@ export function accessDoor(x, y) {
         }
         if (!hasSeenEvent(doorSlug)) {
             const newEvent = document.createElement("div");
-            const eventType = newEvent;
             newEvent.className = "adventure-log__new-event";
             newEvent.textContent = door.description;
             adventureLog.prepend(newEvent);

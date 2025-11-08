@@ -1,5 +1,5 @@
 import {CHAPTERS, chapterOneSlugs} from "./slugs.js";
-import { mapRender } from "./mapRender.js";
+import {mapRender} from "./mapRender.js";
 
 let levelData = {};
 
@@ -16,7 +16,8 @@ let enemyData = {};
 
 //load data
 export function loadLevelData(slug = CHAPTERS.CHAPTER_1) {
-    fetch(`/roguelike-game/load-level?slug=${encodeURIComponent(slug)}`)
+    // fetch(`/roguelike-game/load-level?slug=${encodeURIComponent(slug)}`)
+    fetch("/roguelike-game/load-level?slug=" + slug)
         .then(response => response.json())
         .then(level => {
             levelData = level;

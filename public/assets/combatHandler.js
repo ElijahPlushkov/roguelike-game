@@ -3,6 +3,7 @@ import {gameData, displayPollen} from "./gameData.js";
 import {adventureLog} from "./gameData.js";
 import {handleDeath} from "./deathHandler.js";
 import {appendContinueButton} from "./helperFunctions.js";
+import {updateGameProgress} from "./saveGame.js";
 
 export function initCombat(enemySlug) {
 
@@ -13,6 +14,7 @@ export function initCombat(enemySlug) {
     const enemyDifficulty = enemy.difficulty;
     let isSuccessful;
 
+    console.log(enemySlug, enemyDifficulty);
     //create a combat's description
     const newCombat = document.createElement("div");
     const eventType = newCombat;
@@ -52,6 +54,7 @@ export function initCombat(enemySlug) {
                         + resolveCombat(enemyDifficulty, isSuccessful, gameData.pollen);
                 }
                 appendContinueButton(eventType);
+                updateGameProgress(enemySlug, isSuccessful);
             }
 
             //check negotiate outcome
@@ -70,6 +73,7 @@ export function initCombat(enemySlug) {
                         + resolveCombat(enemyDifficulty, isSuccessful, gameData.pollen);
                 }
                 appendContinueButton(eventType);
+                updateGameProgress(enemySlug, isSuccessful);
             }
 
             //check flee outcome
@@ -96,6 +100,7 @@ export function initCombat(enemySlug) {
                     }
                 }
                 appendContinueButton(eventType);
+                updateGameProgress(enemySlug, isSuccessful);
             }
         });
     });
@@ -105,7 +110,6 @@ export function resolveCombat(enemyDifficulty, isSuccessful) {
 
     let increase;
     let decrease;
-    let pollenChange;
 
     const characteristics = Object.keys(gameData.playerCharacteristics);
     const charKey = characteristics[Math.floor(Math.random() * characteristics.length)];

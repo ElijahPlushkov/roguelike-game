@@ -64,10 +64,8 @@ document.addEventListener("DOMContentLoaded", () => {
             player.y = newY;
         }
 
-        checkForAnyEvent(player.x, player.y);
-
         mapRender();
-
+        checkForAnyEvent(player.x, player.y);
     });
 });
 
@@ -85,9 +83,9 @@ function checkForAnyEvent(x, y) {
     console.log(newEvent);
 
     if (newEvent) {
-
+        let eventSlug = newEvent.slug;
         //an event cannot start unless the player meets its requirements
-        if (!characteristicCheck(newEvent)) {
+        if (!characteristicCheck(newEvent) || questChecker(newEvent)) {
             return;
         }
 
@@ -106,6 +104,7 @@ function checkForAnyEvent(x, y) {
                 gameData.eventActive = true;
                 initDialogue(dialogueSlug, gameData.stateKey);
                 markEventSeen(dialogueSlug);
+                console.log(gameData.gameProgress);
             }
         }
 
@@ -203,3 +202,15 @@ saveGameButton.addEventListener("click", saveGame);
 const loadGameButton = document.getElementById("loadGame");
 loadGameButton.addEventListener("click", applySavedFile);
 
+//this is a test function to include event outcomes to requirements
+function questChecker(newEvent) {
+    let eventOutcomes = gameData.gameProgress.eventOutcomes;
+    //flies_camp
+    if (newEvent.slug === "flies_camp") {
+        for (let outcome of eventOutcomes) {
+            if (outcome.eventSlug === "flies_gang" && outcome.eventOutcome === false) {
+                return true;
+            }
+        }
+    }
+}

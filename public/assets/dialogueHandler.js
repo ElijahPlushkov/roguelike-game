@@ -60,6 +60,15 @@ export function initDialogue(dialogueSlug, stateKey) {
                     }
                 }
 
+                // if an option has a reward or debuff
+                if (optionData.characteristics) {
+                    for (const [key, value] of Object.entries(optionData.characteristics)) {
+                        gameData.playerCharacteristics[key] += value;
+                        const displayCharacteristic = document.querySelector(`.${key}-characteristic-count`);
+                        displayCharacteristic.textContent = gameData.playerCharacteristics[key];
+                    }
+                }
+
                 const nextStateKey = option.key;
                 if (nextStateKey) {
                     options.innerHTML = '';
@@ -74,6 +83,7 @@ export function initDialogue(dialogueSlug, stateKey) {
         const finalState = dialogue[stateKey];
 
         dialogue.finalOutcome = {
+            finalKey: stateKey,
             description: finalState.description,
             characteristics: finalState.characteristics
         }
