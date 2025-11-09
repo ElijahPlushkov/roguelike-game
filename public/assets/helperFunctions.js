@@ -1,4 +1,5 @@
 import {gameData} from "./gameData.js";
+import {updateGameProgress} from "./saveGame.js";
 
 export function appendContinueButton(eventType) {
     const newEvent = eventType;
@@ -12,9 +13,16 @@ export function appendContinueButton(eventType) {
         newEvent.removeChild(continueButton);
     });
 }
+let eventBox = document.querySelector(".event-box");
 
-export function endEvent() {
+export function displayEventBox() {
+    eventBox.classList.remove("hidden");
+}
+
+export function endEvent(slug, status) {
     gameData.eventActive = false;
+    updateGameProgress(slug, status);
+    eventBox.classList.add("hidden");
 }
 
 export function hasSeenEvent(slug) {
@@ -34,5 +42,5 @@ export function clearStorage() {
     // localStorage.clear();
 }
 
-export const clearLocalStorage = document.getElementById("clearStorage");
-clearLocalStorage.addEventListener("click", clearStorage);
+// export const clearLocalStorage = document.getElementById("clearStorage");
+// clearLocalStorage.addEventListener("click", clearStorage);

@@ -1,12 +1,14 @@
 import {dialogueData} from "./dataLoaders.js";
 import {gameData} from "./gameData.js";
 import {adventureLog} from "./gameData.js";
-import {endEvent} from "./helperFunctions.js";
+import {endEvent, displayEventBox} from "./helperFunctions.js";
 import {handleDeath} from "./deathHandler.js";
 import {updateGameProgress} from "./saveGame.js";
 
-export function initDialogue(dialogueSlug, stateKey) {
+let description = document.querySelector(".event-description");
 
+export function initDialogue(dialogueSlug, stateKey) {
+    displayEventBox();
     //find the dialogue
     const dialogue = dialogueData.dialogues.find(dialogue => dialogue.slug === dialogueSlug);
     //initiate the starting key
@@ -21,14 +23,16 @@ export function initDialogue(dialogueSlug, stateKey) {
     console.log(currentState);
 
     //add dialogue state's description to the adventure log
-    const description = document.createElement("p");
+    // const description = document.createElement("p");
+    // let description = document.querySelector(".event-description");
     description.textContent = currentState.description;
     description.className = "dialogue-color";
 
-    adventureLog.prepend(description);
+    // adventureLog.prepend(description);
 
-    const options = document.createElement("div");
-    description.append(options);
+    // const options = document.createElement("div");
+    const options = document.querySelector(".event-options");
+    // description.append(options);
     options.innerHTML = '';
 
     //check for options, if no options left, the dialogue will end
@@ -51,7 +55,8 @@ export function initDialogue(dialogueSlug, stateKey) {
                             canProceed = false;
                             const rejection = document.createElement("div");
                             rejection.textContent = optionData.rejection || "You cannot do this.";
-                            adventureLog.prepend(rejection);
+                            // adventureLog.prepend(rejection);
+                            description.prepend(rejection);
                             break;
                         }
                     }
@@ -69,9 +74,11 @@ export function initDialogue(dialogueSlug, stateKey) {
                     }
                 }
 
+                // initiate next dialogue stage
                 const nextStateKey = option.key;
                 if (nextStateKey) {
                     options.innerHTML = '';
+                    // description.textContent = "";
                     initDialogue(dialogueSlug, nextStateKey);
                 }
             });
@@ -92,6 +99,16 @@ export function initDialogue(dialogueSlug, stateKey) {
 
         if (dialogueOutcome) {
             registerDialogueOutcome(dialogueOutcome);
+            // endEvent(dialogueSlug, stateKey);
+            // const options = document.querySelector(".event-options");
+            options.innerHTML = "";
+            const continueButton = document.createElement("button");
+            continueButton.textContent = "Continue";
+            continueButton.className = "dialogue-button";
+            options.prepend(continueButton);
+            continueButton.addEventListener("click", function () {
+                endEvent(dialogueSlug, stateKey);
+            });
         }
 
         if (stateKey === "death") {
@@ -99,17 +116,21 @@ export function initDialogue(dialogueSlug, stateKey) {
             return;
         }
 
-        const continueButton = document.createElement("button");
-        continueButton.textContent = "Continue";
-        continueButton.className = "dialogue-button";
-        options.appendChild(continueButton);
-        continueButton.addEventListener("click", () => {
-            endEvent();
-            options.removeChild(continueButton);
-            updateGameProgress(dialogueSlug, stateKey);
-            console.log(gameData.gameProgress.eventOutcomes);
-            console.log("Final outcome registered:", dialogue.finalOutcome);
-        });
+
+        console.log(gameData.gameProgress.eventOutcomes);
+        console.log("Final outcome registered:", dialogue.finalOutcome);
+
+        // const continueButton = document.createElement("button");
+        // continueButton.textContent = "Continue";
+        // continueButton.className = "dialogue-button";
+        // options.appendChild(continueButton);
+        // continueButton.addEventListener("click", () => {
+        //     endEvent();
+        //     options.removeChild(continueButton);
+        //     updateGameProgress(dialogueSlug, stateKey);
+        //     console.log(gameData.gameProgress.eventOutcomes);
+        //     console.log("Final outcome registered:", dialogue.finalOutcome);
+        // });
     }
 }
 

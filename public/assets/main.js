@@ -119,6 +119,11 @@ function checkForAnyEvent(x, y) {
     }
 }
 
+// function displayEventBox() {
+//     let eventBox = document.querySelector(".event-box");
+//     eventBox.classList.remove("hidden");
+// }
+
 function isWalkable(x, y) {
     const tileType = map[y][x];
 

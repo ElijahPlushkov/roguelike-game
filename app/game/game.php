@@ -38,6 +38,18 @@ require_once __DIR__ . "/../views/header.php";
     <div id="game" class="tile-grid"></div>
 </section>
 
+<section>
+    <div class="event-box hidden">
+        <div class="event-content">
+            <div class="event-portrait">
+                <img src="assets/spider-placeholder.png" class="event-portrait__image">
+            </div>
+            <div class="event-description">This is the description.</div>
+            <div class="event-options"></div>
+<!--            <button class="end-event-button hidden" onclick="endEventButton()"></button>-->
+        </div>
+    </div>
+</section>
 
 <section class="adventure-log-container">
     <div class="adventure-log__divider">< ==**====-*-====-*-====-*-====-*-====-*-====-*-====-*-====-*-====-*-====-*-====-*-====**== ></div>
@@ -53,7 +65,7 @@ require_once __DIR__ . "/../views/header.php";
 
 <br>
 <br>
-<button id="clearStorage"></button>
+<!--<button id="clearStorage"></button>-->
 
 <script type="module" src="/roguelike-game/public/assets/main.js"></script>
 </body>

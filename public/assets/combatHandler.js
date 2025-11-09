@@ -2,10 +2,13 @@ import {enemyData} from "./dataLoaders.js";
 import {gameData, displayPollen} from "./gameData.js";
 import {adventureLog} from "./gameData.js";
 import {handleDeath} from "./deathHandler.js";
-import {appendContinueButton} from "./helperFunctions.js";
+import {appendContinueButton, displayEventBox, endEvent} from "./helperFunctions.js";
 import {updateGameProgress} from "./saveGame.js";
 
+const description = document.querySelector(".event-description");
+
 export function initCombat(enemySlug) {
+    displayEventBox();
 
     const enemy = enemyData.enemies.find(enemy => enemy.slug === enemySlug);
 
@@ -16,16 +19,21 @@ export function initCombat(enemySlug) {
 
     console.log(enemySlug, enemyDifficulty);
     //create a combat's description
-    const newCombat = document.createElement("div");
-    const eventType = newCombat;
-    newCombat.className = "adventure-log__new-combat";
-    newCombat.textContent = enemy.description;
-    adventureLog.prepend(newCombat);
+    // const description = document.querySelector(".event-description");
+    description.className = "adventure-log__new-combat";
+    // const newCombat = document.createElement("div");
+    // const eventType = newCombat;
+    // newCombat.className = "adventure-log__new-combat";
+    // newCombat.textContent = enemy.description;
+    // adventureLog.prepend(newCombat);
 
     //create options
-    const options = document.createElement("div");
-    newCombat.append(options);
+    const options = document.querySelector(".event-options");
     options.innerHTML = '';
+
+    // const options = document.createElement("div");
+    // newCombat.append(options);
+    // options.innerHTML = '';
 
     //add text to option buttons
     enemy.options.forEach(option => {
@@ -45,16 +53,24 @@ export function initCombat(enemySlug) {
                     return;
                 } else if (enemyChars.might - gameData.playerCharacteristics.might === 1) {
                     isSuccessful = false;
-                    newCombat.textContent = enemy.combatDefeat + " "
+                    description.textContent = enemy.combatDefeat + " "
                         + resolveCombat(enemyDifficulty, isSuccessful, gameData.pollen);
                 }
                 else {
                     isSuccessful = true;
-                    newCombat.textContent = enemy.combatVictory + " "
+                    description.textContent = enemy.combatVictory + " "
                         + resolveCombat(enemyDifficulty, isSuccessful, gameData.pollen);
                 }
-                appendContinueButton(eventType);
-                updateGameProgress(enemySlug, isSuccessful);
+                options.innerHTML = "";
+                const continueButton = document.createElement("button");
+                continueButton.textContent = "Continue";
+                continueButton.className = "dialogue-button";
+                options.prepend(continueButton);
+                continueButton.addEventListener("click", function () {
+                    endEvent(enemySlug, isSuccessful);
+                });
+                // appendContinueButton(eventType);
+                // updateGameProgress(enemySlug, isSuccessful);
             }
 
             //check negotiate outcome
@@ -65,22 +81,30 @@ export function initCombat(enemySlug) {
                     return;
                 } else if (enemyChars.reputation - gameData.playerCharacteristics.reputation === 1) {
                     isSuccessful = false;
-                    newCombat.textContent = enemy.negotiationDefeat + " "
+                    descriptionn.textContent = enemy.negotiationDefeat + " "
                         + resolveCombat(enemyDifficulty, isSuccessful, gameData.pollen);
                 } else {
                     isSuccessful = true;
-                    newCombat.textContent = enemy.negotiationVictory + " "
+                    description.textContent = enemy.negotiationVictory + " "
                         + resolveCombat(enemyDifficulty, isSuccessful, gameData.pollen);
                 }
-                appendContinueButton(eventType);
-                updateGameProgress(enemySlug, isSuccessful);
+                options.innerHTML = "";
+                const continueButton = document.createElement("button");
+                continueButton.textContent = "Continue";
+                continueButton.className = "dialogue-button";
+                options.prepend(continueButton);
+                continueButton.addEventListener("click", function () {
+                    endEvent(enemySlug, isSuccessful);
+                });
+                // appendContinueButton(eventType);
+                // updateGameProgress(enemySlug, isSuccessful);
             }
 
             //check flee outcome
             if (button.textContent === "flee") {
                 if (enemyDifficulty === "flimsy" || enemyDifficulty === "weak" || enemyDifficulty === "average") {
                     isSuccessful = false;
-                    newCombat.textContent = enemy.fleeSuccess + " "
+                    description.textContent = enemy.fleeSuccess + " "
                         + resolveCombat(enemyDifficulty, isSuccessful, gameData.pollen);
                 } else {
                     if (enemyDifficulty === "boss" || enemyDifficulty === "legendary") {
@@ -91,16 +115,24 @@ export function initCombat(enemySlug) {
                     else if (gameData.playerCharacteristics.might < enemyFleeRequirements.might ||
                         gameData.playerCharacteristics.prayer < enemyFleeRequirements.prayer) {
                         isSuccessful = false;
-                        newCombat.textContent = enemy.fleeFailure + " "
+                        description.textContent = enemy.fleeFailure + " "
                             + resolveCombat(enemyDifficulty, isSuccessful, gameData.pollen);
                     } else {
                         isSuccessful = false;
-                        newCombat.textContent = enemy.fleeSuccess + " "
+                        description.textContent = enemy.fleeSuccess + " "
                             + resolveCombat(enemyDifficulty, isSuccessful, gameData.pollen);
                     }
                 }
-                appendContinueButton(eventType);
-                updateGameProgress(enemySlug, isSuccessful);
+                options.innerHTML = "";
+                const continueButton = document.createElement("button");
+                continueButton.textContent = "Continue";
+                continueButton.className = "dialogue-button";
+                options.prepend(continueButton);
+                continueButton.addEventListener("click", function () {
+                    endEvent(enemySlug, isSuccessful);
+                });
+                // appendContinueButton(eventType);
+                // updateGameProgress();
             }
         });
     });

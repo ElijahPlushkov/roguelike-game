@@ -68,10 +68,28 @@ body {
     transition: transform 0.25s ease-in-out;
 }
 
+.event-box {
+    width: 600px;
+    height: 600px;
+    border: whitesmoke 1px solid;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+}
+
+.event-portrait__image {
+    width: 100px;
+    height: 100px;
+}
+
+.hidden {
+    display: none;
+}
+
 .adventure-log {
     border-radius: 5px;
     width: 1024px;
-    max-height: 20vh;
+    height: 20vh;
     overflow-y: scroll;
     font-size: 12px;
 }
