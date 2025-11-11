@@ -1,39 +1,29 @@
 import {gameData} from "./gameData.js";
 import {eventData} from "./dataLoaders.js";
-import {adventureLog, displayReputation, displayMight, displayPrayer, displayPollen} from "./gameData.js";
+import {adventureLog, displayPollen} from "./gameData.js";
 import {appendContinueButton, displayEventBox, endEvent} from "./helperFunctions.js";
 
 const description = document.querySelector(".event-description");
+
 export function initEvent(eventSlug) {
 
     displayEventBox();
 
     const event = eventData.events.find(event => event.slug === eventSlug);
 
-    // const description = document.querySelector(".event-description");
     description.className = "adventure-log__new-event";
     description.textContent = event.event;
 
-    // const newEvent = document.createElement("div");
-    // const eventType = newEvent;
-    // newEvent.className = "adventure-log__new-event";
-    // newEvent.textContent = event.event;
-    // adventureLog.prepend(newEvent);
-
-    // appendContinueButton(eventType);
     const options = document.querySelector(".event-options");
     options.innerHTML = "";
-    const continueButton = document.createElement("button");
-    continueButton.textContent = "Continue";
-    continueButton.className = "dialogue-button";
+
+    let continueButton = appendContinueButton();
     options.prepend(continueButton);
     continueButton.addEventListener("click", function () {
         endEvent(eventSlug, "completed");
+        const reward = event.reward;
+        registerEventOutcome(reward);
     });
-
-
-    const reward = event.reward;
-    registerEventOutcome(reward);
 }
 
 export function registerEventOutcome(reward) {

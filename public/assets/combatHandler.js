@@ -1,9 +1,7 @@
 import {enemyData} from "./dataLoaders.js";
-import {gameData, displayPollen} from "./gameData.js";
-import {adventureLog} from "./gameData.js";
+import {gameData, displayPollen, adventureLog} from "./gameData.js";
 import {handleDeath} from "./deathHandler.js";
 import {appendContinueButton, displayEventBox, endEvent} from "./helperFunctions.js";
-import {updateGameProgress} from "./saveGame.js";
 
 const description = document.querySelector(".event-description");
 
@@ -18,22 +16,14 @@ export function initCombat(enemySlug) {
     let isSuccessful;
 
     console.log(enemySlug, enemyDifficulty);
+
     //create a combat's description
-    // const description = document.querySelector(".event-description");
+    description.textContent = enemy.description;
     description.className = "adventure-log__new-combat";
-    // const newCombat = document.createElement("div");
-    // const eventType = newCombat;
-    // newCombat.className = "adventure-log__new-combat";
-    // newCombat.textContent = enemy.description;
-    // adventureLog.prepend(newCombat);
 
     //create options
     const options = document.querySelector(".event-options");
     options.innerHTML = '';
-
-    // const options = document.createElement("div");
-    // newCombat.append(options);
-    // options.innerHTML = '';
 
     //add text to option buttons
     enemy.options.forEach(option => {
@@ -53,24 +43,20 @@ export function initCombat(enemySlug) {
                     return;
                 } else if (enemyChars.might - gameData.playerCharacteristics.might === 1) {
                     isSuccessful = false;
-                    description.textContent = enemy.combatDefeat + " "
-                        + resolveCombat(enemyDifficulty, isSuccessful, gameData.pollen);
+                    description.textContent = enemy.combatDefeat + " ";
                 }
                 else {
                     isSuccessful = true;
-                    description.textContent = enemy.combatVictory + " "
-                        + resolveCombat(enemyDifficulty, isSuccessful, gameData.pollen);
+                    description.textContent = enemy.combatVictory + " ";
                 }
+
                 options.innerHTML = "";
-                const continueButton = document.createElement("button");
-                continueButton.textContent = "Continue";
-                continueButton.className = "dialogue-button";
+                let continueButton = appendContinueButton();
                 options.prepend(continueButton);
                 continueButton.addEventListener("click", function () {
+                    adventureLog.prepend(resolveCombat(enemyDifficulty, isSuccessful, gameData.pollen));
                     endEvent(enemySlug, isSuccessful);
                 });
-                // appendContinueButton(eventType);
-                // updateGameProgress(enemySlug, isSuccessful);
             }
 
             //check negotiate outcome
@@ -81,31 +67,26 @@ export function initCombat(enemySlug) {
                     return;
                 } else if (enemyChars.reputation - gameData.playerCharacteristics.reputation === 1) {
                     isSuccessful = false;
-                    descriptionn.textContent = enemy.negotiationDefeat + " "
-                        + resolveCombat(enemyDifficulty, isSuccessful, gameData.pollen);
+                    descriptionn.textContent = enemy.negotiationDefeat + " ";
                 } else {
                     isSuccessful = true;
-                    description.textContent = enemy.negotiationVictory + " "
-                        + resolveCombat(enemyDifficulty, isSuccessful, gameData.pollen);
+                    description.textContent = enemy.negotiationVictory + " ";
                 }
+
                 options.innerHTML = "";
-                const continueButton = document.createElement("button");
-                continueButton.textContent = "Continue";
-                continueButton.className = "dialogue-button";
+                let continueButton = appendContinueButton();
                 options.prepend(continueButton);
                 continueButton.addEventListener("click", function () {
+                    adventureLog.prepend(resolveCombat(enemyDifficulty, isSuccessful, gameData.pollen));
                     endEvent(enemySlug, isSuccessful);
                 });
-                // appendContinueButton(eventType);
-                // updateGameProgress(enemySlug, isSuccessful);
             }
 
             //check flee outcome
             if (button.textContent === "flee") {
                 if (enemyDifficulty === "flimsy" || enemyDifficulty === "weak" || enemyDifficulty === "average") {
                     isSuccessful = false;
-                    description.textContent = enemy.fleeSuccess + " "
-                        + resolveCombat(enemyDifficulty, isSuccessful, gameData.pollen);
+                    description.textContent = enemy.fleeSuccess + " ";
                 } else {
                     if (enemyDifficulty === "boss" || enemyDifficulty === "legendary") {
                         options.innerHTML = '';
@@ -115,24 +96,19 @@ export function initCombat(enemySlug) {
                     else if (gameData.playerCharacteristics.might < enemyFleeRequirements.might ||
                         gameData.playerCharacteristics.prayer < enemyFleeRequirements.prayer) {
                         isSuccessful = false;
-                        description.textContent = enemy.fleeFailure + " "
-                            + resolveCombat(enemyDifficulty, isSuccessful, gameData.pollen);
+                        description.textContent = enemy.fleeFailure + " ";
                     } else {
                         isSuccessful = false;
-                        description.textContent = enemy.fleeSuccess + " "
-                            + resolveCombat(enemyDifficulty, isSuccessful, gameData.pollen);
+                        description.textContent = enemy.fleeSuccess + " ";
                     }
                 }
                 options.innerHTML = "";
-                const continueButton = document.createElement("button");
-                continueButton.textContent = "Continue";
-                continueButton.className = "dialogue-button";
+                let continueButton = appendContinueButton();
                 options.prepend(continueButton);
                 continueButton.addEventListener("click", function () {
+                    adventureLog.prepend(resolveCombat(enemyDifficulty, isSuccessful, gameData.pollen));
                     endEvent(enemySlug, isSuccessful);
                 });
-                // appendContinueButton(eventType);
-                // updateGameProgress();
             }
         });
     });
@@ -174,15 +150,20 @@ export function resolveCombat(enemyDifficulty, isSuccessful) {
         gameData.pollenChange = Math.floor(Math.random() * (80 - 60 + 1)) + 60;
     }
 
+    const combatResolution = document.createElement("p");
+    combatResolution.classList.add("adventure-log__new-combat");
+
     if (isSuccessful === false) {
         gameData.playerCharacteristics[charKey] += decrease;
         displayCharacteristic.textContent = gameData.playerCharacteristics[charKey];
         displayPollen.textContent = gameData.pollen -= gameData.pollenChange;
-        return `Your ${charKey} decreased by ${Math.abs(decrease)}. You lose ${gameData.pollenChange} pollen grains`;
+        combatResolution.textContent = `Your ${charKey} decreased by ${Math.abs(decrease)}. You lose ${gameData.pollenChange} pollen grains`;
+        return combatResolution;
     } else {
         gameData.playerCharacteristics[charKey] += increase;
         displayCharacteristic.textContent = gameData.playerCharacteristics[charKey];
         displayPollen.textContent = gameData.pollen += gameData.pollenChange;
-        return `Your ${charKey} increased by ${increase}. You collect ${gameData.pollenChange} pollen grains`;
+        combatResolution.textContent =`Your ${charKey} increased by ${increase}. You collect ${gameData.pollenChange} pollen grains`;
+        return combatResolution;
     }
 }

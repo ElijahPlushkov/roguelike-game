@@ -1,17 +1,12 @@
 import {gameData} from "./gameData.js";
 import {updateGameProgress} from "./saveGame.js";
 
-export function appendContinueButton(eventType) {
-    const newEvent = eventType;
-
+export function appendContinueButton() {
     const continueButton = document.createElement("button");
     continueButton.textContent = "Continue";
     continueButton.className = "dialogue-button";
-    newEvent.appendChild(continueButton);
-    continueButton.addEventListener("click", () => {
-        endEvent();
-        newEvent.removeChild(continueButton);
-    });
+
+    return continueButton;
 }
 let eventBox = document.querySelector(".event-box");
 

@@ -5,14 +5,15 @@ require_once __DIR__ . "/../views/header.php";
 
 
 <body>
+<div class="game-container">
 
 <section class="game-info">
 
     <div class="players-info">
-        <div class="players-info__item">-=REPUTATION <span class="reputation-characteristic-count">0</span>=-</div>
-        <div class="players-info__item">-=MIGHT <span class="might-characteristic-count">0</span>=-</div>
-        <div class="players-info__item">-=PRAYER <span class="prayer-characteristic-count">0</span>=-</div>
-        <div class="players-info__item">-=POLLEN <span class="pollen-quantity-count">0</span>=-</div>
+        <div class="players-info__item">REPUTATION <span class="reputation-characteristic-count">0</span>|</div>
+        <div class="players-info__item">MIGHT <span class="might-characteristic-count">0</span>|</div>
+        <div class="players-info__item">PRAYER <span class="prayer-characteristic-count">0</span>|</div>
+        <div class="players-info__item">POLLEN <span class="pollen-quantity-count">0</span></div>
     </div>
 
     <div class="game-info__divider">||</div>
@@ -23,22 +24,17 @@ require_once __DIR__ . "/../views/header.php";
         <div class="menu__item" id="saveGame">[Save]</div>
         <div class="menu__item" id="loadGame">[Load]</div>
         <div class="menu__item">[Settings]</div>
-        <div class="menu__item">[Quit]</div>
     </div>
 
 </section>
 
 <section class="level-title">
-
     <h3 class="level-title__heading"></h3>
-
 </section>
 
 <section class="map-display">
     <div id="game" class="tile-grid"></div>
-</section>
 
-<section>
     <div class="event-box hidden">
         <div class="event-content">
             <div class="event-portrait">
@@ -46,26 +42,27 @@ require_once __DIR__ . "/../views/header.php";
             </div>
             <div class="event-description">This is the description.</div>
             <div class="event-options"></div>
-<!--            <button class="end-event-button hidden" onclick="endEventButton()"></button>-->
         </div>
     </div>
 </section>
 
+<!--<section>-->
+<!--    <div class="event-box hidden">-->
+<!--        <div class="event-content">-->
+<!--            <div class="event-portrait">-->
+<!--                <img src="assets/spider-placeholder.png" class="event-portrait__image">-->
+<!--            </div>-->
+<!--            <div class="event-description">This is the description.</div>-->
+<!--            <div class="event-options"></div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</section>-->
+
 <section class="adventure-log-container">
-    <div class="adventure-log__divider">< ==**====-*-====-*-====-*-====-*-====-*-====-*-====-*-====-*-====-*-====-*-====-*-====**== ></div>
-
-    <div class="adventure-log">
-
-
-    </div>
-
-    <div class="adventure-log__divider">< ==**====-*-====-*-====-*-====-*-====-*-====-*-====-*-====-*-====-*-====-*-====-*-====**== ></div>
+    <div class="adventure-log"></div>
 </section>
 
-
-<br>
-<br>
-<!--<button id="clearStorage"></button>-->
+</div>
 
 <script type="module" src="/roguelike-game/public/assets/main.js"></script>
 </body>
