@@ -1,15 +1,12 @@
 import {dialogueData} from "./dataLoaders.js";
-import {gameData} from "./gameData.js";
-import {adventureLog} from "./gameData.js";
-import {endEvent, displayEventBox, appendContinueButton} from "./helperFunctions.js";
+import {gameData, eventDescription, eventOptions} from "./gameData.js";
+import {endEvent, appendContinueButton, displayAdventurelogMessage} from "./helperFunctions.js";
 import {handleDeath} from "./deathHandler.js";
 
-let description = document.querySelector(".event-description");
-
 export function initDialogue(dialogueSlug, stateKey) {
-    displayEventBox();
     //find the dialogue
     const dialogue = dialogueData.dialogues.find(dialogue => dialogue.slug === dialogueSlug);
+
     //initiate the starting key
     const currentStateKey = stateKey || dialogue.start || "greetings";
     const currentState = dialogue[currentStateKey];
@@ -19,15 +16,12 @@ export function initDialogue(dialogueSlug, stateKey) {
         return;
     }
 
-    console.log(currentState);
-
     //add dialogue state's description to the adventure log
-    description.textContent = currentState.description;
-    description.className = "dialogue-color";
+    eventDescription.textContent = currentState.description;
+    eventDescription.className = "dialogue-color";
 
-    // create dialogue options
-    const options = document.querySelector(".event-options");
-    options.innerHTML = '';
+    // clear dialogue options
+    eventOptions.innerHTML = '';
 
     //check for options, if no options left, the dialogue will end
     if (currentState.options && currentState.options.length > 0) {
@@ -49,7 +43,7 @@ export function initDialogue(dialogueSlug, stateKey) {
                             canProceed = false;
                             const rejection = document.createElement("div");
                             rejection.textContent = optionData.rejection || "You cannot do this.";
-                            description.prepend(rejection);
+                            eventDescription.prepend(rejection);
                             break;
                         }
                     }
@@ -65,21 +59,18 @@ export function initDialogue(dialogueSlug, stateKey) {
                         const displayCharacteristic = document.querySelector(`.${key}-characteristic-count`);
                         displayCharacteristic.textContent = gameData.playerCharacteristics[key];
 
-                        const charChange = document.createElement("p");
-                        charChange.className = "dialogue-color";
-                        charChange.textContent = `Your reward: ${value} ${key}`;
-                        adventureLog.prepend(charChange);
+                        displayAdventurelogMessage(value, key, "dialogue-color");
                     }
                 }
 
                 // initiate next dialogue stage
                 const nextStateKey = option.key;
                 if (nextStateKey) {
-                    options.innerHTML = '';
+                    eventOptions.innerHTML = '';
                     initDialogue(dialogueSlug, nextStateKey);
                 }
             });
-            options.appendChild(button);
+            eventOptions.appendChild(button);
         });
         //if no options left, register the final outcome
     } else {
@@ -95,11 +86,11 @@ export function initDialogue(dialogueSlug, stateKey) {
         const dialogueOutcome = dialogue.finalOutcome.characteristics;
 
         if (dialogueOutcome) {
-            options.innerHTML = "";
+            eventOptions.innerHTML = "";
             let continueButton = appendContinueButton();
-            options.prepend(continueButton);
+            eventOptions.prepend(continueButton);
             continueButton.addEventListener("click", function () {
-                endEvent(dialogueSlug, stateKey);
+                endEvent(dialogueSlug, stateKey, eventDescription, eventOptions);
                 registerDialogueOutcome(dialogueOutcome);
             });
         }
@@ -122,10 +113,7 @@ export function registerDialogueOutcome(dialogueOutcome) {
         if (displayCharacteristic) {
             displayCharacteristic.textContent = gameData.playerCharacteristics[key];
 
-            const charChange = document.createElement("p");
-            charChange.className = "dialogue-color";
-            charChange.textContent = `Your reward: ${value} ${key}`;
-            adventureLog.prepend(charChange);
+            displayAdventurelogMessage(value, key, "dialogue-color");
 
         } else {
             console.warn(`Missing DOM element for: .${key}-characteristic-count`);

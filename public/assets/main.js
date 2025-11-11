@@ -83,7 +83,6 @@ function checkForAnyEvent(x, y) {
     console.log(newEvent);
 
     if (newEvent) {
-        let eventSlug = newEvent.slug;
         //an event cannot start unless the player meets its requirements
         if (!characteristicCheck(newEvent) || questChecker(newEvent)) {
             return;
@@ -119,11 +118,6 @@ function checkForAnyEvent(x, y) {
     }
 }
 
-// function displayEventBox() {
-//     let eventBox = document.querySelector(".event-box");
-//     eventBox.classList.remove("hidden");
-// }
-
 function isWalkable(x, y) {
     const tileType = map[y][x];
 
@@ -137,7 +131,6 @@ function isWalkable(x, y) {
         return false;
     }
     if (currentTile.type === "door") {
-        // gameData.eventActive = true;
         return accessDoor(x, y);
     }
     return true;

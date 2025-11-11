@@ -1,4 +1,4 @@
-import {gameData} from "./gameData.js";
+import {adventureLog, gameData} from "./gameData.js";
 import {updateGameProgress} from "./saveGame.js";
 
 export function appendContinueButton() {
@@ -8,34 +8,35 @@ export function appendContinueButton() {
 
     return continueButton;
 }
-let eventBox = document.querySelector(".event-box");
 
-export function displayEventBox() {
-    eventBox.classList.remove("hidden");
+export function displayAdventurelogMessage(value, key, ccsClass) {
+    const charChange = document.createElement("p");
+    charChange.className = ccsClass;
+    if (key === "pollen") {
+        if (value === 1) {
+            charChange.textContent = `Your reward: ${value} pollen grain`;
+        }
+        charChange.textContent = `Your reward: ${value} pollen grains`;
+    }
+    charChange.textContent = `Your reward: ${value} ${key}`;
+    adventureLog.prepend(charChange);
 }
 
-export function endEvent(slug, status) {
+export function endEvent(slug, status, description, options) {
     gameData.eventActive = false;
     updateGameProgress(slug, status);
-    eventBox.classList.add("hidden");
+    description.textContent = "";
+    options.textContent = "";
 }
 
 export function hasSeenEvent(slug) {
-    // let requiredSlug = `event_${slug}`;
     return gameData.gameProgress.seenEvents.includes(slug);
-    // return localStorage.getItem(`event_${slug}`) === "true";
 }
 
 export function markEventSeen(slug) {
     gameData.gameProgress.seenEvents.push(slug);
-
-    // localStorage.setItem(`event_${slug}`, "true");
 }
 
 export function clearStorage() {
     gameData.gameProgress.seenEvents = [];
-    // localStorage.clear();
 }
-
-// export const clearLocalStorage = document.getElementById("clearStorage");
-// clearLocalStorage.addEventListener("click", clearStorage);

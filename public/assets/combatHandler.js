@@ -1,12 +1,9 @@
 import {enemyData} from "./dataLoaders.js";
-import {gameData, displayPollen, adventureLog} from "./gameData.js";
+import {gameData, displayPollen, adventureLog, eventDescription, eventOptions} from "./gameData.js";
 import {handleDeath} from "./deathHandler.js";
-import {appendContinueButton, displayEventBox, endEvent} from "./helperFunctions.js";
-
-const description = document.querySelector(".event-description");
+import {appendContinueButton, endEvent} from "./helperFunctions.js";
 
 export function initCombat(enemySlug) {
-    displayEventBox();
 
     const enemy = enemyData.enemies.find(enemy => enemy.slug === enemySlug);
 
@@ -18,19 +15,18 @@ export function initCombat(enemySlug) {
     console.log(enemySlug, enemyDifficulty);
 
     //create a combat's description
-    description.textContent = enemy.description;
-    description.className = "adventure-log__new-combat";
+    eventDescription.textContent = enemy.description;
+    eventDescription.className = "adventure-log__new-combat";
 
     //create options
-    const options = document.querySelector(".event-options");
-    options.innerHTML = '';
+    eventOptions.innerHTML = '';
 
     //add text to option buttons
     enemy.options.forEach(option => {
         const button = document.createElement("button");
         button.textContent = option.label;
         button.className = 'dialogue-button';
-        options.appendChild(button);
+        eventOptions.appendChild(button);
 
         button.addEventListener("click", () => {
 
@@ -38,47 +34,47 @@ export function initCombat(enemySlug) {
             if (button.textContent === "fight") {
                 if (enemyChars.might - gameData.playerCharacteristics.might >= 2
                     && !["flimsy", "weak", "average"].includes(enemyDifficulty)) {
-                    options.innerHTML = '';
+                    eventOptions.innerHTML = '';
                     handleDeath();
                     return;
                 } else if (enemyChars.might - gameData.playerCharacteristics.might === 1) {
                     isSuccessful = false;
-                    description.textContent = enemy.combatDefeat + " ";
+                    eventDescription.textContent = enemy.combatDefeat + " ";
                 }
                 else {
                     isSuccessful = true;
-                    description.textContent = enemy.combatVictory + " ";
+                    eventDescription.textContent = enemy.combatVictory + " ";
                 }
 
-                options.innerHTML = "";
+                eventOptions.innerHTML = "";
                 let continueButton = appendContinueButton();
-                options.prepend(continueButton);
+                eventOptions.prepend(continueButton);
                 continueButton.addEventListener("click", function () {
                     adventureLog.prepend(resolveCombat(enemyDifficulty, isSuccessful, gameData.pollen));
-                    endEvent(enemySlug, isSuccessful);
+                    endEvent(enemySlug, isSuccessful, eventDescription, eventOptions);
                 });
             }
 
             //check negotiate outcome
             if (button.textContent === "negotiate") {
                 if (enemyChars.reputation - gameData.playerCharacteristics.reputation >= 2) {
-                    options.innerHTML = '';
+                    eventOptions.innerHTML = '';
                     handleDeath();
                     return;
                 } else if (enemyChars.reputation - gameData.playerCharacteristics.reputation === 1) {
                     isSuccessful = false;
-                    descriptionn.textContent = enemy.negotiationDefeat + " ";
+                    eventDescription.textContent = enemy.negotiationDefeat + " ";
                 } else {
                     isSuccessful = true;
-                    description.textContent = enemy.negotiationVictory + " ";
+                    eventDescription.textContent = enemy.negotiationVictory + " ";
                 }
 
-                options.innerHTML = "";
+                eventOptions.innerHTML = "";
                 let continueButton = appendContinueButton();
-                options.prepend(continueButton);
+                eventOptions.prepend(continueButton);
                 continueButton.addEventListener("click", function () {
                     adventureLog.prepend(resolveCombat(enemyDifficulty, isSuccessful, gameData.pollen));
-                    endEvent(enemySlug, isSuccessful);
+                    endEvent(enemySlug, isSuccessful, eventDescription, eventOptions);
                 });
             }
 
@@ -86,28 +82,28 @@ export function initCombat(enemySlug) {
             if (button.textContent === "flee") {
                 if (enemyDifficulty === "flimsy" || enemyDifficulty === "weak" || enemyDifficulty === "average") {
                     isSuccessful = false;
-                    description.textContent = enemy.fleeSuccess + " ";
+                    eventDescription.textContent = enemy.fleeSuccess + " ";
                 } else {
                     if (enemyDifficulty === "boss" || enemyDifficulty === "legendary") {
-                        options.innerHTML = '';
+                        eventOptions.innerHTML = '';
                         handleDeath();
                         return;
                     }
                     else if (gameData.playerCharacteristics.might < enemyFleeRequirements.might ||
                         gameData.playerCharacteristics.prayer < enemyFleeRequirements.prayer) {
                         isSuccessful = false;
-                        description.textContent = enemy.fleeFailure + " ";
+                        eventDescription.textContent = enemy.fleeFailure + " ";
                     } else {
                         isSuccessful = false;
-                        description.textContent = enemy.fleeSuccess + " ";
+                        eventDescription.textContent = enemy.fleeSuccess + " ";
                     }
                 }
-                options.innerHTML = "";
+                eventOptions.innerHTML = "";
                 let continueButton = appendContinueButton();
-                options.prepend(continueButton);
+                eventOptions.prepend(continueButton);
                 continueButton.addEventListener("click", function () {
                     adventureLog.prepend(resolveCombat(enemyDifficulty, isSuccessful, gameData.pollen));
-                    endEvent(enemySlug, isSuccessful);
+                    endEvent(enemySlug, isSuccessful, eventDescription, eventOptions);
                 });
             }
         });

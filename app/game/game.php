@@ -3,7 +3,6 @@
 require_once __DIR__ . "/../views/header.php";
 ?>
 
-
 <body>
 <div class="game-container">
 
@@ -32,10 +31,13 @@ require_once __DIR__ . "/../views/header.php";
     <h3 class="level-title__heading"></h3>
 </section>
 
+    <div class="container">
 <section class="map-display">
     <div id="game" class="tile-grid"></div>
+</section>
 
-    <div class="event-box hidden">
+<section>
+    <div class="event-box">
         <div class="event-content">
             <div class="event-portrait">
                 <img src="assets/spider-placeholder.png" class="event-portrait__image">
@@ -45,19 +47,7 @@ require_once __DIR__ . "/../views/header.php";
         </div>
     </div>
 </section>
-
-<!--<section>-->
-<!--    <div class="event-box hidden">-->
-<!--        <div class="event-content">-->
-<!--            <div class="event-portrait">-->
-<!--                <img src="assets/spider-placeholder.png" class="event-portrait__image">-->
-<!--            </div>-->
-<!--            <div class="event-description">This is the description.</div>-->
-<!--            <div class="event-options"></div>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--</section>-->
-
+</div>
 <section class="adventure-log-container">
     <div class="adventure-log"></div>
 </section>

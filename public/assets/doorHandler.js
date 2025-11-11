@@ -1,7 +1,7 @@
 import {doorData, levelData} from "./dataLoaders.js";
-import {adventureLog, gameData} from "./gameData.js";
+import {adventureLog, gameData, eventDescription, eventOptions} from "./gameData.js";
 import {registerEventOutcome} from "./eventHandler.js";
-import { appendContinueButton } from "./helperFunctions.js";
+import {appendContinueButton, endEvent} from "./helperFunctions.js";
 import {hasSeenEvent, markEventSeen} from "./helperFunctions.js";
 
 export function accessDoor(x, y) {
@@ -34,16 +34,17 @@ export function accessDoor(x, y) {
             }
         }
         if (!hasSeenEvent(doorSlug)) {
-            const newEvent = document.createElement("div");
-            newEvent.className = "adventure-log__new-event";
-            newEvent.textContent = door.description;
-            adventureLog.prepend(newEvent);
+            eventDescription.className = "adventure-log__new-event";
+            eventDescription.textContent = door.description;
 
-            const reward = door.reward;
-            registerEventOutcome(reward);
-
-            // appendContinueButton(eventType);
-            markEventSeen(doorSlug);
+            let continueButton = appendContinueButton();
+            eventOptions.prepend(continueButton);
+            continueButton.addEventListener("click", function () {
+                endEvent(doorSlug, "completed", eventDescription, eventOptions);
+                const reward = door.reward;
+                registerEventOutcome(reward);
+                markEventSeen(doorSlug);
+            });
         }
         return true;
     }

@@ -1,26 +1,20 @@
-import {gameData} from "./gameData.js";
 import {eventData} from "./dataLoaders.js";
-import {adventureLog, displayPollen} from "./gameData.js";
-import {appendContinueButton, displayEventBox, endEvent} from "./helperFunctions.js";
-
-const description = document.querySelector(".event-description");
+import { gameData, displayPollen, eventDescription, eventOptions} from "./gameData.js";
+import {appendContinueButton, displayAdventurelogMessage, endEvent} from "./helperFunctions.js";
 
 export function initEvent(eventSlug) {
 
-    displayEventBox();
-
     const event = eventData.events.find(event => event.slug === eventSlug);
 
-    description.className = "adventure-log__new-event";
-    description.textContent = event.event;
+    eventDescription.className = "adventure-log__new-event";
+    eventDescription.textContent = event.event;
 
-    const options = document.querySelector(".event-options");
-    options.innerHTML = "";
+    eventOptions.innerHTML = "";
 
     let continueButton = appendContinueButton();
-    options.prepend(continueButton);
+    eventOptions.prepend(continueButton);
     continueButton.addEventListener("click", function () {
-        endEvent(eventSlug, "completed");
+        endEvent(eventSlug, "completed", eventDescription, eventOptions);
         const reward = event.reward;
         registerEventOutcome(reward);
     });
@@ -33,14 +27,7 @@ export function registerEventOutcome(reward) {
         if (key === "pollen") {
             gameData.pollen += value;
             displayPollen.textContent = gameData.pollen;
-
-            const charChange = document.createElement("p");
-            charChange.className = "log-entry";
-            if (value === 1) {
-                charChange.textContent = `Your reward: ${value} pollen grain`;
-            }
-            charChange.textContent = `Your reward: ${value} pollen grains`;
-            adventureLog.prepend(charChange);
+            displayAdventurelogMessage(value, key, "log-entry");
         }
 
         else {
@@ -51,10 +38,7 @@ export function registerEventOutcome(reward) {
             if (displayCharacteristic) {
                 displayCharacteristic.textContent = gameData.playerCharacteristics[key];
 
-                const charChange = document.createElement("p");
-                charChange.className = "log-entry";
-                charChange.textContent = `Your reward: ${value} ${key}`;
-                adventureLog.prepend(charChange);
+                displayAdventurelogMessage(value, key, "log-entry");
 
             } else {
                 console.warn(`Missing DOM element for: .${key}-characteristic-count`);

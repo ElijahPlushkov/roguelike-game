@@ -57,4 +57,8 @@ displayPrayer.textContent = gameData.playerCharacteristics.prayer;
 const displayPollen = document.querySelector(".pollen-quantity-count");
 displayPollen.textContent = gameData.pollen;
 
-export {adventureLog, displayReputation, displayMight, displayPrayer, displayPollen};
+const eventDescription = document.querySelector(".event-description");
+
+const eventOptions = document.querySelector(".event-options");
+
+export {adventureLog, displayReputation, displayMight, displayPrayer, displayPollen, eventDescription, eventOptions};
