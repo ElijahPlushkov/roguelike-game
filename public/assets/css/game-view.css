@@ -1,0 +1,132 @@
+
+.game-interface {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 1280px;
+    height: 720px;
+}
+
+.player-stats {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    margin: 5px;
+}
+
+.stats-display {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+}
+
+.stat-item {
+    font-size: 16px;
+}
+
+.game-menu {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+}
+
+.game-menu-item {
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.game-menu-link {
+    color: var(--text-color);
+    text-decoration: none;
+}
+
+.game-menu-link_ingame:visited,
+.game-menu-link_ingame:active, a {
+    color: var(--text-color);
+}
+
+.level-title__heading {
+    margin: 10px;
+}
+
+.game-view {
+    max-width: 1280px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 20px;
+    padding: 20px;
+}
+
+.map-display {
+    width: 420px;
+    height: 420px;
+    overflow: hidden;
+    border-radius: 5px;
+}
+
+.event-box {
+    width: 680px;
+    height: 420px;
+    background: rgba(0, 0, 0, 0.8);
+    border-radius: 5px;
+    padding: 5px;
+}
+
+.event-portrait__image {
+    width: 100px;
+    height: 100px;
+}
+
+.event-description {
+    font-size: 14px;
+}
+
+.hidden {
+    display: none;
+}
+
+.adventure-log-container {
+    width: 1120px;
+    margin: 0 auto;
+    border: 1px solid white;
+    border-radius: 5px;
+}
+
+.adventure-log {
+    height: 170px;
+    overflow-y: scroll;
+    font-size: 12px;
+    padding: 5px;
+}
+
+.event-text-color {
+    color: cornflowerblue;
+}
+
+.combat-text-color {
+    color: indianred;
+}
+
+.log-entry {
+    color: chocolate;
+}
+
+.rejection-text-color {
+    color: lightsalmon;
+}
+
+.dialogue-text-color {
+    color: honeydew;
+}
+
+.option-button {
+    font-size: 14px;
+    color: honeydew;
+    background: #3F5F5A;
+    border: 1px solid black;
+    border-radius: 3px;
+    margin: 5px;
+    padding: 3px;
+}

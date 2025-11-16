@@ -25,7 +25,7 @@ export function mapRender() {
         cameraYEnd = map.length;
     }
 
-    const gameContainer = document.getElementById("game");
+    const gameContainer = document.getElementById("game-map");
     gameContainer.innerHTML = "";
 
     for (let y = cameraYStart; y < cameraYEnd; y++) {

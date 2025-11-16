@@ -1,12 +1,24 @@
-import {adventureLog, gameData} from "./gameData.js";
+import {adventureLog, eventDescription, eventOptions, gameData} from "./gameData.js";
 import {updateGameProgress} from "./saveGame.js";
 
 export function appendContinueButton() {
     const continueButton = document.createElement("button");
-    continueButton.textContent = "Continue";
-    continueButton.className = "dialogue-button";
+    continueButton.textContent = "Continue.";
+    continueButton.className = "option-button";
 
     return continueButton;
+}
+
+export function appendRejectionMessage(eventData) {
+    const existingRejection = eventOptions.querySelector(".rejection-text-color");
+    if (existingRejection) {
+        return;
+    }
+
+    const rejection = document.createElement("p");
+    rejection.textContent = eventData.rejection;
+    rejection.classList.add("rejection-text-color");
+    eventOptions.prepend(rejection);
 }
 
 export function displayAdventurelogMessage(value, key, ccsClass) {
@@ -14,11 +26,11 @@ export function displayAdventurelogMessage(value, key, ccsClass) {
     charChange.className = ccsClass;
     if (key === "pollen") {
         if (value === 1) {
-            charChange.textContent = `Your reward: ${value} pollen grain`;
+            charChange.textContent = `Your reward: ${value} pollen grain.`;
         }
-        charChange.textContent = `Your reward: ${value} pollen grains`;
+        charChange.textContent = `Your reward: ${value} pollen grains.`;
     }
-    charChange.textContent = `Your reward: ${value} ${key}`;
+    charChange.textContent = `Your reward: ${value} ${key}.`;
     adventureLog.prepend(charChange);
 }
 

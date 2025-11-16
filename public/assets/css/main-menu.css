@@ -1,28 +1,3 @@
-:root {
-    --background-color: #E6F0EC;
-    --surface-color: #D2E4DD;
-    --accent-color: #6FA89C;
-    --accent-hover: #5F978B;
-    --text-color: #3F5F5A;
-    --green-1: #A3B186;
-    --green-2: #5B754A;
-    --green-3: #4E9B31;
-}
-
-* {
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-}
-
-body {
-    background: var(--background-color);
-    color: var(--text-color);
-    font-family: "Cascadia Code", sans-serif;
-    margin: 0;
-    padding: 0;
-
-}
 
 .game-name {
     margin-top: 20px;
@@ -47,7 +22,6 @@ body {
     margin: 10px;
     padding: 10px 10px;
     border-radius: 6px;
-    background: var(--surface-color);
 }
 
 .menu__heading {
@@ -130,58 +104,4 @@ body {
 .menu__link:active, a {
     color: white;
     text-decoration: none;
-}
-
-.stats-name {
-    list-style: none;
-}
-
-#body {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-#players-info {
-    margin: 20px;
-    padding: 10px;
-    text-align: center;
-    width: 500px;
-    border-radius: 5px;
-    background-color: var(--surface-color);
-}
-
-.flex-container {
-    display: flex;
-    gap: 20px;
-}
-
-.map-display {
-    width: 300px;
-    height: 300px;
-    border-radius: 5px;
-    background-color: var(--surface-color);
-}
-
-#adventure-log {
-    border-radius: 5px;
-    width: 180px;
-    height: 150px;
-    background-color: var(--surface-color);
-}
-
-#inventory {
-    border-radius: 5px;
-    width: 180px;
-    height: 130px;
-    margin-top: 20px;
-    background-color: var(--surface-color);
-}
-
-#dialogue-event {
-    margin: 20px;
-    border-radius: 5px;
-    width: 500px;
-    height: 200px;
-    background-color: var(--surface-color);
 }

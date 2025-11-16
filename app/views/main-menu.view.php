@@ -1,98 +1,99 @@
 <body>
-<section class="game-name">
-    <h2 class="game-name__title">Beetlejust</h2>
-</section>
+<div class="container-flex-center">
+    <section class="game-name">
+        <h2 class="game-name__title">Beetlejust</h2>
+    </section>
 
-<div class="menu-container">
-    <?php if (!isset($_SESSION["id"])) : ?>
-        <section class="menu__authentication">
+    <div class="menu-container">
+        <?php if (!isset($_SESSION["id"])) : ?>
+            <section class="menu__authentication">
 
-            <div class="menu__container">
-                <h2 class="menu__heading">New Player</h2>
-                <form action="register" method="POST" class="menu__form">
-                    <input type="text" name="username" placeholder="Username" required class="menu__input">
-                    <input type="password" name="password" placeholder="Password" required class="menu__input">
-                    <button type="submit" name="register" class="menu__button">Register</button>
-                </form>
-            </div>
+                <div class="menu__container">
+                    <h2 class="menu__heading">New Player</h2>
+                    <form action="register" method="POST" class="menu__form">
+                        <input type="text" name="username" placeholder="Username" required class="menu__input">
+                        <input type="password" name="password" placeholder="Password" required class="menu__input">
+                        <button type="submit" name="register" class="menu__button">Register</button>
+                    </form>
+                </div>
 
-            <div class="menu__container">
-                <h2 class="menu__heading">Famed Player</h2>
-                <form action="login" method="POST" class="menu__form">
-                    <input type="text" name="username" placeholder="Username" required class="menu__input">
-                    <input type="password" name="password" placeholder="Password" required class="menu__input">
-                    <button type="submit" name="login" class="menu__button">Login</button>
-                </form>
-            </div>
+                <div class="menu__container">
+                    <h2 class="menu__heading">Famed Player</h2>
+                    <form action="login" method="POST" class="menu__form">
+                        <input type="text" name="username" placeholder="Username" required class="menu__input">
+                        <input type="password" name="password" placeholder="Password" required class="menu__input">
+                        <button type="submit" name="login" class="menu__button">Login</button>
+                    </form>
+                </div>
 
-        </section>
-    <?php else : ?>
+            </section>
+        <?php else : ?>
+            <section class="menu__container">
+                <h2 class="menu__heading">User Profile</h2>
+
+                <div class="profile-section">
+                    <div class="profile-info">
+                        <p><strong>Username:</strong>
+                            <?php echo htmlspecialchars($_SESSION["username"]); ?>
+                        </p>
+                        <p><strong>Description:</strong></p>
+                        <p class="description">
+                            <?php echo htmlspecialchars($about); ?>
+                        </p>
+                    </div>
+                    <br>
+                    <div class="stats-section">
+                        <h2 class="menu__heading">Statistics</h2>
+                        <ul class="stats-list">
+                            <li class="stats-name">Chapters completed: <span class="stat-value">-</span></li>
+                            <li class="stats-name">Enemies slayed: <span class="stat-value">-</span></li>
+                            <li class="stats-name">Pollen collected: <span class="stat-value">-</span></li>
+                        </ul>
+                    </div>
+                    <form action="user-profile" method="POST">
+                        <button type="submit" name="edit-profile" class="menu__button">Edit Profile</button>
+                    </form>
+                </div>
+            </section>
+        <?php endif; ?>
         <section class="menu__container">
-            <h2 class="menu__heading">User Profile</h2>
 
-            <div class="profile-section">
-                <div class="profile-info">
-                    <p><strong>Username:</strong>
-                        <?php echo htmlspecialchars($_SESSION["username"]); ?>
-                    </p>
-                    <p><strong>Description:</strong></p>
-                    <p class="description">
-                        <?php echo htmlspecialchars($about); ?>
-                    </p>
+            <?php if (isset($_SESSION["id"])) : ?>
+                <a href="game">
+                    <button type="submit" class="menu__button">New Game</button>
+                </a>
+
+                <div class="menu__button">
+                    Load Game
                 </div>
-                <br>
-                <div class="stats-section">
-                    <h2 class="menu__heading">Statistics</h2>
-                    <ul class="stats-list">
-                        <li class="stats-name">Chapters completed: <span class="stat-value">-</span></li>
-                        <li class="stats-name">Enemies slayed: <span class="stat-value">-</span></li>
-                        <li class="stats-name">Pollen collected: <span class="stat-value">-</span></li>
-                    </ul>
-                </div>
-                <form action="user-profile" method="POST">
-                    <button type="submit" name="edit-profile" class="menu__button">Edit Profile</button>
-                </form>
+            <?php endif; ?>
+            <div class="menu__button">
+                Lore Book
             </div>
-        </section>
-    <?php endif; ?>
-    <section class="menu__container">
-
-        <?php if (isset($_SESSION["id"])) : ?>
-            <a href="game">
-                <button type="submit" class="menu__button">New Game</button>
-            </a>
 
             <div class="menu__button">
-                Load Game
+                Send a Note
             </div>
-        <?php endif; ?>
-        <div class="menu__button">
-            Lore Book
-        </div>
 
-        <div class="menu__button">
-            Send a Note
-        </div>
+            <div class="menu__button">
+                Controls
+            </div>
 
-        <div class="menu__button">
-            Controls
-        </div>
+            <div class="menu__button">
+                <a class="menu__link" href="upload-level">Level Uploader</a>
+            </div>
 
-        <div class="menu__button">
-            <a class="menu__link" href="upload-level">Level Uploader</a>
-        </div>
+            <div class="menu__button">
+                <a class="menu__link" href="upload-script">Script Uploader</a>
+            </div>
 
-        <div class="menu__button">
-            <a class="menu__link" href="upload-script">Script Uploader</a>
-        </div>
+            <form action="logout" method="POST">
+                <button type="submit" class="menu__button">Quit</button>
+            </form>
 
-        <form action="logout" method="POST">
-            <button type="submit" class="menu__button">Quit</button>
-        </form>
-
-    </section>
+        </section>
+    </div>
 </div>
-
 </body>
 
 </html>

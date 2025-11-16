@@ -1,6 +1,6 @@
 import {dialogueData} from "./dataLoaders.js";
 import {gameData, eventDescription, eventOptions} from "./gameData.js";
-import {endEvent, appendContinueButton, displayAdventurelogMessage} from "./helperFunctions.js";
+import {endEvent, appendContinueButton, displayAdventurelogMessage, appendRejectionMessage} from "./helperFunctions.js";
 import {handleDeath} from "./deathHandler.js";
 
 export function initDialogue(dialogueSlug, stateKey) {
@@ -18,7 +18,7 @@ export function initDialogue(dialogueSlug, stateKey) {
 
     //add dialogue state's description to the adventure log
     eventDescription.textContent = currentState.description;
-    eventDescription.className = "dialogue-color";
+    eventDescription.className = "dialogue-text-color";
 
     // clear dialogue options
     eventOptions.innerHTML = '';
@@ -28,7 +28,7 @@ export function initDialogue(dialogueSlug, stateKey) {
         currentState.options.forEach(option => {
             const button = document.createElement("button");
             button.textContent = option.label;
-            button.className = 'dialogue-button';
+            button.className = 'option-button';
 
             button.addEventListener("click", () => {
 
@@ -41,9 +41,7 @@ export function initDialogue(dialogueSlug, stateKey) {
                     for (const [charKey, requiredValue] of Object.entries(optionData.requirements)) {
                         if ((gameData.playerCharacteristics[charKey] || 0) < requiredValue) {
                             canProceed = false;
-                            const rejection = document.createElement("div");
-                            rejection.textContent = optionData.rejection || "You cannot do this.";
-                            eventDescription.prepend(rejection);
+                            appendRejectionMessage(optionData);
                             break;
                         }
                     }
@@ -56,10 +54,10 @@ export function initDialogue(dialogueSlug, stateKey) {
                 if (optionData.characteristics) {
                     for (const [key, value] of Object.entries(optionData.characteristics)) {
                         gameData.playerCharacteristics[key] += value;
-                        const displayCharacteristic = document.querySelector(`.${key}-characteristic-count`);
+                        const displayCharacteristic = document.querySelector(`.${key}-stat-value`);
                         displayCharacteristic.textContent = gameData.playerCharacteristics[key];
 
-                        displayAdventurelogMessage(value, key, "dialogue-color");
+                        displayAdventurelogMessage(value, key, "dialogue-text-color");
                     }
                 }
 
@@ -109,11 +107,11 @@ export function registerDialogueOutcome(dialogueOutcome) {
     for (const [key, value] of Object.entries(dialogueOutcome)) {
         gameData.playerCharacteristics[key] += value;
 
-        const displayCharacteristic = document.querySelector(`.${key}-characteristic-count`);
+        const displayCharacteristic = document.querySelector(`.${key}-stat-value`);
         if (displayCharacteristic) {
             displayCharacteristic.textContent = gameData.playerCharacteristics[key];
 
-            displayAdventurelogMessage(value, key, "dialogue-color");
+            displayAdventurelogMessage(value, key, "dialogue-text-color");
 
         } else {
             console.warn(`Missing DOM element for: .${key}-characteristic-count`);

@@ -1,8 +1,13 @@
 import {doorData, levelData} from "./dataLoaders.js";
-import {adventureLog, gameData, eventDescription, eventOptions} from "./gameData.js";
+import {gameData, eventDescription, eventOptions} from "./gameData.js";
 import {registerEventOutcome} from "./eventHandler.js";
-import {appendContinueButton, endEvent} from "./helperFunctions.js";
-import {hasSeenEvent, markEventSeen} from "./helperFunctions.js";
+import {
+    appendContinueButton,
+    endEvent,
+    appendRejectionMessage,
+    hasSeenEvent,
+    markEventSeen
+} from "./helperFunctions.js";
 
 export function accessDoor(x, y) {
     const doors = [...(levelData.layers.doors) || []];
@@ -26,15 +31,13 @@ export function accessDoor(x, y) {
                 //if not, the rejection appears and the tiletype sets to unwalkable
                 if ((gameData.playerCharacteristics[charKey] || 0) < requiredValue) {
                     doorTile.type = "unwalkable";
-                    const rejection = document.createElement("div");
-                    rejection.textContent = door.rejection || "You are not worthy to enter";
-                    adventureLog.prepend(rejection);
+                    appendRejectionMessage(door);
                     return false;
                 }
             }
         }
         if (!hasSeenEvent(doorSlug)) {
-            eventDescription.className = "adventure-log__new-event";
+            eventDescription.className = "event-text-color";
             eventDescription.textContent = door.description;
 
             let continueButton = appendContinueButton();

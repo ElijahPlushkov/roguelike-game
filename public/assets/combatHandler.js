@@ -16,7 +16,7 @@ export function initCombat(enemySlug) {
 
     //create a combat's description
     eventDescription.textContent = enemy.description;
-    eventDescription.className = "adventure-log__new-combat";
+    eventDescription.className = "combat-text-color";
 
     //create options
     eventOptions.innerHTML = '';
@@ -25,7 +25,7 @@ export function initCombat(enemySlug) {
     enemy.options.forEach(option => {
         const button = document.createElement("button");
         button.textContent = option.label;
-        button.className = 'dialogue-button';
+        button.className = 'option-button';
         eventOptions.appendChild(button);
 
         button.addEventListener("click", () => {
@@ -40,8 +40,7 @@ export function initCombat(enemySlug) {
                 } else if (enemyChars.might - gameData.playerCharacteristics.might === 1) {
                     isSuccessful = false;
                     eventDescription.textContent = enemy.combatDefeat + " ";
-                }
-                else {
+                } else {
                     isSuccessful = true;
                     eventDescription.textContent = enemy.combatVictory + " ";
                 }
@@ -88,8 +87,7 @@ export function initCombat(enemySlug) {
                         eventOptions.innerHTML = '';
                         handleDeath();
                         return;
-                    }
-                    else if (gameData.playerCharacteristics.might < enemyFleeRequirements.might ||
+                    } else if (gameData.playerCharacteristics.might < enemyFleeRequirements.might ||
                         gameData.playerCharacteristics.prayer < enemyFleeRequirements.prayer) {
                         isSuccessful = false;
                         eventDescription.textContent = enemy.fleeFailure + " ";
@@ -118,7 +116,7 @@ export function resolveCombat(enemyDifficulty, isSuccessful) {
     const characteristics = Object.keys(gameData.playerCharacteristics);
     const charKey = characteristics[Math.floor(Math.random() * characteristics.length)];
 
-    const displayCharacteristic = document.querySelector(`.${charKey}-characteristic-count`);
+    const displayCharacteristic = document.querySelector(`.${charKey}-stat-value`);
 
     if (enemyDifficulty === "flimsy") {
         increase = 1;
@@ -147,19 +145,19 @@ export function resolveCombat(enemyDifficulty, isSuccessful) {
     }
 
     const combatResolution = document.createElement("p");
-    combatResolution.classList.add("adventure-log__new-combat");
+    combatResolution.classList.add("combat-text-color");
 
     if (isSuccessful === false) {
         gameData.playerCharacteristics[charKey] += decrease;
         displayCharacteristic.textContent = gameData.playerCharacteristics[charKey];
         displayPollen.textContent = gameData.pollen -= gameData.pollenChange;
-        combatResolution.textContent = `Your ${charKey} decreased by ${Math.abs(decrease)}. You lose ${gameData.pollenChange} pollen grains`;
+        combatResolution.textContent = `Your ${charKey} decreased by ${Math.abs(decrease)}. You lose ${gameData.pollenChange} pollen grains.`;
         return combatResolution;
     } else {
         gameData.playerCharacteristics[charKey] += increase;
         displayCharacteristic.textContent = gameData.playerCharacteristics[charKey];
         displayPollen.textContent = gameData.pollen += gameData.pollenChange;
-        combatResolution.textContent =`Your ${charKey} increased by ${increase}. You collect ${gameData.pollenChange} pollen grains`;
+        combatResolution.textContent = `Your ${charKey} increased by ${increase}. You collect ${gameData.pollenChange} pollen grains.`;
         return combatResolution;
     }
 }

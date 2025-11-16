@@ -11,8 +11,7 @@ require __DIR__ . "/../../config/pages.php";
 
     <meta charset="UTF-8">
     <title><?= htmlspecialchars(setPageName($pages, $pageKey)) ?></title>
-    <link rel="stylesheet" href="/roguelike-game/public/assets/styles.css">
-    <link rel="stylesheet" href="/roguelike-game/public/assets/game-layout.css">
+    <link rel="stylesheet" href="/roguelike-game/public/assets/css/main.css">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

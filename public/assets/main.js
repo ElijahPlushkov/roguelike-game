@@ -1,14 +1,14 @@
-import { gameData, adventureLog } from "./gameData.js";
-import { loadLevelData, loadDialogueData, loadEventData, loadDoorData, loadEnemyData } from "./dataLoaders.js";
-import { levelData, map, player, tileSet, dialogueData, eventData, doorData } from "./dataLoaders.js";
-import { initEvent } from "./eventHandler.js";
-import { mapRender } from "./mapRender.js";
-import { initDialogue } from "./dialogueHandler.js";
-import { initCombat } from "./combatHandler.js";
-import { accessDoor } from "./doorHandler.js";
-import { hasSeenEvent, markEventSeen } from "./helperFunctions.js";
-import { saveGame } from "./saveGame.js";
-import { applySavedFile } from "./loadGame.js";
+import {gameData, adventureLog} from "./gameData.js";
+import {loadLevelData, loadDialogueData, loadEventData, loadDoorData, loadEnemyData} from "./dataLoaders.js";
+import {levelData, map, player, tileSet, dialogueData, eventData, doorData} from "./dataLoaders.js";
+import {initEvent} from "./eventHandler.js";
+import {mapRender} from "./mapRender.js";
+import {initDialogue} from "./dialogueHandler.js";
+import {initCombat} from "./combatHandler.js";
+import {accessDoor} from "./doorHandler.js";
+import {hasSeenEvent, markEventSeen} from "./helperFunctions.js";
+import {saveGame} from "./saveGame.js";
+import {applySavedFile} from "./loadGame.js";
 
 document.addEventListener("DOMContentLoaded", () => {
     loadLevelData();
@@ -126,7 +126,7 @@ function isWalkable(x, y) {
     if (currentTile.walkable === false) {
         const newLogEntry = document.createElement("p");
         newLogEntry.className = "log-entry";
-        newLogEntry.textContent = "-you can't walk here";
+        newLogEntry.textContent = "You can't walk here!";
         adventureLog.prepend(newLogEntry);
         return false;
     }
@@ -157,7 +157,7 @@ function characteristicCheck(newEvent) {
 
             for (const [key, value] of Object.entries(requirements)) {
                 if (gameData.playerCharacteristics[key] < value) {
-                    const rejection = document.createElement("div");
+                    const rejection = document.createElement("p");
                     rejection.textContent = dialogue.rejection;
                     adventureLog.prepend(rejection);
                     return false;
@@ -182,7 +182,7 @@ function characteristicCheck(newEvent) {
                         handleDeath();
                         return false;
                     } else {
-                        const rejection = document.createElement("div");
+                        const rejection = document.createElement("p");
                         rejection.textContent = event.rejection;
                         adventureLog.prepend(rejection);
                         return false;

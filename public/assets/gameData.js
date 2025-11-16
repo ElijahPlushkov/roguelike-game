@@ -1,7 +1,7 @@
 export const gameData = {
     // Map & Player
     map: [],
-    player: { x: 0, y: 0 },
+    player: {x: 0, y: 0},
     tileSet: {},
 
     // Level & Chapter
@@ -45,16 +45,16 @@ export const gameData = {
 
 const adventureLog = document.querySelector(".adventure-log");
 
-const displayReputation = document.querySelector(".reputation-characteristic-count");
+const displayReputation = document.querySelector(".reputation-stat-value");
 displayReputation.textContent = gameData.playerCharacteristics.reputation;
 
-const displayMight = document.querySelector(".might-characteristic-count");
+const displayMight = document.querySelector(".might-stat-value");
 displayMight.textContent = gameData.playerCharacteristics.might;
 
-const displayPrayer = document.querySelector(".prayer-characteristic-count");
+const displayPrayer = document.querySelector(".prayer-stat-value");
 displayPrayer.textContent = gameData.playerCharacteristics.prayer;
 
-const displayPollen = document.querySelector(".pollen-quantity-count");
+const displayPollen = document.querySelector(".pollen-stat-value");
 displayPollen.textContent = gameData.pollen;
 
 const eventDescription = document.querySelector(".event-description");
