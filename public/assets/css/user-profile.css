@@ -1,0 +1,76 @@
+
+.profile-section {
+    width: 300px;
+    margin: 10px;
+    padding: 15px;
+    border-radius: 6px;
+    background: var(--surface-color);
+}
+
+.profile-info {
+    margin-bottom: 15px;
+}
+
+.profile-info p {
+    margin-bottom: 10px;
+    font-size: 0.95em;
+    line-height: 1.4;
+}
+
+.profile-info strong {
+    color: var(--green-2);
+    font-weight: normal;
+}
+
+.description {
+    padding: 8px;
+    margin-top: 5px;
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 3px;
+    border-left: 2px solid var(--accent-color);
+    font-style: italic;
+    min-height: 40px;
+}
+
+.stats-section {
+    margin: 20px 0;
+}
+
+.stats-section .main-menu__heading {
+    font-size: 1.1em;
+    padding: 0;
+    margin-bottom: 12px;
+    border-bottom: 1px solid var(--accent-color);
+    padding-bottom: 5px;
+}
+
+.stats-list {
+    list-style: none;
+    padding: 0;
+}
+
+.stats-name {
+    padding: 6px 0;
+    font-size: 0.9em;
+    border-bottom: 1px dashed rgba(95, 151, 139, 0.3);
+}
+
+.stats-name:last-child {
+    border-bottom: none;
+}
+
+.stat-value {
+    color: var(--green-3);
+    font-weight: bold;
+    float: right;
+}
+
+.stats-name::after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.profile-section .main-menu__button {
+    margin-bottom: 0;
+}

@@ -11,32 +11,32 @@
     font-size: 1.2em;
 }
 
-.menu-container {
+.main-menu-container {
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
 }
 
-.menu__container {
+.main-menu__container {
     max-width: 350px;
     margin: 10px;
     padding: 10px 10px;
     border-radius: 6px;
 }
 
-.menu__heading {
+.main-menu__heading {
     font-size: 1.2em;
     padding: 5px;
 }
 
-.menu__form {
+.main-menu__form {
     display: flex;
     flex-direction: column;
     margin-bottom: 28px;
 }
 
-.menu__input[type="text"],
-.menu__input[type="password"] {
+.main-menu__input[type="text"],
+.main-menu__input[type="password"] {
     padding: 5px;
     margin-bottom: 12px;
     border-radius: 3px;
@@ -48,7 +48,7 @@
     border: none;
 }
 
-.menu__button {
+.main-menu__button {
     position: relative;
     display: block;
     width: 100%;
@@ -68,8 +68,8 @@
     transition: all 0.5s ease;
 }
 
-.menu__button:before,
-.menu__button:after {
+.main-menu__button:before,
+.main-menu__button:after {
     content: '';
     position: absolute;
     top: 50%;
@@ -78,30 +78,30 @@
     transition: opacity 0.5s ease;
 }
 
-.menu__button:before {
+.main-menu__button:before {
     content: "-=";
     left: -5px;
 }
 
-.menu__button:after {
+.main-menu__button:after {
     content: "=-";
     right: -5px;
 }
 
-.menu__button:hover::before,
-.menu__button:hover::after {
+.main-menu__button:hover::before,
+.main-menu__button:hover::after {
     opacity: 1;
 }
 
-.menu__input {
+.main-menu__input {
     font: inherit;
     font-size: 1em;
     background-color: #9c9c9c;
     border: none;
 }
 
-.menu__link:visited,
-.menu__link:active, a {
+.main-menu__link:visited,
+.main-menu__link:active, a {
     color: white;
     text-decoration: none;
 }

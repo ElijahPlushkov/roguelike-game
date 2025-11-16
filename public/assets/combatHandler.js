@@ -31,7 +31,7 @@ export function initCombat(enemySlug) {
         button.addEventListener("click", () => {
 
             //check fight outcome
-            if (button.textContent === "fight") {
+            if (button.textContent === "Fight.") {
                 if (enemyChars.might - gameData.playerCharacteristics.might >= 2
                     && !["flimsy", "weak", "average"].includes(enemyDifficulty)) {
                     eventOptions.innerHTML = '';
@@ -55,7 +55,7 @@ export function initCombat(enemySlug) {
             }
 
             //check negotiate outcome
-            if (button.textContent === "negotiate") {
+            if (button.textContent === "Negotiate.") {
                 if (enemyChars.reputation - gameData.playerCharacteristics.reputation >= 2) {
                     eventOptions.innerHTML = '';
                     handleDeath();
@@ -78,7 +78,7 @@ export function initCombat(enemySlug) {
             }
 
             //check flee outcome
-            if (button.textContent === "flee") {
+            if (button.textContent === "Flee.") {
                 if (enemyDifficulty === "flimsy" || enemyDifficulty === "weak" || enemyDifficulty === "average") {
                     isSuccessful = false;
                     eventDescription.textContent = enemy.fleeSuccess + " ";
