@@ -22,7 +22,7 @@ export const gameData = {
     // Player stats
     playerCharacteristics: {
         reputation: 0,
-        might: 3,
+        might: 0,
         prayer: 0
     },
 

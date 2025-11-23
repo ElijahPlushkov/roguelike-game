@@ -32,12 +32,12 @@ export function initCombat(enemySlug) {
 
             //check fight outcome
             if (button.textContent === "Fight.") {
-                if (enemyChars.might - gameData.playerCharacteristics.might >= 2
+                if (enemyChars.might - gameData.playerCharacteristics.might > 2
                     && !["flimsy", "weak", "average"].includes(enemyDifficulty)) {
                     eventOptions.innerHTML = '';
                     handleDeath();
                     return;
-                } else if (enemyChars.might - gameData.playerCharacteristics.might === 1) {
+                } else if (enemyChars.might - gameData.playerCharacteristics.might > 2) {
                     isSuccessful = false;
                     eventDescription.textContent = enemy.combatDefeat + " ";
                 } else {
@@ -56,11 +56,12 @@ export function initCombat(enemySlug) {
 
             //check negotiate outcome
             if (button.textContent === "Negotiate.") {
-                if (enemyChars.reputation - gameData.playerCharacteristics.reputation >= 2) {
+                if (enemyChars.reputation - gameData.playerCharacteristics.reputation > 2
+                    && !["flimsy", "weak", "average", "tough"].includes(enemyDifficulty)) {
                     eventOptions.innerHTML = '';
                     handleDeath();
                     return;
-                } else if (enemyChars.reputation - gameData.playerCharacteristics.reputation === 1) {
+                } else if (enemyChars.reputation - gameData.playerCharacteristics.reputation > 2) {
                     isSuccessful = false;
                     eventDescription.textContent = enemy.negotiationDefeat + " ";
                 } else {

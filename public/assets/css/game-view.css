@@ -36,13 +36,13 @@
 }
 
 .game-menu-link {
-    color: var(--text-color);
+    color: var(--main-text-color);
     text-decoration: none;
 }
 
 .game-menu-link_ingame:visited,
 .game-menu-link_ingame:active, a {
-    color: var(--text-color);
+    color: var(--main-text-color);
 }
 
 .level-title__heading {
@@ -69,7 +69,7 @@
 .event-box {
     width: 680px;
     height: 420px;
-    background: rgba(0, 0, 0, 0.8);
+    background: var(--event-box-background-color);
     border-radius: 5px;
     padding: 5px;
 }
@@ -90,8 +90,9 @@
 .adventure-log-container {
     width: 1120px;
     margin: 0 auto;
-    border: 1px solid white;
+    border: 1px solid var(--main-text-color);
     border-radius: 5px;
+    background: var(--event-box-background-color);
 }
 
 .adventure-log {
@@ -102,29 +103,29 @@
 }
 
 .event-text-color {
-    color: cornflowerblue;
+    color: var(--event-text-color);
 }
 
 .combat-text-color {
-    color: indianred;
+    color: var(--combat-text-color);
 }
 
 .log-entry {
-    color: chocolate;
+    color: var(--log-entry-text-color);
 }
 
 .rejection-text-color {
-    color: lightsalmon;
+    color: var(--rejection-text-color);
 }
 
 .dialogue-text-color {
-    color: honeydew;
+    color: var(--main-text-color);
 }
 
 .option-button {
     font-size: 14px;
-    color: honeydew;
-    background: #3F5F5A;
+    color: var(--main-text-color);
+    background: var(--option-button-background);
     border: 1px solid black;
     border-radius: 3px;
     margin: 5px;

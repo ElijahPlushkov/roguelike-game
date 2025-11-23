@@ -1,12 +1,77 @@
 :root {
-    --background-color: #1e1e1e;
-    --surface-color: #2d2d2d;
-    --accent-color: #6FA89C;
-    --accent-hover: #5F978B;
-    --text-color: #D9E6DA;
-    --green-1: #A3B186;
-    --green-2: #5B754A;
-    --green-3: #4E9B31;
+    --background-color: #2f3140; /* 9 */
+    --event-box-background-color: #182029; /* 10 */
+
+    --main-menu-input: #9c9c9c;
+
+    --main-text-color: honeydew;
+    --event-text-color: #627c80; /* 13 */
+    --combat-text-color: #bf5437; /* 24 */
+    --log-entry-text-color: #bf5437; /* 24 */
+    --rejection-text-color: #af5722; /* 33 */
+
+    --option-button-background: #314646; /* 8 */
+
+    --dirt-tile: #554323; /* 38 */
+    --wall-tile: #353021; /* 39 */
+    --wooden-wall-tile: #703a1a; /* 34 */
+    --boulder-tile: #a49983; /* 2 */
+    --cobble-tile: #b5835a; /* 28 */
+    --tree-tile: #484c2a; /* 16 */
+    --bush-tile: #545f28; /* 15 */
+    --mountain-tile: #425a58; /* 7 */
+    --water-tile: #627c80; /* 13 */
+    --door-tile: #7b7d6a; /* 3 */
+    --alter-tile: honeydew; /* ? */
+    --player-tile: #81b5a2; /* 12 */
+    --npc-tile: #81b5a2; /* 12 */
+    --enemy-tile: #bf5437; /* 24 */
+    --item-tile: #caaa6c; /* 27 */
+
+}
+
+/* color palette */
+:root {
+    --color-1: #e6dac5;
+    --color-2: #a49983;
+    --color-3: #7b7d6a;
+    --color-4: #6a6548;
+    --color-5: #4a484a;
+    --color-6: #353235;
+    --color-7: #425a58;
+    --color-8: #314646;
+    --color-9: #2f3140;
+    --color-10: #182029;
+    --color-11: #bdd2de;
+    --color-12: #81b5a2;
+    --color-13: #627c80;
+    --color-14: #607a53;
+    --color-15: #545f28;
+    --color-16: #484c2a;
+    --color-17: #223925;
+    --color-18: #000000;
+    --color-19: #8f5c66;
+    --color-20: #5a4256;
+    --color-21: #7a393d;
+    --color-22: #562f36;
+    --color-23: #402736;
+    --color-24: #bf5437;
+    --color-25: #842d17;
+    --color-26: #5a231d;
+    --color-27: #caaa6c;
+    --color-28: #b5835a;
+    --color-29: #855139;
+    --color-30: #60342c;
+    --color-31: #af8e2c;
+    --color-32: #8a5c0a;
+    --color-33: #af5722;
+    --color-34: #703a1a;
+    --color-35: #3b1c16;
+    --color-36: #2a1810;
+    --color-37: #80592e;
+    --color-38: #554323;
+    --color-39: #353021;
+    --color-40: #1c200f;
 }
 
 * {
@@ -18,7 +83,7 @@
 body {
     font-family: "Cascadia Code", sans-serif;
     background: var(--background-color);
-    color: var(--text-color);
+    color: var(--main-text-color);
 }
 
 .container-flex-center {

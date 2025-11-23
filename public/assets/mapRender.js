@@ -55,7 +55,7 @@ export function mapRender() {
                         tile.textContent = "α";
                         break;
                     case ".":
-                        tile.classList.add("floor");
+                        tile.classList.add("dirt");
                         tile.textContent = ".";
                         break;
                     case "□":
@@ -64,7 +64,6 @@ export function mapRender() {
                         break;
                     case "T":
                         tile.classList.add("tree");
-                        tile.textContent = "Т";
                         break;
                     case "N":
                         tile.classList.add("npc");
@@ -87,8 +86,7 @@ export function mapRender() {
                         tile.textContent = "Θ";
                         break;
                     case "t":
-                        tile.classList.add("short-tree");
-                        tile.textContent = "t";
+                        tile.classList.add("birch");
                         break;
                     case "*":
                         tile.classList.add("pine-tree");

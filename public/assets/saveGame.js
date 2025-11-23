@@ -1,4 +1,4 @@
-import {gameData} from "./gameData.js";
+import {adventureLog, gameData} from "./gameData.js";
 import {player} from "./dataLoaders.js";
 
 export function updateGameProgress(slug, finalState) {
@@ -30,6 +30,11 @@ export function saveGame() {
         body: JSON.stringify(preparedSaveData)
     })
         .then(result => result.json())
-        .then(data => console.log("game saved:", data))
+        .then(data => {
+            let saveMessage = document.createElement("p");
+            saveMessage.textContent = "game saved";
+            adventureLog.prepend(saveMessage);
+            console.log("game saved:", data);
+        })
         .catch(error => console.error("save failed:", error));
 }

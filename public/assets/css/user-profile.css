@@ -4,7 +4,7 @@
     margin: 10px;
     padding: 15px;
     border-radius: 6px;
-    background: var(--surface-color);
+    /*background: var(--surface-color);*/
 }
 
 .profile-info {
@@ -18,7 +18,7 @@
 }
 
 .profile-info strong {
-    color: var(--green-2);
+    /*color: var(--green-2);*/
     font-weight: normal;
 }
 
@@ -27,7 +27,7 @@
     margin-top: 5px;
     background: rgba(0, 0, 0, 0.1);
     border-radius: 3px;
-    border-left: 2px solid var(--accent-color);
+    /*border-left: 2px solid var(--accent-color);*/
     font-style: italic;
     min-height: 40px;
 }
@@ -40,7 +40,7 @@
     font-size: 1.1em;
     padding: 0;
     margin-bottom: 12px;
-    border-bottom: 1px solid var(--accent-color);
+    /*border-bottom: 1px solid var(--accent-color);*/
     padding-bottom: 5px;
 }
 
@@ -52,7 +52,7 @@
 .stats-name {
     padding: 6px 0;
     font-size: 0.9em;
-    border-bottom: 1px dashed rgba(95, 151, 139, 0.3);
+    border-bottom: 1px dashed #5F978B4C;
 }
 
 .stats-name:last-child {

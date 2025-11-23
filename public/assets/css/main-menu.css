@@ -9,6 +9,7 @@
     padding-bottom: 8px;
     margin-bottom: 18px;
     font-size: 1.2em;
+    color: var(--main-text-color);
 }
 
 .main-menu-container {
@@ -40,11 +41,11 @@
     padding: 5px;
     margin-bottom: 12px;
     border-radius: 3px;
-    color: var(--text-color);
+    color: var(--main-text-color);
 
     font: inherit;
     font-size: 1em;
-    background-color: #9c9c9c;
+    background-color: var(--main-menu-input);
     border: none;
 }
 
@@ -56,7 +57,7 @@
     margin-bottom: 20px;
 
     background: none;
-    color: white;
+    color: var(--main-text-color);
     border: none;
     border-radius: 6px;
 
@@ -96,12 +97,12 @@
 .main-menu__input {
     font: inherit;
     font-size: 1em;
-    background-color: #9c9c9c;
+    background-color: var(--main-menu-input);
     border: none;
 }
 
 .main-menu__link:visited,
 .main-menu__link:active, a {
-    color: white;
+    color: var(--main-text-color);
     text-decoration: none;
 }

@@ -1,4 +1,4 @@
-import {displayMight, displayPollen, displayPrayer, displayReputation, gameData} from "./gameData.js";
+import {adventureLog, displayMight, displayPollen, displayPrayer, displayReputation, gameData} from "./gameData.js";
 import {player} from "./dataLoaders.js";
 import {mapRender} from "./mapRender.js";
 
@@ -46,6 +46,13 @@ export async function applySavedFile() {
         updatePlayerPosition(gameData.player.x, gameData.player.y, player);
         mapRender();
         updatePlayerCharacteristics(displayMight, displayReputation, displayPrayer, displayPollen);
+
+        adventureLog.innerHTML = "";
+
+        let loadMessage = document.createElement("p");
+        loadMessage.textContent = "game loaded";
+        adventureLog.prepend(loadMessage);
+
     } catch (error) {
         console.log("Failed to load game:", error);
     }
