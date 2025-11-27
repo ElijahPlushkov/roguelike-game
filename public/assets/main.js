@@ -109,9 +109,11 @@ function checkForAnyEvent(x, y) {
 
         if (newEvent.type === "enemy") {
             const enemySlug = newEvent.slug;
+            const isImportant = newEvent.isImportant;
+            const difficulty = newEvent.difficulty;
             if (!hasSeenEvent(enemySlug)) {
                 gameData.eventActive = true;
-                initCombat(enemySlug);
+                initCombat(enemySlug, isImportant, difficulty);
                 markEventSeen(enemySlug);
             }
         }

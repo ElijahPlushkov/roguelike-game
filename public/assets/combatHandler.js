@@ -2,10 +2,19 @@ import {enemyData} from "./dataLoaders.js";
 import {gameData, displayPollen, adventureLog, eventDescription, eventOptions} from "./gameData.js";
 import {handleDeath} from "./deathHandler.js";
 import {appendContinueButton, endEvent} from "./helperFunctions.js";
+import {GenerateEnemy} from "./enemyGenerator.js";
 
-export function initCombat(enemySlug) {
+export function initCombat(enemySlug, isImportant, difficulty) {
 
-    const enemy = enemyData.enemies.find(enemy => enemy.slug === enemySlug);
+    let enemy;
+
+    if (isImportant === "true") {
+        enemy = enemyData.enemies.find(enemy => enemy.slug === enemySlug);
+    } else {
+        let newEnemy = new GenerateEnemy(difficulty);
+        enemy = newEnemy.generateEnemy();
+        console.log(enemy);
+    }
 
     const enemyChars = enemy.characteristics;
     const enemyFleeRequirements = enemy.flee;
