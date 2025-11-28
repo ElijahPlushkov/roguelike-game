@@ -44,6 +44,7 @@ require_once __DIR__ . "/../views/header.php";
 <!--                        <img src="assets/spider-placeholder.png" class="event-portrait__image">-->
                     </div>
                     <div class="event-description">Use WASD to move.</div>
+                    <div class="event-info"></div>
                     <div class="event-options"></div>
                 </div>
             </div>

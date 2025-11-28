@@ -39,7 +39,7 @@ export function accessDoor(x, y) {
         if (!hasSeenEvent(doorSlug)) {
             eventDescription.className = "event-text-color";
             eventDescription.textContent = door.description;
-
+            gameData.eventActive = true;
             let continueButton = appendContinueButton();
             eventOptions.prepend(continueButton);
             continueButton.addEventListener("click", function () {
@@ -47,6 +47,7 @@ export function accessDoor(x, y) {
                 const reward = door.reward;
                 registerEventOutcome(reward);
                 markEventSeen(doorSlug);
+                gameData.eventActive = false;
             });
         }
         return true;

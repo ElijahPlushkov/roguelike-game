@@ -61,4 +61,6 @@ const eventDescription = document.querySelector(".event-description");
 
 const eventOptions = document.querySelector(".event-options");
 
-export {adventureLog, displayReputation, displayMight, displayPrayer, displayPollen, eventDescription, eventOptions};
+const eventInfo = document.querySelector(".event-info");
+
+export {adventureLog, displayReputation, displayMight, displayPrayer, displayPollen, eventDescription, eventOptions, eventInfo};

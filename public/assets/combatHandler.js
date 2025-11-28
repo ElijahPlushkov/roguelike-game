@@ -1,5 +1,5 @@
 import {enemyData} from "./dataLoaders.js";
-import {gameData, displayPollen, adventureLog, eventDescription, eventOptions} from "./gameData.js";
+import {gameData, displayPollen, adventureLog, eventDescription, eventOptions, eventInfo} from "./gameData.js";
 import {handleDeath} from "./deathHandler.js";
 import {appendContinueButton, endEvent} from "./helperFunctions.js";
 import {GenerateEnemy} from "./enemyGenerator.js";
@@ -54,10 +54,13 @@ export function initCombat(enemySlug, isImportant, difficulty) {
                     eventDescription.textContent = enemy.combatVictory + " ";
                 }
 
+                displayCombatInfo(enemyChars.might, gameData.playerCharacteristics.might, enemyDifficulty);
+
                 eventOptions.innerHTML = "";
                 let continueButton = appendContinueButton();
                 eventOptions.prepend(continueButton);
                 continueButton.addEventListener("click", function () {
+                    eventInfo.innerHTML = "";
                     adventureLog.prepend(resolveCombat(enemyDifficulty, isSuccessful, gameData.pollen));
                     endEvent(enemySlug, isSuccessful, eventDescription, eventOptions);
                 });
@@ -78,10 +81,13 @@ export function initCombat(enemySlug, isImportant, difficulty) {
                     eventDescription.textContent = enemy.negotiationVictory + " ";
                 }
 
+                displayCombatInfo(enemyChars.reputation, gameData.playerCharacteristics.reputation, enemyDifficulty);
+
                 eventOptions.innerHTML = "";
                 let continueButton = appendContinueButton();
                 eventOptions.prepend(continueButton);
                 continueButton.addEventListener("click", function () {
+                    eventInfo.innerHTML = "";
                     adventureLog.prepend(resolveCombat(enemyDifficulty, isSuccessful, gameData.pollen));
                     endEvent(enemySlug, isSuccessful, eventDescription, eventOptions);
                 });
@@ -106,10 +112,12 @@ export function initCombat(enemySlug, isImportant, difficulty) {
                         eventDescription.textContent = enemy.fleeSuccess + " ";
                     }
                 }
+
                 eventOptions.innerHTML = "";
                 let continueButton = appendContinueButton();
                 eventOptions.prepend(continueButton);
                 continueButton.addEventListener("click", function () {
+                    eventInfo.innerHTML = "";
                     adventureLog.prepend(resolveCombat(enemyDifficulty, isSuccessful, gameData.pollen));
                     endEvent(enemySlug, isSuccessful, eventDescription, eventOptions);
                 });
@@ -170,4 +178,11 @@ export function resolveCombat(enemyDifficulty, isSuccessful) {
         combatResolution.textContent = `Your ${charKey} increased by ${increase}. You collect ${gameData.pollenChange} pollen grains.`;
         return combatResolution;
     }
+}
+
+function displayCombatInfo(enemyChar, playerChar, enemyDifficulty) {
+    let combatInfo = document.createElement("p");
+    combatInfo.classList.add(".dialogue-text-color");
+    combatInfo.textContent = "You: " + playerChar + " / " + "Enemy: " + enemyChar + " / Difficulty: " + enemyDifficulty;
+    eventInfo.prepend(combatInfo);
 }

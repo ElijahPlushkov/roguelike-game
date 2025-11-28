@@ -154,7 +154,3 @@ export class GenerateEnemy {
         return Math.floor(Math.random() * (max - min + 1) + min)
     }
 }
-
-// let generateEnemy = new GenerateEnemy("weak");
-// let newEnemy = generateEnemy.generateEnemy();
-// console.log(newEnemy)

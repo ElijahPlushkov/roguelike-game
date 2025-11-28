@@ -83,6 +83,10 @@
     font-size: 14px;
 }
 
+.event-info {
+    margin-top: 10px;
+}
+
 .hidden {
     display: none;
 }
