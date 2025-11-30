@@ -42,7 +42,6 @@ export const gameData = {
     }
 };
 
-
 const adventureLog = document.querySelector(".adventure-log");
 
 const displayReputation = document.querySelector(".reputation-stat-value");
@@ -63,4 +62,11 @@ const eventOptions = document.querySelector(".event-options");
 
 const eventInfo = document.querySelector(".event-info");
 
-export {adventureLog, displayReputation, displayMight, displayPrayer, displayPollen, eventDescription, eventOptions, eventInfo};
+const journalBox = document.querySelector(".journal-box");
+
+const journalClose = document.querySelector(".journal-close");
+
+export {adventureLog,
+    displayReputation, displayMight, displayPrayer, displayPollen,
+    eventDescription, eventOptions, eventInfo,
+    journalBox, journalClose};

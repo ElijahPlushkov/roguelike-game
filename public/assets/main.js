@@ -1,6 +1,6 @@
-import {gameData, adventureLog} from "./gameData.js";
+import {gameData, adventureLog, journalClose} from "./gameData.js";
 import {loadLevelData, loadDialogueData, loadEventData, loadDoorData, loadEnemyData} from "./dataLoaders.js";
-import {levelData, map, player, tileSet, dialogueData, eventData, doorData} from "./dataLoaders.js";
+import {levelData, map, player, tileSet, dialogueData, eventData} from "./dataLoaders.js";
 import {initEvent} from "./eventHandler.js";
 import {mapRender} from "./mapRender.js";
 import {initDialogue} from "./dialogueHandler.js";
@@ -9,6 +9,7 @@ import {accessDoor} from "./doorHandler.js";
 import {hasSeenEvent, markEventSeen} from "./helperFunctions.js";
 import {saveGame} from "./saveGame.js";
 import {applySavedFile} from "./loadGame.js";
+import {JournalUpdater} from "./JournalUpdater.js";
 
 document.addEventListener("DOMContentLoaded", () => {
     loadLevelData();
@@ -201,6 +202,16 @@ saveGameButton.addEventListener("click", saveGame);
 
 const loadGameButton = document.getElementById("loadGame");
 loadGameButton.addEventListener("click", applySavedFile);
+
+const questJournal = document.getElementById("questJournal");
+let journalUpdater = new JournalUpdater();
+questJournal.addEventListener("click", () => {
+    journalUpdater.toggleJournal();
+});
+
+journalClose.addEventListener("click", () => {
+    journalUpdater.closeJournal();
+})
 
 //this is a test function to include event outcomes to requirements
 function questChecker(newEvent) {

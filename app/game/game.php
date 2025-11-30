@@ -24,7 +24,7 @@ require_once __DIR__ . "/../views/header.php";
                 </div>
                 <div class="game-menu-item" id="saveGame">[Save]</div>
                 <div class="game-menu-item" id="loadGame">[Load]</div>
-                <div class="game-menu-item">[Settings]</div>
+                <div class="game-menu-item" id="questJournal">[Journal]</div>
             </div>
 
         </section>
@@ -38,14 +38,72 @@ require_once __DIR__ . "/../views/header.php";
                 <div id="game-map" class="tile-grid"></div>
             </div>
 
+            <!--events-->
             <div class="event-box">
                 <div class="event-content">
                     <div class="event-portrait">
-<!--                        <img src="assets/spider-placeholder.png" class="event-portrait__image">-->
+<!--                    <img src="" class="event-portrait__image">-->
                     </div>
                     <div class="event-description">Use WASD to move.</div>
                     <div class="event-info"></div>
                     <div class="event-options"></div>
+                </div>
+            </div>
+
+            <!--journal-->
+            <div class="journal-box hidden">
+                <div class="journal-content">
+                    <div class="journal-header">
+                        <h3>Quest Journal</h3>
+                        <button class="journal-close">✕</button>
+                    </div>
+
+                    <div class="journal-active-quests">
+                        <h4 class="journal-section-title">Active Quests</h4>
+                        <div class="quest-list">
+                            <div class="quest-item">
+                                <div class="quest-header">
+                                    <span class="quest-toggle">▶</span>
+                                    <span class="quest-title">Reach the Chyceen border</span>
+                                </div>
+                                <div class="quest-description">
+                                    <p>Your Order assigned you to travel to Chyceen.</p>
+                                    <p>Speak to the commandant of the Chyceen fort.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="journal-completed-quests">
+                        <h4 class="journal-section-title">Completed Quests</h4>
+                        <div class="quest-list">
+                            <div class="quest-item_completed">
+                                <div class="quest-header">
+                                    <span class="quest-toggle">▶</span>
+                                    <span class="quest-title">Arrive to the Borderlands</span>
+                                </div>
+                                <div class="quest-description">
+                                    <p>You have arrived to the Borderlands last night.
+                                        It was an exhausting journey, so you broke camp and rested for the night.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="journal-failed-quests">
+                        <h4 class="journal-section-title">Failed Quests</h4>
+                        <div class="quest-list">
+                            <div class="quest-item_failed">
+                                <div class="quest-header">
+                                    <span class="quest-toggle">▶</span>
+                                    <span class="quest-title">Find an ally</span>
+                                </div>
+                                <div class="quest-description">
+                                    <p>You failed to find a friend.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
