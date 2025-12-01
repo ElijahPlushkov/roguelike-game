@@ -8,6 +8,13 @@ export const gameData = {
     levelData: {},
     chapterName: "",
 
+    // Quests
+    quests: {
+        active: {},
+        completed: {},
+        failed: {}
+    },
+
     // Data sets
     dialogueData: {},
     eventData: {},

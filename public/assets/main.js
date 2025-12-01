@@ -1,5 +1,5 @@
 import {gameData, adventureLog, journalClose} from "./gameData.js";
-import {loadLevelData, loadDialogueData, loadEventData, loadDoorData, loadEnemyData} from "./dataLoaders.js";
+import {loadLevelData, loadDialogueData, loadEventData, loadDoorData, loadEnemyData, loadQuestData} from "./dataLoaders.js";
 import {levelData, map, player, tileSet, dialogueData, eventData} from "./dataLoaders.js";
 import {initEvent} from "./eventHandler.js";
 import {mapRender} from "./mapRender.js";
@@ -17,6 +17,7 @@ document.addEventListener("DOMContentLoaded", () => {
     loadEventData();
     loadDoorData();
     loadEnemyData();
+    loadQuestData();
 
     //movement
     document.addEventListener("keydown", (e) => {
@@ -207,6 +208,12 @@ const questJournal = document.getElementById("questJournal");
 let journalUpdater = new JournalUpdater();
 questJournal.addEventListener("click", () => {
     journalUpdater.toggleJournal();
+});
+
+// journalUpdater.addNewQuest("main_quest_1");
+
+document.addEventListener("keydown", () => {
+    journalUpdater.addNewQuest("main_quest_1")
 });
 
 journalClose.addEventListener("click", () => {

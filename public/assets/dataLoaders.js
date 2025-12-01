@@ -13,10 +13,10 @@ let dialogueData = {};
 let eventData = {};
 let doorData = {};
 let enemyData = {};
+let questData = {};
 
 //load data
 export function loadLevelData(slug = CHAPTERS.CHAPTER_1) {
-    // fetch(`/roguelike-game/load-level?slug=${encodeURIComponent(slug)}`)
     fetch("/roguelike-game/load-level?slug=" + slug)
         .then(response => response.json())
         .then(level => {
@@ -37,47 +37,58 @@ export function loadLevelData(slug = CHAPTERS.CHAPTER_1) {
 }
 
 export function loadDialogueData(slug = chapterOneSlugs.DIALOGUES) {
-    fetch(`/roguelike-game/load-script?slug=${encodeURIComponent(slug)}`)
+    fetch("/roguelike-game/load-script?slug=" + slug)
         .then(response => response.json())
         .then(dialogues => {
             dialogueData = dialogues;
         })
         .catch(err => {
-            console.error("Failed to load script:", err);
+            console.error("Failed to load dialogues:", err);
         });
 }
 
 export function loadEventData(slug = chapterOneSlugs.EVENTS) {
-    fetch(`/roguelike-game/load-script?slug=${encodeURIComponent(slug)}`)
+    fetch("/roguelike-game/load-script?slug=" + slug)
         .then(response => response.json())
         .then(events => {
             eventData = events;
         })
         .catch(err => {
-            console.error("Failed to load script:", err);
+            console.error("Failed to load events:", err);
         });
 }
 
 export function loadDoorData(slug = chapterOneSlugs.DOORS) {
-    fetch(`/roguelike-game/load-script?slug=${encodeURIComponent(slug)}`)
+    fetch("/roguelike-game/load-script?slug=" + slug)
         .then(response => response.json())
         .then(doors => {
             doorData = doors;
         })
         .catch(err => {
-            console.error("Failed to load script:", err);
+            console.error("Failed to load doors:", err);
         });
 }
 
 export function loadEnemyData(slug = chapterOneSlugs.ENEMIES) {
-    fetch(`/roguelike-game/load-script?slug=${encodeURIComponent(slug)}`)
+    fetch("/roguelike-game/load-script?slug=" + slug)
         .then(response => response.json())
         .then(enemies => {
             enemyData = enemies;
         })
         .catch(err => {
-            console.error("Failed to load script:", err);
+            console.error("Failed to load enemies:", err);
         });
 }
 
-export { levelData, chapterName, map, player, tileSet, dialogueData, eventData, doorData, enemyData };
+export function loadQuestData(slug = chapterOneSlugs.QUESTS) {
+    fetch("/roguelike-game/load-script?slug=" + slug)
+        .then(response => response.json())
+        .then(quests => {
+            questData = quests;
+        })
+        .catch(err => {
+            console.error("Failed to load quests:", err);
+        });
+}
+
+export { levelData, chapterName, map, player, tileSet, dialogueData, eventData, doorData, enemyData, questData};

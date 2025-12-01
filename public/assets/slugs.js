@@ -10,5 +10,6 @@ export const chapterOneSlugs = {
     EVENTS: "chapter_1_events",
     DOORS: "chapter_1_doors",
     ITEMS: "chapter_1_items",
-    ENEMIES: "chapter_1_enemies"
+    ENEMIES: "chapter_1_enemies",
+    QUESTS: "chapter_1_quests"
 }
