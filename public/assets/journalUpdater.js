@@ -14,18 +14,32 @@ export class JournalUpdater {
     }
 
     addNewQuest(questId) {
-        let newQuest = this.findDialogue(questId);
-        console.log(newQuest)
+        const newQuest = this.findQuest(questId);
+        console.log(newQuest);
 
-        let questItem = document.querySelector(".journal-active-quests .quest-item");
-        let title = questItem.querySelector(".quest-title");
-        let description = questItem.querySelector(".quest-description");
+        const template = document.getElementById('quest-template');
 
-        title.textContent = "Tempest"
-        description.textContent = newQuest.states[0].text;
+        const questList = document.querySelector('.quest-list');
+
+        const clone = template.content.cloneNode(true);
+
+        clone.querySelector('.quest-title').textContent = newQuest.title;
+
+        const descriptionBox = clone.querySelector('.quest-description');
+        descriptionBox.innerHTML = "";
+
+        const p = document.createElement("p");
+
+        let states = newQuest.states;
+        let startState = states.find(state => state.id === "start")
+
+        p.textContent = startState.description;
+        descriptionBox.appendChild(p);
+
+        questList.appendChild(clone);
     }
 
-    findDialogue(questId) {
+    findQuest(questId) {
         return questData.quests.find(quest => quest.id === questId);
     }
 }

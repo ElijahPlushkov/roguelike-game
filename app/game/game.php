@@ -61,16 +61,18 @@ require_once __DIR__ . "/../views/header.php";
                     <div class="journal-active-quests">
                         <h4 class="journal-section-title">Active Quests</h4>
                         <div class="quest-list">
-                            <div class="quest-item">
-                                <div class="quest-header">
-                                    <span class="quest-toggle">▶</span>
-                                    <span class="quest-title">Reach the Chyceen border</span>
+                            <template id="quest-template">
+                                <div class="quest-item">
+                                    <div class="quest-header">
+                                        <span class="quest-toggle">▶</span>
+                                        <span class="quest-title">Reach the Chyceen border</span>
+                                    </div>
+                                    <div class="quest-description">
+                                        <p>Your Order assigned you to travel to Chyceen.</p>
+                                        <p>Speak to the commandant of the Chyceen fort.</p>
+                                    </div>
                                 </div>
-                                <div class="quest-description">
-                                    <p>Your Order assigned you to travel to Chyceen.</p>
-                                    <p>Speak to the commandant of the Chyceen fort.</p>
-                                </div>
-                            </div>
+                            </template>
                         </div>
                     </div>
 

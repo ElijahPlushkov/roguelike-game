@@ -1,6 +1,7 @@
 import {eventData} from "./dataLoaders.js";
 import {gameData, displayPollen, eventDescription, eventOptions} from "./gameData.js";
 import {appendContinueButton, displayAdventurelogMessage, endEvent} from "./helperFunctions.js";
+import {JournalUpdater} from "./JournalUpdater.js";
 
 export function initEvent(eventSlug) {
 
@@ -14,6 +15,11 @@ export function initEvent(eventSlug) {
     let continueButton = appendContinueButton();
     eventOptions.prepend(continueButton);
     continueButton.addEventListener("click", function () {
+        if (event.quest) {
+            let journalUpdater = new JournalUpdater();
+            let questId = event.quest;
+            journalUpdater.addNewQuest(questId);
+        }
         endEvent(eventSlug, "completed", eventDescription, eventOptions);
         const reward = event.reward;
         registerEventOutcome(reward);

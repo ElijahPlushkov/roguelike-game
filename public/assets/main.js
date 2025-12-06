@@ -212,9 +212,9 @@ questJournal.addEventListener("click", () => {
 
 // journalUpdater.addNewQuest("main_quest_1");
 
-document.addEventListener("keydown", () => {
-    journalUpdater.addNewQuest("main_quest_1")
-});
+// document.addEventListener("keydown", () => {
+//     journalUpdater.addNewQuest("main_quest_1")
+// });
 
 journalClose.addEventListener("click", () => {
     journalUpdater.closeJournal();
