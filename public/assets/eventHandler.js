@@ -1,6 +1,6 @@
 import {eventData} from "./dataLoaders.js";
 import {gameData, displayPollen, eventDescription, eventOptions} from "./gameData.js";
-import {appendContinueButton, displayAdventurelogMessage, endEvent} from "./helperFunctions.js";
+import {appendContinueButton, displayAdventureLogMessage, endEvent} from "./helperFunctions.js";
 import {JournalUpdater} from "./JournalUpdater.js";
 
 export function initEvent(eventSlug) {
@@ -17,8 +17,13 @@ export function initEvent(eventSlug) {
     continueButton.addEventListener("click", function () {
         if (event.quest) {
             let journalUpdater = new JournalUpdater();
-            let questId = event.quest;
-            journalUpdater.addNewQuest(questId);
+
+            if (event.quest.state === "finish") {
+                journalUpdater.finishQuest(event.quest);
+            } else {
+                journalUpdater.addNewQuest(event.quest);
+            }
+            journalUpdater.questUpdateNotification();
         }
         endEvent(eventSlug, "completed", eventDescription, eventOptions);
         const reward = event.reward;
@@ -33,7 +38,7 @@ export function registerEventOutcome(reward) {
         if (key === "pollen") {
             gameData.pollen += value;
             displayPollen.textContent = gameData.pollen;
-            displayAdventurelogMessage(value, key, "event-text-color");
+            displayAdventureLogMessage(value, key, "event-text-color");
         } else {
             gameData.playerCharacteristics[key] += value;
 
@@ -42,7 +47,7 @@ export function registerEventOutcome(reward) {
             if (displayCharacteristic) {
                 displayCharacteristic.textContent = gameData.playerCharacteristics[key];
 
-                displayAdventurelogMessage(value, key, "event-text-color");
+                displayAdventureLogMessage(value, key, "event-text-color");
 
             } else {
                 console.warn(`Missing DOM element for: .${key}-characteristic-count`);

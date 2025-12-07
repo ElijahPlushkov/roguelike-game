@@ -249,7 +249,7 @@
     flex: 1;
 }
 
-.quest-item_completed .quest-title {
+.quest-title_completed {
     color: var(--player-tile);
     text-decoration: line-through;
     opacity: 0.9;

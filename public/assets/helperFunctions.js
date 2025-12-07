@@ -21,7 +21,7 @@ export function appendRejectionMessage(eventData) {
     eventOptions.prepend(rejection);
 }
 
-export function displayAdventurelogMessage(value, key, ccsClass) {
+export function displayAdventureLogMessage(value, key, ccsClass) {
     const charChange = document.createElement("p");
     charChange.className = ccsClass;
     if (key === "pollen") {

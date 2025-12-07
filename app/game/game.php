@@ -60,7 +60,7 @@ require_once __DIR__ . "/../views/header.php";
 
                     <div class="journal-active-quests">
                         <h4 class="journal-section-title">Active Quests</h4>
-                        <div class="quest-list">
+                        <div class="quest-list-active">
                             <template id="quest-template">
                                 <div class="quest-item">
                                     <div class="quest-header">
@@ -78,17 +78,19 @@ require_once __DIR__ . "/../views/header.php";
 
                     <div class="journal-completed-quests">
                         <h4 class="journal-section-title">Completed Quests</h4>
-                        <div class="quest-list">
+                        <div class="quest-list-completed">
+
                             <div class="quest-item_completed">
                                 <div class="quest-header">
                                     <span class="quest-toggle">▶</span>
-                                    <span class="quest-title">Arrive to the Borderlands</span>
+                                    <span class="quest-title_completed">Arrive to the Borderlands</span>
                                 </div>
                                 <div class="quest-description">
                                     <p>You have arrived to the Borderlands last night.
                                         It was an exhausting journey, so you broke camp and rested for the night.</p>
                                 </div>
                             </div>
+
                         </div>
                     </div>
 

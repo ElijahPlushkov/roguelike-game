@@ -1,7 +1,8 @@
 import {dialogueData} from "./dataLoaders.js";
 import {gameData, eventDescription, eventOptions} from "./gameData.js";
-import {endEvent, appendContinueButton, displayAdventurelogMessage, appendRejectionMessage} from "./helperFunctions.js";
+import {endEvent, appendContinueButton, displayAdventureLogMessage, appendRejectionMessage} from "./helperFunctions.js";
 import {handleDeath} from "./deathHandler.js";
+import {JournalUpdater} from "./JournalUpdater.js";
 
 export function initDialogue(dialogueSlug, stateKey) {
     //find the dialogue
@@ -16,7 +17,7 @@ export function initDialogue(dialogueSlug, stateKey) {
         return;
     }
 
-    //add dialogue state's description to the adventure log
+    //add dialogue state's description to the event-box
     eventDescription.textContent = currentState.description;
     eventDescription.className = "dialogue-text-color";
 
@@ -57,7 +58,7 @@ export function initDialogue(dialogueSlug, stateKey) {
                         const displayCharacteristic = document.querySelector(`.${key}-stat-value`);
                         displayCharacteristic.textContent = gameData.playerCharacteristics[key];
 
-                        displayAdventurelogMessage(value, key, "dialogue-text-color");
+                        displayAdventureLogMessage(value, key, "dialogue-text-color");
                     }
                 }
 
@@ -89,6 +90,11 @@ export function initDialogue(dialogueSlug, stateKey) {
             eventOptions.prepend(continueButton);
             continueButton.addEventListener("click", function () {
                 endEvent(dialogueSlug, stateKey, eventDescription, eventOptions);
+                if (dialogue.quest) {
+                    let journalUpdater = new JournalUpdater();
+                    journalUpdater.updateQuest(dialogue.quest);
+                    journalUpdater.questUpdateNotification();
+                }
                 registerDialogueOutcome(dialogueOutcome);
             });
         }
@@ -111,7 +117,7 @@ export function registerDialogueOutcome(dialogueOutcome) {
         if (displayCharacteristic) {
             displayCharacteristic.textContent = gameData.playerCharacteristics[key];
 
-            displayAdventurelogMessage(value, key, "dialogue-text-color");
+            displayAdventureLogMessage(value, key, "dialogue-text-color");
 
         } else {
             console.warn(`Missing DOM element for: .${key}-characteristic-count`);
