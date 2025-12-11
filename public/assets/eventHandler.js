@@ -15,16 +15,12 @@ export function initEvent(eventSlug) {
     let continueButton = appendContinueButton();
     eventOptions.prepend(continueButton);
     continueButton.addEventListener("click", function () {
+
         if (event.quest) {
             let journalUpdater = new JournalUpdater();
-
-            if (event.quest.state === "finish") {
-                journalUpdater.finishQuest(event.quest);
-            } else {
-                journalUpdater.addNewQuest(event.quest);
-            }
-            journalUpdater.questUpdateNotification();
+            journalUpdater.questUpdater(event.quest);
         }
+
         endEvent(eventSlug, "completed", eventDescription, eventOptions);
         const reward = event.reward;
         registerEventOutcome(reward);

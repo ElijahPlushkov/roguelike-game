@@ -92,8 +92,7 @@ export function initDialogue(dialogueSlug, stateKey) {
                 endEvent(dialogueSlug, stateKey, eventDescription, eventOptions);
                 if (dialogue.quest) {
                     let journalUpdater = new JournalUpdater();
-                    journalUpdater.updateQuest(dialogue.quest);
-                    journalUpdater.questUpdateNotification();
+                    journalUpdater.questUpdater(dialogue.quest);
                 }
                 registerDialogueOutcome(dialogueOutcome);
             });

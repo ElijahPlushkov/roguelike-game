@@ -17,42 +17,53 @@ export class JournalUpdater {
         return questData.quests.find(quest => quest.id === questId);
     }
 
-    addNewQuest(quest) {
+    questUpdater(quest) {
         let questId = quest.id;
         let questState = quest.state;
-        const newQuest = this.findQuest(questId);
+        let currentQuest = this.findQuest(questId);
 
-        console.log(newQuest);
+        const activeQuests = document.querySelector(".quest-list-active");
+        const allActiveQuests = activeQuests.getElementsByClassName("quest-item");
+
+        if (questState === "start") {
+            this.addNewQuest(questId, questState, currentQuest);
+        }
+        if (questState !== "start" && questState !== "finish") {
+            this.updateQuest(questId, questState, currentQuest, activeQuests, allActiveQuests);
+        }
+        if (questState === "finish") {
+            this.finishQuest(questId, questState, currentQuest, activeQuests, allActiveQuests);
+        }
+        this.questUpdateNotification();
+    }
+
+    addNewQuest(questId, questState, currentQuest) {
+
+        console.log(currentQuest);
 
         const questList = document.querySelector('.quest-list-active');
         const template = document.getElementById('quest-template');
 
-        const newQuestItem = template.content.cloneNode(true);
+        const currentQuestItem = template.content.cloneNode(true);
 
-        newQuestItem.querySelector('.quest-title').textContent = newQuest.title;
-        newQuestItem.querySelector(".quest-item").id = questId;
+        currentQuestItem.querySelector('.quest-title').textContent = currentQuest.title;
+        currentQuestItem.querySelector(".quest-item").id = questId;
 
-        const descriptionBox = newQuestItem.querySelector('.quest-description');
+        const descriptionBox = currentQuestItem.querySelector('.quest-description');
         descriptionBox.innerHTML = "";
 
         const p = document.createElement("p");
 
-        let states = newQuest.states;
+        let states = currentQuest.states;
         let currentState = states.find(state => state.id === questState);
 
         p.textContent = currentState.description;
         descriptionBox.appendChild(p);
 
-        questList.appendChild(newQuestItem);
+        questList.appendChild(currentQuestItem);
     }
 
-    updateQuest(quest) {
-        let questId = quest.id;
-        let questState = quest.state;
-        const currentQuest = this.findQuest(questId);
-
-        const activeQuests = document.querySelector(".quest-list-active");
-        const allActiveQuests = activeQuests.getElementsByClassName("quest-item");
+    updateQuest(questId, questState, currentQuest, activeQuests, allActiveQuests) {
 
         for (let questItem of allActiveQuests) {
             if (questItem.id === questId) {
@@ -69,15 +80,9 @@ export class JournalUpdater {
         }
     }
 
-    finishQuest(quest) {
-        this.updateQuest(quest);
+    finishQuest(questId, questState, currentQuest, activeQuests, allActiveQuests) {
 
-        let questId = quest.id;
-        let questState = quest.state;
-        const currentQuest = this.findQuest(questId);
-
-        const activeQuests = document.querySelector(".quest-list-active");
-        const allActiveQuests = activeQuests.getElementsByClassName("quest-item");
+        this.updateQuest(questId, questState, currentQuest, activeQuests, allActiveQuests);
 
         for (let questItem of allActiveQuests) {
             if (questItem.id === questId) {
@@ -91,10 +96,9 @@ export class JournalUpdater {
                 completedQuests.prepend(currentQuestItem);
             }
         }
-
     }
 
-    questUpdateNotification(){
+    questUpdateNotification() {
         let newNotification = document.createElement("p");
         newNotification.textContent = "Journal updated."
         adventureLog.prepend(newNotification);
