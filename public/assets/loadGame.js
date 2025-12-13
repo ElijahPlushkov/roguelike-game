@@ -1,12 +1,14 @@
 import {adventureLog, displayMight, displayPollen, displayPrayer, displayReputation, gameData} from "./gameData.js";
 import {player} from "./dataLoaders.js";
 import {mapRender} from "./mapRender.js";
+import {JournalUpdater} from "./JournalUpdater.js";
 
 let savedPlayerCoordinates = {};
 let savedPlayerCharacteristics = {};
 let savedPollen = 0;
 let savedSeenEvents = [];
 let savedEventOutcomes = [];
+let savedQuests = [];
 
 //load a saved file from backend
 function loadSavedGame() {
@@ -18,6 +20,7 @@ function loadSavedGame() {
             savedPollen = savedGame.currentPollen;
             savedSeenEvents = savedGame.seenEvents;
             savedEventOutcomes = savedGame.eventOutcomes;
+            savedQuests = savedGame.seenQuests;
         })
         .catch(error => {
             console.log("failed to load game", error);
@@ -41,22 +44,26 @@ export async function applySavedFile() {
         gameData.gameProgress.seenEvents = savedGame.seenEvents || [];
         gameData.gameProgress.eventOutcomes = savedGame.eventOutcomes || [];
 
+        gameData.gameProgress.quests = savedGame.seenQuests || [];
+
         console.log("Game successfully loaded:", gameData);
 
         updatePlayerPosition(gameData.player.x, gameData.player.y, player);
         mapRender();
         updatePlayerCharacteristics(displayMight, displayReputation, displayPrayer, displayPollen);
 
+        let journalUpdater = new JournalUpdater();
+        journalUpdater.loadSeenQuests(gameData.gameProgress.quests);
+
         adventureLog.innerHTML = "";
 
         let loadMessage = document.createElement("p");
-        loadMessage.textContent = "game loaded";
+        loadMessage.textContent = "Game loaded.";
         adventureLog.prepend(loadMessage);
 
     } catch (error) {
         console.log("Failed to load game:", error);
     }
-
 }
 
 function updatePlayerPosition(x, y, player) {

@@ -19,6 +19,8 @@ function prepareSaveData() {
 
     gameData.gameProgress.currentPollen = gameData.pollen;
 
+    gameData.gameProgress.seenQuests = gameData.quests;
+
     return gameData.gameProgress;
 }
 
@@ -32,7 +34,7 @@ export function saveGame() {
         .then(result => result.json())
         .then(data => {
             let saveMessage = document.createElement("p");
-            saveMessage.textContent = "game saved";
+            saveMessage.textContent = "Game saved.";
             adventureLog.prepend(saveMessage);
             console.log("game saved:", data);
         })

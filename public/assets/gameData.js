@@ -9,11 +9,7 @@ export const gameData = {
     chapterName: "",
 
     // Quests
-    quests: {
-        active: {},
-        completed: {},
-        failed: {}
-    },
+    quests: [],
 
     // Data sets
     dialogueData: {},
@@ -43,6 +39,7 @@ export const gameData = {
             might: 0,
             prayer: 0
         },
+        seenQuests: [],
         currentPollen: 0,
         seenEvents: [],
         eventOutcomes: []

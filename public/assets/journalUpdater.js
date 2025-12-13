@@ -1,5 +1,5 @@
 
-import {adventureLog, journalBox} from "./gameData.js";
+import {adventureLog, gameData, journalBox} from "./gameData.js";
 import {questData} from "./dataLoaders.js";
 
 export class JournalUpdater {
@@ -35,6 +35,8 @@ export class JournalUpdater {
             this.finishQuest(questId, questState, currentQuest, activeQuests, allActiveQuests);
         }
         this.questUpdateNotification();
+
+        this.updateGameDataObject(quest);
     }
 
     addNewQuest(questId, questState, currentQuest) {
@@ -103,6 +105,24 @@ export class JournalUpdater {
         newNotification.textContent = "Journal updated."
         adventureLog.prepend(newNotification);
     }
+
+    removeAllQuests() {
+        const activeQuests = document.querySelector(".quest-list-active");
+        const allActiveQuests = activeQuests.querySelectorAll(".quest-item");
+
+        allActiveQuests.forEach(questItem => {
+            questItem.remove();
+        });
+    }
+
+    loadSeenQuests(quests) {
+        this.removeAllQuests();
+        for (let quest of quests) {
+            this.questUpdater(quest);
+        }
+    }
+
+    updateGameDataObject(quest) {
+        gameData.quests.push(quest);
+    }
 }
-
-
