@@ -82,3 +82,8 @@
 .player {
     background-color: var(--player-tile);
 }
+
+.camp {
+    background-color: var(--camp-tile);
+    background-image: url("../tileImages/camp-tile-img.png");
+}

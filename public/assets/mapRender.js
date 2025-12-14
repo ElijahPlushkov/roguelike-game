@@ -100,6 +100,9 @@ export function mapRender() {
                         tile.classList.add("water");
                         tile.textContent = "≈";
                         break;
+                    case "Δ":
+                        tile.classList.add("camp");
+                        break;
                     default:
                         tile.classList.add("unknown");
                         break;

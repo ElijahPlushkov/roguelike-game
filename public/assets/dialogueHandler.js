@@ -62,6 +62,12 @@ export function initDialogue(dialogueSlug, stateKey) {
                     }
                 }
 
+                // if an option has a quest marker
+                if (optionData.quest) {
+                    let journalUpdater = new JournalUpdater();
+                    journalUpdater.questUpdater(optionData.quest);
+                }
+
                 // initiate next dialogue stage
                 const nextStateKey = option.key;
                 if (nextStateKey) {
