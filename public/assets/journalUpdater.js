@@ -124,5 +124,6 @@ export class JournalUpdater {
 
     updateGameDataObject(quest) {
         gameData.quests.push(quest);
+        console.log(gameData.quests);
     }
 }

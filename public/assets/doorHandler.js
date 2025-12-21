@@ -10,7 +10,7 @@ import {
 } from "./helperFunctions.js";
 
 export function accessDoor(x, y) {
-    const doors = [...(levelData.layers.doors) || []];
+    const doors = [...(levelData.tileData.doors) || []];
 
     const doorTile = doors.find(doorTile => doorTile.x === x && doorTile.y === y);
 

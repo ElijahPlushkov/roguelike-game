@@ -74,10 +74,9 @@ document.addEventListener("DOMContentLoaded", () => {
 function checkForAnyEvent(x, y) {
 
     const allEvents = [
-        ...(levelData.layers.events || []),
-        ...(levelData.layers.dialogues || []),
-        ...(levelData.layers.enemies || []),
-        ...(levelData.layers.items || [])
+        ...(levelData.tileData.events || []),
+        ...(levelData.tileData.dialogues || []),
+        ...(levelData.tileData.enemies || [])
     ]
 
     const newEvent = allEvents.find(event => event.x === x && event.y === y);
