@@ -9,7 +9,7 @@ export function initDialogue(dialogueSlug, stateKey) {
     const dialogue = dialogueData.dialogues.find(dialogue => dialogue.slug === dialogueSlug);
 
     //initiate the starting key
-    const currentStateKey = stateKey || dialogue.start || "greetings";
+    const currentStateKey = stateKey || defineDialogueEntryPoint(dialogue);
     const currentState = dialogue[currentStateKey];
 
     if (!currentState) {
@@ -126,6 +126,25 @@ export function registerDialogueOutcome(dialogueOutcome) {
 
         } else {
             console.warn(`Missing DOM element for: .${key}-characteristic-count`);
+        }
+    }
+}
+
+function defineDialogueEntryPoint(dialogue) {
+    if (!dialogue.entryPoints) {
+        return dialogue.start;
+    }
+    for (let entryPoint of dialogue.entryPoints) {
+        if (entryPoint.stateConditions.anyOf) {
+            const isConditionMet = entryPoint.stateConditions.anyOf.some(condition => {
+                if (condition.id && condition.state) {
+                    const quest = gameData.quests.find(q => q.id === condition.id);
+                    return quest.state === condition.state;
+                }
+            });
+            if (isConditionMet) {
+                return entryPoint.state;
+            }
         }
     }
 }

@@ -9,7 +9,13 @@ export const gameData = {
     chapterName: "",
 
     // Quests
-    quests: [],
+    quests: [{
+        id: "ants_and_queens",
+        state: "warChief_defeated"
+    }],
+
+    // NPCs
+    npcs: [],
 
     // Data sets
     dialogueData: {},
@@ -24,7 +30,7 @@ export const gameData = {
 
     // Player stats
     playerCharacteristics: {
-        reputation: 0,
+        reputation: 8,
         might: 0,
         prayer: 0
     },
