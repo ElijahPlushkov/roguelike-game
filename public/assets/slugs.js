@@ -11,5 +11,6 @@ export const chapterOneSlugs = {
     DOORS: "chapter_1_doors",
     ITEMS: "chapter_1_items",
     ENEMIES: "chapter_1_enemies",
-    QUESTS: "chapter_1_quests"
+    QUESTS: "chapter_1_quests",
+    NPCS: "chapter_1_npcs"
 }

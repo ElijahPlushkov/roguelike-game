@@ -1,8 +1,8 @@
 import {npcData} from "./dataLoaders.js";
-import {eventDescription, eventOptions} from "./gameData.js";
+import {eventDescription, eventOptions, gameData} from "./gameData.js";
 import {initDialogue} from "./dialogueHandler.js";
 
-function initNpc(name) {
+export function initNpc(name) {
 
     let npc = npcData.npcs.find(npc => npc.name === name)
 
@@ -19,7 +19,7 @@ function initNpc(name) {
 
         button.addEventListener("click", () => {
             if (button.textContent === "Talk.") {
-                let npcDialogue = npc.boundDialogues;
+                let npcDialogue = npc.dialogue;
                 initDialogue(npcDialogue);
             }
             if (button.textContent === "Fight.") {

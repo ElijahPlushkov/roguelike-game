@@ -1,11 +1,12 @@
 import {gameData, adventureLog, journalClose} from "./gameData.js";
-import {loadLevelData, loadDialogueData, loadEventData, loadDoorData, loadEnemyData, loadQuestData} from "./dataLoaders.js";
+import {loadLevelData, loadDialogueData, loadEventData, loadDoorData, loadEnemyData, loadQuestData, loadNpcData} from "./dataLoaders.js";
 import {levelData, map, player, tileSet, dialogueData, eventData} from "./dataLoaders.js";
 import {initEvent} from "./eventHandler.js";
 import {mapRender} from "./mapRender.js";
 import {initDialogue} from "./dialogueHandler.js";
 import {initCombat} from "./combatHandler.js";
 import {accessDoor} from "./doorHandler.js";
+import {initNpc} from "./npcHandler.js";
 import {hasSeenEvent, markEventSeen} from "./helperFunctions.js";
 import {saveGame} from "./saveGame.js";
 import {applySavedFile} from "./loadGame.js";
@@ -18,6 +19,7 @@ document.addEventListener("DOMContentLoaded", () => {
     loadDoorData();
     loadEnemyData();
     loadQuestData();
+    loadNpcData();
 
     //movement
     document.addEventListener("keydown", (e) => {
@@ -76,7 +78,8 @@ function checkForAnyEvent(x, y) {
     const allEvents = [
         ...(levelData.tileData.events || []),
         ...(levelData.tileData.dialogues || []),
-        ...(levelData.tileData.enemies || [])
+        ...(levelData.tileData.enemies || []),
+        ...(levelData.tileData.npcs || [])
     ]
 
     const newEvent = allEvents.find(event => event.x === x && event.y === y);
@@ -117,6 +120,12 @@ function checkForAnyEvent(x, y) {
                 initCombat(enemySlug, isImportant, difficulty);
                 markEventSeen(enemySlug);
             }
+        }
+
+        if (newEvent.type === "npc") {
+            const npcName = newEvent.name;
+            gameData.eventActive = true;
+            initNpc(npcName);
         }
     }
 }

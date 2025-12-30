@@ -8,25 +8,19 @@ require_once __DIR__ . "/../views/header.php";
     <div class="game-interface">
 
         <section class="player-stats">
-
             <div class="stats-display">
                 <div class="stat-item">REPUTATION <span class="reputation-stat-value">0</span>|</div>
                 <div class="stat-item">MIGHT <span class="might-stat-value">0</span>|</div>
                 <div class="stat-item">PRAYER <span class="prayer-stat-value">0</span>|</div>
                 <div class="stat-item">POLLEN <span class="pollen-stat-value">0</span></div>
             </div>
-
             <div class="stats-divider">||</div>
-
             <div class="game-menu">
-
-                <div class="game-menu-item"><a class="game-menu-link game-menu-link_ingame" href="main-menu">[Menu]</a>
-                </div>
+                <div class="game-menu-item"><a class="game-menu-link game-menu-link_ingame" href="main-menu">[Menu]</a></div>
                 <div class="game-menu-item" id="saveGame">[Save]</div>
                 <div class="game-menu-item" id="loadGame">[Load]</div>
                 <div class="game-menu-item" id="questJournal">[Journal]</div>
             </div>
-
         </section>
 
         <section class="level-title">
@@ -42,7 +36,7 @@ require_once __DIR__ . "/../views/header.php";
             <div class="event-box">
                 <div class="event-content">
                     <div class="event-portrait">
-<!--                    <img src="" class="event-portrait__image">-->
+                        <!--                    <img src="" class="event-portrait__image">-->
                     </div>
                     <div class="event-description">Use WASD to move.</div>
                     <div class="event-info"></div>
@@ -79,7 +73,6 @@ require_once __DIR__ . "/../views/header.php";
                     <div class="journal-completed-quests">
                         <h4 class="journal-section-title">Completed Quests</h4>
                         <div class="quest-list-completed">
-
                             <div class="quest-item_completed">
                                 <div class="quest-header">
                                     <span class="quest-toggle">▶</span>
@@ -87,10 +80,10 @@ require_once __DIR__ . "/../views/header.php";
                                 </div>
                                 <div class="quest-description">
                                     <p>You have arrived to the Borderlands last night.
-                                        It was an exhausting journey, so you broke camp and rested for the night.</p>
+                                        It was an exhausting journey, so you broke camp and rested for the night.
+                                    </p>
                                 </div>
                             </div>
-
                         </div>
                     </div>
 
@@ -120,4 +113,5 @@ require_once __DIR__ . "/../views/header.php";
 </div>
 <script type="module" src="/roguelike-game/public/assets/main.js"></script>
 </body>
+
 </html>

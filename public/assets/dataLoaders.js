@@ -14,6 +14,7 @@ let eventData = {};
 let doorData = {};
 let enemyData = {};
 let questData = {};
+let npcData = {};
 
 //load data
 export function loadLevelData(slug = CHAPTERS.CHAPTER_1) {
@@ -91,4 +92,15 @@ export function loadQuestData(slug = chapterOneSlugs.QUESTS) {
         });
 }
 
-export { levelData, chapterName, map, player, tileSet, dialogueData, eventData, doorData, enemyData, questData};
+export function loadNpcData(slug = chapterOneSlugs.NPCS) {
+    fetch("/roguelike-game/load-script?slug=" + slug)
+        .then(response => response.json())
+        .then(npcs => {
+            npcData = npcs
+        })
+        .catch(err => {
+            console.error("Failed to load npcs:", err);
+        });
+}
+
+export { levelData, chapterName, map, player, tileSet, dialogueData, eventData, doorData, enemyData, questData, npcData};

@@ -9,8 +9,8 @@ export function initDialogue(dialogueSlug, stateKey) {
     const dialogue = dialogueData.dialogues.find(dialogue => dialogue.slug === dialogueSlug);
 
     //initiate the starting key
-    const currentStateKey = stateKey || defineDialogueEntryPoint(dialogue);
-    const currentState = dialogue[currentStateKey];
+    let currentStateKey = stateKey || defineDialogueEntryPoint(dialogue);
+    let currentState = dialogue[currentStateKey];
 
     if (!currentState) {
         console.error(`State "${currentStateKey}" not found in dialogue "${dialogueSlug}"`);
@@ -80,15 +80,26 @@ export function initDialogue(dialogueSlug, stateKey) {
         //if no options left, register the final outcome
     } else {
 
-        const finalState = dialogue[stateKey];
+        const finalStateKey = stateKey || currentStateKey;
+        const finalState = dialogue[finalStateKey];
 
-        dialogue.finalOutcome = {
-            finalKey: stateKey,
-            description: finalState.description,
-            characteristics: finalState.characteristics
+        if (!finalState) {
+            console.error("Invalid final state:", finalStateKey);
+            return;
         }
 
-        const dialogueOutcome = dialogue.finalOutcome.characteristics;
+        // dialogue.finalOutcome = {
+        //     finalKey: stateKey,
+        //     description: finalState.description,
+        //     characteristics: finalState.characteristics
+        // }
+
+        gameData.gameProgress.dialogueOutcomes[dialogueSlug] = {
+            finalKey: stateKey,
+            characteristics: finalState.characteristics
+        };
+
+        const dialogueOutcome = finalState.characteristics;
 
         if (dialogueOutcome) {
             eventOptions.innerHTML = "";
@@ -147,4 +158,5 @@ function defineDialogueEntryPoint(dialogue) {
             }
         }
     }
+    return dialogue.start;
 }

@@ -11,7 +11,7 @@ export const gameData = {
     // Quests
     quests: [{
         id: "ants_and_queens",
-        state: "warChief_defeated"
+        state: "evidence_against_shaman"
     }],
 
     // NPCs
@@ -48,7 +48,8 @@ export const gameData = {
         seenQuests: [],
         currentPollen: 0,
         seenEvents: [],
-        eventOutcomes: []
+        eventOutcomes: [],
+        dialogueOutcomes: []
     }
 };
 
