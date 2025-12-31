@@ -127,7 +127,9 @@ export class JournalUpdater {
         if (q) {
             q.state = questState;
         } else {
-            gameData.quests.push(quest);
+            gameData.quests[questId] = {
+                questState: questState
+            }
         }
         console.log(gameData.quests);
     }

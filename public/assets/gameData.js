@@ -1,34 +1,16 @@
 export const gameData = {
-    // Map & Player
-    map: [],
     player: {x: 0, y: 0},
-    tileSet: {},
 
-    // Level & Chapter
-    levelData: {},
-    chapterName: "",
-
-    // Quests
     quests: [{
         id: "ants_and_queens",
         state: "evidence_against_shaman"
     }],
 
-    // NPCs
-    npcs: [],
+    npcs: [{name: "ant shaman", isAlive: "true"}],
 
-    // Data sets
-    dialogueData: {},
-    eventData: {},
-    doorData: {},
-    itemData: {},
-    enemyData: {},
-
-    // State flags
     eventActive: false,
     stateKey: "",
 
-    // Player stats
     playerCharacteristics: {
         reputation: 8,
         might: 0,
@@ -37,7 +19,6 @@ export const gameData = {
 
     pollen: 0,
 
-    // Game progress
     gameProgress: {
         currentCoordinates: {x: 0, y: 0},
         currentCharacteristics: {

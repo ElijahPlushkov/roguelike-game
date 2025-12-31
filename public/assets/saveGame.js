@@ -2,11 +2,9 @@ import {adventureLog, gameData} from "./gameData.js";
 import {player} from "./dataLoaders.js";
 
 export function updateGameProgress(slug, finalState) {
-    let newOutcome = {
-        eventSlug: slug,
+    gameData.gameProgress.eventOutcomes[slug] = {
         eventOutcome: finalState
     }
-    gameData.gameProgress.eventOutcomes.push(newOutcome);
 }
 
 function prepareSaveData() {

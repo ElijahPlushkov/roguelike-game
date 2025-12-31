@@ -103,4 +103,4 @@ export function loadNpcData(slug = chapterOneSlugs.NPCS) {
         });
 }
 
-export { levelData, chapterName, map, player, tileSet, dialogueData, eventData, doorData, enemyData, questData, npcData};
+export {levelData, chapterName, map, player, tileSet, dialogueData, eventData, doorData, enemyData, questData, npcData};

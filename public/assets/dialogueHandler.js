@@ -26,7 +26,12 @@ export function initDialogue(dialogueSlug, stateKey) {
 
     //check for options, if no options left, the dialogue will end
     if (currentState.options && currentState.options.length > 0) {
-        currentState.options.forEach(option => {
+
+        const visibleOptions = currentState.options.filter(option =>
+            checkOptionConditions(option.optionConditions)
+        );
+
+        visibleOptions.forEach(option => {
             const button = document.createElement("button");
             button.textContent = option.label;
             button.className = 'option-button';
@@ -88,15 +93,8 @@ export function initDialogue(dialogueSlug, stateKey) {
             return;
         }
 
-        // dialogue.finalOutcome = {
-        //     finalKey: stateKey,
-        //     description: finalState.description,
-        //     characteristics: finalState.characteristics
-        // }
-
-        gameData.gameProgress.dialogueOutcomes[dialogueSlug] = {
-            finalKey: stateKey,
-            characteristics: finalState.characteristics
+        gameData.gameProgress.eventOutcomes[dialogueSlug] = {
+            eventOutcome: stateKey
         };
 
         const dialogueOutcome = finalState.characteristics;
@@ -121,7 +119,7 @@ export function initDialogue(dialogueSlug, stateKey) {
         }
 
         console.log(gameData.gameProgress.eventOutcomes);
-        console.log("Final outcome registered:", dialogue.finalOutcome);
+        console.log("Final outcome registered:", dialogueOutcome);
     }
 }
 
@@ -150,6 +148,7 @@ function defineDialogueEntryPoint(dialogue) {
             const isConditionMet = entryPoint.stateConditions.anyOf.some(condition => {
                 if (condition.id && condition.state) {
                     const quest = gameData.quests.find(q => q.id === condition.id);
+                    // const quest = gameData.quests[condition.id];
                     return quest.state === condition.state;
                 }
             });
@@ -159,4 +158,23 @@ function defineDialogueEntryPoint(dialogue) {
         }
     }
     return dialogue.start;
+}
+
+function checkOptionConditions(optionConditions) {
+    if (!optionConditions) {
+        return true;
+    }
+    if (optionConditions.quest) {
+        const { id, state } = optionConditions.quest;
+        const quest = gameData.quests.find(quest => quest.id === id);
+        return quest.state === state
+    }
+
+    if (optionConditions.npc) {
+        const {name, isAlive} = optionConditions.npc;
+        const npc = gameData.npcs.find(npc => npc.name === name)
+        return npc.isAlive === isAlive;
+    }
+
+    return true;
 }
