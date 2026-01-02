@@ -1,6 +1,5 @@
-import {gameData, adventureLog, journalClose} from "./gameData.js";
-import {loadLevelData, loadDialogueData, loadEventData, loadDoorData, loadEnemyData, loadQuestData, loadNpcData} from "./dataLoaders.js";
-import {levelData, map, player, tileSet, dialogueData, eventData} from "./dataLoaders.js";
+import {gameData, adventureLog, journalClose, levelData, map, player, tileSet, dialogueData, eventData,
+    loadLevelData, loadDialogueData, loadEventData, loadDoorData, loadEnemyData, loadQuestData, loadNpcData} from "./gameData.js";
 import {initEvent} from "./eventHandler.js";
 import {mapRender} from "./mapRender.js";
 import {initDialogue} from "./dialogueHandler.js";
@@ -10,7 +9,7 @@ import {initNpc} from "./npcHandler.js";
 import {hasSeenEvent, markEventSeen} from "./helperFunctions.js";
 import {saveGame} from "./saveGame.js";
 import {applySavedFile} from "./loadGame.js";
-import {JournalUpdater} from "./JournalUpdater.js";
+import {QuestUpdater} from "./QuestUpdater.js";
 
 document.addEventListener("DOMContentLoaded", () => {
     loadLevelData();
@@ -213,7 +212,7 @@ const loadGameButton = document.getElementById("loadGame");
 loadGameButton.addEventListener("click", applySavedFile);
 
 const questJournal = document.getElementById("questJournal");
-let journalUpdater = new JournalUpdater();
+let journalUpdater = new QuestUpdater();
 questJournal.addEventListener("click", () => {
     journalUpdater.toggleJournal();
 });

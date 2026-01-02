@@ -1,8 +1,6 @@
-
 import {adventureLog, gameData, journalBox} from "./gameData.js";
-import {questData} from "./dataLoaders.js";
 
-export class JournalUpdater {
+export class QuestUpdater {
     journalBox = journalBox
 
     toggleJournal() {
@@ -25,13 +23,22 @@ export class JournalUpdater {
         const activeQuests = document.querySelector(".quest-list-active");
         const allActiveQuests = activeQuests.getElementsByClassName("quest-item");
 
+        let states = currentQuest.states;
+        let finishingStates = [];
+
+        for (let state of states) {
+            if (state.flag === "finish") {
+                finishingStates.push(state.id);
+            }
+        }
+
         if (questState === "start") {
             this.addNewQuest(questId, questState, currentQuest);
         }
-        if (questState !== "start" && questState !== "finish") {
+        else if (questState !== "start" && !finishingStates.includes(questState)) {
             this.updateQuest(questId, questState, currentQuest, activeQuests, allActiveQuests);
         }
-        if (questState === "finish") {
+        else {
             this.finishQuest(questId, questState, currentQuest, activeQuests, allActiveQuests);
         }
         this.questUpdateNotification();
@@ -40,8 +47,6 @@ export class JournalUpdater {
     }
 
     addNewQuest(questId, questState, currentQuest) {
-
-        console.log(currentQuest);
 
         const questList = document.querySelector('.quest-list-active');
         const template = document.getElementById('quest-template');
@@ -127,9 +132,7 @@ export class JournalUpdater {
         if (q) {
             q.state = questState;
         } else {
-            gameData.quests[questId] = {
-                questState: questState
-            }
+            gameData.quests.push(quest)
         }
         console.log(gameData.quests);
     }

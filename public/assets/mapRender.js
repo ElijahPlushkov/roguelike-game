@@ -1,4 +1,4 @@
-import{ map, player } from "./dataLoaders.js";
+import{ map, player } from "./gameData.js";
 
 export const cameraView = {
     height: 21,

@@ -1,5 +1,4 @@
-import {enemyData} from "./dataLoaders.js";
-import {gameData, displayPollen, adventureLog, eventDescription, eventOptions, eventInfo} from "./gameData.js";
+import {gameData, displayPollen, adventureLog, eventDescription, eventOptions, eventInfo, enemyData} from "./gameData.js";
 import {handleDeath} from "./deathHandler.js";
 import {appendContinueButton, endEvent} from "./helperFunctions.js";
 import {GenerateEnemy} from "./EnemyGenerator.js";

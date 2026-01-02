@@ -1,5 +1,4 @@
-import {doorData, levelData} from "./dataLoaders.js";
-import {gameData, eventDescription, eventOptions} from "./gameData.js";
+import {gameData, eventDescription, eventOptions, doorData, levelData} from "./gameData.js";
 import {registerEventOutcome} from "./eventHandler.js";
 import {
     appendContinueButton,

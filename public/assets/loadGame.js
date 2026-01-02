@@ -1,7 +1,6 @@
-import {adventureLog, displayMight, displayPollen, displayPrayer, displayReputation, gameData} from "./gameData.js";
-import {player} from "./dataLoaders.js";
+import {adventureLog, displayMight, displayPollen, displayPrayer, displayReputation, gameData, player} from "./gameData.js";
 import {mapRender} from "./mapRender.js";
-import {JournalUpdater} from "./JournalUpdater.js";
+import {QuestUpdater} from "./QuestUpdater.js";
 
 let savedPlayerCoordinates = {};
 let savedPlayerCharacteristics = {};
@@ -52,7 +51,7 @@ export async function applySavedFile() {
         mapRender();
         updatePlayerCharacteristics(displayMight, displayReputation, displayPrayer, displayPollen);
 
-        let journalUpdater = new JournalUpdater();
+        let journalUpdater = new QuestUpdater();
         journalUpdater.loadSeenQuests(gameData.gameProgress.quests);
 
         adventureLog.innerHTML = "";

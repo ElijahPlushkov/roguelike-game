@@ -1,5 +1,4 @@
-import {adventureLog, gameData} from "./gameData.js";
-import {player} from "./dataLoaders.js";
+import {adventureLog, gameData, player} from "./gameData.js";
 
 export function updateGameProgress(slug, finalState) {
     gameData.gameProgress.eventOutcomes[slug] = {
