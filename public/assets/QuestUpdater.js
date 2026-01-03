@@ -1,4 +1,5 @@
-import {adventureLog, gameData, journalBox} from "./gameData.js";
+import {adventureLog, displayPollen, gameData, journalBox, questData} from "./gameData.js";
+import {displayAdventureLogMessage} from "./helperFunctions.js";
 
 export class QuestUpdater {
     journalBox = journalBox
@@ -39,7 +40,9 @@ export class QuestUpdater {
             this.updateQuest(questId, questState, currentQuest, activeQuests, allActiveQuests);
         }
         else {
-            this.finishQuest(questId, questState, currentQuest, activeQuests, allActiveQuests);
+            this.updateQuest(questId, questState, currentQuest, activeQuests, allActiveQuests);
+            this.finishQuest(questId, activeQuests, allActiveQuests);
+            this.giveReward(questState, currentQuest);
         }
         this.questUpdateNotification();
 
@@ -74,8 +77,7 @@ export class QuestUpdater {
 
         for (let questItem of allActiveQuests) {
             if (questItem.id === questId) {
-                let currentQuestItem = questItem;
-                const descriptionBox = currentQuestItem.querySelector('.quest-description');
+                const descriptionBox = questItem.querySelector('.quest-description');
                 const p = document.createElement("p");
 
                 let states = currentQuest.states;
@@ -87,10 +89,7 @@ export class QuestUpdater {
         }
     }
 
-    finishQuest(questId, questState, currentQuest, activeQuests, allActiveQuests) {
-
-        this.updateQuest(questId, questState, currentQuest, activeQuests, allActiveQuests);
-
+    finishQuest(questId, activeQuests, allActiveQuests) {
         for (let questItem of allActiveQuests) {
             if (questItem.id === questId) {
                 let currentQuestItem = questItem;
@@ -101,6 +100,37 @@ export class QuestUpdater {
 
                 const completedQuests = document.querySelector(".quest-list-completed");
                 completedQuests.prepend(currentQuestItem);
+            }
+        }
+    }
+
+    giveReward(questState, currentQuest) {
+        let states = currentQuest.states;
+        let currentState = states.find(state => state.id === questState);
+
+        if (currentState.reward) {
+            let reward = currentState.reward;
+
+            for (const [key, value] of Object.entries(reward)) {
+
+                if (key === "pollen") {
+                    gameData.pollen += value;
+                    displayPollen.textContent = gameData.pollen;
+                    displayAdventureLogMessage(value, key, "event-text-color");
+                }
+
+                gameData.playerCharacteristics[key] += value;
+
+                const displayCharacteristic = document.querySelector(`.${key}-stat-value`);
+
+                if (displayCharacteristic) {
+                    displayCharacteristic.textContent = gameData.playerCharacteristics[key];
+
+                    displayAdventureLogMessage(value, key, "event-text-color");
+
+                } else {
+                    console.warn(`Missing DOM element for: .${key}-characteristic-count`);
+                }
             }
         }
     }

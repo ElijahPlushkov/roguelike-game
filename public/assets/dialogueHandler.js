@@ -98,21 +98,18 @@ export function initDialogue(dialogueSlug, stateKey) {
             eventOutcome: stateKey
         };
 
-        console.log(stateKey);
-
-        const dialogueOutcome = finalState.characteristics;
-
-        if (dialogueOutcome) {
+        if (finalState.characteristics) {
             eventOptions.innerHTML = "";
             let continueButton = appendContinueButton();
             eventOptions.prepend(continueButton);
+
             continueButton.addEventListener("click", function () {
                 endEvent(dialogueSlug, stateKey, eventDescription, eventOptions);
                 if (dialogue.quest) {
                     let journalUpdater = new QuestUpdater();
                     journalUpdater.questUpdater(dialogue.quest);
                 }
-                registerDialogueOutcome(dialogueOutcome);
+                registerDialogueOutcome(finalState.characteristics);
             });
         }
 
@@ -125,8 +122,8 @@ export function initDialogue(dialogueSlug, stateKey) {
     }
 }
 
-export function registerDialogueOutcome(dialogueOutcome) {
-    for (const [key, value] of Object.entries(dialogueOutcome)) {
+export function registerDialogueOutcome(characteristics) {
+    for (const [key, value] of Object.entries(characteristics)) {
         gameData.playerCharacteristics[key] += value;
 
         const displayCharacteristic = document.querySelector(`.${key}-stat-value`);
@@ -150,7 +147,6 @@ function defineDialogueEntryPoint(dialogue) {
             const isConditionMet = entryPoint.stateConditions.anyOf.some(condition => {
                 if (condition.id && condition.state) {
                     const quest = gameData.quests.find(q => q.id === condition.id);
-                    // const quest = gameData.quests[condition.id];
                     return quest.state === condition.state;
                 }
                 if (condition.eventOutcome) {

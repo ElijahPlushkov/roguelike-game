@@ -60,7 +60,7 @@ export function initCombat(enemySlug, isImportant, difficulty) {
                 eventOptions.prepend(continueButton);
                 continueButton.addEventListener("click", function () {
                     eventInfo.innerHTML = "";
-                    adventureLog.prepend(resolveCombat(enemyDifficulty, isSuccessful, gameData.pollen));
+                    adventureLog.prepend(registerCombatOutcome(enemyDifficulty, isSuccessful, gameData.pollen));
                     endEvent(enemySlug, isSuccessful, eventDescription, eventOptions);
                 });
             }
@@ -87,7 +87,7 @@ export function initCombat(enemySlug, isImportant, difficulty) {
                 eventOptions.prepend(continueButton);
                 continueButton.addEventListener("click", function () {
                     eventInfo.innerHTML = "";
-                    adventureLog.prepend(resolveCombat(enemyDifficulty, isSuccessful, gameData.pollen));
+                    adventureLog.prepend(registerCombatOutcome(enemyDifficulty, isSuccessful, gameData.pollen));
                     endEvent(enemySlug, isSuccessful, eventDescription, eventOptions);
                 });
             }
@@ -117,7 +117,7 @@ export function initCombat(enemySlug, isImportant, difficulty) {
                 eventOptions.prepend(continueButton);
                 continueButton.addEventListener("click", function () {
                     eventInfo.innerHTML = "";
-                    adventureLog.prepend(resolveCombat(enemyDifficulty, isSuccessful, gameData.pollen));
+                    adventureLog.prepend(registerCombatOutcome(enemyDifficulty, isSuccessful, gameData.pollen));
                     endEvent(enemySlug, isSuccessful, eventDescription, eventOptions);
                 });
             }
@@ -125,7 +125,7 @@ export function initCombat(enemySlug, isImportant, difficulty) {
     });
 }
 
-export function resolveCombat(enemyDifficulty, isSuccessful) {
+export function registerCombatOutcome(enemyDifficulty, isSuccessful) {
 
     let increase;
     let decrease;

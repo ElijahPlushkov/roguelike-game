@@ -12,7 +12,7 @@ export const gameData = {
     stateKey: "",
 
     playerCharacteristics: {
-        reputation: 8,
+        reputation: 0,
         might: 0,
         prayer: 0
     },
