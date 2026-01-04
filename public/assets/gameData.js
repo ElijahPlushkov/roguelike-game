@@ -14,7 +14,8 @@ export const gameData = {
     playerCharacteristics: {
         reputation: 0,
         might: 0,
-        prayer: 0
+        prayer: 0,
+        agility: 0
     },
 
     pollen: 0,

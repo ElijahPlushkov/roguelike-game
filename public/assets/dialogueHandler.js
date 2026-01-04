@@ -2,6 +2,7 @@ import {gameData, eventDescription, eventOptions, dialogueData} from "./gameData
 import {endEvent, appendContinueButton, displayAdventureLogMessage, appendRejectionMessage} from "./helperFunctions.js";
 import {handleDeath} from "./deathHandler.js";
 import {QuestUpdater} from "./QuestUpdater.js";
+import {registerEventOutcome} from "./eventHandler.js";
 
 export function initDialogue(dialogueSlug, stateKey) {
     //find the dialogue
@@ -109,7 +110,7 @@ export function initDialogue(dialogueSlug, stateKey) {
                     let journalUpdater = new QuestUpdater();
                     journalUpdater.questUpdater(dialogue.quest);
                 }
-                registerDialogueOutcome(finalState.characteristics);
+                registerEventOutcome(finalState.characteristics);
             });
         }
 
@@ -119,22 +120,6 @@ export function initDialogue(dialogueSlug, stateKey) {
         }
 
         console.log(gameData.gameProgress.eventOutcomes);
-    }
-}
-
-export function registerDialogueOutcome(characteristics) {
-    for (const [key, value] of Object.entries(characteristics)) {
-        gameData.playerCharacteristics[key] += value;
-
-        const displayCharacteristic = document.querySelector(`.${key}-stat-value`);
-        if (displayCharacteristic) {
-            displayCharacteristic.textContent = gameData.playerCharacteristics[key];
-
-            displayAdventureLogMessage(value, key, "dialogue-text-color");
-
-        } else {
-            console.warn(`Missing DOM element for: .${key}-characteristic-count`);
-        }
     }
 }
 

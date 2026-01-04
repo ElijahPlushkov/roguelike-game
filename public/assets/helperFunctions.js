@@ -1,4 +1,4 @@
-import {adventureLog, eventDescription, eventOptions, gameData} from "./gameData.js";
+import {adventureLog, eventOptions, gameData} from "./gameData.js";
 import {updateGameProgress} from "./saveGame.js";
 
 export function appendContinueButton() {

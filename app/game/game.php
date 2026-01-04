@@ -12,6 +12,7 @@ require_once __DIR__ . "/../views/header.php";
                 <div class="stat-item">REPUTATION <span class="reputation-stat-value">0</span>|</div>
                 <div class="stat-item">MIGHT <span class="might-stat-value">0</span>|</div>
                 <div class="stat-item">PRAYER <span class="prayer-stat-value">0</span>|</div>
+                <div class="stat-item">AGILITY <span class="agility-stat-value">0</span>|</div>
                 <div class="stat-item">POLLEN <span class="pollen-stat-value">0</span></div>
             </div>
             <div class="stats-divider">||</div>
@@ -82,21 +83,6 @@ require_once __DIR__ . "/../views/header.php";
                                     <p>You have arrived to the Borderlands last night.
                                         It was an exhausting journey, so you broke camp and rested for the night.
                                     </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="journal-failed-quests">
-                        <h4 class="journal-section-title">Failed Quests</h4>
-                        <div class="quest-list">
-                            <div class="quest-item_failed">
-                                <div class="quest-header">
-                                    <span class="quest-toggle">▶</span>
-                                    <span class="quest-title">Find an ally</span>
-                                </div>
-                                <div class="quest-description">
-                                    <p>You failed to find a friend.</p>
                                 </div>
                             </div>
                         </div>

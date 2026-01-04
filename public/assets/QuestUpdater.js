@@ -16,6 +16,11 @@ export class QuestUpdater {
         return questData.quests.find(quest => quest.id === questId);
     }
 
+    findCurrentState(currentQuest, questState) {
+        let states = currentQuest.states;
+        return states.find(state => state.id === questState);
+    }
+
     questUpdater(quest) {
         let questId = quest.id;
         let questState = quest.state;
@@ -64,8 +69,7 @@ export class QuestUpdater {
 
         const p = document.createElement("p");
 
-        let states = currentQuest.states;
-        let currentState = states.find(state => state.id === questState);
+        let currentState = this.findCurrentState(currentQuest, questState);
 
         p.textContent = currentState.description;
         descriptionBox.appendChild(p);
@@ -80,8 +84,7 @@ export class QuestUpdater {
                 const descriptionBox = questItem.querySelector('.quest-description');
                 const p = document.createElement("p");
 
-                let states = currentQuest.states;
-                let currentState = states.find(state => state.id === questState);
+                let currentState = this.findCurrentState(currentQuest, questState);
 
                 p.textContent = currentState.description;
                 descriptionBox.appendChild(p);
@@ -105,8 +108,7 @@ export class QuestUpdater {
     }
 
     giveReward(questState, currentQuest) {
-        let states = currentQuest.states;
-        let currentState = states.find(state => state.id === questState);
+        let currentState = this.findCurrentState(currentQuest, questState);
 
         if (currentState.reward) {
             let reward = currentState.reward;
