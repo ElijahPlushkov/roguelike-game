@@ -6,10 +6,11 @@ import {initDialogue} from "./dialogueHandler.js";
 import {initCombat} from "./combatHandler.js";
 import {accessDoor} from "./doorHandler.js";
 import {initNpc} from "./npcHandler.js";
-import {hasSeenEvent, markEventSeen} from "./helperFunctions.js";
+import {hasSeenEvent, markEventSeen, appendRejectionMessage} from "./helperFunctions.js";
 import {saveGame} from "./saveGame.js";
 import {applySavedFile} from "./loadGame.js";
 import {QuestUpdater} from "./QuestUpdater.js";
+import {handleDeath} from "./deathHandler.js";
 
 document.addEventListener("DOMContentLoaded", () => {
     loadLevelData();
@@ -87,7 +88,7 @@ function checkForAnyEvent(x, y) {
 
     if (newEvent) {
         //an event cannot start unless the player meets its requirements
-        if (!characteristicCheck(newEvent) || questChecker(newEvent)) {
+        if (!requirementsCheck(newEvent)) {
             return;
         }
 
@@ -153,27 +154,37 @@ function checkMight() {
     }
 }
 
-function characteristicCheck(newEvent) {
+function isRequirementPassed(requirements, event) {
+    if (gameData.gameProgress.eventOutcomes[requirements.eventSlug]) {
+        if (gameData.gameProgress.eventOutcomes[requirements.eventSlug].eventOutcome === requirements.eventOutcome) {
+            return true;
+        }
+        appendRejectionMessage(event);
+        return false;
+    }
+
+    for (const [key, value] of Object.entries(requirements)) {
+        if (gameData.playerCharacteristics[key] < value) {
+            appendRejectionMessage(event);
+            return false;
+        }
+    }
+    return true;
+}
+
+function requirementsCheck(newEvent) {
+
+    let isPassed = true;
 
     if (newEvent.type === "dialogue") {
         const dialogueSlug = newEvent.slug;
         const dialogue = dialogueData.dialogues.find(dialogue => dialogue.slug === dialogueSlug);
-        console.log(dialogue);
 
         if (!dialogue.requirements) {
-            return true;
+            isPassed = true;
         } else {
-
             const requirements = dialogue.requirements;
-
-            for (const [key, value] of Object.entries(requirements)) {
-                if (gameData.playerCharacteristics[key] < value) {
-                    const rejection = document.createElement("p");
-                    rejection.textContent = dialogue.rejection;
-                    adventureLog.prepend(rejection);
-                    return false;
-                }
-            }
+            isPassed = isRequirementPassed(requirements, dialogue);
         }
     }
     if (newEvent.type === "event") {
@@ -181,28 +192,13 @@ function characteristicCheck(newEvent) {
         const event = eventData.events.find(event => event.slug === eventSlug);
 
         if (!event.requirements) {
-            return true;
+            isPassed = true;
         } else {
-
             const requirements = event.requirements;
-            let isDead = false;
-            for (const [key, value] of Object.entries(requirements)) {
-                if (gameData.playerCharacteristics[key] < value) {
-                    if (event.death === "death") {
-                        isDead = true;
-                        handleDeath();
-                        return false;
-                    } else {
-                        const rejection = document.createElement("p");
-                        rejection.textContent = event.rejection;
-                        adventureLog.prepend(rejection);
-                        return false;
-                    }
-                }
-            }
+            isPassed = isRequirementPassed(requirements, event);
         }
     }
-    return true;
+    return isPassed;
 }
 
 const saveGameButton = document.getElementById("saveGame");
@@ -219,17 +215,4 @@ questJournal.addEventListener("click", () => {
 
 journalClose.addEventListener("click", () => {
     journalUpdater.closeJournal();
-})
-
-//this is a test function to include event outcomes to requirements
-function questChecker(newEvent) {
-    let eventOutcomes = gameData.gameProgress.eventOutcomes;
-    //flies_camp
-    if (newEvent.slug === "flies_camp") {
-        for (let outcome of eventOutcomes) {
-            if (outcome.eventSlug === "flies_gang" && outcome.eventOutcome === false) {
-                return true;
-            }
-        }
-    }
-}
+});

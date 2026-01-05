@@ -4,6 +4,7 @@ export function updateGameProgress(slug, finalState) {
     gameData.gameProgress.eventOutcomes[slug] = {
         eventOutcome: finalState
     }
+    console.log(gameData.gameProgress.eventOutcomes);
 }
 
 function prepareSaveData() {
@@ -12,6 +13,7 @@ function prepareSaveData() {
 
     gameData.gameProgress.currentCharacteristics.might = gameData.playerCharacteristics.might;
     gameData.gameProgress.currentCharacteristics.reputation = gameData.playerCharacteristics.reputation;
+    gameData.gameProgress.currentCharacteristics.agility = gameData.playerCharacteristics.agility;
     gameData.gameProgress.currentCharacteristics.prayer = gameData.playerCharacteristics.prayer;
 
     gameData.gameProgress.currentPollen = gameData.pollen;
