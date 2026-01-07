@@ -33,7 +33,7 @@ export function initCombat(enemySlug, isImportant, difficulty) {
     enemy.options.forEach(option => {
         const button = document.createElement("button");
         button.textContent = option.label;
-        button.className = 'option-button';
+        button.className = 'option-button option-button_small';
         eventOptions.appendChild(button);
 
         button.addEventListener("click", () => {

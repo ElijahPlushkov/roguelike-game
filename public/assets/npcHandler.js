@@ -27,3 +27,7 @@ export function initNpc(name) {
         })
     })
 }
+
+function npcCombat() {
+
+}

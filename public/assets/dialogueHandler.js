@@ -31,23 +31,23 @@ export function initDialogue(dialogueSlug, stateKey) {
             checkOptionConditions(option.optionConditions)
         );
 
+        let optionsCount = 1;
+
         visibleOptions.forEach(option => {
             const button = document.createElement("button");
-            button.textContent = option.label;
+            button.textContent = optionsCount++ + ". " + option.label + displayStatRequirementsInfo(option);
             button.className = 'option-button';
 
             button.addEventListener("click", () => {
 
-                const optionData = option;
-
                 //if a certain option has a requirement, the function will check it
-                if (optionData.requirements) {
+                if (option.requirements) {
                     let canProceed = true;
 
-                    for (const [charKey, requiredValue] of Object.entries(optionData.requirements)) {
+                    for (const [charKey, requiredValue] of Object.entries(option.requirements)) {
                         if ((gameData.playerCharacteristics[charKey] || 0) < requiredValue) {
                             canProceed = false;
-                            appendRejectionMessage(optionData);
+                            appendRejectionMessage(option);
                             break;
                         }
                     }
@@ -57,8 +57,8 @@ export function initDialogue(dialogueSlug, stateKey) {
                 }
 
                 // if an option has a reward or debuff
-                if (optionData.characteristics) {
-                    for (const [key, value] of Object.entries(optionData.characteristics)) {
+                if (option.characteristics) {
+                    for (const [key, value] of Object.entries(option.characteristics)) {
                         gameData.playerCharacteristics[key] += value;
                         const displayCharacteristic = document.querySelector(`.${key}-stat-value`);
                         displayCharacteristic.textContent = gameData.playerCharacteristics[key];
@@ -68,9 +68,9 @@ export function initDialogue(dialogueSlug, stateKey) {
                 }
 
                 // if an option has a quest marker
-                if (optionData.quest) {
+                if (option.quest) {
                     let journalUpdater = new QuestUpdater();
-                    journalUpdater.questUpdater(optionData.quest);
+                    journalUpdater.questUpdater(option.quest);
                 }
 
                 // initiate next dialogue stage
@@ -165,6 +165,19 @@ function checkOptionConditions(optionConditions) {
         const npc = gameData.npcs.find(npc => npc.name === name)
         return npc.isAlive === isAlive;
     }
-
     return true;
+}
+
+function displayStatRequirementsInfo(option) {
+
+    let requirementInfo = "";
+
+    if (option.requirements) {
+        for (const [requirement, value] of Object.entries(option.requirements)) {
+            let abbreviations = requirement.slice(0, 1).toUpperCase();
+            requirementInfo += " [" + abbreviations + ": " + value + "]";
+        }
+    }
+
+    return requirementInfo;
 }

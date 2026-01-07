@@ -4,7 +4,7 @@ import {updateGameProgress} from "./saveGame.js";
 export function appendContinueButton() {
     const continueButton = document.createElement("button");
     continueButton.textContent = "Continue.";
-    continueButton.className = "option-button";
+    continueButton.className = "option-button option-button_small";
 
     return continueButton;
 }
