@@ -99,20 +99,21 @@ export function initDialogue(dialogueSlug, stateKey) {
             eventOutcome: stateKey
         };
 
-        if (finalState.characteristics) {
-            eventOptions.innerHTML = "";
-            let continueButton = appendContinueButton();
-            eventOptions.prepend(continueButton);
+        eventOptions.innerHTML = "";
+        let continueButton = appendContinueButton();
+        eventOptions.prepend(continueButton);
 
-            continueButton.addEventListener("click", function () {
-                endEvent(dialogueSlug, stateKey, eventDescription, eventOptions);
-                if (dialogue.quest) {
-                    let journalUpdater = new QuestUpdater();
-                    journalUpdater.questUpdater(dialogue.quest);
-                }
+        continueButton.addEventListener("click", function () {
+            endEvent(dialogueSlug, stateKey, eventDescription, eventOptions);
+            if (dialogue.quest) {
+                let journalUpdater = new QuestUpdater();
+                journalUpdater.questUpdater(dialogue.quest);
+            }
+            if (finalState.characteristics) {
                 registerEventOutcome(finalState.characteristics);
-            });
-        }
+            }
+
+        });
 
         if (stateKey === "death") {
             handleDeath();
@@ -132,7 +133,9 @@ function defineDialogueEntryPoint(dialogue) {
             const isConditionMet = entryPoint.stateConditions.anyOf.some(condition => {
                 if (condition.id && condition.state) {
                     const quest = gameData.quests.find(q => q.id === condition.id);
-                    return quest.state === condition.state;
+                    if (quest) {
+                        return quest.state === condition.state;
+                    }
                 }
                 if (condition.eventOutcome) {
                     if (!gameData.gameProgress.eventOutcomes[dialogue.slug]) {

@@ -12,10 +12,10 @@ export const gameData = {
     stateKey: "",
 
     playerCharacteristics: {
-        reputation: 0,
-        might: 0,
-        prayer: 0,
-        agility: 0
+        reputation: 10,
+        might: 10,
+        prayer: 10,
+        agility: 10
     },
 
     pollen: 0,
@@ -25,7 +25,8 @@ export const gameData = {
         currentCharacteristics: {
             reputation: 0,
             might: 0,
-            prayer: 0
+            prayer: 0,
+            agility: 0
         },
         seenQuests: [],
         currentPollen: 0,
@@ -45,6 +46,9 @@ displayMight.textContent = gameData.playerCharacteristics.might;
 const displayPrayer = document.querySelector(".prayer-stat-value");
 displayPrayer.textContent = gameData.playerCharacteristics.prayer;
 
+const displayAgility = document.querySelector(".agility-stat-value");
+displayAgility.textContent = gameData.playerCharacteristics.agility;
+
 const displayPollen = document.querySelector(".pollen-stat-value");
 displayPollen.textContent = gameData.pollen;
 
@@ -59,7 +63,7 @@ const journalBox = document.querySelector(".journal-box");
 const journalClose = document.querySelector(".journal-close");
 
 export {adventureLog,
-    displayReputation, displayMight, displayPrayer, displayPollen,
+    displayReputation, displayMight, displayPrayer, displayAgility, displayPollen,
     eventDescription, eventOptions, eventInfo,
     journalBox, journalClose};
 

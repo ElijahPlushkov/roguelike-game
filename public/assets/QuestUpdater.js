@@ -1,5 +1,6 @@
 import {adventureLog, displayPollen, gameData, journalBox, questData} from "./gameData.js";
 import {displayAdventureLogMessage} from "./helperFunctions.js";
+import {registerEventOutcome} from "./eventHandler.js";
 
 export class QuestUpdater {
     journalBox = journalBox
@@ -38,17 +39,20 @@ export class QuestUpdater {
             }
         }
 
-        if (questState === "start") {
-            this.addNewQuest(questId, questState, currentQuest);
-        }
-        else if (questState !== "start" && !finishingStates.includes(questState)) {
-            this.updateQuest(questId, questState, currentQuest, activeQuests, allActiveQuests);
-        }
-        else {
+        let q = gameData.quests.find(quest => quest.id === questId);
+
+        if (finishingStates.includes(questState)) {
             this.updateQuest(questId, questState, currentQuest, activeQuests, allActiveQuests);
             this.finishQuest(questId, activeQuests, allActiveQuests);
             this.giveReward(questState, currentQuest);
         }
+        else if (q && !finishingStates.includes(questState)) {
+            this.updateQuest(questId, questState, currentQuest, activeQuests, allActiveQuests);
+        }
+         else {
+            this.addNewQuest(questId, questState, currentQuest);
+        }
+
         this.questUpdateNotification();
 
         this.updateGameDataObject(questId, questState, quest);
@@ -112,28 +116,7 @@ export class QuestUpdater {
 
         if (currentState.reward) {
             let reward = currentState.reward;
-
-            for (const [key, value] of Object.entries(reward)) {
-
-                if (key === "pollen") {
-                    gameData.pollen += value;
-                    displayPollen.textContent = gameData.pollen;
-                    displayAdventureLogMessage(value, key, "event-text-color");
-                }
-
-                gameData.playerCharacteristics[key] += value;
-
-                const displayCharacteristic = document.querySelector(`.${key}-stat-value`);
-
-                if (displayCharacteristic) {
-                    displayCharacteristic.textContent = gameData.playerCharacteristics[key];
-
-                    displayAdventureLogMessage(value, key, "event-text-color");
-
-                } else {
-                    console.warn(`Missing DOM element for: .${key}-characteristic-count`);
-                }
-            }
+            registerEventOutcome(reward)
         }
     }
 
