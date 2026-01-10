@@ -160,13 +160,21 @@ function checkOptionConditions(optionConditions) {
     if (optionConditions.quest) {
         const { id, state } = optionConditions.quest;
         const quest = gameData.quests.find(quest => quest.id === id);
-        return quest.state === state
+        if (quest) {
+            return quest.state === state;
+        } else {
+            return false;
+        }
     }
 
     if (optionConditions.npc) {
         const {name, isAlive} = optionConditions.npc;
-        const npc = gameData.npcs.find(npc => npc.name === name)
-        return npc.isAlive === isAlive;
+        const npc = gameData.npcs.find(npc => npc.name === name);
+        if (npc) {
+            return npc.isAlive === isAlive;
+        } else {
+            return false;
+        }
     }
     return true;
 }

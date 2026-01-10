@@ -1,5 +1,4 @@
-import {adventureLog, displayPollen, gameData, journalBox, questData} from "./gameData.js";
-import {displayAdventureLogMessage} from "./helperFunctions.js";
+import {adventureLog, gameData, journalBox, questData} from "./gameData.js";
 import {registerEventOutcome} from "./eventHandler.js";
 
 export class QuestUpdater {
@@ -22,6 +21,15 @@ export class QuestUpdater {
         return states.find(state => state.id === questState);
     }
 
+    doesQuestExistInDom(allActiveQuests, questId) {
+        for (let questItem of allActiveQuests) {
+            if (questItem.id === questId) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     questUpdater(quest) {
         let questId = quest.id;
         let questState = quest.state;
@@ -39,14 +47,12 @@ export class QuestUpdater {
             }
         }
 
-        let q = gameData.quests.find(quest => quest.id === questId);
-
         if (finishingStates.includes(questState)) {
             this.updateQuest(questId, questState, currentQuest, activeQuests, allActiveQuests);
             this.finishQuest(questId, activeQuests, allActiveQuests);
             this.giveReward(questState, currentQuest);
         }
-        else if (q && !finishingStates.includes(questState)) {
+        else if (this.doesQuestExistInDom(allActiveQuests, questId) && !finishingStates.includes(questState)) {
             this.updateQuest(questId, questState, currentQuest, activeQuests, allActiveQuests);
         }
          else {
