@@ -2,7 +2,7 @@ import {chapterOneSlugs, CHAPTERS} from "./slugs.js";
 import {mapRender} from "./mapRender.js";
 
 export const gameData = {
-    player: {x: 0, y: 0},
+    player: {x: 24, y: 6},
 
     quests: [],
 
@@ -31,7 +31,8 @@ export const gameData = {
         seenQuests: [],
         currentPollen: 0,
         seenEvents: [],
-        eventOutcomes: []
+        eventOutcomes: [],
+        metNpcs: []
     }
 };
 

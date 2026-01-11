@@ -1,32 +1,8 @@
-import {adventureLog, displayMight, displayPollen, displayPrayer, displayReputation, gameData, player} from "./gameData.js";
+import {adventureLog, displayMight, displayPollen, displayPrayer, displayAgility, displayReputation, gameData, player} from "./gameData.js";
 import {mapRender} from "./mapRender.js";
 import {QuestUpdater} from "./QuestUpdater.js";
 
-let savedPlayerCoordinates = {};
-let savedPlayerCharacteristics = {};
-let savedPollen = 0;
-let savedSeenEvents = [];
-let savedEventOutcomes = [];
-let savedQuests = [];
-
-//load a saved file from backend
-function loadSavedGame() {
-    fetch("/roguelike-game/loadGame")
-        .then(response => response.json())
-        .then(savedGame => {
-            savedPlayerCoordinates = savedGame.currentCoordinates;
-            savedPlayerCharacteristics = savedGame.currentCharacteristics;
-            savedPollen = savedGame.currentPollen;
-            savedSeenEvents = savedGame.seenEvents;
-            savedEventOutcomes = savedGame.eventOutcomes;
-            savedQuests = savedGame.seenQuests;
-        })
-        .catch(error => {
-            console.log("failed to load game", error);
-        });
-}
-
-export async function applySavedFile() {
+export async function loadSavedGame() {
     try {
         const response = await fetch("/roguelike-game/loadGame");
         const savedGame = await response.json();
@@ -49,7 +25,7 @@ export async function applySavedFile() {
 
         updatePlayerPosition(gameData.player.x, gameData.player.y, player);
         mapRender();
-        updatePlayerCharacteristics(displayMight, displayReputation, displayPrayer, displayPollen);
+        updatePlayerCharacteristics(displayMight, displayReputation, displayPrayer, displayAgility, displayPollen);
 
         let journalUpdater = new QuestUpdater();
         journalUpdater.loadSeenQuests(gameData.gameProgress.quests);
@@ -70,9 +46,10 @@ function updatePlayerPosition(x, y, player) {
     player.y = y;
 }
 
-function updatePlayerCharacteristics(displayMight, displayReputation, displayPrayer, displayPollen) {
+function updatePlayerCharacteristics(displayMight, displayReputation, displayPrayer, displayAgility, displayPollen) {
     displayMight.textContent = gameData.playerCharacteristics.might;
     displayReputation.textContent = gameData.playerCharacteristics.reputation;
     displayPrayer.textContent = gameData.playerCharacteristics.prayer;
+    displayAgility.textContent = gameData.playerCharacteristics.agility;
     displayPollen.textContent = gameData.pollen;
 }

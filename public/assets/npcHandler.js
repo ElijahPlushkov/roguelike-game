@@ -1,9 +1,20 @@
-import {eventDescription, eventOptions, npcData} from "./gameData.js";
+import {eventDescription, eventOptions, gameData, npcData} from "./gameData.js";
 import {initDialogue} from "./dialogueHandler.js";
 
 export function initNpc(name) {
 
-    let npc = npcData.npcs.find(npc => npc.name === name)
+    let npc = npcData.npcs.find(npc => npc.name === name);
+
+    if (!hasMetNpc(npc)) {
+        gameData.npcs.push({id: npc.id, isAlive: npc.isAlive});
+    }
+
+    if (!isNpcAlive(npc.id)) {
+        gameData.eventActive = false;
+        return;
+    }
+
+    console.log(gameData.npcs);
 
     eventDescription.textContent = npc.description;
     eventDescription.className = "event-text-color";
@@ -26,6 +37,27 @@ export function initNpc(name) {
             }
         })
     })
+}
+
+function hasMetNpc(npc) {
+    for (let n of gameData.npcs) {
+        if (npc.id === n.id) {
+            return true;
+        }
+    }
+    return false;
+}
+
+function isNpcAlive(npcId) {
+    let n = gameData.npcs.find(npc => npc.id === npcId);
+    if (n) {
+        return n.isAlive;
+    }
+}
+
+export function registerNpcDeath(npcId) {
+    let deadNpc = gameData.npcs.find(npc => npc.id === npcId);
+    deadNpc.isAlive = false;
 }
 
 function npcCombat() {

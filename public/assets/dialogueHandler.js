@@ -3,6 +3,7 @@ import {endEvent, appendContinueButton, displayAdventureLogMessage, appendReject
 import {handleDeath} from "./deathHandler.js";
 import {QuestUpdater} from "./QuestUpdater.js";
 import {registerEventOutcome} from "./eventHandler.js";
+import {registerNpcDeath} from "./npcHandler.js";
 
 export function initDialogue(dialogueSlug, stateKey) {
     //find the dialogue
@@ -71,6 +72,11 @@ export function initDialogue(dialogueSlug, stateKey) {
                 if (option.quest) {
                     let journalUpdater = new QuestUpdater();
                     journalUpdater.questUpdater(option.quest);
+                }
+
+                // if an option has a npc death marker
+                if (option.npcDeath) {
+                    registerNpcDeath(option.npcDeath.id);
                 }
 
                 // initiate next dialogue stage
@@ -189,6 +195,5 @@ function displayStatRequirementsInfo(option) {
             requirementInfo += " [" + abbreviations + ": " + value + "]";
         }
     }
-
     return requirementInfo;
 }

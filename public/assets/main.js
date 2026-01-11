@@ -1,5 +1,7 @@
-import {gameData, adventureLog, journalClose, levelData, map, player, tileSet, dialogueData, eventData,
-    loadLevelData, loadDialogueData, loadEventData, loadDoorData, loadEnemyData, loadQuestData, loadNpcData} from "./gameData.js";
+import {
+    gameData, adventureLog, journalClose, levelData, map, player, tileSet, dialogueData, eventData,
+    loadLevelData, loadDialogueData, loadEventData, loadDoorData, loadEnemyData, loadQuestData, loadNpcData
+} from "./gameData.js";
 import {initEvent} from "./eventHandler.js";
 import {mapRender} from "./mapRender.js";
 import {initDialogue} from "./dialogueHandler.js";
@@ -8,7 +10,7 @@ import {accessDoor} from "./doorHandler.js";
 import {initNpc} from "./npcHandler.js";
 import {hasSeenEvent, markEventSeen, appendRejectionMessage} from "./helperFunctions.js";
 import {saveGame} from "./saveGame.js";
-import {applySavedFile} from "./loadGame.js";
+import {loadSavedGame} from "./loadGame.js";
 import {QuestUpdater} from "./QuestUpdater.js";
 import {handleDeath} from "./deathHandler.js";
 
@@ -205,7 +207,7 @@ const saveGameButton = document.getElementById("saveGame");
 saveGameButton.addEventListener("click", saveGame);
 
 const loadGameButton = document.getElementById("loadGame");
-loadGameButton.addEventListener("click", applySavedFile);
+loadGameButton.addEventListener("click", loadSavedGame);
 
 const questJournal = document.getElementById("questJournal");
 let journalUpdater = new QuestUpdater();
