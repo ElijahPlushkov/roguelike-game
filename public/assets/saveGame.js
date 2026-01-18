@@ -19,6 +19,7 @@ function prepareSaveData() {
     gameData.gameProgress.currentPollen = gameData.pollen;
 
     gameData.gameProgress.seenQuests = gameData.quests;
+    gameData.gameProgress.metNpcs = gameData.npcs;
 
     return gameData.gameProgress;
 }

@@ -20,6 +20,7 @@ export async function loadSavedGame() {
         gameData.gameProgress.eventOutcomes = savedGame.eventOutcomes || [];
 
         gameData.gameProgress.quests = savedGame.seenQuests || [];
+        gameData.npcs = savedGame.metNpcs || [];
 
         console.log("Game successfully loaded:", gameData);
 

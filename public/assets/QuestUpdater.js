@@ -61,7 +61,7 @@ export class QuestUpdater {
 
         this.questUpdateNotification();
 
-        this.updateGameDataObject(questId, questState, quest);
+        this.updateGameDataObject(questId, questState);
     }
 
     addNewQuest(questId, questState, currentQuest) {
@@ -148,13 +148,19 @@ export class QuestUpdater {
         }
     }
 
-    updateGameDataObject(questId, questState, quest) {
+    updateGameDataObject(questId, questState) {
         let q = gameData.quests.find(quest => quest.id === questId);
         if (q) {
-            q.state = questState;
+            if (!q.states.includes(questState)) {
+                q.states.push(questState);
+            }
         } else {
-            gameData.quests.push(quest)
+            gameData.quests.push({
+                id: questId,
+                states: [questState]
+            });
         }
+
         console.log(gameData.quests);
     }
 }
