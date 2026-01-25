@@ -50,16 +50,17 @@ export class QuestUpdater {
         if (finishingStates.includes(questState)) {
             this.updateQuest(questId, questState, currentQuest, activeQuests, allActiveQuests);
             this.finishQuest(questId, activeQuests, allActiveQuests);
+            this.questFinishNotification();
             this.giveReward(questState, currentQuest);
         }
         else if (this.doesQuestExistInDom(allActiveQuests, questId) && !finishingStates.includes(questState)) {
             this.updateQuest(questId, questState, currentQuest, activeQuests, allActiveQuests);
+            this.questUpdateNotification();
         }
          else {
             this.addNewQuest(questId, questState, currentQuest);
+            this.questUpdateNotification();
         }
-
-        this.questUpdateNotification();
 
         this.updateGameDataObject(questId, questState);
     }
@@ -130,6 +131,12 @@ export class QuestUpdater {
         let newNotification = document.createElement("p");
         newNotification.textContent = "Journal updated."
         adventureLog.prepend(newNotification);
+    }
+
+    questFinishNotification() {
+        let finishNotification = document.createElement("p");
+        finishNotification.textContent = "Quest completed."
+        adventureLog.prepend(finishNotification);
     }
 
     removeAllQuests() {

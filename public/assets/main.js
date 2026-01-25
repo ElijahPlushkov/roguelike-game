@@ -125,9 +125,9 @@ function checkForAnyEvent(x, y) {
         }
 
         if (newEvent.type === "npc") {
-            const npcName = newEvent.name;
+            const npcId = newEvent.id;
             gameData.eventActive = true;
-            initNpc(npcName);
+            initNpc(npcId);
         }
     }
 }

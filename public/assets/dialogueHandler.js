@@ -140,9 +140,7 @@ function defineDialogueEntryPoint(dialogue) {
                 if (condition.id && condition.state) {
                     const quest = gameData.quests.find(q => q.id === condition.id);
                     if (quest) {
-                        if (quest.states.includes(condition.state)) {
-                            return true;
-                        }
+                        quest.states.includes(condition.state);
                     }
                 }
                 if (condition.eventOutcome) {
@@ -169,11 +167,7 @@ function checkOptionConditions(optionConditions) {
         const { id, state } = optionConditions.quest;
         const quest = gameData.quests.find(quest => quest.id === id);
         if (quest) {
-            if (quest.states.includes(state)) {
-                return true;
-            }
-        } else {
-            return false;
+            return quest.states.includes(state);
         }
     }
 

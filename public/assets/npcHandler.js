@@ -1,9 +1,9 @@
 import {eventDescription, eventOptions, gameData, npcData} from "./gameData.js";
 import {initDialogue} from "./dialogueHandler.js";
 
-export function initNpc(name) {
+export function initNpc(id) {
 
-    let npc = npcData.npcs.find(npc => npc.name === name);
+    let npc = npcData.npcs.find(npc => npc.id === id);
 
     if (!hasMetNpc(npc)) {
         gameData.npcs.push({id: npc.id, isAlive: npc.isAlive});
