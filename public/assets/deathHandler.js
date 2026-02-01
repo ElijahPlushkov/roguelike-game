@@ -1,5 +1,4 @@
 import {adventureLog, gameData} from "./gameData.js";
-import {clearStorage} from "./helperFunctions.js";
 
 export function handleDeath() {
     const deathMessage = document.createElement("div");
@@ -15,6 +14,4 @@ export function handleDeath() {
     } catch (e) {
         console.log("an error occurred");
     }
-
-    clearStorage();
 }

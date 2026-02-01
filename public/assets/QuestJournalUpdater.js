@@ -1,7 +1,7 @@
 import {adventureLog, gameData, journalBox, questData} from "./gameData.js";
 import {registerEventOutcome} from "./eventHandler.js";
 
-export class QuestUpdater {
+export class QuestJournalUpdater {
     journalBox = journalBox
 
     toggleJournal() {
@@ -17,6 +17,8 @@ export class QuestUpdater {
     }
 
     findCurrentState(currentQuest, questState) {
+        console.log(currentQuest);
+        console.log(questState);
         let states = currentQuest.states;
         return states.find(state => state.id === questState);
     }
@@ -30,9 +32,9 @@ export class QuestUpdater {
         return false;
     }
 
-    questUpdater(quest) {
+    journalUpdater(quest, state) {
         let questId = quest.id;
-        let questState = quest.state;
+        let questState = quest.state || state;
         let currentQuest = this.findQuest(questId);
 
         const activeQuests = document.querySelector(".quest-list-active");
@@ -52,20 +54,23 @@ export class QuestUpdater {
             this.finishQuest(questId, activeQuests, allActiveQuests);
             this.questFinishNotification();
             this.giveReward(questState, currentQuest);
+            this.updateGameDataObject(questId, questState, "completed");
         }
         else if (this.doesQuestExistInDom(allActiveQuests, questId) && !finishingStates.includes(questState)) {
             this.updateQuest(questId, questState, currentQuest, activeQuests, allActiveQuests);
             this.questUpdateNotification();
+            this.updateGameDataObject(questId, questState, "active");
         }
          else {
             this.addNewQuest(questId, questState, currentQuest);
             this.questUpdateNotification();
+            this.updateGameDataObject(questId, questState, "active");
         }
-
-        this.updateGameDataObject(questId, questState);
     }
 
     addNewQuest(questId, questState, currentQuest) {
+        console.log(questState);
+        console.log(currentQuest);
 
         const questList = document.querySelector('.quest-list-active');
         const template = document.getElementById('quest-template');
@@ -81,10 +86,9 @@ export class QuestUpdater {
         const p = document.createElement("p");
 
         let currentState = this.findCurrentState(currentQuest, questState);
-
+        console.log(currentState);
         p.textContent = currentState.description;
         descriptionBox.appendChild(p);
-
         questList.appendChild(currentQuestItem);
     }
 
@@ -148,26 +152,37 @@ export class QuestUpdater {
         });
     }
 
-    loadSeenQuests(quests) {
-        this.removeAllQuests();
-        for (let quest of quests) {
-            this.questUpdater(quest);
+    restoreAllQuests(quest) {
+        if (quest.status === "active") {
+            let questStates = quest.states;
+            let originalQuest = this.findQuest(quest.id);
+            questStates.forEach(questState => {
+                this.journalUpdater(originalQuest, questState);
+            });
         }
     }
 
-    updateGameDataObject(questId, questState) {
+    loadSeenQuests(quests) {
+        this.removeAllQuests();
+        for (let quest of quests) {
+            this.restoreAllQuests(quest);
+        }
+    }
+
+    updateGameDataObject(questId, questState, questStatus) {
         let q = gameData.quests.find(quest => quest.id === questId);
         if (q) {
             if (!q.states.includes(questState)) {
                 q.states.push(questState);
+                q.status = questStatus;
             }
         } else {
             gameData.quests.push({
                 id: questId,
-                states: [questState]
+                states: [questState],
+                status: questStatus
             });
         }
-
         console.log(gameData.quests);
     }
 }

@@ -1,5 +1,4 @@
 import {adventureLog, eventOptions, gameData} from "./gameData.js";
-import {updateGameProgress} from "./saveGame.js";
 
 export function appendContinueButton() {
     const continueButton = document.createElement("button");
@@ -19,6 +18,10 @@ export function appendRejectionMessage(eventData) {
     rejection.textContent = eventData.rejection;
     rejection.classList.add("rejection-text-color");
     eventOptions.prepend(rejection);
+
+    setTimeout(() => {
+        eventOptions.innerHTML = "";
+    }, 5000);
 }
 
 export function displayAdventureLogMessage(value, key, ccsClass) {
@@ -41,14 +44,26 @@ export function endEvent(slug, status, description, options) {
     options.textContent = "";
 }
 
+function updateGameProgress(slug, finalState) {
+    let event = gameData.eventOutcomes.find(e => e.event === slug);
+    if (event) {
+        if (event.outcome !== finalState) {
+            event.outcome = finalState;
+        }
+    } else {
+        gameData.eventOutcomes.push({
+            event: slug,
+            outcome: finalState
+        });
+    }
+    console.log(gameData.eventOutcomes);
+}
+
 export function hasSeenEvent(slug) {
-    return gameData.gameProgress.seenEvents.includes(slug);
+    return gameData.seenEvents.includes(slug);
 }
 
 export function markEventSeen(slug) {
-    gameData.gameProgress.seenEvents.push(slug);
+    gameData.seenEvents.push(slug);
 }
 
-export function clearStorage() {
-    gameData.gameProgress.seenEvents = [];
-}

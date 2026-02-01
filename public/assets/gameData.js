@@ -2,38 +2,25 @@ import {chapterOneSlugs, CHAPTERS} from "./slugs.js";
 import {mapRender} from "./mapRender.js";
 
 export const gameData = {
-    player: {x: 24, y: 6},
+    player: {x: 0, y: 1},
 
     quests: [],
 
     npcs: [],
 
+    eventOutcomes: [],
+    seenEvents: [],
+
     eventActive: false,
-    stateKey: "",
 
     playerCharacteristics: {
-        reputation: 10,
-        might: 10,
-        prayer: 10,
-        agility: 10
+        reputation: 1,
+        might: 1,
+        prayer: 1,
+        agility: 1
     },
 
-    pollen: 0,
-
-    gameProgress: {
-        currentCoordinates: {x: 0, y: 0},
-        currentCharacteristics: {
-            reputation: 0,
-            might: 0,
-            prayer: 0,
-            agility: 0
-        },
-        seenQuests: [],
-        currentPollen: 0,
-        seenEvents: [],
-        eventOutcomes: [],
-        metNpcs: []
-    }
+    pollen: 1,
 };
 
 const adventureLog = document.querySelector(".adventure-log");

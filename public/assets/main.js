@@ -11,7 +11,7 @@ import {initNpc} from "./npcHandler.js";
 import {hasSeenEvent, markEventSeen, appendRejectionMessage} from "./helperFunctions.js";
 import {saveGame} from "./saveGame.js";
 import {loadSavedGame} from "./loadGame.js";
-import {QuestUpdater} from "./QuestUpdater.js";
+import {QuestJournalUpdater} from "./QuestJournalUpdater.js";
 import {handleDeath} from "./deathHandler.js";
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -65,6 +65,9 @@ document.addEventListener("DOMContentLoaded", () => {
         const newX = player.x + dx;
         const newY = player.y + dy;
 
+        gameData.player.x = newX;
+        gameData.player.y = newY;
+
         if (isWalkable(newX, newY)) {
             player.x = newX;
             player.y = newY;
@@ -85,8 +88,6 @@ function checkForAnyEvent(x, y) {
     ]
 
     const newEvent = allEvents.find(event => event.x === x && event.y === y);
-
-    console.log(newEvent);
 
     if (newEvent) {
         //an event cannot start unless the player meets its requirements
@@ -109,7 +110,6 @@ function checkForAnyEvent(x, y) {
                 gameData.eventActive = true;
                 initDialogue(dialogueSlug, gameData.stateKey);
                 markEventSeen(dialogueSlug);
-                console.log(gameData.gameProgress);
             }
         }
 
@@ -157,8 +157,9 @@ function checkMight() {
 }
 
 function isRequirementPassed(requirements, event) {
-    if (gameData.gameProgress.eventOutcomes[requirements.eventSlug]) {
-        if (gameData.gameProgress.eventOutcomes[requirements.eventSlug].eventOutcome === requirements.eventOutcome) {
+    let currentEvent = gameData.eventOutcomes.find(currentEvent => currentEvent.event === event);
+    if (currentEvent) {
+        if (currentEvent.outcome === requirements.eventOutcome) {
             return true;
         }
         appendRejectionMessage(event);
@@ -210,7 +211,7 @@ const loadGameButton = document.getElementById("loadGame");
 loadGameButton.addEventListener("click", loadSavedGame);
 
 const questJournal = document.getElementById("questJournal");
-let journalUpdater = new QuestUpdater();
+let journalUpdater = new QuestJournalUpdater();
 questJournal.addEventListener("click", () => {
     journalUpdater.toggleJournal();
 });

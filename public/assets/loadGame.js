@@ -1,26 +1,27 @@
 import {adventureLog, displayMight, displayPollen, displayPrayer, displayAgility, displayReputation, gameData, player} from "./gameData.js";
 import {mapRender} from "./mapRender.js";
-import {QuestUpdater} from "./QuestUpdater.js";
+import {QuestJournalUpdater} from "./QuestJournalUpdater.js";
 
 export async function loadSavedGame() {
     try {
         const response = await fetch("/roguelike-game/loadGame");
         const savedGame = await response.json();
 
-        gameData.player.x = savedGame.currentCoordinates.x;
-        gameData.player.y = savedGame.currentCoordinates.y;
+        gameData.player.x = savedGame.player.x
+        gameData.player.y = savedGame.player.y;
 
-        gameData.playerCharacteristics.might = savedGame.currentCharacteristics.might;
-        gameData.playerCharacteristics.reputation = savedGame.currentCharacteristics.reputation;
-        gameData.playerCharacteristics.prayer = savedGame.currentCharacteristics.prayer;
+        gameData.playerCharacteristics.might = savedGame.playerCharacteristics.might;
+        gameData.playerCharacteristics.reputation = savedGame.playerCharacteristics.reputation;
+        gameData.playerCharacteristics.prayer = savedGame.playerCharacteristics.prayer;
+        gameData.playerCharacteristics.agility = savedGame.playerCharacteristics.agility;
 
-        gameData.pollen = savedGame.currentPollen;
+        gameData.pollen = savedGame.pollen;
 
-        gameData.gameProgress.seenEvents = savedGame.seenEvents || [];
-        gameData.gameProgress.eventOutcomes = savedGame.eventOutcomes || [];
+        gameData.eventOutcomes = savedGame.eventOutcomes || [];
+        gameData.seenEvents = savedGame.seenEvents || [];
 
-        gameData.gameProgress.quests = savedGame.seenQuests || [];
-        gameData.npcs = savedGame.metNpcs || [];
+        gameData.quests = savedGame.quests || [];
+        gameData.npcs = savedGame.npcs || [];
 
         console.log("Game successfully loaded:", gameData);
 
@@ -28,8 +29,8 @@ export async function loadSavedGame() {
         mapRender();
         updatePlayerCharacteristics(displayMight, displayReputation, displayPrayer, displayAgility, displayPollen);
 
-        let journalUpdater = new QuestUpdater();
-        journalUpdater.loadSeenQuests(gameData.gameProgress.quests);
+        let journalUpdater = new QuestJournalUpdater();
+        journalUpdater.loadSeenQuests(gameData.quests);
 
         adventureLog.innerHTML = "";
 

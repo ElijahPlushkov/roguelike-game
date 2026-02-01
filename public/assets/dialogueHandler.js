@@ -1,7 +1,7 @@
 import {gameData, eventDescription, eventOptions, dialogueData} from "./gameData.js";
 import {endEvent, appendContinueButton, displayAdventureLogMessage, appendRejectionMessage} from "./helperFunctions.js";
 import {handleDeath} from "./deathHandler.js";
-import {QuestUpdater} from "./QuestUpdater.js";
+import {QuestJournalUpdater} from "./QuestJournalUpdater.js";
 import {registerEventOutcome} from "./eventHandler.js";
 import {registerNpcDeath} from "./npcHandler.js";
 
@@ -70,8 +70,8 @@ export function initDialogue(dialogueSlug, stateKey) {
 
                 // if an option has a quest marker
                 if (option.quest) {
-                    let journalUpdater = new QuestUpdater();
-                    journalUpdater.questUpdater(option.quest);
+                    let journalUpdater = new QuestJournalUpdater();
+                    journalUpdater.journalUpdater(option.quest);
                 }
 
                 // if an option has a npc death marker
@@ -101,7 +101,7 @@ export function initDialogue(dialogueSlug, stateKey) {
             return;
         }
 
-        gameData.gameProgress.eventOutcomes[dialogueSlug] = {
+        gameData.eventOutcomes[dialogueSlug] = {
             eventOutcome: stateKey
         };
 
@@ -112,8 +112,8 @@ export function initDialogue(dialogueSlug, stateKey) {
         continueButton.addEventListener("click", function () {
             endEvent(dialogueSlug, stateKey, eventDescription, eventOptions);
             if (dialogue.quest) {
-                let journalUpdater = new QuestUpdater();
-                journalUpdater.questUpdater(dialogue.quest);
+                let journalUpdater = new QuestJournalUpdater();
+                journalUpdater.journalUpdater(dialogue.quest);
             }
             if (finalState.characteristics) {
                 registerEventOutcome(finalState.characteristics);
@@ -126,7 +126,7 @@ export function initDialogue(dialogueSlug, stateKey) {
             return;
         }
 
-        console.log(gameData.gameProgress.eventOutcomes);
+        console.log(gameData.eventOutcomes);
     }
 }
 
@@ -140,15 +140,15 @@ function defineDialogueEntryPoint(dialogue) {
                 if (condition.id && condition.state) {
                     const quest = gameData.quests.find(q => q.id === condition.id);
                     if (quest) {
-                        quest.states.includes(condition.state);
+                        return quest.states.includes(condition.state);
                     }
                 }
-                if (condition.eventOutcome) {
-                    if (!gameData.gameProgress.eventOutcomes[dialogue.slug]) {
+                else if (condition.eventOutcome) {
+                    const eventOutcome = gameData.eventOutcomes.find(outcome => outcome.event === dialogue.slug);
+                    if (!eventOutcome) {
                         return;
                     }
-                    const eventOutcome = gameData.gameProgress.eventOutcomes[dialogue.slug];
-                    return condition.eventOutcome === eventOutcome.eventOutcome;
+                    return condition.eventOutcome === eventOutcome.outcome;
                 }
             });
             if (isConditionMet) {
@@ -168,6 +168,8 @@ function checkOptionConditions(optionConditions) {
         const quest = gameData.quests.find(quest => quest.id === id);
         if (quest) {
             return quest.states.includes(state);
+        } else {
+            return false;
         }
     }
 
