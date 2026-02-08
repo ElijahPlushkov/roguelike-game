@@ -1,12 +1,6 @@
 import {gameData, eventDescription, eventOptions, doorData, levelData} from "./gameData.js";
-import {registerEventOutcome} from "./eventHandler.js";
-import {
-    appendContinueButton,
-    endEvent,
-    appendRejectionMessage,
-    hasSeenEvent,
-    markEventSeen
-} from "./helperFunctions.js";
+import {appendContinueButton, endEvent, appendRejectionMessage, hasSeenEvent, markEventSeen} from "./helperFunctions.js";
+import {ChangeStats} from "./ChangeStats.js";
 
 export function accessDoor(x, y) {
     const doors = [...(levelData.tileData.doors) || []];
@@ -38,15 +32,17 @@ export function accessDoor(x, y) {
         if (!hasSeenEvent(doorSlug)) {
             eventDescription.className = "event-text-color";
             eventDescription.textContent = door.description;
-            gameData.eventActive = true;
+            gameData.isEventActive = true;
             let continueButton = appendContinueButton();
             eventOptions.prepend(continueButton);
             continueButton.addEventListener("click", function () {
                 endEvent(doorSlug, "completed", eventDescription, eventOptions);
                 const reward = door.reward;
-                registerEventOutcome(reward);
+                // registerEventOutcome(reward);
+                let statChanger = new ChangeStats();
+                statChanger.changeStats(reward);
                 markEventSeen(doorSlug);
-                gameData.eventActive = false;
+                gameData.isEventActive = false;
             });
         }
         return true;

@@ -9,6 +9,10 @@ require_once __DIR__ . "/../views/header.php";
 
         <section class="player-stats">
             <div class="stats-display">
+                <div class="stat-item">HEALTH {<span class="current-health">10</span>/<span class="max-health">10</span>}</span></div>
+                <div class="stat-item">MYSTICISM {<span class="current-mysticism">10</span>/<span class="max-mysticism">10</span>}</div>
+                <div class="stat-item">WILLPOWER {<span class="current-willpower">10</span>}</div>
+
                 <div class="stat-item">REPUTATION <span class="reputation-stat-value">0</span>|</div>
                 <div class="stat-item">MIGHT <span class="might-stat-value">0</span>|</div>
                 <div class="stat-item">PRAYER <span class="prayer-stat-value">0</span>|</div>
@@ -37,7 +41,7 @@ require_once __DIR__ . "/../views/header.php";
             <div class="event-box">
                 <div class="event-content">
                     <div class="event-portrait">
-                        <!--                    <img src="" class="event-portrait__image">-->
+                        <!--<img src="" class="event-portrait__image">-->
                     </div>
                     <div class="event-description">Use WASD to move.</div>
                     <div class="event-info"></div>
@@ -91,8 +95,41 @@ require_once __DIR__ . "/../views/header.php";
             </div>
         </section>
 
-        <section class="adventure-log-container">
+
+        <section class="bottom-interface">
             <div class="adventure-log"></div>
+            <div class="inventory">
+<!--                <div class="inventory-header">-->
+<!--                    <h4>Inventory</h4>-->
+<!--                    <h4>Wielding: <span>Wooden Spear</span></h4>-->
+<!--                    <h4>Wearing: <span>Wax cuirass</span></h4>-->
+<!--                    <h4>Shield: <span>Wooden shield</span></h4>-->
+<!--                </div>-->
+<!--                <div class="inventory-content">-->
+<!--                    <div class="inventory-category">-->
+<!--                        <h4 class="inventory-category__heading">Weapon</h4>-->
+<!--                        <p>Wooden dagger</p>-->
+<!--                        <p>Wooden spear</p>-->
+<!--                    </div>-->
+<!--                    <div class="inventory-category">-->
+<!--                        <h4 class="inventory-category__heading">Armor</h4>-->
+<!--                        <p>Wooden shield</p>-->
+<!--                        <p>Wax cuirass</p>-->
+<!--                    </div>-->
+<!--                    <div class="inventory-category">-->
+<!--                        <h4 class="inventory-category__heading">Food</h4>-->
+<!--                        <p>Apple seed</p>-->
+<!--                        <p>Water drop</p>-->
+<!--                        <p>Pepper bag</p>-->
+<!--                    </div>-->
+<!--                    <div class="inventory-category">-->
+<!--                        <h4 class="inventory-category__heading">Portions</h4>-->
+<!--                    </div>-->
+<!--                    <div class="inventory-category">-->
+<!--                        <h4 class="inventory-category__heading">Magic Books</h4>-->
+<!--                    </div>-->
+<!--                </div>-->
+            </div>
         </section>
 
     </div>

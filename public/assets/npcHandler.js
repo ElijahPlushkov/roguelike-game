@@ -10,7 +10,7 @@ export function initNpc(id) {
     }
 
     if (!isNpcAlive(npc.id)) {
-        gameData.eventActive = false;
+        gameData.isEventActive = false;
         return;
     }
 

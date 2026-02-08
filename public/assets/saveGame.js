@@ -1,7 +1,7 @@
 import {adventureLog, gameData} from "./gameData.js";
 
 export function saveGame() {
-    if (gameData.eventActive === true) {
+    if (gameData.isEventActive) {
         adventureLog.prepend("Cannot save now.");
         return;
     }

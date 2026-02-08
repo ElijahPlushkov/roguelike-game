@@ -5,7 +5,7 @@ export function handleDeath() {
     deathMessage.textContent = "you are dead";
     adventureLog.prepend(deathMessage);
 
-    gameData.eventActive = true;
+    gameData.isEventActive = true;
 
     try{
         setTimeout(function() {

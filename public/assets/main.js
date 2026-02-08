@@ -1,5 +1,5 @@
 import {
-    gameData, adventureLog, journalClose, levelData, map, player, tileSet, dialogueData, eventData,
+    gameData, adventureLog, journalClose, levelData, map, playerCoordinates, tileSet, dialogueData, eventData,
     loadLevelData, loadDialogueData, loadEventData, loadDoorData, loadEnemyData, loadQuestData, loadNpcData
 } from "./gameData.js";
 import {initEvent} from "./eventHandler.js";
@@ -13,6 +13,16 @@ import {saveGame} from "./saveGame.js";
 import {loadSavedGame} from "./loadGame.js";
 import {QuestJournalUpdater} from "./QuestJournalUpdater.js";
 import {handleDeath} from "./deathHandler.js";
+import {Player} from "./Player.js";
+
+export let playerObject = new Player(
+    gameData.playerCharacteristics.might,
+    gameData.playerCharacteristics.reputation,
+    gameData.playerCharacteristics.prayer,
+    gameData.playerCharacteristics.agility,
+    gameData.pollen
+);
+console.log(playerObject);
 
 document.addEventListener("DOMContentLoaded", () => {
     loadLevelData();
@@ -26,7 +36,7 @@ document.addEventListener("DOMContentLoaded", () => {
     //movement
     document.addEventListener("keydown", (e) => {
         checkMight();
-        if (gameData.eventActive) {
+        if (gameData.isEventActive) {
             return;
         }
 
@@ -62,19 +72,19 @@ document.addEventListener("DOMContentLoaded", () => {
                 return;
         }
 
-        const newX = player.x + dx;
-        const newY = player.y + dy;
+        const newX = playerCoordinates.x + dx;
+        const newY = playerCoordinates.y + dy;
 
-        gameData.player.x = newX;
-        gameData.player.y = newY;
+        gameData.playerCoordinates.x = newX;
+        gameData.playerCoordinates.y = newY;
 
         if (isWalkable(newX, newY)) {
-            player.x = newX;
-            player.y = newY;
+            playerCoordinates.x = newX;
+            playerCoordinates.y = newY;
         }
 
         mapRender();
-        checkForAnyEvent(player.x, player.y);
+        checkForAnyEvent(playerCoordinates.x, playerCoordinates.y);
     });
 });
 
@@ -90,7 +100,7 @@ function checkForAnyEvent(x, y) {
     const newEvent = allEvents.find(event => event.x === x && event.y === y);
 
     if (newEvent) {
-        //an event cannot start unless the player meets its requirements
+        //an event cannot start unless the player meets the requirements
         if (!requirementsCheck(newEvent)) {
             return;
         }
@@ -98,7 +108,7 @@ function checkForAnyEvent(x, y) {
         if (newEvent.type === "event") {
             const eventSlug = newEvent.slug;
             if (!hasSeenEvent(eventSlug)) {
-                gameData.eventActive = true;
+                gameData.isEventActive = true;
                 initEvent(eventSlug);
                 markEventSeen(eventSlug);
             }
@@ -107,7 +117,7 @@ function checkForAnyEvent(x, y) {
         if (newEvent.type === "dialogue") {
             const dialogueSlug = newEvent.slug;
             if (!hasSeenEvent(dialogueSlug)) {
-                gameData.eventActive = true;
+                gameData.isEventActive = true;
                 initDialogue(dialogueSlug, gameData.stateKey);
                 markEventSeen(dialogueSlug);
             }
@@ -118,7 +128,7 @@ function checkForAnyEvent(x, y) {
             const isImportant = newEvent.isImportant;
             const difficulty = newEvent.difficulty;
             if (!hasSeenEvent(enemySlug)) {
-                gameData.eventActive = true;
+                gameData.isEventActive = true;
                 initCombat(enemySlug, isImportant, difficulty);
                 markEventSeen(enemySlug);
             }
@@ -126,7 +136,7 @@ function checkForAnyEvent(x, y) {
 
         if (newEvent.type === "npc") {
             const npcId = newEvent.id;
-            gameData.eventActive = true;
+            gameData.isEventActive = true;
             initNpc(npcId);
         }
     }

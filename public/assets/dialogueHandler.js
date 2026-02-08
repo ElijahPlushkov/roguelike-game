@@ -2,8 +2,8 @@ import {gameData, eventDescription, eventOptions, dialogueData} from "./gameData
 import {endEvent, appendContinueButton, displayAdventureLogMessage, appendRejectionMessage} from "./helperFunctions.js";
 import {handleDeath} from "./deathHandler.js";
 import {QuestJournalUpdater} from "./QuestJournalUpdater.js";
-import {registerEventOutcome} from "./eventHandler.js";
 import {registerNpcDeath} from "./npcHandler.js";
+import {ChangeStats} from "./ChangeStats.js";
 
 export function initDialogue(dialogueSlug, stateKey) {
     //find the dialogue
@@ -59,13 +59,8 @@ export function initDialogue(dialogueSlug, stateKey) {
 
                 // if an option has a reward or debuff
                 if (option.characteristics) {
-                    for (const [key, value] of Object.entries(option.characteristics)) {
-                        gameData.playerCharacteristics[key] += value;
-                        const displayCharacteristic = document.querySelector(`.${key}-stat-value`);
-                        displayCharacteristic.textContent = gameData.playerCharacteristics[key];
-
-                        displayAdventureLogMessage(value, key, "dialogue-text-color");
-                    }
+                    let statChanger = new ChangeStats();
+                    statChanger.changeStats(option.characteristics);
                 }
 
                 // if an option has a quest marker
@@ -94,8 +89,6 @@ export function initDialogue(dialogueSlug, stateKey) {
         const finalStateKey = stateKey || currentStateKey;
         const finalState = dialogue[finalStateKey];
 
-        console.log(finalStateKey);
-
         if (!finalState) {
             console.error("Invalid final state:", finalStateKey);
             return;
@@ -116,9 +109,9 @@ export function initDialogue(dialogueSlug, stateKey) {
                 journalUpdater.journalUpdater(dialogue.quest);
             }
             if (finalState.characteristics) {
-                registerEventOutcome(finalState.characteristics);
+                let statChanger = new ChangeStats();
+                statChanger.changeStats(finalState.characteristics);
             }
-
         });
 
         if (stateKey === "death") {

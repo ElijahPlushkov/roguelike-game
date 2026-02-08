@@ -1,14 +1,18 @@
-import {adventureLog, displayMight, displayPollen, displayPrayer, displayAgility, displayReputation, gameData, player} from "./gameData.js";
+import {adventureLog, displayMight, displayPollen, displayPrayer, displayAgility, displayReputation, gameData, playerCoordinates} from "./gameData.js";
 import {mapRender} from "./mapRender.js";
 import {QuestJournalUpdater} from "./QuestJournalUpdater.js";
 
 export async function loadSavedGame() {
+    if (gameData.isEventActive) {
+        adventureLog.prepend("Cannot load now.");
+        return
+    }
     try {
         const response = await fetch("/roguelike-game/loadGame");
         const savedGame = await response.json();
 
-        gameData.player.x = savedGame.player.x
-        gameData.player.y = savedGame.player.y;
+        gameData.playerCoordinates.x = savedGame.playerCoordinates.x
+        gameData.playerCoordinates.y = savedGame.playerCoordinates.y;
 
         gameData.playerCharacteristics.might = savedGame.playerCharacteristics.might;
         gameData.playerCharacteristics.reputation = savedGame.playerCharacteristics.reputation;
@@ -25,7 +29,7 @@ export async function loadSavedGame() {
 
         console.log("Game successfully loaded:", gameData);
 
-        updatePlayerPosition(gameData.player.x, gameData.player.y, player);
+        updatePlayerPosition(gameData.playerCoordinates.x, gameData.playerCoordinates.y, playerCoordinates);
         mapRender();
         updatePlayerCharacteristics(displayMight, displayReputation, displayPrayer, displayAgility, displayPollen);
 
@@ -43,9 +47,9 @@ export async function loadSavedGame() {
     }
 }
 
-function updatePlayerPosition(x, y, player) {
-    player.x = x;
-    player.y = y;
+function updatePlayerPosition(x, y, playerCoordinates) {
+    playerCoordinates.x = x;
+    playerCoordinates.y = y;
 }
 
 function updatePlayerCharacteristics(displayMight, displayReputation, displayPrayer, displayAgility, displayPollen) {

@@ -2,7 +2,13 @@ import {chapterOneSlugs, CHAPTERS} from "./slugs.js";
 import {mapRender} from "./mapRender.js";
 
 export const gameData = {
-    player: {x: 0, y: 1},
+    playerCoordinates: {x: 0, y: 1},
+
+    health: 10,
+    currentHealth: 10,
+    mysticism: 10,
+    currentMysticism: 10,
+    willpower: 10,
 
     quests: [],
 
@@ -11,7 +17,7 @@ export const gameData = {
     eventOutcomes: [],
     seenEvents: [],
 
-    eventActive: false,
+    isEventActive: false,
 
     playerCharacteristics: {
         reputation: 1,
@@ -20,16 +26,31 @@ export const gameData = {
         agility: 1
     },
 
-    pollen: 1,
+    pollen: 0,
 };
 
 const adventureLog = document.querySelector(".adventure-log");
 
-const displayReputation = document.querySelector(".reputation-stat-value");
-displayReputation.textContent = gameData.playerCharacteristics.reputation;
+const displayMaxHealth = document.querySelector(".max-health");
+displayMaxHealth.textContent = gameData.health;
+
+const displayCurrentHealth = document.querySelector(".current-health");
+displayCurrentHealth.textContent = gameData.currentHealth;
+
+const displayMaxMysticism = document.querySelector(".max-mysticism");
+displayMaxMysticism.textContent = gameData.mysticism;
+
+const displayCurrentMysticism = document.querySelector(".current-mysticism");
+displayCurrentMysticism.textContent = gameData.currentMysticism;
+
+const displayWillpower = document.querySelector(".current-willpower");
+displayWillpower.textContent = gameData.willpower;
 
 const displayMight = document.querySelector(".might-stat-value");
 displayMight.textContent = gameData.playerCharacteristics.might;
+
+const displayReputation = document.querySelector(".reputation-stat-value");
+displayReputation.textContent = gameData.playerCharacteristics.reputation;
 
 const displayPrayer = document.querySelector(".prayer-stat-value");
 displayPrayer.textContent = gameData.playerCharacteristics.prayer;
@@ -51,6 +72,7 @@ const journalBox = document.querySelector(".journal-box");
 const journalClose = document.querySelector(".journal-close");
 
 export {adventureLog,
+    displayMaxHealth, displayCurrentHealth, displayMaxMysticism, displayCurrentMysticism, displayWillpower,
     displayReputation, displayMight, displayPrayer, displayAgility, displayPollen,
     eventDescription, eventOptions, eventInfo,
     journalBox, journalClose};
@@ -60,7 +82,7 @@ let levelData = {};
 let chapterName = "";
 
 let map = [];
-let player = {x: 0, y: 0};
+let playerCoordinates = {x: 0, y: 0};
 let tileSet = {};
 
 let dialogueData = {};
@@ -77,13 +99,13 @@ export function loadLevelData(slug = CHAPTERS.CHAPTER_1) {
             levelData = level;
             chapterName = level.name;
             map = level.tilemap;
-            player = level.player;
+            playerCoordinates = level.player;
             tileSet = level.tileset;
 
             const chapterHeading = document.querySelector(".level-title__heading");
             chapterHeading.textContent = `-=${chapterName}=-`;
 
-            mapRender(map, player);
+            mapRender(map, playerCoordinates);
         })
         .catch(err => {
             console.error("Failed to load level:", err);
@@ -156,4 +178,4 @@ export function loadNpcData(slug = chapterOneSlugs.NPCS) {
         });
 }
 
-export {levelData, chapterName, map, player, tileSet, dialogueData, eventData, doorData, enemyData, questData, npcData};
+export {levelData, chapterName, map, playerCoordinates, tileSet, dialogueData, eventData, doorData, enemyData, questData, npcData};

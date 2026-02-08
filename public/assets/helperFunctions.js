@@ -20,11 +20,11 @@ export function appendRejectionMessage(eventData) {
     eventOptions.prepend(rejection);
 
     setTimeout(() => {
-        eventOptions.innerHTML = "";
+        rejection.remove();
     }, 5000);
 }
 
-export function displayAdventureLogMessage(value, key, ccsClass) {
+export function displayAdventureLogMessage(key, value, ccsClass) {
     const charChange = document.createElement("p");
     charChange.className = ccsClass;
     if (key === "pollen") {
@@ -38,7 +38,7 @@ export function displayAdventureLogMessage(value, key, ccsClass) {
 }
 
 export function endEvent(slug, status, description, options) {
-    gameData.eventActive = false;
+    gameData.isEventActive = false;
     updateGameProgress(slug, status);
     description.textContent = "";
     options.textContent = "";

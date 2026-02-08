@@ -1,5 +1,5 @@
 import {adventureLog, gameData, journalBox, questData} from "./gameData.js";
-import {registerEventOutcome} from "./eventHandler.js";
+import {ChangeStats} from "./ChangeStats.js";
 
 export class QuestJournalUpdater {
     journalBox = journalBox
@@ -17,8 +17,6 @@ export class QuestJournalUpdater {
     }
 
     findCurrentState(currentQuest, questState) {
-        console.log(currentQuest);
-        console.log(questState);
         let states = currentQuest.states;
         return states.find(state => state.id === questState);
     }
@@ -69,9 +67,6 @@ export class QuestJournalUpdater {
     }
 
     addNewQuest(questId, questState, currentQuest) {
-        console.log(questState);
-        console.log(currentQuest);
-
         const questList = document.querySelector('.quest-list-active');
         const template = document.getElementById('quest-template');
 
@@ -86,7 +81,6 @@ export class QuestJournalUpdater {
         const p = document.createElement("p");
 
         let currentState = this.findCurrentState(currentQuest, questState);
-        console.log(currentState);
         p.textContent = currentState.description;
         descriptionBox.appendChild(p);
         questList.appendChild(currentQuestItem);
@@ -127,7 +121,8 @@ export class QuestJournalUpdater {
 
         if (currentState.reward) {
             let reward = currentState.reward;
-            registerEventOutcome(reward)
+            let statChanger = new ChangeStats();
+            statChanger.changeStats(reward);
         }
     }
 
@@ -153,13 +148,11 @@ export class QuestJournalUpdater {
     }
 
     restoreAllQuests(quest) {
-        if (quest.status === "active") {
-            let questStates = quest.states;
-            let originalQuest = this.findQuest(quest.id);
-            questStates.forEach(questState => {
-                this.journalUpdater(originalQuest, questState);
-            });
-        }
+        let questStates = quest.states;
+        let originalQuest = this.findQuest(quest.id);
+        questStates.forEach(questState => {
+            this.journalUpdater(originalQuest, questState);
+        });
     }
 
     loadSeenQuests(quests) {

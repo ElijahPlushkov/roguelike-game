@@ -1,4 +1,4 @@
-import{ map, player } from "./gameData.js";
+import{ map, playerCoordinates } from "./gameData.js";
 
 export const cameraView = {
     height: 21,
@@ -7,8 +7,8 @@ export const cameraView = {
 
 export function mapRender() {
 
-    let cameraXStart = player.x - Math.floor(cameraView.width / 2);
-    let cameraYStart = player.y - Math.floor(cameraView.height / 2);
+    let cameraXStart = playerCoordinates.x - Math.floor(cameraView.width / 2);
+    let cameraYStart = playerCoordinates.y - Math.floor(cameraView.height / 2);
     let cameraXEnd = cameraXStart + cameraView.width;
     let cameraYEnd = cameraYStart + cameraView.height;
 
@@ -37,7 +37,7 @@ export function mapRender() {
             const tile = document.createElement("div");
             tile.classList.add("tile");
 
-            if (x === player.x && y === player.y) {
+            if (x === playerCoordinates.x && y === playerCoordinates.y) {
                 tile.classList.add("player");
                 tile.textContent = "Ж";
             } else {
