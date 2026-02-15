@@ -10,6 +10,10 @@ export const gameData = {
     currentMysticism: 10,
     willpower: 10,
 
+    accuracy: 1,
+    evasion: 1,
+    spellChance: 1,
+
     quests: [],
 
     npcs: [],

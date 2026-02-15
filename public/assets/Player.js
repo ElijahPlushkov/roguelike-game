@@ -16,9 +16,9 @@ export class Player {
     agility = 0;
     pollen = 0;
 
-    BASE_ACCURACY = 0;
-    BASE_EVASION = 0;
-    BASE_SPELL_CHANCE = 15;
+    accuracy = 0;
+    evasion = 0;
+    spellChance = 15;
 
     constructor(might, reputation, prayer, agility, pollen) {
         this.health = this.BASE_HEALTH;
@@ -31,9 +31,9 @@ export class Player {
         this.agility = agility;
         this.pollen = pollen;
 
-        this.BASE_ACCURACY = this.agility;
-        this.BASE_EVASION = this.agility;
-        this.BASE_SPELL_CHANCE = 15;
+        this.accuracy = this.agility;
+        this.evasion = this.agility;
+        this.spellChance = 15;
     }
 
     setMight(newValue) {
@@ -68,6 +68,18 @@ export class Player {
         this.willpower = newValue;
     }
 
+    setAccuracy(newValue) {
+        this.accuracy = newValue;
+    }
+
+    setEvasion(newValue) {
+        this.evasion = newValue;
+    }
+
+    setSpellChance(newValue) {
+        this.spellChance = newValue;
+    }
+
     getMight() {
         return this.might;
     }
@@ -94,6 +106,18 @@ export class Player {
 
     getWillpower() {
         return this.willpower;
+    }
+
+    getAccuracy() {
+        return this.accuracy;
+    }
+
+    getEvasion() {
+        return this.evasion;
+    }
+
+    getSpellChance() {
+        return this.spellChance;
     }
 
     setStartingInventory() {

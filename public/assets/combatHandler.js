@@ -1,7 +1,7 @@
 import {gameData, displayPollen, adventureLog, eventDescription, eventOptions, eventInfo, enemyData} from "./gameData.js";
 import {handleDeath} from "./deathHandler.js";
 import {appendContinueButton, endEvent} from "./helperFunctions.js";
-import {GenerateEnemy} from "./EnemyGenerator.js";
+import {RandomEnemyFactory} from "./RandomEnemyFactory.js";
 
 export function initCombat(enemySlug, isImportant, difficulty) {
 
@@ -10,14 +10,14 @@ export function initCombat(enemySlug, isImportant, difficulty) {
     if (isImportant === "true") {
         enemy = enemyData.enemies.find(enemy => enemy.slug === enemySlug);
     } else {
-        let newEnemy = new GenerateEnemy(difficulty);
-        enemy = newEnemy.generateEnemy();
+        let enemyFactory = new RandomEnemyFactory();
+        enemy = enemyFactory.createRandomEnemy(difficulty);
         console.log(enemy);
     }
 
     const enemyChars = enemy.characteristics;
     const enemyFleeRequirements = enemy.flee;
-    const enemyDifficulty = enemy.difficulty;
+    const enemyDifficulty = enemy.enemyDifficulty || enemy.difficulty;
     let isSuccessful;
 
     console.log(enemySlug, enemyDifficulty);
