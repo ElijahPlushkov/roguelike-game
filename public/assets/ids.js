@@ -5,7 +5,7 @@ export const CHAPTERS = {
     CHAPTER_3: "chapter_3",
 };
 
-export const chapterOneSlugs = {
+export const chapterOneIds = {
     DIALOGUES: "chapter_1_dialogues",
     EVENTS: "chapter_1_events",
     DOORS: "chapter_1_doors",

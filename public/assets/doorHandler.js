@@ -13,10 +13,10 @@ export function accessDoor(x, y) {
         return true;
     }
 
-    if (doorTile.slug) {
-        const doorSlug = doorTile.slug;
+    if (doorTile.id) {
+        const doorId = doorTile.id;
 
-        const door = doorData.doors.find(door => door.slug === doorSlug);
+        const door = doorData.doors.find(door => door.id === doorId);
 
         //check if the player can enter the door
         if (door) {
@@ -29,19 +29,19 @@ export function accessDoor(x, y) {
                 }
             }
         }
-        if (!hasSeenEvent(doorSlug)) {
+        if (!hasSeenEvent(doorId)) {
             eventDescription.className = "event-text-color";
             eventDescription.textContent = door.description;
             gameData.isEventActive = true;
             let continueButton = appendContinueButton();
             eventOptions.prepend(continueButton);
             continueButton.addEventListener("click", function () {
-                endEvent(doorSlug, "completed", eventDescription, eventOptions);
+                endEvent(doorId, "completed", eventDescription, eventOptions);
                 const reward = door.reward;
                 // registerEventOutcome(reward);
                 let statChanger = new ChangeStats();
                 statChanger.changeStats(reward);
-                markEventSeen(doorSlug);
+                markEventSeen(doorId);
                 gameData.isEventActive = false;
             });
         }

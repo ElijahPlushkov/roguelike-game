@@ -9,18 +9,18 @@ class ScriptLoader extends Dbh {
         $this->db = $this->connect();
     }
 
-    public function uploadScript($slug, $type, $scriptData) {
+    public function uploadScript($name, $type, $scriptData) {
 
-        if (!$slug || !isset($type) || !isset($scriptData)) {
+        if (!$name || !isset($type) || !isset($scriptData)) {
             http_response_code(400);
             echo json_encode(['error' => 'Invalid script data']);
             return;
         }
 
-        $stmt = $this->db->prepare("INSERT INTO scripts (slug, type, script_data) VALUES (?, ?, ?)
-        ON DUPLICATE KEY UPDATE slug = VALUES(slug), script_data = VALUES(script_data)");
+        $stmt = $this->db->prepare("INSERT INTO scripts (name, type, script_data) VALUES (?, ?, ?)
+        ON DUPLICATE KEY UPDATE id = VALUES(id), script_data = VALUES(script_data)");
 
-        $stmt->execute([$slug,
+        $stmt->execute([$name,
             $type,
             json_encode($scriptData)
         ]);
@@ -28,9 +28,9 @@ class ScriptLoader extends Dbh {
         echo json_encode(['success' => true, 'message' => 'script uploaded successfully']);
     }
 
-    public function loadScript($slug) {
-        $stmt = $this->db->prepare("SELECT script_data FROM scripts WHERE slug= ?");
-        $stmt->execute([$slug]);
+    public function loadScript($name) {
+        $stmt = $this->db->prepare("SELECT script_data FROM scripts WHERE name= ?");
+        $stmt->execute([$name]);
         $result =  $stmt->fetch(PDO::FETCH_ASSOC);
 
         $scriptData = $result["script_data"];

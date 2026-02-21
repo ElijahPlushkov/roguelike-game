@@ -129,23 +129,23 @@ export class RandomEnemyFactory {
     }
 
     setCombatDefeat() {
-        return "You lose. What a shame."
+        return "You lose. What a shame.";
     }
 
     setNegotiationVictory() {
-        return "Your words are heard."
+        return "Your words are heard.";
     }
 
     setNegotiationDefeat() {
-        return "No one listens to your false speeches."
+        return "No one listens to your false speeches.";
     }
 
     setFleeSuccess() {
-        return "You avoid combat."
+        return "You avoid combat.";
     }
 
     setFleeFailure() {
-        return "It's impossible to avoid combat."
+        return "It's impossible to avoid combat.";
     }
 
     setOptions() {

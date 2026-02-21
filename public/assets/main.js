@@ -106,31 +106,31 @@ function checkForAnyEvent(x, y) {
         }
 
         if (newEvent.type === "event") {
-            const eventSlug = newEvent.slug;
-            if (!hasSeenEvent(eventSlug)) {
+            const eventId = newEvent.id;
+            if (!hasSeenEvent(eventId)) {
                 gameData.isEventActive = true;
-                initEvent(eventSlug);
-                markEventSeen(eventSlug);
+                initEvent(eventId);
+                markEventSeen(eventId);
             }
         }
 
         if (newEvent.type === "dialogue") {
-            const dialogueSlug = newEvent.slug;
-            if (!hasSeenEvent(dialogueSlug)) {
+            const dialogueId = newEvent.id;
+            if (!hasSeenEvent(dialogueId)) {
                 gameData.isEventActive = true;
-                initDialogue(dialogueSlug, gameData.stateKey);
-                markEventSeen(dialogueSlug);
+                initDialogue(dialogueId, gameData.stateKey);
+                markEventSeen(dialogueId);
             }
         }
 
         if (newEvent.type === "enemy") {
-            const enemySlug = newEvent.slug;
+            const enemyId = newEvent.id;
             const isImportant = newEvent.isImportant;
             const difficulty = newEvent.difficulty;
-            if (!hasSeenEvent(enemySlug)) {
+            if (!hasSeenEvent(enemyId)) {
                 gameData.isEventActive = true;
-                initCombat(enemySlug, isImportant, difficulty);
-                markEventSeen(enemySlug);
+                initCombat(enemyId, isImportant, difficulty);
+                markEventSeen(enemyId);
             }
         }
 
@@ -190,8 +190,8 @@ function requirementsCheck(newEvent) {
     let isPassed = true;
 
     if (newEvent.type === "dialogue") {
-        const dialogueSlug = newEvent.slug;
-        const dialogue = dialogueData.dialogues.find(dialogue => dialogue.slug === dialogueSlug);
+        const dialogueId = newEvent.id;
+        const dialogue = dialogueData.dialogues.find(dialogue => dialogue.id === dialogueId);
 
         if (!dialogue.requirements) {
             isPassed = true;
@@ -201,8 +201,8 @@ function requirementsCheck(newEvent) {
         }
     }
     if (newEvent.type === "event") {
-        const eventSlug = newEvent.slug;
-        const event = eventData.events.find(event => event.slug === eventSlug);
+        const eventId = newEvent.id;
+        const event = eventData.events.find(event => event.id === eventId);
 
         if (!event.requirements) {
             isPassed = true;

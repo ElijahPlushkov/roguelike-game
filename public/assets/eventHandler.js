@@ -3,9 +3,9 @@ import {appendContinueButton, endEvent} from "./helperFunctions.js";
 import {QuestJournalUpdater} from "./QuestJournalUpdater.js";
 import {ChangeStats} from "./ChangeStats.js";
 
-export function initEvent(eventSlug) {
+export function initEvent(eventId) {
 
-    const event = eventData.events.find(event => event.slug === eventSlug);
+    const event = eventData.events.find(event => event.id === eventId);
 
     eventDescription.className = "event-text-color";
     eventDescription.textContent = event.event;
@@ -21,7 +21,7 @@ export function initEvent(eventSlug) {
             journalUpdater.journalUpdater(event.quest);
         }
 
-        endEvent(eventSlug, "completed", eventDescription, eventOptions);
+        endEvent(eventId, "completed", eventDescription, eventOptions);
         const reward = event.reward;
         console.log(reward);
         let statChanger = new ChangeStats();

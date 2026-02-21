@@ -5,16 +5,16 @@ import {QuestJournalUpdater} from "./QuestJournalUpdater.js";
 import {registerNpcDeath} from "./npcHandler.js";
 import {ChangeStats} from "./ChangeStats.js";
 
-export function initDialogue(dialogueSlug, stateKey) {
+export function initDialogue(dialogueId, stateKey) {
     //find the dialogue
-    const dialogue = dialogueData.dialogues.find(dialogue => dialogue.slug === dialogueSlug);
+    const dialogue = dialogueData.dialogues.find(dialogue => dialogue.id === dialogueId);
 
     //initiate the starting key
     let currentStateKey = stateKey || defineDialogueEntryPoint(dialogue);
     let currentState = dialogue[currentStateKey];
 
     if (!currentState) {
-        console.error(`State "${currentStateKey}" not found in dialogue "${dialogueSlug}"`);
+        console.error(`State "${currentStateKey}" not found in dialogue "${dialogueId}"`);
         return;
     }
 
@@ -78,7 +78,7 @@ export function initDialogue(dialogueSlug, stateKey) {
                 const nextStateKey = option.key;
                 if (nextStateKey) {
                     eventOptions.innerHTML = '';
-                    initDialogue(dialogueSlug, nextStateKey);
+                    initDialogue(dialogueId, nextStateKey);
                 }
             });
             eventOptions.appendChild(button);
@@ -94,7 +94,7 @@ export function initDialogue(dialogueSlug, stateKey) {
             return;
         }
 
-        gameData.eventOutcomes[dialogueSlug] = {
+        gameData.eventOutcomes[dialogueId] = {
             eventOutcome: stateKey
         };
 
@@ -103,7 +103,7 @@ export function initDialogue(dialogueSlug, stateKey) {
         eventOptions.prepend(continueButton);
 
         continueButton.addEventListener("click", function () {
-            endEvent(dialogueSlug, stateKey, eventDescription, eventOptions);
+            endEvent(dialogueId, stateKey, eventDescription, eventOptions);
             if (dialogue.quest) {
                 let journalUpdater = new QuestJournalUpdater();
                 journalUpdater.journalUpdater(dialogue.quest);
@@ -137,7 +137,7 @@ function defineDialogueEntryPoint(dialogue) {
                     }
                 }
                 else if (condition.eventOutcome) {
-                    const eventOutcome = gameData.eventOutcomes.find(outcome => outcome.event === dialogue.slug);
+                    const eventOutcome = gameData.eventOutcomes.find(outcome => outcome.event === dialogue.id);
                     if (!eventOutcome) {
                         return;
                     }

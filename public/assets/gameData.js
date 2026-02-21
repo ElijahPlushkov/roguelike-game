@@ -1,4 +1,4 @@
-import {chapterOneSlugs, CHAPTERS} from "./slugs.js";
+import {chapterOneIds, CHAPTERS} from "./ids.js";
 import {mapRender} from "./mapRender.js";
 
 export const gameData = {
@@ -96,8 +96,8 @@ let enemyData = {};
 let questData = {};
 let npcData = {};
 
-export function loadLevelData(slug = CHAPTERS.CHAPTER_1) {
-    fetch("/roguelike-game/load-level?slug=" + slug)
+export function loadLevelData(id = CHAPTERS.CHAPTER_1) {
+    fetch("/roguelike-game/load-level?id=" + id)
         .then(response => response.json())
         .then(level => {
             levelData = level;
@@ -116,8 +116,8 @@ export function loadLevelData(slug = CHAPTERS.CHAPTER_1) {
         });
 }
 
-export function loadDialogueData(slug = chapterOneSlugs.DIALOGUES) {
-    fetch("/roguelike-game/load-script?slug=" + slug)
+export function loadDialogueData(id = chapterOneIds.DIALOGUES) {
+    fetch("/roguelike-game/load-script?id=" + id)
         .then(response => response.json())
         .then(dialogues => {
             dialogueData = dialogues;
@@ -127,8 +127,8 @@ export function loadDialogueData(slug = chapterOneSlugs.DIALOGUES) {
         });
 }
 
-export function loadEventData(slug = chapterOneSlugs.EVENTS) {
-    fetch("/roguelike-game/load-script?slug=" + slug)
+export function loadEventData(id = chapterOneIds.EVENTS) {
+    fetch("/roguelike-game/load-script?id=" + id)
         .then(response => response.json())
         .then(events => {
             eventData = events;
@@ -138,8 +138,8 @@ export function loadEventData(slug = chapterOneSlugs.EVENTS) {
         });
 }
 
-export function loadDoorData(slug = chapterOneSlugs.DOORS) {
-    fetch("/roguelike-game/load-script?slug=" + slug)
+export function loadDoorData(id = chapterOneIds.DOORS) {
+    fetch("/roguelike-game/load-script?id=" + id)
         .then(response => response.json())
         .then(doors => {
             doorData = doors;
@@ -149,8 +149,8 @@ export function loadDoorData(slug = chapterOneSlugs.DOORS) {
         });
 }
 
-export function loadEnemyData(slug = chapterOneSlugs.ENEMIES) {
-    fetch("/roguelike-game/load-script?slug=" + slug)
+export function loadEnemyData(id = chapterOneIds.ENEMIES) {
+    fetch("/roguelike-game/load-script?id=" + id)
         .then(response => response.json())
         .then(enemies => {
             enemyData = enemies;
@@ -160,8 +160,8 @@ export function loadEnemyData(slug = chapterOneSlugs.ENEMIES) {
         });
 }
 
-export function loadQuestData(slug = chapterOneSlugs.QUESTS) {
-    fetch("/roguelike-game/load-script?slug=" + slug)
+export function loadQuestData(id = chapterOneIds.QUESTS) {
+    fetch("/roguelike-game/load-script?id=" + id)
         .then(response => response.json())
         .then(quests => {
             questData = quests;
@@ -171,8 +171,8 @@ export function loadQuestData(slug = chapterOneSlugs.QUESTS) {
         });
 }
 
-export function loadNpcData(slug = chapterOneSlugs.NPCS) {
-    fetch("/roguelike-game/load-script?slug=" + slug)
+export function loadNpcData(id = chapterOneIds.NPCS) {
+    fetch("/roguelike-game/load-script?id=" + id)
         .then(response => response.json())
         .then(npcs => {
             npcData = npcs

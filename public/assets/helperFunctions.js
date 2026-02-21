@@ -37,33 +37,33 @@ export function displayAdventureLogMessage(key, value, ccsClass) {
     adventureLog.prepend(charChange);
 }
 
-export function endEvent(slug, status, description, options) {
+export function endEvent(id, status, description, options) {
     gameData.isEventActive = false;
-    updateGameProgress(slug, status);
+    updateGameProgress(id, status);
     description.textContent = "";
     options.textContent = "";
 }
 
-function updateGameProgress(slug, finalState) {
-    let event = gameData.eventOutcomes.find(e => e.event === slug);
+function updateGameProgress(id, finalState) {
+    let event = gameData.eventOutcomes.find(e => e.event === id);
     if (event) {
         if (event.outcome !== finalState) {
             event.outcome = finalState;
         }
     } else {
         gameData.eventOutcomes.push({
-            event: slug,
+            event: id,
             outcome: finalState
         });
     }
     console.log(gameData.eventOutcomes);
 }
 
-export function hasSeenEvent(slug) {
-    return gameData.seenEvents.includes(slug);
+export function hasSeenEvent(id) {
+    return gameData.seenEvents.includes(id);
 }
 
-export function markEventSeen(slug) {
-    gameData.seenEvents.push(slug);
+export function markEventSeen(id) {
+    gameData.seenEvents.push(id);
 }
 

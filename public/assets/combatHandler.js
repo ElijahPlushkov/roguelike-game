@@ -3,12 +3,12 @@ import {handleDeath} from "./deathHandler.js";
 import {appendContinueButton, endEvent} from "./helperFunctions.js";
 import {RandomEnemyFactory} from "./RandomEnemyFactory.js";
 
-export function initCombat(enemySlug, isImportant, difficulty) {
+export function initCombat(enemyId, isImportant, difficulty) {
 
     let enemy;
 
     if (isImportant === "true") {
-        enemy = enemyData.enemies.find(enemy => enemy.slug === enemySlug);
+        enemy = enemyData.enemies.find(enemy => enemy.id === enemyId);
     } else {
         let enemyFactory = new RandomEnemyFactory();
         enemy = enemyFactory.createRandomEnemy(difficulty);
@@ -20,7 +20,7 @@ export function initCombat(enemySlug, isImportant, difficulty) {
     const enemyDifficulty = enemy.enemyDifficulty || enemy.difficulty;
     let isSuccessful;
 
-    console.log(enemySlug, enemyDifficulty);
+    console.log(enemyId, enemyDifficulty);
 
     //create a combat's description
     eventDescription.textContent = enemy.description;
@@ -61,7 +61,7 @@ export function initCombat(enemySlug, isImportant, difficulty) {
                 continueButton.addEventListener("click", function () {
                     eventInfo.innerHTML = "";
                     adventureLog.prepend(registerCombatOutcome(enemyDifficulty, isSuccessful, gameData.pollen));
-                    endEvent(enemySlug, isSuccessful, eventDescription, eventOptions);
+                    endEvent(enemyId, isSuccessful, eventDescription, eventOptions);
                 });
             }
 
@@ -88,7 +88,7 @@ export function initCombat(enemySlug, isImportant, difficulty) {
                 continueButton.addEventListener("click", function () {
                     eventInfo.innerHTML = "";
                     adventureLog.prepend(registerCombatOutcome(enemyDifficulty, isSuccessful, gameData.pollen));
-                    endEvent(enemySlug, isSuccessful, eventDescription, eventOptions);
+                    endEvent(enemyId, isSuccessful, eventDescription, eventOptions);
                 });
             }
 
@@ -118,7 +118,7 @@ export function initCombat(enemySlug, isImportant, difficulty) {
                 continueButton.addEventListener("click", function () {
                     eventInfo.innerHTML = "";
                     adventureLog.prepend(registerCombatOutcome(enemyDifficulty, isSuccessful, gameData.pollen));
-                    endEvent(enemySlug, isSuccessful, eventDescription, eventOptions);
+                    endEvent(enemyId, isSuccessful, eventDescription, eventOptions);
                 });
             }
         });
