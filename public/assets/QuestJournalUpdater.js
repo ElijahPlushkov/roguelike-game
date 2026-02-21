@@ -109,9 +109,17 @@ export class QuestJournalUpdater {
                 activeQuests.removeChild(currentQuestItem);
 
                 currentQuestItem.querySelector(".quest-title").classList.add("quest-title_completed");
+                // currentQuestItem.querySelector(".quest-item").classList.add("quest-item_completed");
 
                 const completedQuests = document.querySelector(".quest-list-completed");
-                completedQuests.prepend(currentQuestItem);
+
+                let compQ = gameData.quests.find(quest => quest.id === questId);
+                console.log(compQ);
+                if (compQ.status === "completed") {
+                    return;
+                } else {
+                    completedQuests.prepend(currentQuestItem);
+                }
             }
         }
     }
