@@ -131,15 +131,20 @@
     gap: 5px;
 }
 
-.combat-weapon-window {
-    width: 150px;
-    /*border: 1px solid white;*/
+.combat-player-window {
+    width: 190px;
 }
 
 .combat-player-info {
     display: flex;
     flex-direction: column;
     margin: 5px;
+}
+
+.combat-attack-types {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
 }
 
 .combat-weapon {
@@ -155,7 +160,7 @@
     border-radius: 3px;
     margin: 5px;
     padding: 3px;
-    width: 80px;
+    width: 75px;
     text-align: left;
 }
 
@@ -170,12 +175,12 @@
 }
 
 .combat-progress-window {
-    width: 330px;
+    width: 280px;
     border: 1px solid white;
 }
 
-.combat-magic-window {
-    width: 200px;
+.combat-enemy-window {
+    /*width: 200px;*/
 }
 
 .magic-schools-slider {
@@ -206,6 +211,7 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
+    margin-top: 20px;
 }
 
 .hidden {

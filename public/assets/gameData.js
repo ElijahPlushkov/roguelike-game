@@ -106,8 +106,8 @@ export function loadLevelData(id = CHAPTERS.CHAPTER_1) {
             playerCoordinates = level.player;
             tileSet = level.tileset;
 
-            const chapterHeading = document.querySelector(".level-title__heading");
-            chapterHeading.textContent = `-=${chapterName}=-`;
+            // const chapterHeading = document.querySelector(".level-title__heading");
+            // chapterHeading.textContent = `-=${chapterName}=-`;
 
             mapRender(map, playerCoordinates);
         })

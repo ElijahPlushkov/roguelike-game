@@ -28,9 +28,9 @@ require_once __DIR__ . "/../views/header.php";
             </div>
         </section>
 
-        <section class="level-title">
-            <h3 class="level-title__heading"></h3>
-        </section>
+<!--        <section class="level-title">-->
+<!--            <h3 class="level-title__heading"></h3>-->
+<!--        </section>-->
 
         <section class="game-view">
             <div class="map-display">
@@ -51,10 +51,10 @@ require_once __DIR__ . "/../views/header.php";
 
             <div class="combat-box">
                 <div class="combat-content">
-                    <div class="combat-description">You meet a new enemy. He is wielding a wooden staff.</div>
-                    <hr style="margin-bottom: 10px; margin-top: 10px">
+                    <div class="combat-description"></div>
                     <div class="combat-display">
-                        <div class="combat-weapon-window">
+                        <div class="combat-player-window">
+                            <!--Weapons-->
                             <div class="combat-weapon">Wooden Spear</div>
                             <div class="combat-player-info">
                                 <p>Accuracy: <span class="player-accuracy">10</span>%</p>
@@ -64,19 +64,11 @@ require_once __DIR__ . "/../views/header.php";
                                 <button class="attack-button">Chop: <span class="weapon-chop-damage">5</span>D</button>
                                 <button class="attack-button">Slash: <span class="weapon-slash-damage">6</span>D</button>
                                 <button class="attack-button">Thrust: <span class="weapon-thrust-damage">7</span>D</button>
-                            </div>
-                            <div class="combat-defense-mode">
                                 <button class="attack-button">Shield</button>
                             </div>
-                        </div>
-
-                        <div class="combat-progress-window">
-                            <p class="combat-player-message">>player message</p>
-                            <p class="combat-enemy-message">enemy message<</p>
-                        </div>
-
-                        <div class="combat-magic-window">
-                            <div class="magic-schools-slider">School of Thoughts</div>
+                            <hr>
+                            <!--Magic-->
+                            <div class="magic-schools-slider">Magic Book</div>
                             <div class="magic-player-info">
                                 <p>Spell chance: <span class="player-spell-chance">10</span>%</p>
                                 <p>Willpower: <span class="player-spell-chance">10</span>%</p>
@@ -88,11 +80,25 @@ require_once __DIR__ . "/../views/header.php";
                                 <button class="magic-button">Pacify</button>
                             </div>
                         </div>
+
+                        <div class="combat-progress-window">
+                            <p class="combat-player-message">>player message</p>
+                            <p class="combat-enemy-message">enemy message<</p>
+                        </div>
+
+                        <div class="combat-enemy-window">
+                            <div>ENEMY</div>
+                            <div class="enemy-health">HEALTH {10/10}</div>
+                            <div class="enemy-mysticism">MYSTICISM {10/10}</div>
+                            <div class="enemy-race">Wasp</div>
+                            <div class="enemy-weapon">Wooden Staff</div>
+                        </div>
                     </div>
                     <div class="combat-footer">
                         <button class="option-button option-button_small take-mercy">Take mercy</button>
                         <button class="option-button option-button_small execute">Execute</button>
                         <button class="option-button option-button_small ask-mercy">Ask mercy</button>
+                        <button class="option-button option-button_small flee">Flee</button>
                     </div>
                 </div>
             </div>
