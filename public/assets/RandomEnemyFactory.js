@@ -1,10 +1,13 @@
 import {NewEnemy} from "./NewEnemy.js";
+import {weaponsByClass} from "./weaponsByClass.js";
+import {armorByClass} from "./armorByClass.js";
 
 export class RandomEnemyFactory {
 
     flimsyRaces = ['tick', 'gnat']
     weakRaces = ['ant', 'mosquito', 'fly']
     averageRaces = ['butterfly', 'wasp', 'bee']
+    classes = ['knight', 'monk', 'mystic'] // 'thief', 'psychic', 'ranger'
 
     BASE_HEALTH = 10
     BASE_MYSTICISM = 10
@@ -33,6 +36,11 @@ export class RandomEnemyFactory {
     createRandomEnemy(difficulty) {
         let enemyDifficulty = difficulty
         let race = this.setRace(enemyDifficulty)
+        let enemyClass = this.setEnemyClass()
+        let weapon = this.setWeapon(enemyClass)
+        let armor = this.setArmor(enemyClass)
+        let shield = this.setShield(enemyClass)
+        let spells = this.setSpells(enemyClass)
         let characteristics = this.setCharacteristics(enemyDifficulty)
         let health = this.setHealth(characteristics.might, enemyDifficulty)
         let mysticism = this.setMysticism(characteristics.prayer, enemyDifficulty)
@@ -50,7 +58,7 @@ export class RandomEnemyFactory {
         let fleeFailure = this.setFleeFailure()
         let options = this.setOptions()
 
-        return new NewEnemy(enemyDifficulty, race,
+        return new NewEnemy(enemyDifficulty, race, enemyClass, weapon, armor, shield, spells,
             characteristics, health, mysticism, willpower, accuracy, evasion, spellChance,
             fleeConditions, description,
             combatVictory, combatDefeat, negotiationVictory, negotiationDefeat, fleeSuccess, fleeFailure, options)
@@ -58,18 +66,67 @@ export class RandomEnemyFactory {
 
     setRace(difficulty) {
         if (difficulty === "flimsy") {
-            let randomIndex = Math.floor(Math.random() * this.flimsyRaces.length)
-            return this.flimsyRaces[randomIndex]
+            let randomIndex = Math.floor(Math.random() * this.flimsyRaces.length);
+            return this.flimsyRaces[randomIndex];
         }
 
         if (difficulty === "weak") {
-            let randomIndex = Math.floor(Math.random() * this.weakRaces.length)
-            return this.weakRaces[randomIndex]
+            let randomIndex = Math.floor(Math.random() * this.weakRaces.length);
+            return this.weakRaces[randomIndex];
         }
         if (difficulty === "average") {
-            let randomIndex = Math.floor(Math.random() * this.averageRaces.length)
-            return this.averageRaces[randomIndex]
+            let randomIndex = Math.floor(Math.random() * this.averageRaces.length);
+            return this.averageRaces[randomIndex];
         }
+    }
+
+    setEnemyClass() {
+        let randomIndex = Math.floor(Math.random() * this.classes.length);
+        return this.classes[randomIndex];
+    }
+
+    setWeapon(enemyClass) {
+        if (enemyClass === "knight") {
+            let randomWeaponIndex = Math.floor(Math.random() * weaponsByClass.knight.length);
+            this.weapon = weaponsByClass.knight[randomWeaponIndex];
+            return this.weapon;
+        }
+        if (enemyClass === "monk") {
+            let randomWeaponIndex = Math.floor(Math.random() * weaponsByClass.monk.length);
+            this.weapon = weaponsByClass.monk[randomWeaponIndex];
+            return this.weapon;
+        }
+        if (enemyClass === "mystic") {
+            let randomWeaponIndex = Math.floor(Math.random() * weaponsByClass.mystic.length);
+            this.weapon = weaponsByClass.mystic[randomWeaponIndex];
+            return this.weapon;
+        }
+    }
+
+    setArmor(enemyClass) {
+        if (enemyClass === "knight") {
+            let randomArmorIndex = Math.floor(Math.random() * armorByClass.knight.length);
+            this.armor = armorByClass.knight[randomArmorIndex];
+            return this.armor;
+        }
+        if (enemyClass === "monk") {
+            let randomArmorIndex = Math.floor(Math.random() * armorByClass.monk.length);
+            this.armor = armorByClass.monk[randomArmorIndex];
+            return this.armor;
+        }
+        if (enemyClass === "mystic") {
+            let randomArmorIndex = Math.floor(Math.random() * armorByClass.mystic.length);
+            this.armor = armorByClass.mystic[randomArmorIndex];
+            return this.armor;
+        }
+    }
+
+    setShield(enemyClass) {
+
+    }
+
+    setSpells(enemyClass) {
+        return undefined;
     }
 
     setCharacteristics(difficulty) {
@@ -100,15 +157,15 @@ export class RandomEnemyFactory {
     }
 
     setHealth(might, difficulty) {
-            return this.BASE_HEALTH + (might + Math.floor(might * this.healthModifiers[difficulty]))
+            return this.BASE_HEALTH + (might + Math.floor(might * this.healthModifiers[difficulty]));
     }
 
     setMysticism(prayer, difficulty) {
-        return this.BASE_MYSTICISM + (prayer + Math.floor(prayer * this.mysticismModifiers[difficulty]))
+        return this.BASE_MYSTICISM + (prayer + Math.floor(prayer * this.mysticismModifiers[difficulty]));
     }
 
     setWillpower(prayer, difficulty) {
-        return this.BASE_WILLPOWER + (prayer + Math.floor(prayer * this.willpowerModifiers[difficulty]))
+        return this.BASE_WILLPOWER + (prayer + Math.floor(prayer * this.willpowerModifiers[difficulty]));
     }
 
 
@@ -121,11 +178,11 @@ export class RandomEnemyFactory {
     }
 
     setDescription() {
-        return "You meet a "
+        return "You meet a ";
     }
 
     setCombatVictory() {
-        return "You win a victory."
+        return "You win a victory.";
     }
 
     setCombatDefeat() {
@@ -166,6 +223,6 @@ export class RandomEnemyFactory {
     }
 
     getRandomNumber(min, max) {
-        return Math.floor(Math.random() * (max - min + 1) + min)
+        return Math.floor(Math.random() * (max - min + 1) + min);
     }
 }

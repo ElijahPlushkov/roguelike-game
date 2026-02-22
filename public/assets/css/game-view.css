@@ -109,6 +109,105 @@
     text-align: center;
 }
 
+.combat-box {
+    position: absolute;
+    width: 680px;
+    height: 420px;
+    background: var(--event-box-background-color);
+    border: 2px solid var(--enemy-tile);
+    border-radius: 8px;
+    margin-left: 440px;
+    padding: 10px;
+    z-index: 5;
+    overflow-y: auto;
+}
+
+.combat-description {
+    color: var(--combat-text-color);
+}
+
+.combat-display {
+    display: flex;
+    gap: 5px;
+}
+
+.combat-weapon-window {
+    width: 150px;
+    /*border: 1px solid white;*/
+}
+
+.combat-player-info {
+    display: flex;
+    flex-direction: column;
+    margin: 5px;
+}
+
+.combat-weapon {
+    color: var(--log-entry-text-color);
+    margin: 5px;
+}
+
+.attack-button {
+    font-size: 14px;
+    color: var(--main-text-color);
+    background: var(--combat-text-color);
+    border: 1px solid black;
+    border-radius: 3px;
+    margin: 5px;
+    padding: 3px;
+    width: 80px;
+    text-align: left;
+}
+
+.combat-player-message {
+    text-align: left;
+    margin: 5px;
+}
+
+.combat-enemy-message {
+    text-align: right;
+    margin: 5px;
+}
+
+.combat-progress-window {
+    width: 330px;
+    border: 1px solid white;
+}
+
+.combat-magic-window {
+    width: 200px;
+}
+
+.magic-schools-slider {
+    color: var(--player-tile);
+    margin: 5px;
+}
+
+.magic-player-info {
+    display: flex;
+    flex-direction: column;
+    margin: 5px;
+}
+
+.magic-button {
+    font-size: 14px;
+    color: var(--main-text-color);
+    background: var(--water-tile);
+    border: 1px solid black;
+    border-radius: 3px;
+    margin: 5px;
+    padding: 3px;
+    width: 80px;
+    text-align: left;
+}
+
+.combat-footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
 .hidden {
     display: none;
 }
