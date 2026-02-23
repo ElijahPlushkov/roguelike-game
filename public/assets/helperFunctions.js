@@ -66,4 +66,3 @@ export function hasSeenEvent(id) {
 export function markEventSeen(id) {
     gameData.seenEvents.push(id);
 }
-

@@ -169,7 +169,7 @@ export class QuestJournalUpdater {
     }
 
     updateGameDataObject(questId, questState, questStatus) {
-        let q = this.findQuest(questId);
+        let q = gameData.quests.find(quest => quest.id === questId);
         if (q) {
             if (!q.states.includes(questState)) {
                 q.states.push(questState);

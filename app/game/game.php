@@ -19,13 +19,6 @@ require_once __DIR__ . "/../views/header.php";
                 <div class="stat-item">AGILITY <span class="agility-stat-value">0</span>|</div>
                 <div class="stat-item">POLLEN <span class="pollen-stat-value">0</span></div>
             </div>
-            <div class="stats-divider">||</div>
-            <div class="game-menu">
-                <div class="game-menu-item"><a class="game-menu-link game-menu-link_ingame" href="main-menu">[Menu]</a></div>
-                <div class="game-menu-item" id="saveGame">[Save]</div>
-                <div class="game-menu-item" id="loadGame">[Load]</div>
-                <div class="game-menu-item" id="questJournal">[Journal]</div>
-            </div>
         </section>
 
 <!--        <section class="level-title">-->
@@ -49,7 +42,7 @@ require_once __DIR__ . "/../views/header.php";
                 </div>
             </div>
 
-            <div class="combat-box">
+            <div class="combat-box hidden">
                 <div class="combat-content">
                     <div class="combat-description"></div>
                     <div class="combat-display">
@@ -61,10 +54,10 @@ require_once __DIR__ . "/../views/header.php";
                                 <p>Evasion: <span class="player-evasion">10</span>%</p>
                             </div>
                             <div class="combat-attack-types">
-                                <button class="attack-button">Chop: <span class="weapon-chop-damage">5</span>D</button>
-                                <button class="attack-button">Slash: <span class="weapon-slash-damage">6</span>D</button>
-                                <button class="attack-button">Thrust: <span class="weapon-thrust-damage">7</span>D</button>
-                                <button class="attack-button">Shield</button>
+                                <button class="combat-button attack-button">Chop: <span class="weapon-chop-damage">5</span>D</button>
+                                <button class="combat-button attack-button">Slash: <span class="weapon-slash-damage">6</span>D</button>
+                                <button class="combat-button attack-button">Thrust: <span class="weapon-thrust-damage">7</span>D</button>
+                                <button class="combat-button attack-button">Shield</button>
                             </div>
                             <hr>
                             <!--Magic-->
@@ -74,24 +67,27 @@ require_once __DIR__ . "/../views/header.php";
                                 <p>Willpower: <span class="player-spell-chance">10</span>%</p>
                             </div>
                             <div class="magic-spells">
-                                <button class="magic-button">Telepathy</button>
-                                <button class="magic-button">Mind Blow</button>
-                                <button class="magic-button">Mind Wave</button>
-                                <button class="magic-button">Pacify</button>
+                                <button class="combat-button magic-button">Telepathy</button>
+                                <button class="combat-button magic-button">Mind Blow</button>
+                                <button class="combat-button magic-button">Mind Wave</button>
+                                <button class="combat-button magic-button">Pacify</button>
                             </div>
                         </div>
 
                         <div class="combat-progress-window">
-                            <p class="combat-player-message">>player message</p>
-                            <p class="combat-enemy-message">enemy message<</p>
+                            <p class="combat-player-message">>You deal 5D</p>
+                            <p class="combat-enemy-message">Your enemy deals 5D<</p>
+                            <p class="combat-player-message">>You dodge a blow</p>
+                            <p class="combat-enemy-message">Your enemy casts a spell<</p>
                         </div>
 
                         <div class="combat-enemy-window">
-                            <div>ENEMY</div>
-                            <div class="enemy-health">HEALTH {10/10}</div>
-                            <div class="enemy-mysticism">MYSTICISM {10/10}</div>
-                            <div class="enemy-race">Wasp</div>
-                            <div class="enemy-weapon">Wooden Staff</div>
+                            <div class="enemy-name">Despicable Wasp</div>
+                            <div class="enemy-difficulty">Average</div>
+                            <div class="enemy-health">HEALTH {<span class="enemy-current-health">55</span>/<span class="enemy-max-health">60</span>}</div>
+                            <div class="enemy-mysticism">MYSTICISM {<span class="enemy-current-mysticism">35</span>/<span class="enemy-max-mysticism">40</span>}</div>
+                            <div class="enemy-class">Dark Knight</div>
+                            <div class="enemy-weapon">Obsidian Spear</div>
                         </div>
                     </div>
                     <div class="combat-footer">
@@ -117,7 +113,7 @@ require_once __DIR__ . "/../views/header.php";
                             <template id="quest-template">
                                 <div class="quest-item">
                                     <div class="quest-header">
-                                        <span class="quest-toggle">▶</span>
+                                        <span class="quest-toggle">></span>
                                         <span class="quest-title">Reach the Chyceen border</span>
                                     </div>
                                     <div class="quest-description">
@@ -134,7 +130,7 @@ require_once __DIR__ . "/../views/header.php";
                         <div class="quest-list-completed">
                             <div class="quest-item_completed">
                                 <div class="quest-header">
-                                    <span class="quest-toggle">▶</span>
+                                    <span class="quest-toggle">></span>
                                     <span class="quest-title_completed">Arrive to the Borderlands</span>
                                 </div>
                                 <div class="quest-description">
@@ -185,6 +181,13 @@ require_once __DIR__ . "/../views/header.php";
 <!--                </div>-->
             </div>
         </section>
+
+        <div class="game-menu">
+            <div class="game-menu-item"><a class="game-menu-link game-menu-link_ingame" href="main-menu">[Menu]</a></div>
+            <div class="game-menu-item" id="saveGame">[Save]</div>
+            <div class="game-menu-item" id="loadGame">[Load]</div>
+            <div class="game-menu-item" id="questJournal">[Journal]</div>
+        </div>
 
     </div>
 </div>
