@@ -1,5 +1,7 @@
 import {chapterOneIds, CHAPTERS} from "./ids.js";
 import {mapRender} from "./mapRender.js";
+import {spears} from "./weaponsAll.js";
+import {mediumCuirasses} from "./armorAll.js";
 
 export const gameData = {
     playerCoordinates: {x: 0, y: 1},
@@ -9,6 +11,9 @@ export const gameData = {
     mysticism: 10,
     currentMysticism: 10,
     willpower: 10,
+
+    weapon: spears[0],
+    armor: mediumCuirasses[0],
 
     accuracy: 1,
     evasion: 1,

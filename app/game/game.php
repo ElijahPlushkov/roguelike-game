@@ -48,15 +48,16 @@ require_once __DIR__ . "/../views/header.php";
                     <div class="combat-display">
                         <div class="combat-player-window">
                             <!--Weapons-->
+                            <div class="player" style="margin: 5px">Beetle Knight</div>
                             <div class="combat-weapon">Wooden Spear</div>
                             <div class="combat-player-info">
                                 <p>Accuracy: <span class="player-accuracy">10</span>%</p>
                                 <p>Evasion: <span class="player-evasion">10</span>%</p>
                             </div>
                             <div class="combat-attack-types">
-                                <button class="combat-button attack-button">Chop: <span class="weapon-chop-damage">5</span>D</button>
-                                <button class="combat-button attack-button">Slash: <span class="weapon-slash-damage">6</span>D</button>
-                                <button class="combat-button attack-button">Thrust: <span class="weapon-thrust-damage">7</span>D</button>
+                                <button class="combat-button attack-button chop-btn">Chop: <span class="weapon-chop-damage">5</span>D</button>
+                                <button class="combat-button attack-button slash-btn">Slash: <span class="weapon-slash-damage">6</span>D</button>
+                                <button class="combat-button attack-button thrust-btn">Thrust: <span class="weapon-thrust-damage">7</span>D</button>
                                 <button class="combat-button attack-button">Shield</button>
                             </div>
                             <hr>
@@ -74,6 +75,7 @@ require_once __DIR__ . "/../views/header.php";
                             </div>
                         </div>
 
+                        <!--combat log-->
                         <div class="combat-progress-window">
                             <p class="combat-player-message">>You deal 5D</p>
                             <p class="combat-enemy-message">Your enemy deals 5D<</p>
@@ -81,6 +83,7 @@ require_once __DIR__ . "/../views/header.php";
                             <p class="combat-enemy-message">Your enemy casts a spell<</p>
                         </div>
 
+                        <!--enemy-->
                         <div class="combat-enemy-window">
                             <div class="enemy-name">Despicable Wasp</div>
                             <div class="enemy-difficulty">Average</div>

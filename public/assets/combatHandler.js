@@ -2,6 +2,8 @@ import {gameData, displayPollen, adventureLog, eventDescription, eventOptions, e
 import {handleDeath} from "./deathHandler.js";
 import {appendContinueButton, endEvent} from "./helperFunctions.js";
 import {RandomEnemyFactory} from "./RandomEnemyFactory.js";
+import {Combat} from "./Combat.js";
+import {playerObject} from "./main.js";
 
 export function initCombat(enemyId, isImportant, difficulty) {
 
@@ -13,6 +15,8 @@ export function initCombat(enemyId, isImportant, difficulty) {
         let enemyFactory = new RandomEnemyFactory();
         enemy = enemyFactory.createRandomEnemy(difficulty);
         console.log(enemy);
+        let combat = new Combat(enemy, playerObject);
+        combat.initCombat();
     }
 
     const enemyChars = enemy.characteristics;

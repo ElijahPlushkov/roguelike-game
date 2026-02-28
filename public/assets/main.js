@@ -20,7 +20,9 @@ export let playerObject = new Player(
     gameData.playerCharacteristics.reputation,
     gameData.playerCharacteristics.prayer,
     gameData.playerCharacteristics.agility,
-    gameData.pollen
+    gameData.pollen,
+    gameData.weapon,
+    gameData.armor
 );
 console.log(playerObject);
 

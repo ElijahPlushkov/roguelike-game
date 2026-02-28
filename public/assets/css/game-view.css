@@ -133,6 +133,7 @@
 
 .combat-player-window {
     width: 190px;
+    background: rgba(156, 156, 156, 0.3);
 }
 
 .combat-player-info,
@@ -199,6 +200,11 @@
 
 .combat-enemy-message {
     color: var(--log-entry-text-color);
+}
+
+.combat-enemy-window {
+    width: 175px;
+    background: rgba(112, 58, 26, 0.3);
 }
 
 .enemy-name {
