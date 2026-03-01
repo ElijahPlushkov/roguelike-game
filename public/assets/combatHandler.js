@@ -15,8 +15,25 @@ export function initCombat(enemyId, isImportant, difficulty) {
         let enemyFactory = new RandomEnemyFactory();
         enemy = enemyFactory.createRandomEnemy(difficulty);
         console.log(enemy);
-        let combat = new Combat(enemy, playerObject);
-        combat.initCombat();
+        // testing new combat system
+        let newCombat = new Combat(enemy, playerObject);
+        newCombat.initCombat();
+
+        let attackType;
+        let damage;
+
+        const attackBtns = document.querySelectorAll(".attack-button");
+
+        attackBtns.forEach(button => {
+            button.addEventListener("click", function() {
+                attackType = this.dataset.attackType;
+                damage = Number(this.dataset.damage);
+                let action;
+                let enemyAction;
+                newCombat.initNextTurn(newCombat.initiative, damage, enemyAction, action = "attack");
+            })
+        })
+
     }
 
     const enemyChars = enemy.characteristics;

@@ -55,9 +55,9 @@ require_once __DIR__ . "/../views/header.php";
                                 <p>Evasion: <span class="player-evasion">10</span>%</p>
                             </div>
                             <div class="combat-attack-types">
-                                <button class="combat-button attack-button chop-btn">Chop: <span class="weapon-chop-damage">5</span>D</button>
-                                <button class="combat-button attack-button slash-btn">Slash: <span class="weapon-slash-damage">6</span>D</button>
-                                <button class="combat-button attack-button thrust-btn">Thrust: <span class="weapon-thrust-damage">7</span>D</button>
+                                <button class="combat-button attack-button chop-btn" data-damage="" data-attack-type="chop">Chop: <span class="weapon-chop-damage">5</span>D</button>
+                                <button class="combat-button attack-button slash-btn" data-damage="" data-attack-type="slash">Slash: <span class="weapon-slash-damage">6</span>D</button>
+                                <button class="combat-button attack-button thrust-btn" data-damage="" data-attack-type="thrust">Thrust: <span class="weapon-thrust-damage">7</span>D</button>
                                 <button class="combat-button attack-button">Shield</button>
                             </div>
                             <hr>
