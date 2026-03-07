@@ -15,25 +15,51 @@ export function initCombat(enemyId, isImportant, difficulty) {
         let enemyFactory = new RandomEnemyFactory();
         enemy = enemyFactory.createRandomEnemy(difficulty);
         console.log(enemy);
+
         // testing new combat system
+
+        // start a new combat
         let newCombat = new Combat(enemy, playerObject);
         newCombat.initCombat();
-
         let attackType;
-        let damage;
+        let weaponDamage;
 
         const attackBtns = document.querySelectorAll(".attack-button");
 
-        attackBtns.forEach(button => {
-            button.addEventListener("click", function() {
-                attackType = this.dataset.attackType;
-                damage = Number(this.dataset.damage);
-                let action;
-                let enemyAction;
-                newCombat.initNextTurn(newCombat.initiative, damage, enemyAction, action = "attack");
-            })
-        })
-
+        if (enemy.health > 0) {
+            if (newCombat.initiative) {
+                attackBtns.forEach(button => {
+                    button.addEventListener("click", function() {
+                        attackType = this.dataset.attackType;
+                        weaponDamage = Number(this.dataset.damage);
+                        newCombat.playerAttack(weaponDamage);
+                        newCombat.enemyAttack();
+                        if (enemy.health <= 0) {
+                            newCombat.finishCombat(enemyId);
+                        }
+                        if (playerObject.health <= 0) {
+                            handleDeath();
+                        }
+                    })
+                });
+            } else {
+                newCombat.enemyAttack();
+                attackBtns.forEach(button => {
+                    button.addEventListener("click", function() {
+                        attackType = this.dataset.attackType;
+                        weaponDamage = Number(this.dataset.damage);
+                        newCombat.playerAttack(weaponDamage);
+                        newCombat.enemyAttack();
+                        if (enemy.health <= 0) {
+                            newCombat.finishCombat(enemyId);
+                        }
+                        if (playerObject.health <= 0) {
+                            handleDeath();
+                        }
+                    })
+                });
+            }
+        }
     }
 
     const enemyChars = enemy.characteristics;

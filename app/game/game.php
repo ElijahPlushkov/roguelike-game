@@ -76,12 +76,7 @@ require_once __DIR__ . "/../views/header.php";
                         </div>
 
                         <!--combat log-->
-                        <div class="combat-progress-window">
-                            <p class="combat-player-message">>You deal 5D</p>
-                            <p class="combat-enemy-message">Your enemy deals 5D<</p>
-                            <p class="combat-player-message">>You dodge a blow</p>
-                            <p class="combat-enemy-message">Your enemy casts a spell<</p>
-                        </div>
+                        <div class="combat-progress-window"></div>
 
                         <!--enemy-->
                         <div class="combat-enemy-window">

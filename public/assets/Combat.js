@@ -1,10 +1,13 @@
-import {gameData, displayCurrentHealth} from "./gameData.js";
+import {gameData, displayCurrentHealth, eventDescription, eventOptions, adventureLog} from "./gameData.js";
+import {registerCombatOutcome} from "./combatHandler.js";
+import {endEvent} from "./helperFunctions.js";
 
 export class Combat {
 
-    isCombatOn = false
     combatWindow = document.querySelector(".combat-box")
+    combatLog = document.querySelector(".combat-progress-window")
     initiative = null
+    isCombatOn = false
 
     constructor(enemy, player) {
         this.enemy = enemy
@@ -24,26 +27,10 @@ export class Combat {
         this.isCombatOn = true;
     }
 
-    initNextTurn(initiative, damage, action) {
-        // TODO check whether the action is attack, magic or defense
-
-        if (initiative) {
-            // player action
-            this.playerAttack(damage, this.enemy, this.player);
-            // enemy action
-            this.enemyAttack(this.enemy, this.player);
-        } else {
-            // enemy action
-            this.enemyAttack(this.enemy, this.player);
-            // player action
-            this.playerAttack(damage, this.enemy, this.player);
-        }
-    }
-
-    playerAttack(damage, enemy, player) {
+    playerAttack(weaponDamage) {
         // calculate if an attack was successful
-        let hitChance = Math.floor((player.agility / (enemy.agility * 1.5)) * 100 + (player.accuracy / 2));
-        let dodgeChance = Math.floor((enemy.agility / player.agility)  * 10 + (enemy.evasion / 2));
+        let hitChance = Math.floor((this.player.agility / (this.enemy.characteristics.agility * 1.5)) * 100 + (this.player.accuracy / 2));
+        let dodgeChance = Math.floor((this.enemy.characteristics.agility / this.player.agility)  * 10 + (this.enemy.evasion / 2));
 
         let hasHit = hitChance - dodgeChance;
 
@@ -56,19 +43,54 @@ export class Combat {
         let luckyStrikeChance = 2;
 
         if (roll > chance && luckyRoll > luckyStrikeChance) {
-            return "you missed";
+            this.displayPlayerCombatMessage("You miss");
         } else {
             // calculate damage
-            let damageDealt = (damage - enemy.armor.armorRate) * player.might;
-            if (damageDealt < 0) {
+            let damageDealt = (weaponDamage - this.enemy.armor.armorRate) * this.player.might;
+            if (damageDealt <= 0) {
                 damageDealt = 1;
             }
             this.decreaseEnemyHealth(damageDealt);
+            this.displayPlayerCombatMessage("You deal " + damageDealt + "D");
+        }
+    }
+
+    enemyAttack() {
+        // calculate if an attack was successful
+        let hitChance = Math.floor((this.enemy.characteristics.agility / (this.player.agility * 1.5)) * 100 + (this.enemy.accuracy / 2));
+        let dodgeChance = Math.floor((this.player.agility / this.enemy.characteristics.agility)  * 10 + (this.player.evasion / 2));
+
+        let hasHit = hitChance - dodgeChance;
+
+        // regular strike
+        let roll = Math.floor(Math.random() * 100);
+        let chance = Math.max(5, Math.min(95, hasHit));
+
+        // lucky strike
+        let luckyRoll = Math.floor(Math.random() * 100);
+        let luckyStrikeChance = 2;
+
+        if (roll > chance && luckyRoll > luckyStrikeChance) {
+            this.displayEnemyCombatMessage("Enemy misses");
+        } else {
+            // calculate damage
+            let attackTypes = Object.values(this.enemy.weapon.attackTypes);
+            let weaponDamage = attackTypes[Math.floor(Math.random() * attackTypes.length)];
+            let damageDealt = (weaponDamage - this.player.armor.armorRate) * this.enemy.characteristics.might;
+            if (damageDealt <= 0) {
+                damageDealt = 1;
+            }
+            this.decreasePlayerHealth(damageDealt);
+            this.displayEnemyCombatMessage("Enemy deals " + damageDealt + "D");
         }
     }
 
     showCombatWindow() {
         this.combatWindow.classList.remove("hidden");
+    }
+
+    hideCombatWindow() {
+        this.combatWindow.classList.add("hidden");
     }
 
     displayPlayerInfo(player) {
@@ -130,24 +152,39 @@ export class Combat {
         return Math.floor(Math.random() * 2);
     }
 
-    enemyAction() {
-
+    finishCombat(enemyId) {
+        this.isCombatOn = false;
+        let isSuccessful = true;
+        adventureLog.prepend(registerCombatOutcome(this.enemy.difficulty, isSuccessful));
+        endEvent(enemyId, isSuccessful, eventDescription, eventOptions);
+        this.hideCombatWindow();
     }
 
-    enemyAttack(enemy, player) {
-        console.log("enemy attacks");
-        player.health = player.health - 1;
-        gameData.currentHealth = player.health;
+    decreaseEnemyHealth(damageDealt) {
+        console.log("player deals: " + damageDealt);
+        this.enemy.health = this.enemy.health - damageDealt;
+        let enemyCurrentHealth = document.querySelector(".enemy-current-health");
+        enemyCurrentHealth.textContent = this.enemy.health;
+    }
+
+    decreasePlayerHealth(damageDealt) {
+        console.log("enemy deals: " + damageDealt);
+        this.player.health = this.player.health - damageDealt;
+        gameData.currentHealth = this.player.health;
         displayCurrentHealth.textContent = gameData.currentHealth;
     }
 
-    finishCombat() {
-
+    displayPlayerCombatMessage(message) {
+        let newMessage = document.createElement("p");
+        newMessage.textContent = message;
+        newMessage.classList.add("combat-player-message");
+        this.combatLog.append(newMessage);
     }
 
-    decreaseEnemyHealth(damage) {
-        this.enemy.health = this.enemy.health - damage;
-        let enemyCurrentHealth = document.querySelector(".enemy-current-health");
-        enemyCurrentHealth.textContent = this.enemy.health;
+    displayEnemyCombatMessage(message) {
+        let newMessage = document.createElement("p");
+        newMessage.textContent = message;
+        newMessage.classList.add("combat-enemy-message");
+        this.combatLog.append(newMessage);
     }
 }
