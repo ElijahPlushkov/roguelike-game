@@ -1,22 +1,37 @@
-import {gameData, displayPollen, adventureLog, eventDescription, eventOptions, eventInfo, enemyData} from "./gameData.js";
+import {
+    gameData,
+    displayPollen,
+    adventureLog,
+    eventDescription,
+    eventOptions,
+    eventInfo,
+    enemyData,
+    npcData
+} from "./gameData.js";
 import {handleDeath} from "./deathHandler.js";
 import {appendContinueButton, endEvent} from "./helperFunctions.js";
 import {RandomEnemyFactory} from "./RandomEnemyFactory.js";
+import {NpcFactory} from "./NpcFactory.js";
 import {Combat} from "./Combat.js";
 import {playerObject} from "./main.js";
 
-export function initCombat(enemyId, isImportant, difficulty) {
+export function initCombat(enemyId, isImportant, difficulty, enemyType) {
 
     let enemy;
 
     if (isImportant === "true") {
         enemy = enemyData.enemies.find(enemy => enemy.id === enemyId);
     } else {
-        let enemyFactory = new RandomEnemyFactory();
-        enemy = enemyFactory.createRandomEnemy(difficulty);
-        console.log(enemy);
-
-        // testing new combat system
+        if (enemyType === "regular") {
+            let enemyFactory = new RandomEnemyFactory();
+            enemy = enemyFactory.createRandomEnemy(difficulty);
+            console.log(enemy);
+        } else if (enemyType === "npc") {
+            let npcFactory = new NpcFactory();
+            let npc = npcData.npcs.find(npc => npc.id === enemyId);
+            enemy = npcFactory.createNpcEnemy(npc);
+            console.log(enemy);
+        }
 
         // start a new combat
         let newCombat = new Combat(enemy, playerObject);
@@ -44,6 +59,9 @@ export function initCombat(enemyId, isImportant, difficulty) {
                 });
             } else {
                 newCombat.enemyAttack();
+                if (playerObject.health <= 0) {
+                    handleDeath();
+                }
                 attackBtns.forEach(button => {
                     button.addEventListener("click", function() {
                         attackType = this.dataset.attackType;

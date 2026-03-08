@@ -80,7 +80,7 @@ require_once __DIR__ . "/../views/header.php";
 
                         <!--enemy-->
                         <div class="combat-enemy-window">
-                            <div class="enemy-name">Despicable Wasp</div>
+                            <div class="enemy-race">Despicable Wasp</div>
                             <div class="enemy-difficulty">Average</div>
                             <div class="enemy-health">HEALTH {<span class="enemy-current-health">55</span>/<span class="enemy-max-health">60</span>}</div>
                             <div class="enemy-mysticism">MYSTICISM {<span class="enemy-current-mysticism">35</span>/<span class="enemy-max-mysticism">40</span>}</div>

@@ -1,5 +1,6 @@
 import {eventDescription, eventOptions, gameData, npcData} from "./gameData.js";
 import {initDialogue} from "./dialogueHandler.js";
+import {initCombat} from "./combatHandler.js";
 
 export function initNpc(id) {
 
@@ -33,7 +34,7 @@ export function initNpc(id) {
                 initDialogue(npcDialogue);
             }
             if (button.textContent === "Fight.") {
-                // to be continued
+                initCombat(npc.id, npc.isImportant, "none", "npc");
             }
         })
     })

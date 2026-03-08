@@ -123,8 +123,8 @@ export class Combat {
     }
 
     displayEnemyInfo(enemy) {
-        let enemyName = document.querySelector(".enemy-name");
-        enemyName.textContent = enemy.race;
+        let enemyRace = document.querySelector(".enemy-race");
+        enemyRace.textContent = enemy.race;
 
         let enemyDifficulty = document.querySelector(".enemy-difficulty");
         enemyDifficulty.textContent = enemy.difficulty;

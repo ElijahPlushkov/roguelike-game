@@ -131,7 +131,7 @@ function checkForAnyEvent(x, y) {
             const difficulty = newEvent.difficulty;
             if (!hasSeenEvent(enemyId)) {
                 gameData.isEventActive = true;
-                initCombat(enemyId, isImportant, difficulty);
+                initCombat(enemyId, isImportant, difficulty, "regular"); // TODO change the sorting of enemies
                 markEventSeen(enemyId);
             }
         }

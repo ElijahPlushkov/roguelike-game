@@ -4,6 +4,7 @@ import {handleDeath} from "./deathHandler.js";
 import {QuestJournalUpdater} from "./QuestJournalUpdater.js";
 import {registerNpcDeath} from "./npcHandler.js";
 import {ChangeStats} from "./ChangeStats.js";
+import {initCombat} from "./combatHandler.js";
 
 export function initDialogue(dialogueId, stateKey) {
     //find the dialogue
@@ -72,6 +73,11 @@ export function initDialogue(dialogueId, stateKey) {
                 // if an option has a npc death marker
                 if (option.npcDeath) {
                     registerNpcDeath(option.npcDeath.id);
+                }
+
+                // if an option has a combat marker
+                if (option.initCombat) {
+                    initCombat(option.enemy.id, option.enemy.isImportant, option.enemy.difficulty, option.enemy.type);
                 }
 
                 // initiate next dialogue stage

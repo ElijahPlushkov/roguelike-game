@@ -126,6 +126,7 @@ export class Player {
     setStartingInventory() {
 
     }
+
     changeAttributes(stat) {
         let attributeChanger = new ChangeAttributes();
         attributeChanger.changeAttributes(stat);

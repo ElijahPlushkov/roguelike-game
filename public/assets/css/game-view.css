@@ -207,7 +207,7 @@
     background: rgba(112, 58, 26, 0.3);
 }
 
-.enemy-name {
+.enemy-race {
     color: var(--log-entry-text-color);
     margin: 5px;
 }

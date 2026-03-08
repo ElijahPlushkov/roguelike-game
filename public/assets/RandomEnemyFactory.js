@@ -170,6 +170,7 @@ export class RandomEnemyFactory {
 
 
     setFleeConditions() {
+        // TODO rethink this mechanic
         return {
             might: Math.floor(this.getRandomNumber(10, 20) / 2),
             reputation: Math.floor(this.getRandomNumber(10, 20) / 2),
