@@ -33,8 +33,8 @@ export class RandomEnemyFactory {
         average: 1.5
     }
 
-    createRandomEnemy(difficulty) {
-        let enemyDifficulty = difficulty
+    createRandomEnemy(enemyType) {
+        let enemyDifficulty = enemyType.slice(7);
         let race = this.setRace(enemyDifficulty)
         let enemyClass = this.setEnemyClass()
         let weapon = this.setWeapon(enemyClass)

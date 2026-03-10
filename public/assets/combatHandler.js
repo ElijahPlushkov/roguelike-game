@@ -14,181 +14,185 @@ import {RandomEnemyFactory} from "./RandomEnemyFactory.js";
 import {NpcFactory} from "./NpcFactory.js";
 import {Combat} from "./Combat.js";
 import {playerObject} from "./main.js";
+import {UniqueEnemyFactory} from "./uniqueEnemyFactory.js";
 
-export function initCombat(enemyId, isImportant, difficulty, enemyType) {
+export function initCombat(enemyId, enemyType) {
 
     let enemy;
 
-    if (isImportant === "true") {
+    if (enemyType === "unique") {
         enemy = enemyData.enemies.find(enemy => enemy.id === enemyId);
-    } else {
-        if (enemyType === "regular") {
-            let enemyFactory = new RandomEnemyFactory();
-            enemy = enemyFactory.createRandomEnemy(difficulty);
-            console.log(enemy);
-        } else if (enemyType === "npc") {
-            let npcFactory = new NpcFactory();
-            let npc = npcData.npcs.find(npc => npc.id === enemyId);
-            enemy = npcFactory.createNpcEnemy(npc);
-            console.log(enemy);
-        }
-
-        // start a new combat
-        let newCombat = new Combat(enemy, playerObject);
-        newCombat.initCombat();
-        let attackType;
-        let weaponDamage;
-
-        const attackBtns = document.querySelectorAll(".attack-button");
-
-        if (enemy.health > 0) {
-            if (newCombat.initiative) {
-                attackBtns.forEach(button => {
-                    button.addEventListener("click", function() {
-                        attackType = this.dataset.attackType;
-                        weaponDamage = Number(this.dataset.damage);
-                        newCombat.playerAttack(weaponDamage);
-                        newCombat.enemyAttack();
-                        if (enemy.health <= 0) {
-                            newCombat.finishCombat(enemyId);
-                        }
-                        if (playerObject.health <= 0) {
-                            handleDeath();
-                        }
-                    })
-                });
-            } else {
-                newCombat.enemyAttack();
-                if (playerObject.health <= 0) {
-                    handleDeath();
-                }
-                attackBtns.forEach(button => {
-                    button.addEventListener("click", function() {
-                        attackType = this.dataset.attackType;
-                        weaponDamage = Number(this.dataset.damage);
-                        newCombat.playerAttack(weaponDamage);
-                        newCombat.enemyAttack();
-                        if (enemy.health <= 0) {
-                            newCombat.finishCombat(enemyId);
-                        }
-                        if (playerObject.health <= 0) {
-                            handleDeath();
-                        }
-                    })
-                });
-            }
-        }
+        let uniqueEnemyFactory = new UniqueEnemyFactory();
+        enemy = uniqueEnemyFactory.createUniqueEnemy(enemy);
+    }
+    if (enemyType.includes("random")) {
+        console.log(enemyType);
+        let enemyFactory = new RandomEnemyFactory();
+        enemy = enemyFactory.createRandomEnemy(enemyType);
+        console.log(enemy);
+    } else if (enemyType === "npc") {
+        let npcFactory = new NpcFactory();
+        let npc = npcData.npcs.find(npc => npc.id === enemyId);
+        enemy = npcFactory.createNpcEnemy(npc);
+        console.log(enemy);
     }
 
-    const enemyChars = enemy.characteristics;
-    const enemyFleeRequirements = enemy.flee;
-    const enemyDifficulty = enemy.enemyDifficulty || enemy.difficulty;
-    let isSuccessful;
+    // start a new combat
+    let newCombat = new Combat(enemy, playerObject);
+    newCombat.initCombat();
+    let attackType;
+    let weaponDamage;
 
-    console.log(enemyId, enemyDifficulty);
+    const attackBtns = document.querySelectorAll(".attack-button");
 
-    //create a combat's description
-    eventDescription.textContent = enemy.description;
-    eventDescription.className = "combat-text-color";
-
-    //create options
-    eventOptions.innerHTML = '';
-
-    //add text to option buttons
-    enemy.options.forEach(option => {
-        const button = document.createElement("button");
-        button.textContent = option.label;
-        button.className = 'option-button option-button_small';
-        eventOptions.appendChild(button);
-
-        button.addEventListener("click", () => {
-
-            //check fight outcome
-            if (button.textContent === "Fight.") {
-                if (enemyChars.might - gameData.playerCharacteristics.might > 2
-                    && !["flimsy", "weak", "average"].includes(enemyDifficulty)) {
-                    eventOptions.innerHTML = '';
-                    handleDeath();
-                    return;
-                } else if (enemyChars.might - gameData.playerCharacteristics.might > 2) {
-                    isSuccessful = false;
-                    eventDescription.textContent = enemy.combatDefeat + " ";
-                } else {
-                    isSuccessful = true;
-                    eventDescription.textContent = enemy.combatVictory + " ";
-                }
-
-                displayCombatInfo(enemyChars.might, gameData.playerCharacteristics.might, enemyDifficulty);
-
-                eventOptions.innerHTML = "";
-                let continueButton = appendContinueButton();
-                eventOptions.prepend(continueButton);
-                continueButton.addEventListener("click", function () {
-                    eventInfo.innerHTML = "";
-                    adventureLog.prepend(registerCombatOutcome(enemyDifficulty, isSuccessful, gameData.pollen));
-                    endEvent(enemyId, isSuccessful, eventDescription, eventOptions);
-                });
-            }
-
-            //check negotiate outcome
-            if (button.textContent === "Negotiate.") {
-                if (enemyChars.reputation - gameData.playerCharacteristics.reputation > 2
-                    && !["flimsy", "weak", "average", "tough"].includes(enemyDifficulty)) {
-                    eventOptions.innerHTML = '';
-                    handleDeath();
-                    return;
-                } else if (enemyChars.reputation - gameData.playerCharacteristics.reputation > 2) {
-                    isSuccessful = false;
-                    eventDescription.textContent = enemy.negotiationDefeat + " ";
-                } else {
-                    isSuccessful = true;
-                    eventDescription.textContent = enemy.negotiationVictory + " ";
-                }
-
-                displayCombatInfo(enemyChars.reputation, gameData.playerCharacteristics.reputation, enemyDifficulty);
-
-                eventOptions.innerHTML = "";
-                let continueButton = appendContinueButton();
-                eventOptions.prepend(continueButton);
-                continueButton.addEventListener("click", function () {
-                    eventInfo.innerHTML = "";
-                    adventureLog.prepend(registerCombatOutcome(enemyDifficulty, isSuccessful, gameData.pollen));
-                    endEvent(enemyId, isSuccessful, eventDescription, eventOptions);
-                });
-            }
-
-            //check flee outcome
-            if (button.textContent === "Flee.") {
-                if (enemyDifficulty === "flimsy" || enemyDifficulty === "weak" || enemyDifficulty === "average") {
-                    isSuccessful = false;
-                    eventDescription.textContent = enemy.fleeSuccess + " ";
-                } else {
-                    if (enemyDifficulty === "boss" || enemyDifficulty === "legendary") {
-                        eventOptions.innerHTML = '';
-                        handleDeath();
-                        return;
-                    } else if (gameData.playerCharacteristics.might < enemyFleeRequirements.might ||
-                        gameData.playerCharacteristics.prayer < enemyFleeRequirements.prayer) {
-                        isSuccessful = false;
-                        eventDescription.textContent = enemy.fleeFailure + " ";
-                    } else {
-                        isSuccessful = false;
-                        eventDescription.textContent = enemy.fleeSuccess + " ";
+    if (enemy.health > 0) {
+        if (newCombat.initiative) {
+            attackBtns.forEach(button => {
+                button.addEventListener("click", function() {
+                    attackType = this.dataset.attackType;
+                    weaponDamage = Number(this.dataset.damage);
+                    newCombat.playerAttack(weaponDamage);
+                    newCombat.enemyAttack();
+                    if (enemy.health <= 0) {
+                        newCombat.finishCombat(enemyId);
                     }
-                }
-
-                eventOptions.innerHTML = "";
-                let continueButton = appendContinueButton();
-                eventOptions.prepend(continueButton);
-                continueButton.addEventListener("click", function () {
-                    eventInfo.innerHTML = "";
-                    adventureLog.prepend(registerCombatOutcome(enemyDifficulty, isSuccessful, gameData.pollen));
-                    endEvent(enemyId, isSuccessful, eventDescription, eventOptions);
-                });
+                    if (playerObject.health <= 0) {
+                        handleDeath();
+                    }
+                })
+            });
+        } else {
+            newCombat.enemyAttack();
+            if (playerObject.health <= 0) {
+                handleDeath();
             }
-        });
-    });
-}
+            attackBtns.forEach(button => {
+                button.addEventListener("click", function() {
+                    attackType = this.dataset.attackType;
+                    weaponDamage = Number(this.dataset.damage);
+                    newCombat.playerAttack(weaponDamage);
+                    newCombat.enemyAttack();
+                    if (enemy.health <= 0) {
+                        newCombat.finishCombat(enemyId);
+                    }
+                    if (playerObject.health <= 0) {
+                        handleDeath();
+                    }
+                })
+            });
+        }
+    }
+    }
+
+    // const enemyChars = enemy.characteristics;
+    // const enemyFleeRequirements = enemy.flee;
+    // const enemyDifficulty = enemy.enemyDifficulty || enemy.difficulty;
+    // let isSuccessful;
+    //
+    // console.log(enemyId, enemyDifficulty);
+    //
+    // //create a combat's description
+    // eventDescription.textContent = enemy.description;
+    // eventDescription.className = "combat-text-color";
+    //
+    // //create options
+    // eventOptions.innerHTML = '';
+    //
+    // //add text to option buttons
+    // enemy.options.forEach(option => {
+    //     const button = document.createElement("button");
+    //     button.textContent = option.label;
+    //     button.className = 'option-button option-button_small';
+    //     eventOptions.appendChild(button);
+    //
+    //     button.addEventListener("click", () => {
+    //
+    //         //check fight outcome
+    //         if (button.textContent === "Fight.") {
+    //             if (enemyChars.might - gameData.playerCharacteristics.might > 2
+    //                 && !["flimsy", "weak", "average"].includes(enemyDifficulty)) {
+    //                 eventOptions.innerHTML = '';
+    //                 handleDeath();
+    //                 return;
+    //             } else if (enemyChars.might - gameData.playerCharacteristics.might > 2) {
+    //                 isSuccessful = false;
+    //                 eventDescription.textContent = enemy.combatDefeat + " ";
+    //             } else {
+    //                 isSuccessful = true;
+    //                 eventDescription.textContent = enemy.combatVictory + " ";
+    //             }
+    //
+    //             displayCombatInfo(enemyChars.might, gameData.playerCharacteristics.might, enemyDifficulty);
+    //
+    //             eventOptions.innerHTML = "";
+    //             let continueButton = appendContinueButton();
+    //             eventOptions.prepend(continueButton);
+    //             continueButton.addEventListener("click", function () {
+    //                 eventInfo.innerHTML = "";
+    //                 adventureLog.prepend(registerCombatOutcome(enemyDifficulty, isSuccessful, gameData.pollen));
+    //                 endEvent(enemyId, isSuccessful, eventDescription, eventOptions);
+    //             });
+    //         }
+    //
+    //         //check negotiate outcome
+    //         if (button.textContent === "Negotiate.") {
+    //             if (enemyChars.reputation - gameData.playerCharacteristics.reputation > 2
+    //                 && !["flimsy", "weak", "average", "tough"].includes(enemyDifficulty)) {
+    //                 eventOptions.innerHTML = '';
+    //                 handleDeath();
+    //                 return;
+    //             } else if (enemyChars.reputation - gameData.playerCharacteristics.reputation > 2) {
+    //                 isSuccessful = false;
+    //                 eventDescription.textContent = enemy.negotiationDefeat + " ";
+    //             } else {
+    //                 isSuccessful = true;
+    //                 eventDescription.textContent = enemy.negotiationVictory + " ";
+    //             }
+    //
+    //             displayCombatInfo(enemyChars.reputation, gameData.playerCharacteristics.reputation, enemyDifficulty);
+    //
+    //             eventOptions.innerHTML = "";
+    //             let continueButton = appendContinueButton();
+    //             eventOptions.prepend(continueButton);
+    //             continueButton.addEventListener("click", function () {
+    //                 eventInfo.innerHTML = "";
+    //                 adventureLog.prepend(registerCombatOutcome(enemyDifficulty, isSuccessful, gameData.pollen));
+    //                 endEvent(enemyId, isSuccessful, eventDescription, eventOptions);
+    //             });
+    //         }
+    //
+    //         //check flee outcome
+    //         if (button.textContent === "Flee.") {
+    //             if (enemyDifficulty === "flimsy" || enemyDifficulty === "weak" || enemyDifficulty === "average") {
+    //                 isSuccessful = false;
+    //                 eventDescription.textContent = enemy.fleeSuccess + " ";
+    //             } else {
+    //                 if (enemyDifficulty === "boss" || enemyDifficulty === "legendary") {
+    //                     eventOptions.innerHTML = '';
+    //                     handleDeath();
+    //                     return;
+    //                 } else if (gameData.playerCharacteristics.might < enemyFleeRequirements.might ||
+    //                     gameData.playerCharacteristics.prayer < enemyFleeRequirements.prayer) {
+    //                     isSuccessful = false;
+    //                     eventDescription.textContent = enemy.fleeFailure + " ";
+    //                 } else {
+    //                     isSuccessful = false;
+    //                     eventDescription.textContent = enemy.fleeSuccess + " ";
+    //                 }
+    //             }
+    //
+    //             eventOptions.innerHTML = "";
+    //             let continueButton = appendContinueButton();
+    //             eventOptions.prepend(continueButton);
+    //             continueButton.addEventListener("click", function () {
+    //                 eventInfo.innerHTML = "";
+    //                 adventureLog.prepend(registerCombatOutcome(enemyDifficulty, isSuccessful, gameData.pollen));
+    //                 endEvent(enemyId, isSuccessful, eventDescription, eventOptions);
+    //             });
+    //         }
+    //     });
+    // });
+
 
 export function registerCombatOutcome(enemyDifficulty, isSuccessful) {
 

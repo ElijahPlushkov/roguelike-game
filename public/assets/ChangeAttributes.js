@@ -29,7 +29,6 @@ export class ChangeAttributes {
             playerObject.setWillpower(gameData.willpower);
             gameData.spellChance = this.changeSpellChance();
             playerObject.setSpellChance(gameData.spellChance);
-            console.log(playerObject.spellChance);
         }
         this.updateDomAttributes();
     }

@@ -34,7 +34,7 @@ export function initNpc(id) {
                 initDialogue(npcDialogue);
             }
             if (button.textContent === "Fight.") {
-                initCombat(npc.id, npc.isImportant, "none", "npc");
+                initCombat(npc.id, "npc");
             }
         })
     })
