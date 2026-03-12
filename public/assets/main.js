@@ -130,7 +130,7 @@ function checkForAnyEvent(x, y) {
             const enemyType = newEvent.enemyType;
             if (!hasSeenEvent(enemyId)) {
                 gameData.isEventActive = true;
-                initCombat(enemyId, enemyType); // TODO change the sorting of enemies
+                initCombat(enemyId, enemyType);
                 markEventSeen(enemyId);
             }
         }

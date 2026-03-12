@@ -1,13 +1,20 @@
-import {gameData, displayCurrentHealth, eventDescription, eventOptions, adventureLog} from "./gameData.js";
+import {
+    gameData,
+    displayCurrentHealth,
+    eventDescription,
+    eventOptions,
+    adventureLog,
+    combatWindow, combatLog
+} from "./gameData.js";
 import {registerCombatOutcome} from "./combatHandler.js";
 import {endEvent} from "./helperFunctions.js";
 
 export class Combat {
 
-    combatWindow = document.querySelector(".combat-box")
-    combatLog = document.querySelector(".combat-progress-window")
-    initiative = null
-    isCombatOn = false
+    initiative = null;
+    isCombatOn = false;
+    enemy = null;
+    player = null;
 
     constructor(enemy, player) {
         this.enemy = enemy
@@ -86,11 +93,11 @@ export class Combat {
     }
 
     showCombatWindow() {
-        this.combatWindow.classList.remove("hidden");
+        combatWindow.classList.remove("hidden");
     }
 
     hideCombatWindow() {
-        this.combatWindow.classList.add("hidden");
+        combatWindow.classList.add("hidden");
     }
 
     displayPlayerInfo(player) {
@@ -158,6 +165,8 @@ export class Combat {
         adventureLog.prepend(registerCombatOutcome(this.enemy.difficulty, isSuccessful));
         endEvent(enemyId, isSuccessful, eventDescription, eventOptions);
         this.hideCombatWindow();
+        combatLog.innerHTML = "";
+        this.enemy = null;
     }
 
     decreaseEnemyHealth(damageDealt) {
@@ -178,13 +187,13 @@ export class Combat {
         let newMessage = document.createElement("p");
         newMessage.textContent = message;
         newMessage.classList.add("combat-player-message");
-        this.combatLog.append(newMessage);
+        combatLog.append(newMessage);
     }
 
     displayEnemyCombatMessage(message) {
         let newMessage = document.createElement("p");
         newMessage.textContent = message;
         newMessage.classList.add("combat-enemy-message");
-        this.combatLog.append(newMessage);
+        combatLog.append(newMessage);
     }
 }

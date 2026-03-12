@@ -70,14 +70,14 @@ export function initDialogue(dialogueId, stateKey) {
                     journalUpdater.journalUpdater(option.quest);
                 }
 
-                // if an option has a npc death marker
+                // if an option has an npc death marker
                 if (option.npcDeath) {
                     registerNpcDeath(option.npcDeath.id);
                 }
 
                 // if an option has a combat marker
-                if (option.initCombat) {
-                    initCombat(option.enemy.id, option.enemy.isImportant, option.enemy.difficulty, option.enemy.type);
+                if (option.combat) {
+                    initCombat(option.combat.id, option.combat.type);
                 }
 
                 // initiate next dialogue stage

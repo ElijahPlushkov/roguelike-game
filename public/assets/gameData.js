@@ -80,11 +80,14 @@ const journalBox = document.querySelector(".journal-box");
 
 const journalClose = document.querySelector(".journal-close");
 
+const combatWindow = document.querySelector(".combat-box");
+const combatLog = document.querySelector(".combat-progress-window");
+
 export {adventureLog,
     displayMaxHealth, displayCurrentHealth, displayMaxMysticism, displayCurrentMysticism, displayWillpower,
     displayReputation, displayMight, displayPrayer, displayAgility, displayPollen,
     eventDescription, eventOptions, eventInfo,
-    journalBox, journalClose};
+    journalBox, journalClose, combatWindow, combatLog};
 
 let levelData = {};
 

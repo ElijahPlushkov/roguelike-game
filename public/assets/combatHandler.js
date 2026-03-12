@@ -14,7 +14,7 @@ import {RandomEnemyFactory} from "./RandomEnemyFactory.js";
 import {NpcFactory} from "./NpcFactory.js";
 import {Combat} from "./Combat.js";
 import {playerObject} from "./main.js";
-import {UniqueEnemyFactory} from "./uniqueEnemyFactory.js";
+import {UniqueEnemyFactory} from "./UniqueEnemyFactory.js";
 
 export function initCombat(enemyId, enemyType) {
 
@@ -24,9 +24,8 @@ export function initCombat(enemyId, enemyType) {
         enemy = enemyData.enemies.find(enemy => enemy.id === enemyId);
         let uniqueEnemyFactory = new UniqueEnemyFactory();
         enemy = uniqueEnemyFactory.createUniqueEnemy(enemy);
-    }
-    if (enemyType.includes("random")) {
-        console.log(enemyType);
+        console.log(enemy);
+    } else if (enemyType.includes("random")) {
         let enemyFactory = new RandomEnemyFactory();
         enemy = enemyFactory.createRandomEnemy(enemyType);
         console.log(enemy);
@@ -43,23 +42,23 @@ export function initCombat(enemyId, enemyType) {
     let attackType;
     let weaponDamage;
 
-    const attackBtns = document.querySelectorAll(".attack-button");
+    let attackBtns = document.querySelectorAll(".attack-button");
 
-    if (enemy.health > 0) {
+    if (newCombat.enemy.health > 0) {
         if (newCombat.initiative) {
             attackBtns.forEach(button => {
-                button.addEventListener("click", function() {
-                    attackType = this.dataset.attackType;
-                    weaponDamage = Number(this.dataset.damage);
-                    newCombat.playerAttack(weaponDamage);
-                    newCombat.enemyAttack();
-                    if (enemy.health <= 0) {
-                        newCombat.finishCombat(enemyId);
-                    }
-                    if (playerObject.health <= 0) {
-                        handleDeath();
-                    }
-                })
+               button.addEventListener("click", () => {
+                   attackType = button.dataset.attackType;
+                   weaponDamage = Number(button.dataset.damage);
+                   newCombat.playerAttack(weaponDamage);
+                   newCombat.enemyAttack();
+                   if (newCombat.enemy.health <= 0) {
+                       newCombat.finishCombat(enemyId);
+                   }
+                   if (playerObject.health <= 0) {
+                       handleDeath();
+                   }
+               });
             });
         } else {
             newCombat.enemyAttack();
@@ -67,22 +66,22 @@ export function initCombat(enemyId, enemyType) {
                 handleDeath();
             }
             attackBtns.forEach(button => {
-                button.addEventListener("click", function() {
-                    attackType = this.dataset.attackType;
-                    weaponDamage = Number(this.dataset.damage);
-                    newCombat.playerAttack(weaponDamage);
-                    newCombat.enemyAttack();
-                    if (enemy.health <= 0) {
-                        newCombat.finishCombat(enemyId);
-                    }
-                    if (playerObject.health <= 0) {
-                        handleDeath();
-                    }
-                })
+                button.addEventListener("click", () => {
+                   attackType = button.dataset.attackType;
+                   weaponDamage = Number(button.dataset.damage);
+                   newCombat.playerAttack(weaponDamage);
+                   newCombat.enemyAttack();
+                   if (newCombat.enemy.health <= 0) {
+                       newCombat.finishCombat(enemyId);
+                   }
+                   if (playerObject.health <= 0) {
+                       handleDeath();
+                   }
+               });
             });
         }
     }
-    }
+}
 
     // const enemyChars = enemy.characteristics;
     // const enemyFleeRequirements = enemy.flee;

@@ -167,4 +167,8 @@ export class UniqueEnemyFactory {
     setNegotiationDefeat() {
         return "No one listens to your false speeches.";
     }
+
+    setSpells(enemyClass) {
+        return undefined;
+    }
 }
