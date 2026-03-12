@@ -17,6 +17,8 @@ import {playerObject} from "./main.js";
 import {UniqueEnemyFactory} from "./UniqueEnemyFactory.js";
 
 export function initCombat(enemyId, enemyType) {
+    let combatController = new AbortController();
+    const { signal } = combatController;
 
     let enemy;
 
@@ -54,11 +56,12 @@ export function initCombat(enemyId, enemyType) {
                    newCombat.enemyAttack();
                    if (newCombat.enemy.health <= 0) {
                        newCombat.finishCombat(enemyId);
+                       combatController.abort();
                    }
                    if (playerObject.health <= 0) {
                        handleDeath();
                    }
-               });
+               }, {signal});
             });
         } else {
             newCombat.enemyAttack();
@@ -73,11 +76,12 @@ export function initCombat(enemyId, enemyType) {
                    newCombat.enemyAttack();
                    if (newCombat.enemy.health <= 0) {
                        newCombat.finishCombat(enemyId);
+                       combatController.abort();
                    }
                    if (playerObject.health <= 0) {
                        handleDeath();
                    }
-               });
+               }, {signal});
             });
         }
     }
