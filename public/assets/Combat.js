@@ -4,10 +4,10 @@ import {
     eventDescription,
     eventOptions,
     adventureLog,
-    combatWindow, combatLog
+    combatWindow, combatLog, displayPollen
 } from "./gameData.js";
-import {registerCombatOutcome} from "./combatHandler.js";
 import {endEvent} from "./helperFunctions.js";
+import {ChangeStats} from "./ChangeStats.js";
 
 export class Combat {
 
@@ -162,7 +162,7 @@ export class Combat {
     finishCombat(enemyId) {
         this.isCombatOn = false;
         let isSuccessful = true;
-        adventureLog.prepend(registerCombatOutcome(this.enemy.difficulty, isSuccessful));
+        this.registerCombatOutcome(this.enemy.difficulty, isSuccessful);
         endEvent(enemyId, isSuccessful, eventDescription, eventOptions);
         this.hideCombatWindow();
         combatLog.innerHTML = "";
@@ -196,4 +196,59 @@ export class Combat {
         newMessage.classList.add("combat-enemy-message");
         combatLog.append(newMessage);
     }
+
+    registerCombatOutcome(enemyDifficulty, isSuccessful) {
+
+        let increase;
+        let decrease;
+
+        const characteristics = Object.keys(gameData.playerCharacteristics);
+        const charKey = characteristics[Math.floor(Math.random() * characteristics.length)];
+
+        const displayCharacteristic = document.querySelector(`.${charKey}-stat-value`);
+
+        if (enemyDifficulty === "flimsy") {
+            increase = 1;
+            decrease = -1;
+            gameData.pollenChange = Math.floor(Math.random() * 7) + 1;
+        } else if (enemyDifficulty === "weak") {
+            increase = 1;
+            decrease = -1;
+            gameData.pollenChange = Math.floor(Math.random() * 10) + 1;
+        } else if (enemyDifficulty === "average") {
+            increase = 2;
+            decrease = -2;
+            gameData.pollenChange = Math.floor(Math.random() * (20 - 10 + 1)) + 10;
+        } else if (enemyDifficulty === "tough") {
+            increase = 3;
+            decrease = -4;
+            gameData.pollenChange = Math.floor(Math.random() * (40 - 20 + 1)) + 20;
+        } else if (enemyDifficulty === "master") {
+            increase = 4;
+            decrease = -6;
+            gameData.pollenChange = Math.floor(Math.random() * (60 - 40 + 1)) + 40;
+        } else if (enemyDifficulty === "boss") {
+            increase = 5;
+            decrease = -8;
+            gameData.pollenChange = Math.floor(Math.random() * (80 - 60 + 1)) + 60;
+        }
+
+        const combatResolution = document.createElement("p");
+        combatResolution.classList.add("combat-text-color");
+
+        if (isSuccessful === false) {
+            displayPollen.textContent = gameData.pollen -= gameData.pollenChange;
+            combatResolution.textContent = `Your ${charKey} decreased by ${Math.abs(decrease)}. You lose ${gameData.pollenChange} pollen grains.`;
+            adventureLog.prepend(combatResolution);
+            let statChanger = new ChangeStats();
+            statChanger.changeStats(charKey);
+        } else {
+            displayPollen.textContent = gameData.pollen += gameData.pollenChange;
+            combatResolution.textContent = `Your ${charKey} increased by ${increase}. You collect ${gameData.pollenChange} pollen grains.`;
+            adventureLog.prepend(combatResolution);
+            let statChanger = new ChangeStats();
+            statChanger.changeStats({[charKey]: increase });
+        }
+    }
+
 }
