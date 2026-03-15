@@ -1,8 +1,8 @@
 import{ map, playerCoordinates } from "./gameData.js";
 
 export const cameraView = {
-    height: 21,
-    width: 21
+    height: 100,
+    width: 100 // change later to 21
 }
 
 export function mapRender() {

@@ -1,4 +1,4 @@
-import {adventureLog, eventOptions, gameData} from "./gameData.js";
+import {adventureLog, eventBox, eventOptions, gameData} from "./gameData.js";
 
 export function appendContinueButton() {
     const continueButton = document.createElement("button");
@@ -42,6 +42,7 @@ export function endEvent(id, status, description, options) {
     updateGameProgress(id, status);
     description.textContent = "";
     options.textContent = "";
+    eventBox.classList.toggle("hidden");
 }
 
 function updateGameProgress(id, finalState) {

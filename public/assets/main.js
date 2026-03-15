@@ -1,6 +1,6 @@
 import {
     gameData, adventureLog, journalClose, levelData, map, playerCoordinates, tileSet, dialogueData, eventData,
-    loadLevelData, loadDialogueData, loadEventData, loadDoorData, loadEnemyData, loadQuestData, loadNpcData
+    loadLevelData, loadDialogueData, loadEventData, loadDoorData, loadEnemyData, loadQuestData, loadNpcData, eventBox
 } from "./gameData.js";
 import {initEvent} from "./eventHandler.js";
 import {mapRender} from "./mapRender.js";
@@ -110,6 +110,7 @@ function checkForAnyEvent(x, y) {
         if (newEvent.type === "event") {
             const eventId = newEvent.id;
             if (!hasSeenEvent(eventId)) {
+                eventBox.classList.toggle("hidden");
                 gameData.isEventActive = true;
                 initEvent(eventId);
                 markEventSeen(eventId);
@@ -119,6 +120,7 @@ function checkForAnyEvent(x, y) {
         if (newEvent.type === "dialogue") {
             const dialogueId = newEvent.id;
             if (!hasSeenEvent(dialogueId)) {
+                eventBox.classList.toggle("hidden");
                 gameData.isEventActive = true;
                 initDialogue(dialogueId, gameData.stateKey);
                 markEventSeen(dialogueId);

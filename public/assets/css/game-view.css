@@ -8,7 +8,7 @@
 
 .player-stats {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     gap: 5px;
     margin: 5px;
 }
@@ -26,8 +26,12 @@
 .game-menu {
     display: flex;
     flex-direction: row;
-    gap: 5px;
-    margin-top: 50px;
+    justify-content: center;
+    margin-top: 10px;
+    gap: 10px;
+    border: var(--main-text-color) 1px solid;
+    padding: 10px;
+    width: 1280px;
 }
 
 .game-menu-item {
@@ -60,13 +64,16 @@
 }
 
 .map-display {
-    width: 420px;
+    width: 1200px;
     height: 420px;
     overflow: hidden;
     border-radius: 5px;
 }
 
 .event-box {
+    position: fixed;
+    top: 70px;
+    right: 500px;
     width: 680px;
     height: 420px;
     background: var(--event-box-background-color);
@@ -110,7 +117,9 @@
 }
 
 .combat-box {
-    position: absolute;
+    position: fixed;
+    top: 70px;
+    right: 500px;
     width: 680px;
     height: 420px;
     background: var(--event-box-background-color);
@@ -119,7 +128,6 @@
     margin-left: 440px;
     padding: 10px;
     z-index: 5;
-    overflow-y: auto;
 }
 
 .combat-description {
@@ -179,9 +187,12 @@
     width: 80px;
 }
 
-.combat-progress-window {
+.combat-log {
     width: 280px;
+    height: 390px;
     border: 1px solid var(--main-text-color);
+    scroll-behavior: smooth;
+    overflow-y: auto;
 }
 
 .combat-player-message {
@@ -202,19 +213,22 @@
     color: var(--log-entry-text-color);
 }
 
-.combat-enemy-window {
-    width: 175px;
-    background: rgba(112, 58, 26, 0.3);
+.combat-enemy-status {
+    display: flex;
+    flex-direction: row;
+    margin: 5px;
+}
+
+.enemy-stats {
+    display: flex;
+    flex-direction: column;
 }
 
 .enemy-race {
     color: var(--log-entry-text-color);
-    margin: 5px;
 }
 
 .enemy-difficulty,
-.enemy-health,
-.enemy-mysticism,
 .enemy-class,
 .enemy-weapon {
     margin: 5px;
@@ -232,13 +246,12 @@
     display: none;
 }
 
-.bottom-interface {
-    max-width: 1280px;
-    margin: 0 auto;
+.player-interface {
+    width: 1280px;
     display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    gap: 20px;
+    justify-content: start;
+    align-items: start;
+    gap: 30px;
 }
 
 .adventure-log {
@@ -250,31 +263,6 @@
     background: var(--event-box-background-color);
     border: 1px solid var(--main-text-color);
     border-radius: 5px;
-}
-
-.inventory {
-    height: 190px;
-    width: 680px;
-    overflow-y: scroll;
-    padding: 10px;
-    background: var(--event-box-background-color);
-    border: 1px solid var(--main-text-color);
-    border-radius: 5px;
-    font-size: 14px;
-}
-
-.inventory-content {
-    display: flex;
-}
-
-.inventory-category__heading {
-    padding: 5px;
-    border-bottom: 1px solid var(--main-text-color);
-}
-
-.inventory-category {
-    padding: 5px;
-    border-right: 1px solid var(--main-text-color);
 }
 
 .event-text-color {
@@ -298,7 +286,9 @@
 }
 
 .journal-box {
-    position: absolute;
+    position: fixed;
+    top: 70px;
+    right: 500px;
     width: 680px;
     height: 420px;
     background: var(--event-box-background-color);

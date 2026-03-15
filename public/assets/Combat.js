@@ -4,7 +4,7 @@ import {
     eventDescription,
     eventOptions,
     adventureLog,
-    combatWindow, combatLog, displayPollen
+    combatWindow, combatLog, displayPollen, eventBox
 } from "./gameData.js";
 import {endEvent} from "./helperFunctions.js";
 import {ChangeStats} from "./ChangeStats.js";
@@ -104,11 +104,11 @@ export class Combat {
         let playerWeapon = document.querySelector(".combat-weapon");
         playerWeapon.textContent = player.weapon.name;
 
-        let playerAccuracy = document.querySelector(".player-accuracy");
-        playerAccuracy.textContent = player.accuracy;
-
-        let playerEvasion = document.querySelector(".player-evasion");
-        playerEvasion.textContent = player.evasion;
+        // let playerAccuracy = document.querySelector(".player-accuracy");
+        // playerAccuracy.textContent = player.accuracy;
+        //
+        // let playerEvasion = document.querySelector(".player-evasion");
+        // playerEvasion.textContent = player.evasion;
 
         let chopDamage = document.querySelector(".weapon-chop-damage");
         chopDamage.textContent = player.weapon.attackTypes.chop;
@@ -167,6 +167,7 @@ export class Combat {
         this.hideCombatWindow();
         combatLog.innerHTML = "";
         this.enemy = null;
+        eventBox.classList.toggle("hidden");
     }
 
     decreaseEnemyHealth(damageDealt) {

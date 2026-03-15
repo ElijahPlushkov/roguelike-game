@@ -70,6 +70,8 @@ displayAgility.textContent = gameData.playerCharacteristics.agility;
 const displayPollen = document.querySelector(".pollen-stat-value");
 displayPollen.textContent = gameData.pollen;
 
+const eventBox = document.querySelector(".event-box");
+
 const eventDescription = document.querySelector(".event-description");
 
 const eventOptions = document.querySelector(".event-options");
@@ -81,12 +83,12 @@ const journalBox = document.querySelector(".journal-box");
 const journalClose = document.querySelector(".journal-close");
 
 const combatWindow = document.querySelector(".combat-box");
-const combatLog = document.querySelector(".combat-progress-window");
+const combatLog = document.querySelector(".combat-log");
 
 export {adventureLog,
     displayMaxHealth, displayCurrentHealth, displayMaxMysticism, displayCurrentMysticism, displayWillpower,
     displayReputation, displayMight, displayPrayer, displayAgility, displayPollen,
-    eventDescription, eventOptions, eventInfo,
+    eventBox, eventDescription, eventOptions, eventInfo,
     journalBox, journalClose, combatWindow, combatLog};
 
 let levelData = {};
