@@ -1,4 +1,4 @@
-import {adventureLog, eventBox, eventOptions, gameData} from "./gameData.js";
+import {adventureLog, eventBox, gameData} from "./gameData.js";
 
 export function appendContinueButton() {
     const continueButton = document.createElement("button");
@@ -9,7 +9,7 @@ export function appendContinueButton() {
 }
 
 export function appendRejectionMessage(eventData) {
-    const existingRejection = eventOptions.querySelector(".rejection-text-color");
+    const existingRejection = adventureLog.querySelector(".rejection-text-color");
     if (existingRejection) {
         return;
     }
@@ -17,11 +17,7 @@ export function appendRejectionMessage(eventData) {
     const rejection = document.createElement("p");
     rejection.textContent = eventData.rejection;
     rejection.classList.add("rejection-text-color");
-    eventOptions.prepend(rejection);
-
-    setTimeout(() => {
-        rejection.remove();
-    }, 5000);
+    adventureLog.prepend(rejection);
 }
 
 export function displayAdventureLogMessage(key, value, ccsClass) {

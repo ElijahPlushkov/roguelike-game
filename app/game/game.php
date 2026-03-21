@@ -30,7 +30,7 @@ require_once __DIR__ . "/../views/header.php";
                 <div class="stat-item">MYSTICISM: {<span class="current-mysticism">10</span>/<span
                             class="max-mysticism">10</span>}</div>
                 <div class="stat-item">WEAPON: <span class="combat-weapon">Wooden Spear</span></div>
-                <div class="armor-rate stat-item">ARMOR RATE: 3</div>
+                <div class="stat-item">ARMOR RATE: <span class="armor-rate">3</span></div>
                 <div class="stat-item">POLLEN <span class="pollen-stat-value">0</span></div>
             </div>
             <div class="player-stats">
@@ -50,11 +50,7 @@ require_once __DIR__ . "/../views/header.php";
         <!--events-->
         <div class="event-box hidden">
             <div class="event-content">
-                <div class="event-portrait">
-                    <!--<img src="" class="event-portrait__image">-->
-                </div>
                 <div class="event-description">Use WASD to move.</div>
-                <div class="event-info"></div>
                 <div class="event-options"></div>
             </div>
         </div>
