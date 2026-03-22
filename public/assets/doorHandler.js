@@ -39,7 +39,6 @@ export function accessDoor(x, y) {
             continueButton.addEventListener("click", function () {
                 endEvent(doorId, "completed", eventDescription, eventOptions);
                 const reward = door.reward;
-                // registerEventOutcome(reward);
                 let statChanger = new ChangeStats();
                 statChanger.changeStats(reward);
                 markEventSeen(doorId);

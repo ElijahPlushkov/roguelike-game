@@ -68,6 +68,7 @@
     height: 420px;
     overflow: hidden;
     border-radius: 5px;
+    overflow-y: auto;
 }
 
 .event-box {

@@ -1,38 +1,40 @@
 import{ map, playerCoordinates } from "./gameData.js";
 
-export const cameraView = {
-    height: 100,
-    width: 100 // change later to 21
-}
+// export const cameraView = {
+//     height: 101,
+//     width: 101 // change later to 21
+// }
 
 export function mapRender() {
 
-    let cameraXStart = playerCoordinates.x - Math.floor(cameraView.width / 2);
-    let cameraYStart = playerCoordinates.y - Math.floor(cameraView.height / 2);
-    let cameraXEnd = cameraXStart + cameraView.width;
-    let cameraYEnd = cameraYStart + cameraView.height;
-
-    if (cameraXStart < 0) {
-        cameraXStart = 0;
-    }
-    if (cameraYStart < 0) {
-        cameraYStart = 0;
-    }
-    if (cameraXEnd > map[0].length)
-        cameraXEnd = map[0].length;
-
-    if (cameraYEnd > map.length) {
-        cameraYEnd = map.length;
-    }
+    // let cameraXStart = playerCoordinates.x - Math.floor(cameraView.width / 2);
+    // let cameraYStart = playerCoordinates.y - Math.floor(cameraView.height / 2);
+    // let cameraXEnd = cameraXStart + cameraView.width;
+    // let cameraYEnd = cameraYStart + cameraView.height;
+    //
+    // if (cameraXStart < 0) {
+    //     cameraXStart = 0;
+    // }
+    // if (cameraYStart < 0) {
+    //     cameraYStart = 0;
+    // }
+    // if (cameraXEnd > map[0].length)
+    //     cameraXEnd = map[0].length;
+    //
+    // if (cameraYEnd > map.length) {
+    //     cameraYEnd = map.length;
+    // }
 
     const gameContainer = document.getElementById("game-map");
     gameContainer.innerHTML = "";
 
-    for (let y = cameraYStart; y < cameraYEnd; y++) {
+    // for (let y = cameraYStart; y < cameraYEnd; y++)
+    for (let y = 0; y < map.length; y++) {
         const row = document.createElement("div");
         row.classList.add("tile-row");
 
-        for (let x = cameraXStart; x < cameraXEnd; x++) {
+        // for (let x = cameraXStart; x < cameraXEnd; x++)
+        for (let x = 0; x < map[y].length; x++) {
             const tileType = map[y][x];
             const tile = document.createElement("div");
             tile.classList.add("tile");
@@ -110,7 +112,6 @@ export function mapRender() {
             }
             row.appendChild(tile);
         }
-
         gameContainer.appendChild(row);
     }
 }

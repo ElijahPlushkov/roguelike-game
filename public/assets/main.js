@@ -14,6 +14,7 @@ import {loadSavedGame} from "./loadGame.js";
 import {QuestJournalUpdater} from "./QuestJournalUpdater.js";
 import {handleDeath} from "./deathHandler.js";
 import {Player} from "./Player.js";
+import {loadDungeon} from "./dungeonHandler.js";
 
 export let playerObject = new Player(
     gameData.playerCharacteristics.might,
@@ -96,7 +97,8 @@ function checkForAnyEvent(x, y) {
         ...(levelData.tileData.events || []),
         ...(levelData.tileData.dialogues || []),
         ...(levelData.tileData.enemies || []),
-        ...(levelData.tileData.npcs || [])
+        ...(levelData.tileData.npcs || []),
+        ...(levelData.tileData.dungeons || [])
     ]
 
     const newEvent = allEvents.find(event => event.x === x && event.y === y);
@@ -141,6 +143,13 @@ function checkForAnyEvent(x, y) {
             const npcId = newEvent.id;
             gameData.isEventActive = true;
             initNpc(npcId);
+        }
+
+        if (newEvent.type === "dungeon") {
+            console.log(newEvent);
+            const dungeonId = newEvent.id;
+            console.log("Attempting to load dungeon with ID:", dungeonId);
+            loadDungeon(dungeonId);
         }
     }
 }
