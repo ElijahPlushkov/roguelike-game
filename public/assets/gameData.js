@@ -93,6 +93,8 @@ export {adventureLog,
 
 let levelData = {};
 
+let chapterId = "";
+
 let chapterName = "";
 
 let map = [];
@@ -106,14 +108,15 @@ let enemyData = {};
 let questData = {};
 let npcData = {};
 
-export function loadLevelData(id = CHAPTERS.CHAPTER_1) {
+export function loadLevelData(id = CHAPTERS.CHAPTER_1, spawnPosition) {
     fetch("/roguelike-game/load-level?id=" + id)
         .then(response => response.json())
         .then(level => {
             levelData = level;
             chapterName = level.name;
+            chapterId = level.id;
             map = level.tilemap;
-            playerCoordinates = level.player;
+            playerCoordinates = spawnPosition || level.player;
             tileSet = level.tileset;
 
             // const chapterHeading = document.querySelector(".level-title__heading");
@@ -192,4 +195,4 @@ export function loadNpcData(id = chapterOneIds.NPCS) {
         });
 }
 
-export {levelData, chapterName, map, playerCoordinates, tileSet, dialogueData, eventData, doorData, enemyData, questData, npcData};
+export {levelData, chapterId, chapterName, map, playerCoordinates, tileSet, dialogueData, eventData, doorData, enemyData, questData, npcData};

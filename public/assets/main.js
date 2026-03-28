@@ -1,6 +1,7 @@
 import {
     gameData, adventureLog, journalClose, levelData, map, playerCoordinates, tileSet, dialogueData, eventData,
-    loadLevelData, loadDialogueData, loadEventData, loadDoorData, loadEnemyData, loadQuestData, loadNpcData, eventBox
+    loadLevelData, loadDialogueData, loadEventData, loadDoorData, loadEnemyData, loadQuestData, loadNpcData, eventBox,
+    chapterId
 } from "./gameData.js";
 import {initEvent} from "./eventHandler.js";
 import {mapRender} from "./mapRender.js";
@@ -14,7 +15,8 @@ import {loadSavedGame} from "./loadGame.js";
 import {QuestJournalUpdater} from "./QuestJournalUpdater.js";
 import {handleDeath} from "./deathHandler.js";
 import {Player} from "./Player.js";
-import {loadDungeon} from "./dungeonHandler.js";
+import {exitDungeon, loadDungeon} from "./dungeonHandler.js";
+import {CHAPTERS} from "./ids.js";
 
 export let playerObject = new Player(
     gameData.playerCharacteristics.might,
@@ -26,6 +28,9 @@ export let playerObject = new Player(
     gameData.armor
 );
 console.log(playerObject);
+
+let spawnPosition;
+let spawnChapter;
 
 document.addEventListener("DOMContentLoaded", () => {
     loadLevelData();
@@ -98,7 +103,8 @@ function checkForAnyEvent(x, y) {
         ...(levelData.tileData.dialogues || []),
         ...(levelData.tileData.enemies || []),
         ...(levelData.tileData.npcs || []),
-        ...(levelData.tileData.dungeons || [])
+        ...(levelData.tileData.dungeons || []),
+        ...(levelData.tileData.dungeonExit || [])
     ]
 
     const newEvent = allEvents.find(event => event.x === x && event.y === y);
@@ -146,10 +152,14 @@ function checkForAnyEvent(x, y) {
         }
 
         if (newEvent.type === "dungeon") {
-            console.log(newEvent);
+            spawnPosition = {x: newEvent.x, y: newEvent.y};
+            spawnChapter = chapterId;
             const dungeonId = newEvent.id;
-            console.log("Attempting to load dungeon with ID:", dungeonId);
             loadDungeon(dungeonId);
+        }
+
+        if (newEvent.type === "dungeonExit") {
+            exitDungeon(spawnChapter, spawnPosition);
         }
     }
 }
