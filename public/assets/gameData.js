@@ -14,6 +14,22 @@ export const gameData = {
 
     weapon: spears[0],
     armor: mediumCuirasses[0],
+    shield: {
+        name: 'shield',
+        id: 'shield',
+        armorRate: 2,
+        durability: 60,
+        weight: 5,
+        value: 15
+    },
+    rangedWeapon: {
+        name: 'dart',
+        id: 'dart',
+        attack: 3,
+        weight: 2,
+        durability: 30,
+        value: 5
+    },
 
     accuracy: 1,
     evasion: 1,

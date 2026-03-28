@@ -16,7 +16,6 @@ import {QuestJournalUpdater} from "./QuestJournalUpdater.js";
 import {handleDeath} from "./deathHandler.js";
 import {Player} from "./Player.js";
 import {exitDungeon, loadDungeon} from "./dungeonHandler.js";
-import {CHAPTERS} from "./ids.js";
 
 export let playerObject = new Player(
     gameData.playerCharacteristics.might,
@@ -25,7 +24,9 @@ export let playerObject = new Player(
     gameData.playerCharacteristics.agility,
     gameData.pollen,
     gameData.weapon,
-    gameData.armor
+    gameData.armor,
+    gameData.shield,
+    gameData.rangedWeapon
 );
 console.log(playerObject);
 

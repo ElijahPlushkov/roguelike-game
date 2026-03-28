@@ -155,7 +155,8 @@
     margin: 5px;
 }
 
-.combat-attack-types {
+.combat-attack-types,
+.combat-action-types {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -176,19 +177,20 @@
     text-align: left;
 }
 
-.attack-button {
+.attack-button,
+.shield {
     background: var(--log-entry-text-color);
     width: 75px;
 }
 
-.magic-schools-slider {
-    color: var(--player-tile);
-    margin: 5px;
+.shield-active {
+    background: var(--water-tile);
 }
 
-.magic-button {
+.action-button {
     background: var(--water-tile);
-    width: 80px;
+    width: 75px;
+    text-align: center;
 }
 
 .combat-log {

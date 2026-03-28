@@ -20,7 +20,7 @@ export class Player {
     evasion = 0;
     spellChance = 15;
 
-    constructor(might, reputation, prayer, agility, pollen, weapon, armor) {
+    constructor(might, reputation, prayer, agility, pollen, weapon, armor, shield, rangedWeapon) {
         this.health = this.BASE_HEALTH;
         this.mysticism = this.BASE_MYSTICISM;
         this.willpower = this.BASE_WILLPOWER;
@@ -33,6 +33,8 @@ export class Player {
 
         this.weapon = weapon;
         this.armor = armor;
+        this.shield = shield;
+        this.rangedWeapon = rangedWeapon;
 
         this.accuracy = this.agility;
         this.evasion = this.agility;

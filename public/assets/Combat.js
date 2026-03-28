@@ -15,6 +15,7 @@ export class Combat {
     isCombatOn = false;
     enemy = null;
     player = null;
+    isShieldEquipped = false;
 
     constructor(enemy, player) {
         this.enemy = enemy
@@ -92,6 +93,30 @@ export class Combat {
         }
     }
 
+    toggleShield() {
+        const shield = document.querySelector(".shield");
+        shield.addEventListener("click", () => {
+            shield.classList.toggle("shield-active");
+            if (shield.classList.contains("shield-active")) {
+                this.equipShield();
+            } else {
+                this.unequipShield();
+            }
+        });
+    }
+
+    equipShield() {
+        this.player.armor.armorRate = this.player.armor.armorRate + this.player.shield.armorRate;
+        this.player.agility = this.player.agility - this.player.shield.armorRate / 2;
+        this.isShieldEquipped = true;
+    }
+
+    unequipShield() {
+        this.player.armor.armorRate = this.player.armor.armorRate - this.player.shield.armorRate;
+        this.player.agility = this.player.agility + this.player.shield.armorRate / 2;
+        this.isShieldEquipped = false;
+    }
+
     showCombatWindow() {
         combatWindow.classList.remove("hidden");
     }
@@ -127,6 +152,12 @@ export class Combat {
 
         let thrustBtn = document.querySelector(".thrust-btn");
         thrustBtn.dataset.damage = player.weapon.attackTypes.thrust;
+
+        let rangedDamage = document.querySelector(".weapon-ranged-damage");
+        rangedDamage.textContent = player.rangedWeapon.attack;
+
+        let rangedBtn = document.querySelector(".ranged-btn");
+        rangedBtn.dataset.damage = player.rangedWeapon.attack;
     }
 
     displayEnemyInfo(enemy) {
@@ -168,6 +199,7 @@ export class Combat {
         combatLog.innerHTML = "";
         this.enemy = null;
         eventBox.classList.toggle("hidden");
+        this.unequipShield();
     }
 
     decreaseEnemyHealth(damageDealt) {
@@ -251,5 +283,4 @@ export class Combat {
             statChanger.changeStats({[charKey]: increase });
         }
     }
-
 }

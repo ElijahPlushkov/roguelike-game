@@ -31,7 +31,8 @@ require_once __DIR__ . "/../views/header.php";
                             class="max-mysticism">10</span>}</div>
                 <div class="stat-item">WEAPON: <span class="combat-weapon">Wooden Spear</span></div>
                 <div class="stat-item">ARMOR RATE: <span class="armor-rate">3</span></div>
-                <div class="stat-item">POLLEN <span class="pollen-stat-value">0</span></div>
+                <div class="stat-item">POLLEN: <span class="pollen-stat-value">0</span></div>
+                <div class="stat-item">STATUS EFFECTS: <span class="effects-stat-value">none</span></div>
             </div>
             <div class="player-stats">
                 <div class="stat-item">MIGHT: <span class="might-stat-value">0</span></div>
@@ -81,16 +82,24 @@ require_once __DIR__ . "/../views/header.php";
                         <hr>
                         <br>
                         <hr>
-                        <div>AVAILABLE ATTACKS: </div>
-                        <div class="combat-attack-types">
+                        <div class="combat-action-types">
+<!--                            <div>AVAILABLE ACTIONS: </div>-->
+                            <button class="combat-button action-button fight-btn">Fight</button>
+                            <button class="combat-button action-button negotiate-btn">Negotiate</button>
+                            <button class="combat-button action-button flee-btn">Flee</button>
+                        </div>
+
+                        <div class="combat-attack-types hidden">
+<!--                            <div>AVAILABLE ATTACKS: </div>-->
                             <button class="combat-button attack-button chop-btn" data-damage=""
                                     data-attack-type="chop">Chop: <span class="weapon-chop-damage">5</span>D</button>
                             <button class="combat-button attack-button slash-btn" data-damage=""
                                     data-attack-type="slash">Slash: <span class="weapon-slash-damage">6</span>D</button>
                             <button class="combat-button attack-button thrust-btn" data-damage=""
-                                    data-attack-type="thrust">Thrust: <span
-                                        class="weapon-thrust-damage">7</span>D</button>
-                            <button class="combat-button attack-button">Shield</button>
+                                    data-attack-type="thrust">Thrust: <span class="weapon-thrust-damage">7</span>D</button>
+                            <button class="combat-button attack-button ranged-btn" data-damage=""
+                                    data-attack-type="ranged">Ranged: <span class="weapon-ranged-damage">7</span>D</button>
+                            <button class="combat-button shield">Shield</button>
                         </div>
                     </div>
                 </div>

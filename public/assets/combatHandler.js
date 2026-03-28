@@ -16,6 +16,13 @@ import {Combat} from "./Combat.js";
 import {playerObject} from "./main.js";
 import {UniqueEnemyFactory} from "./UniqueEnemyFactory.js";
 
+const fightButton = document.querySelector(".fight-btn");
+const negotiateButton = document.querySelector(".negotiate-btn");
+const fleeButton = document.querySelector(".flee-btn");
+
+const attackTypes = document.querySelector(".combat-attack-types");
+const actionTypes = document.querySelector(".combat-action-types");
+
 export function initCombat(enemyId, enemyType) {
     let combatController = new AbortController();
     const { signal } = combatController;
@@ -44,25 +51,51 @@ export function initCombat(enemyId, enemyType) {
     let attackType;
     let weaponDamage;
 
+    fightButton.addEventListener("click", () => {
+        combat(newCombat, attackType, weaponDamage, enemyId, combatController, signal);
+    });
+
+    negotiateButton.addEventListener("click", () => {
+       if (!checkReputation(playerObject, enemy)) {
+           combat(newCombat, attackType, weaponDamage, enemyId, combatController, signal);
+       } else {
+           newCombat.finishCombat(enemyId);
+       }
+    });
+
+    fleeButton.addEventListener("click", () => {
+        if (!hasFled(playerObject, enemy)) {
+            combat(newCombat, attackType, weaponDamage, enemyId, combatController, signal);
+        } else {
+            newCombat.finishCombat(enemyId);
+        }
+    });
+}
+
+function combat(newCombat, attackType, weaponDamage, enemyId, combatController, signal) {
+    attackTypes.classList.remove("hidden");
+    actionTypes.classList.add("hidden");
     let attackBtns = document.querySelectorAll(".attack-button");
+
+    newCombat.toggleShield();
 
     if (newCombat.enemy.health > 0) {
         if (newCombat.initiative) {
             attackBtns.forEach(button => {
-               button.addEventListener("click", () => {
-                   attackType = button.dataset.attackType;
-                   weaponDamage = Number(button.dataset.damage);
-                   newCombat.playerAttack(weaponDamage);
-                   if (newCombat.enemy.health <= 0) {
-                       newCombat.finishCombat(enemyId);
-                       combatController.abort();
-                       return;
-                   }
-                   newCombat.enemyAttack();
-                   if (playerObject.health <= 0) {
-                       handleDeath();
-                   }
-               }, {signal});
+                button.addEventListener("click", () => {
+                    attackType = button.dataset.attackType;
+                    weaponDamage = Number(button.dataset.damage);
+                    newCombat.playerAttack(weaponDamage);
+                    if (newCombat.enemy.health <= 0) {
+                        newCombat.finishCombat(enemyId);
+                        combatController.abort();
+                        return;
+                    }
+                    newCombat.enemyAttack();
+                    if (playerObject.health <= 0) {
+                        handleDeath();
+                    }
+                }, {signal});
             });
         } else {
             newCombat.enemyAttack();
@@ -71,22 +104,34 @@ export function initCombat(enemyId, enemyType) {
             }
             attackBtns.forEach(button => {
                 button.addEventListener("click", () => {
-                   attackType = button.dataset.attackType;
-                   weaponDamage = Number(button.dataset.damage);
-                   newCombat.playerAttack(weaponDamage);
+                    attackType = button.dataset.attackType;
+                    weaponDamage = Number(button.dataset.damage);
+                    newCombat.playerAttack(weaponDamage);
                     if (newCombat.enemy.health <= 0) {
                         newCombat.finishCombat(enemyId);
                         combatController.abort();
                         return;
                     }
-                   newCombat.enemyAttack();
-                   if (playerObject.health <= 0) {
-                       handleDeath();
-                   }
-               }, {signal});
+                    newCombat.enemyAttack();
+                    if (playerObject.health <= 0) {
+                        handleDeath();
+                    }
+                }, {signal});
             });
         }
     }
+}
+
+function checkReputation(playerObject, enemy) {
+    // compare the attributes?
+    return false;
+}
+
+function hasFled(playerObject, enemy) {
+    // compare the attributes?
+    // if fled, the enemy remains
+    // the player steps on the previous tile
+    return false;
 }
 
 function displayCombatInfo(enemyChar, playerChar, enemyDifficulty) {
@@ -94,4 +139,8 @@ function displayCombatInfo(enemyChar, playerChar, enemyDifficulty) {
     combatInfo.classList.add(".dialogue-text-color");
     combatInfo.textContent = "You: " + playerChar + " / " + "Enemy: " + enemyChar + " / Difficulty: " + enemyDifficulty;
     eventInfo.prepend(combatInfo);
+}
+
+function toggleShield(playerObject) {
+
 }
