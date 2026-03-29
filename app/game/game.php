@@ -30,14 +30,14 @@ require_once __DIR__ . "/../views/header.php";
                 <div class="stat-item">MYSTICISM: {<span class="current-mysticism">10</span>/<span
                             class="max-mysticism">10</span>}</div>
                 <div class="stat-item">WEAPON: <span class="combat-weapon">Wooden Spear</span></div>
-                <div class="stat-item">ARMOR RATE: <span class="armor-rate">3</span></div>
+                <div class="stat-item">ARMOR RATE: <span class="armor-rate">3</span><span class="armor-rate-modifier"></span></div>
                 <div class="stat-item">POLLEN: <span class="pollen-stat-value">0</span></div>
                 <div class="stat-item">STATUS EFFECTS: <span class="effects-stat-value">none</span></div>
             </div>
             <div class="player-stats">
                 <div class="stat-item">MIGHT: <span class="might-stat-value">0</span></div>
                 <div class="stat-item">PRAYER: <span class="prayer-stat-value">0</span></div>
-                <div class="stat-item">AGILITY: <span class="agility-stat-value">0</span></div>
+                <div class="stat-item">AGILITY: <span class="agility-stat-value">0</span><span class="agility-modifier"></span></div>
                 <div class="stat-item">REPUTATION: <span class="reputation-stat-value">0</span></div>
                 <div class="stat-item">WILLPOWER: <span class="current-willpower">10</span></div>
             </div>

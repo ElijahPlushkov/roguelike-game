@@ -86,6 +86,16 @@ displayAgility.textContent = gameData.playerCharacteristics.agility;
 const displayPollen = document.querySelector(".pollen-stat-value");
 displayPollen.textContent = gameData.pollen;
 
+const displayArmorRate = document.querySelector(".armor-rate");
+displayArmorRate.textContent = gameData.armor.armorRate;
+
+const displayWeapon = document.querySelector(".combat-weapon");
+displayWeapon.textContent = gameData.weapon.name;
+
+const armorRateModifier = document.querySelector(".armor-rate-modifier");
+
+const agilityModifier = document.querySelector(".agility-modifier");
+
 const eventBox = document.querySelector(".event-box");
 
 const eventDescription = document.querySelector(".event-description");
@@ -103,7 +113,8 @@ const combatLog = document.querySelector(".combat-log");
 
 export {adventureLog,
     displayMaxHealth, displayCurrentHealth, displayMaxMysticism, displayCurrentMysticism, displayWillpower,
-    displayReputation, displayMight, displayPrayer, displayAgility, displayPollen,
+    displayReputation, displayMight, displayPrayer, displayAgility, displayPollen, displayArmorRate, armorRateModifier,
+    agilityModifier,
     eventBox, eventDescription, eventOptions, eventInfo,
     journalBox, journalClose, combatWindow, combatLog};
 

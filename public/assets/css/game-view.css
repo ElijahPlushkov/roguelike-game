@@ -1,3 +1,7 @@
+.hidden {
+    display: none;
+}
+
 .game-interface {
     display: flex;
     flex-direction: column;
@@ -120,136 +124,12 @@
     text-align: center;
 }
 
-.combat-box {
-    position: fixed;
-    top: 70px;
-    right: 500px;
-    width: 680px;
-    height: 420px;
-    background: var(--event-box-background-color);
-    border: 2px solid var(--enemy-tile);
-    border-radius: 8px;
-    margin-left: 440px;
-    padding: 10px;
-    z-index: 5;
+.positiveBuff {
+    color: var(--water-tile);
 }
 
-.combat-description {
-    color: var(--combat-text-color);
-}
-
-.combat-display {
-    display: flex;
-    gap: 5px;
-}
-
-.combat-player-window {
-    width: 190px;
-    background: rgba(156, 156, 156, 0.3);
-}
-
-.combat-player-info,
-.magic-player-info {
-    display: flex;
-    flex-direction: column;
-    margin: 5px;
-}
-
-.combat-attack-types,
-.combat-action-types {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-}
-
-.combat-weapon {
-    color: var(--log-entry-text-color);
-    margin: 5px;
-}
-
-.combat-button {
-    font-size: 14px;
-    color: var(--main-text-color);
-    border: 1px solid black;
-    border-radius: 3px;
-    margin: 5px;
-    padding: 3px;
-    text-align: left;
-}
-
-.attack-button,
-.shield {
-    background: var(--log-entry-text-color);
-    width: 75px;
-}
-
-.shield-active {
-    background: var(--water-tile);
-}
-
-.action-button {
-    background: var(--water-tile);
-    width: 75px;
-    text-align: center;
-}
-
-.combat-log {
-    width: 280px;
-    height: 390px;
-    border: 1px solid var(--main-text-color);
-    scroll-behavior: smooth;
-    overflow-y: auto;
-}
-
-.combat-player-message {
-    text-align: left;
-    margin: 5px;
-}
-
-.combat-enemy-message {
-    text-align: right;
-    margin: 5px;
-}
-
-.combat-player-message {
-    color: var(--event-text-color);
-}
-
-.combat-enemy-message {
-    color: var(--log-entry-text-color);
-}
-
-.combat-enemy-status {
-    display: flex;
-    flex-direction: row;
-    margin: 5px;
-}
-
-.enemy-stats {
-    display: flex;
-    flex-direction: column;
-}
-
-.enemy-race {
-    color: var(--log-entry-text-color);
-}
-
-.enemy-difficulty,
-.enemy-class,
-.enemy-weapon {
-    margin: 5px;
-}
-
-.combat-footer {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    margin-top: 20px;
-}
-
-.hidden {
-    display: none;
+.negativeBuff {
+    color: var(--rejection-text-color);
 }
 
 .player-interface {
@@ -275,10 +155,6 @@
     color: var(--event-text-color);
 }
 
-.combat-text-color {
-    color: var(--combat-text-color);
-}
-
 .log-entry {
     color: var(--log-entry-text-color);
 }
@@ -289,138 +165,4 @@
 
 .dialogue-text-color {
     color: var(--main-text-color);
-}
-
-.journal-box {
-    position: fixed;
-    top: 70px;
-    right: 500px;
-    width: 680px;
-    height: 420px;
-    background: var(--event-box-background-color);
-    border: 2px solid var(--dirt-tile);
-    border-radius: 8px;
-    margin-left: 440px;
-    padding: 20px;
-    z-index: 10;
-    overflow-y: auto;
-}
-
-.journal-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
-    border-bottom: 2px solid var(--cobble-tile);
-    padding-bottom: 12px;
-    position: relative;
-}
-
-.journal-header h3 {
-    margin: 0;
-    color: var(--item-tile);
-    font-size: 22px;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-    letter-spacing: 1px;
-}
-
-.journal-close {
-    background: var(--option-button-background);
-    border: 1px solid var(--dirt-tile);
-    color: var(--item-tile);
-    font-size: 16px;
-    cursor: pointer;
-    padding: 4px 10px;
-    border-radius: 4px;
-    transition: all 0.2s ease;
-}
-
-.journal-close:hover {
-    background: var(--dirt-tile);
-    border-color: var(--cobble-tile);
-}
-
-.journal-section-title {
-    color: var(--player-tile);
-    margin: 20px 0 12px 0;
-    font-size: 17px;
-    border-bottom: 1px solid var(--water-tile);
-    padding-bottom: 6px;
-}
-
-.quest-list {
-    margin-bottom: 15px;
-}
-
-.quest-item {
-    margin-bottom: 12px;
-    padding-left: 15px;
-    border-radius: 0 6px 6px 0;
-    position: relative;
-}
-
-.quest-item_completed {
-    border-left-color: var(--player-tile);
-}
-
-.quest-item_failed {
-    border-left-color: var(--combat-text-color);
-}
-
-.quest-header {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    cursor: pointer;
-}
-
-.quest-title {
-    color: var(--main-text-color);
-    font-size: 15px;
-    font-weight: bold;
-    flex: 1;
-}
-
-.quest-title_completed {
-    color: var(--player-tile);
-    text-decoration: line-through;
-    opacity: 0.9;
-}
-
-.quest-item_failed .quest-title {
-    color: var(--combat-text-color);
-    opacity: 0.8;
-}
-
-.quest-description {
-    background: var(--event-box-background-color);
-    margin-top: 8px;
-    position: relative;
-}
-
-.quest-description p {
-    color: var(--event-text-color);
-    font-size: 14px;
-    line-height: 1.5;
-    font-style: italic;
-}
-
-.journal-box::-webkit-scrollbar {
-    width: 12px;
-}
-
-.journal-box::-webkit-scrollbar-track {
-    background: var(--option-button-background);
-    border-radius: 6px;
-    border: 1px solid var(--dirt-tile);
-}
-
-.journal-box::-webkit-scrollbar-thumb {
-    background: var(--dirt-tile);
-    border-radius: 6px;
-    border: 2px solid var(--option-button-background);
-}
-
-.journal-box::-webkit-scrollbar-thumb:hover {
-    background: var(--cobble-tile);
 }

@@ -1,15 +1,9 @@
 import {
-    gameData,
-    displayPollen,
-    adventureLog,
-    eventDescription,
-    eventOptions,
     eventInfo,
     enemyData,
     npcData
 } from "./gameData.js";
 import {handleDeath} from "./deathHandler.js";
-import {appendContinueButton, endEvent} from "./helperFunctions.js";
 import {RandomEnemyFactory} from "./RandomEnemyFactory.js";
 import {NpcFactory} from "./NpcFactory.js";
 import {Combat} from "./Combat.js";
@@ -132,15 +126,4 @@ function hasFled(playerObject, enemy) {
     // if fled, the enemy remains
     // the player steps on the previous tile
     return false;
-}
-
-function displayCombatInfo(enemyChar, playerChar, enemyDifficulty) {
-    let combatInfo = document.createElement("p");
-    combatInfo.classList.add(".dialogue-text-color");
-    combatInfo.textContent = "You: " + playerChar + " / " + "Enemy: " + enemyChar + " / Difficulty: " + enemyDifficulty;
-    eventInfo.prepend(combatInfo);
-}
-
-function toggleShield(playerObject) {
-
 }

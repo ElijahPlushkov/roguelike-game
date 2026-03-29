@@ -4,7 +4,7 @@ import {
     eventDescription,
     eventOptions,
     adventureLog,
-    combatWindow, combatLog, displayPollen, eventBox
+    combatWindow, combatLog, displayPollen, eventBox, armorRateModifier, agilityModifier
 } from "./gameData.js";
 import {endEvent} from "./helperFunctions.js";
 import {ChangeStats} from "./ChangeStats.js";
@@ -109,12 +109,22 @@ export class Combat {
         this.player.armor.armorRate = this.player.armor.armorRate + this.player.shield.armorRate;
         this.player.agility = this.player.agility - this.player.shield.armorRate / 2;
         this.isShieldEquipped = true;
+
+        armorRateModifier.classList.add("positiveBuff");
+        armorRateModifier.textContent = `(+${this.player.shield.armorRate})`;
+
+        agilityModifier.classList.add("negativeBuff");
+        agilityModifier.textContent = `(-${this.player.shield.armorRate})`;
     }
 
     unequipShield() {
         this.player.armor.armorRate = this.player.armor.armorRate - this.player.shield.armorRate;
         this.player.agility = this.player.agility + this.player.shield.armorRate / 2;
         this.isShieldEquipped = false;
+
+        armorRateModifier.textContent = "";
+
+        agilityModifier.textContent = "";
     }
 
     showCombatWindow() {
