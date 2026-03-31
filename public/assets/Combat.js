@@ -31,7 +31,6 @@ export class Combat {
         this.displayEnemyInfo(this.enemy);
         // define the initiative
         this.initiative = this.defineInitiative(); // true/false
-
         this.isCombatOn = true;
     }
 
@@ -208,7 +207,6 @@ export class Combat {
         this.hideCombatWindow();
         combatLog.innerHTML = "";
         this.enemy = null;
-        eventBox.classList.toggle("hidden");
         this.unequipShield();
     }
 
@@ -292,5 +290,31 @@ export class Combat {
             let statChanger = new ChangeStats();
             statChanger.changeStats({[charKey]: increase });
         }
+    }
+
+    checkReputation() {
+        return this.player.reputation - this.enemy.characteristics.reputation >= 2;
+    }
+
+    fleeCombat() {
+        this.isCombatOn = false;
+        this.hideCombatWindow();
+        this.enemy = null;
+        this.unequipShield();
+        gameData.isEventActive = false;
+        console.log(gameData.isEventActive);
+
+        this.player.reputation = this.player.reputation - 1;
+        console.log(this.player.reputation);
+
+        this.player.pollen = this.player.pollen - 10;
+        console.log(this.player.pollen);
+    }
+
+    hasFled() {
+        if (this.enemy.difficulty === 'boss' || this.enemy.difficulty === 'legendary') {
+            return false;
+        }
+        return this.player.agility - this.enemy.characteristics.agility >= 3;
     }
 }

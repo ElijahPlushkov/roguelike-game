@@ -13,10 +13,8 @@ export class ChangeAttributes {
         if (stat === "agility") {
             gameData.accuracy = this.changeAccuracy();
             playerObject.setAccuracy(gameData.accuracy);
-            console.log(playerObject.accuracy);
             gameData.evasion = this.changeEvasion();
             playerObject.setEvasion(gameData.evasion);
-            console.log(playerObject.evasion);
         }
         if (stat === "might") {
             gameData.health = this.changeHealth();

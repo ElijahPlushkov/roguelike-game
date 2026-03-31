@@ -38,7 +38,7 @@ export function endEvent(id, status, description, options) {
     updateGameProgress(id, status);
     description.textContent = "";
     options.textContent = "";
-    eventBox.classList.toggle("hidden");
+    eventBox.classList.add("hidden");
 }
 
 function updateGameProgress(id, finalState) {

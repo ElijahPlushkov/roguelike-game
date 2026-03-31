@@ -1,5 +1,4 @@
 import {
-    eventInfo,
     enemyData,
     npcData
 } from "./gameData.js";
@@ -50,20 +49,22 @@ export function initCombat(enemyId, enemyType) {
     });
 
     negotiateButton.addEventListener("click", () => {
-       if (!checkReputation(playerObject, enemy)) {
+       if (!newCombat.checkReputation()) {
            combat(newCombat, attackType, weaponDamage, enemyId, combatController, signal);
        } else {
            newCombat.finishCombat(enemyId);
+           combatController.abort();
        }
-    });
+    }, {signal});
 
     fleeButton.addEventListener("click", () => {
-        if (!hasFled(playerObject, enemy)) {
+        if (!newCombat.hasFled()) {
             combat(newCombat, attackType, weaponDamage, enemyId, combatController, signal);
         } else {
-            newCombat.finishCombat(enemyId);
+            newCombat.fleeCombat();
+            combatController.abort();
         }
-    });
+    }, {signal});
 }
 
 function combat(newCombat, attackType, weaponDamage, enemyId, combatController, signal) {
@@ -114,16 +115,4 @@ function combat(newCombat, attackType, weaponDamage, enemyId, combatController, 
             });
         }
     }
-}
-
-function checkReputation(playerObject, enemy) {
-    // compare the attributes?
-    return false;
-}
-
-function hasFled(playerObject, enemy) {
-    // compare the attributes?
-    // if fled, the enemy remains
-    // the player steps on the previous tile
-    return false;
 }

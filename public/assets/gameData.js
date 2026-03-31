@@ -48,7 +48,7 @@ export const gameData = {
         reputation: 1,
         might: 1,
         prayer: 1,
-        agility: 1
+        agility: 5
     },
 
     pollen: 0,
