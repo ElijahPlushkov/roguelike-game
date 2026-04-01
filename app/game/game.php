@@ -84,13 +84,11 @@ require_once __DIR__ . "/../views/header.php";
                         <hr>
                         <div class="combat-action-types">
 <!--                            <div>AVAILABLE ACTIONS: </div>-->
-                            <button class="combat-button action-button fight-btn">Fight</button>
-                            <button class="combat-button action-button negotiate-btn">Negotiate</button>
-                            <button class="combat-button action-button flee-btn">Flee</button>
+<!--                            <button class="combat-button action-button fight-btn">Fight</button>-->
+<!--                            <button class="combat-button action-button negotiate-btn">Negotiate</button>-->
+<!--                            <button class="combat-button action-button flee-btn">Flee</button>-->
                         </div>
-
                         <div class="combat-attack-types hidden">
-<!--                            <div>AVAILABLE ATTACKS: </div>-->
                             <button class="combat-button attack-button chop-btn" data-damage=""
                                     data-attack-type="chop">Chop: <span class="weapon-chop-damage">5</span>D</button>
                             <button class="combat-button attack-button slash-btn" data-damage=""

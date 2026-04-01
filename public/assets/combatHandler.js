@@ -2,24 +2,13 @@ import {
     enemyData,
     npcData
 } from "./gameData.js";
-import {handleDeath} from "./deathHandler.js";
 import {RandomEnemyFactory} from "./RandomEnemyFactory.js";
 import {NpcFactory} from "./NpcFactory.js";
 import {Combat} from "./Combat.js";
 import {playerObject} from "./main.js";
 import {UniqueEnemyFactory} from "./UniqueEnemyFactory.js";
 
-const fightButton = document.querySelector(".fight-btn");
-const negotiateButton = document.querySelector(".negotiate-btn");
-const fleeButton = document.querySelector(".flee-btn");
-
-const attackTypes = document.querySelector(".combat-attack-types");
-const actionTypes = document.querySelector(".combat-action-types");
-
 export function initCombat(enemyId, enemyType) {
-    let combatController = new AbortController();
-    const { signal } = combatController;
-
     let enemy;
 
     if (enemyType === "unique") {
@@ -39,80 +28,6 @@ export function initCombat(enemyId, enemyType) {
     }
 
     // start a new combat
-    let newCombat = new Combat(enemy, playerObject);
-    newCombat.initCombat();
-    let attackType;
-    let weaponDamage;
-
-    fightButton.addEventListener("click", () => {
-        combat(newCombat, attackType, weaponDamage, enemyId, combatController, signal);
-    });
-
-    negotiateButton.addEventListener("click", () => {
-       if (!newCombat.checkReputation()) {
-           combat(newCombat, attackType, weaponDamage, enemyId, combatController, signal);
-       } else {
-           newCombat.finishCombat(enemyId);
-           combatController.abort();
-       }
-    }, {signal});
-
-    fleeButton.addEventListener("click", () => {
-        if (!newCombat.hasFled()) {
-            combat(newCombat, attackType, weaponDamage, enemyId, combatController, signal);
-        } else {
-            newCombat.fleeCombat();
-            combatController.abort();
-        }
-    }, {signal});
-}
-
-function combat(newCombat, attackType, weaponDamage, enemyId, combatController, signal) {
-    attackTypes.classList.remove("hidden");
-    actionTypes.classList.add("hidden");
-    let attackBtns = document.querySelectorAll(".attack-button");
-
-    newCombat.toggleShield();
-
-    if (newCombat.enemy.health > 0) {
-        if (newCombat.initiative) {
-            attackBtns.forEach(button => {
-                button.addEventListener("click", () => {
-                    attackType = button.dataset.attackType;
-                    weaponDamage = Number(button.dataset.damage);
-                    newCombat.playerAttack(weaponDamage);
-                    if (newCombat.enemy.health <= 0) {
-                        newCombat.finishCombat(enemyId);
-                        combatController.abort();
-                        return;
-                    }
-                    newCombat.enemyAttack();
-                    if (playerObject.health <= 0) {
-                        handleDeath();
-                    }
-                }, {signal});
-            });
-        } else {
-            newCombat.enemyAttack();
-            if (playerObject.health <= 0) {
-                handleDeath();
-            }
-            attackBtns.forEach(button => {
-                button.addEventListener("click", () => {
-                    attackType = button.dataset.attackType;
-                    weaponDamage = Number(button.dataset.damage);
-                    newCombat.playerAttack(weaponDamage);
-                    if (newCombat.enemy.health <= 0) {
-                        newCombat.finishCombat(enemyId);
-                        combatController.abort();
-                        return;
-                    }
-                    newCombat.enemyAttack();
-                    if (playerObject.health <= 0) {
-                        handleDeath();
-                    }
-                }, {signal});
-            });
-        }
-    }
+    let newCombat = new Combat(enemy, playerObject, enemyId);
+    newCombat.startCombat();
 }

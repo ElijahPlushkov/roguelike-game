@@ -4,10 +4,11 @@ import {
     eventDescription,
     eventOptions,
     adventureLog,
-    combatWindow, combatLog, displayPollen, eventBox, armorRateModifier, agilityModifier
+    combatWindow, combatLog, displayPollen, armorRateModifier, agilityModifier
 } from "./gameData.js";
 import {endEvent} from "./helperFunctions.js";
 import {ChangeStats} from "./ChangeStats.js";
+import {handleDeath} from "./deathHandler.js";
 
 export class Combat {
 
@@ -15,23 +16,156 @@ export class Combat {
     isCombatOn = false;
     enemy = null;
     player = null;
+    enemyId = null;
     isShieldEquipped = false;
 
-    constructor(enemy, player) {
-        this.enemy = enemy
-        this.player = player
+    actionTypes = document.querySelector(".combat-action-types");
+    attackTypes = document.querySelector(".combat-attack-types");
+    shield = document.querySelector(".shield");
+
+    constructor(enemy, player, enemyId) {
+        this.enemy = enemy;
+        this.player = player;
+        this.enemyId = enemyId;
     }
 
-    initCombat() {
-        // show the combat window
+    startCombat() {
         this.showCombatWindow();
-        // show the player's info
         this.displayPlayerInfo(this.player);
-        // show the enemy
         this.displayEnemyInfo(this.enemy);
-        // define the initiative
-        this.initiative = this.defineInitiative(); // true/false
+        this.initiative = this.defineInitiative(); // bool
         this.isCombatOn = true;
+
+        let fightButton = this.createActionButtons("fight-btn", "Fight.", "fight");
+        let negotiateButton = this.createActionButtons("negotiate-btn", "Negotiate.", "negotiate");
+        let fleeButton = this.createActionButtons("flee-btn", "Flee.", "flee");
+
+        this.actionTypes.append(fightButton, negotiateButton, fleeButton);
+
+        this.initRounds(this.enemyId);
+    }
+
+    initRounds() {
+        this.actionTypes.addEventListener("click", this.handleActionButtons);
+        this.attackTypes.addEventListener("click", this.handleAttackButtons);
+        this.shield.addEventListener("click", this.toggleShield);
+    }
+
+    finishCombat() {
+        this.isCombatOn = false;
+        let isSuccessful = true;
+        this.registerCombatOutcome(this.enemy.difficulty, isSuccessful);
+        endEvent(this.enemyId, isSuccessful, eventDescription, eventOptions);
+        this.hideCombatWindow();
+        combatLog.innerHTML = "";
+        this.enemy = null;
+        this.unequipShield();
+        this.removeActionButtons();
+        this.actionTypes.removeEventListener("click", this.handleActionButtons);
+        this.attackTypes.removeEventListener("click", this.handleAttackButtons);
+        this.shield.removeEventListener("click", this.toggleShield);
+        this.actionTypes.classList.remove("hidden");
+        this.attackTypes.classList.add("hidden");
+    }
+
+    handleAttackButtons = (event) => {
+        const button = event.target.closest(".attack-button");
+        if (!button) return;
+
+        const weaponDamage = Number(button.dataset.damage);
+        this.executeAttackRound(weaponDamage);
+    }
+
+    executeAttackRound(weaponDamage) {
+        this.playerAttack(weaponDamage);
+
+        if (this.enemy.health <= 0) {
+            this.finishCombat(this.enemy.id);
+            return;
+        }
+
+        this.enemyAttack();
+
+        if (this.player.health <= 0) {
+            handleDeath();
+        }
+    }
+
+    handleActionButtons = (event) => {
+        const button = event.target.closest(".action-button");
+        if (!button) return;
+
+        const action = button.dataset.action;
+
+        if (action === "fight") {
+            this.toggleCombatButtons();
+        }
+        if (action === "negotiate") {
+            if (this.checkReputation()) {
+                this.finishCombat(this.enemyId);
+            } else {
+                this.displayEnemyCombatMessage("Your words are not heard.");
+            }
+        }
+        if (action === "flee") {
+            if (this.hasFled()) {
+                this.fleeCombat();
+            } else {
+                this.displayEnemyCombatMessage("You cannot flee.");
+            }
+        }
+    }
+
+    createActionButtons(className, text, actionType) {
+        const btn = document.createElement('button');
+        btn.className = `combat-button action-button ${className}`;
+        btn.textContent = text;
+        btn.dataset.action = actionType;
+        return btn;
+    }
+
+    removeActionButtons() {
+        this.actionTypes.innerHTML = "";
+    }
+
+    toggleCombatButtons() {
+        this.actionTypes.classList.add("hidden");
+        this.attackTypes.classList.remove("hidden");
+    }
+
+    toggleShield = (event) => {
+        const button = event.target.closest(".shield");
+        if (!button) return;
+
+        this.shield.classList.toggle("shield-active");
+        if (this.shield.classList.contains("shield-active")) {
+            this.equipShield();
+        } else {
+            this.unequipShield();
+        }
+    }
+
+    equipShield() {
+        this.player.armor.armorRate = this.player.armor.armorRate + this.player.shield.armorRate;
+        this.player.agility = this.player.agility - this.player.shield.armorRate / 2;
+        this.isShieldEquipped = true;
+
+        armorRateModifier.classList.add("positiveBuff");
+        armorRateModifier.textContent = `(+${this.player.shield.armorRate})`;
+
+        agilityModifier.classList.add("negativeBuff");
+        agilityModifier.textContent = `(-${this.player.shield.armorRate})`;
+    }
+
+    unequipShield() {
+        this.player.armor.armorRate = this.player.armor.armorRate - this.player.shield.armorRate;
+        this.player.agility = this.player.agility + this.player.shield.armorRate / 2;
+        this.isShieldEquipped = false;
+
+        armorRateModifier.textContent = "";
+
+        agilityModifier.textContent = "";
+        this.shield.classList.remove("shield-active");
     }
 
     playerAttack(weaponDamage) {
@@ -90,40 +224,6 @@ export class Combat {
             this.decreasePlayerHealth(damageDealt);
             this.displayEnemyCombatMessage("Enemy deals " + damageDealt + "D");
         }
-    }
-
-    toggleShield() {
-        const shield = document.querySelector(".shield");
-        shield.addEventListener("click", () => {
-            shield.classList.toggle("shield-active");
-            if (shield.classList.contains("shield-active")) {
-                this.equipShield();
-            } else {
-                this.unequipShield();
-            }
-        });
-    }
-
-    equipShield() {
-        this.player.armor.armorRate = this.player.armor.armorRate + this.player.shield.armorRate;
-        this.player.agility = this.player.agility - this.player.shield.armorRate / 2;
-        this.isShieldEquipped = true;
-
-        armorRateModifier.classList.add("positiveBuff");
-        armorRateModifier.textContent = `(+${this.player.shield.armorRate})`;
-
-        agilityModifier.classList.add("negativeBuff");
-        agilityModifier.textContent = `(-${this.player.shield.armorRate})`;
-    }
-
-    unequipShield() {
-        this.player.armor.armorRate = this.player.armor.armorRate - this.player.shield.armorRate;
-        this.player.agility = this.player.agility + this.player.shield.armorRate / 2;
-        this.isShieldEquipped = false;
-
-        armorRateModifier.textContent = "";
-
-        agilityModifier.textContent = "";
     }
 
     showCombatWindow() {
@@ -197,17 +297,6 @@ export class Combat {
 
     defineInitiative() {
         return Math.floor(Math.random() * 2);
-    }
-
-    finishCombat(enemyId) {
-        this.isCombatOn = false;
-        let isSuccessful = true;
-        this.registerCombatOutcome(this.enemy.difficulty, isSuccessful);
-        endEvent(enemyId, isSuccessful, eventDescription, eventOptions);
-        this.hideCombatWindow();
-        combatLog.innerHTML = "";
-        this.enemy = null;
-        this.unequipShield();
     }
 
     decreaseEnemyHealth(damageDealt) {
