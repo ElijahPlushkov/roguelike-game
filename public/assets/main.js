@@ -33,6 +33,11 @@ console.log(playerObject);
 let spawnPosition;
 let spawnChapter;
 
+export let previousCoordinates = {
+    x: 0,
+    y: 0
+}
+
 document.addEventListener("DOMContentLoaded", () => {
     loadLevelData();
     loadDialogueData();
@@ -79,6 +84,11 @@ document.addEventListener("DOMContentLoaded", () => {
                 break;
             default:
                 return;
+        }
+
+        previousCoordinates = {
+            x: playerCoordinates.x,
+            y: playerCoordinates.y
         }
 
         const newX = playerCoordinates.x + dx;
@@ -140,9 +150,7 @@ function checkForAnyEvent(x, y) {
             const enemyId = newEvent.id;
             const enemyType = newEvent.enemyType;
             if (!hasSeenEvent(enemyId)) {
-                gameData.isEventActive = true;
                 initCombat(enemyId, enemyType);
-                markEventSeen(enemyId);
             }
         }
 

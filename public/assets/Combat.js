@@ -4,11 +4,13 @@ import {
     eventDescription,
     eventOptions,
     adventureLog,
-    combatWindow, combatLog, displayPollen, armorRateModifier, agilityModifier
+    combatWindow, combatLog, displayPollen, armorRateModifier, agilityModifier, playerCoordinates
 } from "./gameData.js";
-import {endEvent} from "./helperFunctions.js";
+import {endEvent, markEventSeen} from "./helperFunctions.js";
 import {ChangeStats} from "./ChangeStats.js";
 import {handleDeath} from "./deathHandler.js";
+import {previousCoordinates} from "./main.js";
+import {mapRender} from "./mapRender.js";
 
 export class Combat {
 
@@ -18,6 +20,8 @@ export class Combat {
     player = null;
     enemyId = null;
     isShieldEquipped = false;
+
+    statChanger = new ChangeStats();
 
     actionTypes = document.querySelector(".combat-action-types");
     attackTypes = document.querySelector(".combat-attack-types");
@@ -30,6 +34,7 @@ export class Combat {
     }
 
     startCombat() {
+        gameData.isEventActive = true;
         this.showCombatWindow();
         this.displayPlayerInfo(this.player);
         this.displayEnemyInfo(this.enemy);
@@ -56,10 +61,16 @@ export class Combat {
         let isSuccessful = true;
         this.registerCombatOutcome(this.enemy.difficulty, isSuccessful);
         endEvent(this.enemyId, isSuccessful, eventDescription, eventOptions);
+        markEventSeen(this.enemyId);
+        this.clearCombatState();
+    }
+
+    clearCombatState() {
         this.hideCombatWindow();
         combatLog.innerHTML = "";
         this.enemy = null;
         this.unequipShield();
+        gameData.isEventActive = false;
         this.removeActionButtons();
         this.actionTypes.removeEventListener("click", this.handleActionButtons);
         this.attackTypes.removeEventListener("click", this.handleAttackButtons);
@@ -126,6 +137,34 @@ export class Combat {
 
     removeActionButtons() {
         this.actionTypes.innerHTML = "";
+    }
+
+    fleeCombat() {
+        this.isCombatOn = false;
+        this.clearCombatState();
+
+        playerCoordinates.x = previousCoordinates.x;
+        playerCoordinates.y = previousCoordinates.y;
+
+        gameData.playerCoordinates.x = previousCoordinates.x;
+        gameData.playerCoordinates.y = previousCoordinates.y;
+
+        this.statChanger.changeStats({["pollen"]: -10});
+
+        this.statChanger.changeStats({["reputation"]: -1});
+
+        mapRender();
+    }
+
+    hasFled() {
+        if (this.enemy.difficulty === 'boss' || this.enemy.difficulty === 'legendary') {
+            return false;
+        }
+        return this.player.agility - this.enemy.characteristics.agility >= 3;
+    }
+
+    checkReputation() {
+        return this.player.reputation - this.enemy.characteristics.reputation >= 2;
     }
 
     toggleCombatButtons() {
@@ -370,40 +409,12 @@ export class Combat {
             displayPollen.textContent = gameData.pollen -= gameData.pollenChange;
             combatResolution.textContent = `Your ${charKey} decreased by ${Math.abs(decrease)}. You lose ${gameData.pollenChange} pollen grains.`;
             adventureLog.prepend(combatResolution);
-            let statChanger = new ChangeStats();
-            statChanger.changeStats(charKey);
+            this.statChanger.changeStats(charKey);
         } else {
             displayPollen.textContent = gameData.pollen += gameData.pollenChange;
             combatResolution.textContent = `Your ${charKey} increased by ${increase}. You collect ${gameData.pollenChange} pollen grains.`;
             adventureLog.prepend(combatResolution);
-            let statChanger = new ChangeStats();
-            statChanger.changeStats({[charKey]: increase });
+            this.statChanger.changeStats({[charKey]: increase });
         }
-    }
-
-    checkReputation() {
-        return this.player.reputation - this.enemy.characteristics.reputation >= 2;
-    }
-
-    fleeCombat() {
-        this.isCombatOn = false;
-        this.hideCombatWindow();
-        this.enemy = null;
-        this.unequipShield();
-        gameData.isEventActive = false;
-        console.log(gameData.isEventActive);
-
-        this.player.reputation = this.player.reputation - 1;
-        console.log(this.player.reputation);
-
-        this.player.pollen = this.player.pollen - 10;
-        console.log(this.player.pollen);
-    }
-
-    hasFled() {
-        if (this.enemy.difficulty === 'boss' || this.enemy.difficulty === 'legendary') {
-            return false;
-        }
-        return this.player.agility - this.enemy.characteristics.agility >= 3;
     }
 }
