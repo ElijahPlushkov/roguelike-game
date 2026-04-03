@@ -21,16 +21,34 @@ export function appendRejectionMessage(eventData) {
 }
 
 export function displayAdventureLogMessage(key, value, ccsClass) {
-    const charChange = document.createElement("p");
-    charChange.className = ccsClass;
-    if (key === "pollen") {
-        if (value === 1) {
-            charChange.textContent = `Your reward: ${value} pollen grain.`;
+    const adventureLogMessage = document.createElement("p");
+    adventureLogMessage.className = ccsClass;
+
+    let text;
+
+    if (value < 0) {
+        if (key === "pollen") {
+            if (value === -1) {
+                text = `You lose: ${value} pollen grain.`;
+            } else {
+                text = `You lose: ${value} pollen grains.`;
+            }
+        } else {
+            text = `You lose: ${value} ${key}.`;
         }
-        charChange.textContent = `Your reward: ${value} pollen grains.`;
+    } else {
+        if (key === "pollen") {
+            if (value === 1) {
+                text = `Your reward: ${value} pollen grain.`;
+            } else {
+                text = `Your reward: ${value} pollen grains.`;
+            }
+        } else {
+            text = `Your reward: ${value} ${key}.`;
+        }
     }
-    charChange.textContent = `Your reward: ${value} ${key}.`;
-    adventureLog.prepend(charChange);
+    adventureLogMessage.textContent = text;
+    adventureLog.prepend(adventureLogMessage);
 }
 
 export function endEvent(id, status, description, options) {

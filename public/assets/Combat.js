@@ -141,7 +141,6 @@ export class Combat {
 
     fleeCombat() {
         this.isCombatOn = false;
-        this.clearCombatState();
 
         playerCoordinates.x = previousCoordinates.x;
         playerCoordinates.y = previousCoordinates.y;
@@ -150,10 +149,17 @@ export class Combat {
         gameData.playerCoordinates.y = previousCoordinates.y;
 
         this.statChanger.changeStats({["pollen"]: -10});
-
         this.statChanger.changeStats({["reputation"]: -1});
-
+        this.displayFleeMessage(this.enemy.fleeSuccess);
+        this.clearCombatState();
         mapRender();
+    }
+
+    displayFleeMessage(message) {
+        const fleeMessage = document.createElement("p");
+        fleeMessage.className = "combat-text-color";
+        fleeMessage.textContent = message;
+        adventureLog.prepend(fleeMessage);
     }
 
     hasFled() {
@@ -407,13 +413,13 @@ export class Combat {
 
         if (isSuccessful === false) {
             displayPollen.textContent = gameData.pollen -= gameData.pollenChange;
-            combatResolution.textContent = `Your ${charKey} decreased by ${Math.abs(decrease)}. You lose ${gameData.pollenChange} pollen grains.`;
-            adventureLog.prepend(combatResolution);
-            this.statChanger.changeStats(charKey);
+            // combatResolution.textContent = `Your ${charKey} decreased by ${Math.abs(decrease)}. You lose ${gameData.pollenChange} pollen grains.`;
+            // adventureLog.prepend(combatResolution);
+            this.statChanger.changeStats({[charKey]: decrease });
         } else {
             displayPollen.textContent = gameData.pollen += gameData.pollenChange;
-            combatResolution.textContent = `Your ${charKey} increased by ${increase}. You collect ${gameData.pollenChange} pollen grains.`;
-            adventureLog.prepend(combatResolution);
+            // combatResolution.textContent = `Your ${charKey} increased by ${increase}. You collect ${gameData.pollenChange} pollen grains.`;
+            // adventureLog.prepend(combatResolution);
             this.statChanger.changeStats({[charKey]: increase });
         }
     }

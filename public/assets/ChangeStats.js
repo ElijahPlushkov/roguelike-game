@@ -3,6 +3,9 @@ import {displayAdventureLogMessage} from "./helperFunctions.js";
 import {playerObject} from "./main.js";
 
 export class ChangeStats {
+
+    adventureLogHandler = new AdventureLogHandler();
+
     changeStats(reward) {
         for (const [key, value] of Object.entries(reward)) {
             if (key === "pollen") {

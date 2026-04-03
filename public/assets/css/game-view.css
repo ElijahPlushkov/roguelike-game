@@ -149,6 +149,7 @@
     background: var(--event-box-background-color);
     border: 1px solid var(--main-text-color);
     border-radius: 5px;
+    overflow-y: auto;
 }
 
 .event-text-color {
