@@ -1,10 +1,13 @@
 import {gameData, eventDescription, eventOptions, dialogueData} from "./gameData.js";
-import {endEvent, appendContinueButton, displayAdventureLogMessage, appendRejectionMessage} from "./helperFunctions.js";
+import {endEvent, appendContinueButton} from "./helperFunctions.js";
 import {handleDeath} from "./deathHandler.js";
 import {QuestJournalUpdater} from "./QuestJournalUpdater.js";
 import {registerNpcDeath} from "./npcHandler.js";
 import {ChangeStats} from "./ChangeStats.js";
 import {initCombat} from "./combatHandler.js";
+import {AdventureLogHandler} from "./AdventureLogHandler.js";
+
+const adventureLogHandler = new AdventureLogHandler();
 
 export function initDialogue(dialogueId, stateKey) {
     //find the dialogue
@@ -49,7 +52,7 @@ export function initDialogue(dialogueId, stateKey) {
                     for (const [charKey, requiredValue] of Object.entries(option.requirements)) {
                         if ((gameData.playerCharacteristics[charKey] || 0) < requiredValue) {
                             canProceed = false;
-                            appendRejectionMessage(option);
+                            adventureLogHandler.appendRejectionMessage(option);
                             break;
                         }
                     }

@@ -9,13 +9,14 @@ import {initDialogue} from "./dialogueHandler.js";
 import {initCombat} from "./combatHandler.js";
 import {accessDoor} from "./doorHandler.js";
 import {initNpc} from "./npcHandler.js";
-import {hasSeenEvent, markEventSeen, appendRejectionMessage} from "./helperFunctions.js";
+import {hasSeenEvent, markEventSeen} from "./helperFunctions.js";
 import {saveGame} from "./saveGame.js";
 import {loadSavedGame} from "./loadGame.js";
 import {QuestJournalUpdater} from "./QuestJournalUpdater.js";
 import {handleDeath} from "./deathHandler.js";
 import {Player} from "./Player.js";
 import {exitDungeon, loadDungeon} from "./dungeonHandler.js";
+import {AdventureLogHandler} from "./AdventureLogHandler.js";
 
 export let playerObject = new Player(
     gameData.playerCharacteristics.might,
@@ -37,6 +38,8 @@ export let previousCoordinates = {
     x: 0,
     y: 0
 }
+
+const adventureLogHandler = new AdventureLogHandler();
 
 document.addEventListener("DOMContentLoaded", () => {
     loadLevelData();
@@ -203,13 +206,13 @@ function isRequirementPassed(requirements, event) {
         if (currentEvent.outcome === requirements.eventOutcome) {
             return true;
         }
-        appendRejectionMessage(event);
+        adventureLogHandler.appendRejectionMessage(event);
         return false;
     }
 
     for (const [key, value] of Object.entries(requirements)) {
         if (gameData.playerCharacteristics[key] < value) {
-            appendRejectionMessage(event);
+            adventureLogHandler.appendRejectionMessage(event);
             return false;
         }
     }

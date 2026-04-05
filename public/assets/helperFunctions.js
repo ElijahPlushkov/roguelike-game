@@ -8,18 +8,6 @@ export function appendContinueButton() {
     return continueButton;
 }
 
-export function appendRejectionMessage(eventData) {
-    const existingRejection = adventureLog.querySelector(".rejection-text-color");
-    if (existingRejection) {
-        return;
-    }
-
-    const rejection = document.createElement("p");
-    rejection.textContent = eventData.rejection;
-    rejection.classList.add("rejection-text-color");
-    adventureLog.prepend(rejection);
-}
-
 export function displayAdventureLogMessage(key, value, ccsClass) {
     const adventureLogMessage = document.createElement("p");
     adventureLogMessage.className = ccsClass;

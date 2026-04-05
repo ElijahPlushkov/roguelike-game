@@ -84,11 +84,12 @@ export class Combat {
         if (!button) return;
 
         const weaponDamage = Number(button.dataset.damage);
-        this.executeAttackRound(weaponDamage);
+        const attackType = button.dataset.attackType;
+        this.executeAttackRound(weaponDamage, attackType);
     }
 
-    executeAttackRound(weaponDamage) {
-        this.playerAttack(weaponDamage);
+    executeAttackRound(weaponDamage, attackType) {
+        this.playerAttack(weaponDamage, attackType);
 
         if (this.enemy.health <= 0) {
             this.finishCombat(this.enemy.id);
@@ -213,7 +214,7 @@ export class Combat {
         this.shield.classList.remove("shield-active");
     }
 
-    playerAttack(weaponDamage) {
+    playerAttack(weaponDamage, attackType) {
         // calculate if an attack was successful
         let hitChance = Math.floor((this.player.agility / (this.enemy.characteristics.agility * 1.5)) * 100 + (this.player.accuracy / 2));
         let dodgeChance = Math.floor((this.enemy.characteristics.agility / this.player.agility)  * 10 + (this.enemy.evasion / 2));
@@ -229,16 +230,48 @@ export class Combat {
         let luckyStrikeChance = 2;
 
         if (roll > chance && luckyRoll > luckyStrikeChance) {
-            this.displayPlayerCombatMessage("You miss");
+            this.displayPlayerCombatMessage("You miss.");
         } else {
             // calculate damage
+            let damageReduction = this.calculateDamageReduction(attackType, "player");
             let damageDealt = (weaponDamage - this.enemy.armor.armorRate) * this.player.might;
+            let reduction = Math.floor(damageDealt / 100 * damageReduction);
+            damageDealt = damageDealt - reduction;
             if (damageDealt <= 0) {
                 damageDealt = 1;
             }
             this.decreaseEnemyHealth(damageDealt);
-            this.displayPlayerCombatMessage("You deal " + damageDealt + "D");
+            this.displayPlayerCombatMessage("You deal " + damageDealt + "D.");
         }
+    }
+
+    calculateDamageReduction(attackType, attacker) {
+        const reductionPercentage = {
+            unarmored: { chop: 0, thrust: 0, slash: 0, ranged: 0 },
+            clothes: { chop: 5, thrust: 10, slash: 15, ranged: 5 },
+            light: { chop: 25, thrust: 30, slash: 35, ranged: 25 },
+            medium: { chop: 35, thrust: 45, slash: 55, ranged: 40 },
+            heavy: { chop: 50, thrust: 55, slash: 85, ranged: 70 }
+        };
+
+        if (attacker === "player") {
+            let enemyArmorType = this.enemy.armor.type;
+
+            const armorData = reductionPercentage[enemyArmorType];
+            if (armorData && attackType in armorData) {
+                return armorData[attackType];
+            }
+        } else {
+            let playerArmorType = this.player.armor.type;
+
+            const armorData = reductionPercentage[playerArmorType];
+            if (armorData && attackType in armorData) {
+                return armorData[attackType];
+            }
+        }
+
+        // console.warn(`Unknown armor type "${enemyArmorType}" or attack type "${attackType}"`);
+        // return 0;
     }
 
     enemyAttack() {
@@ -260,9 +293,14 @@ export class Combat {
             this.displayEnemyCombatMessage("Enemy misses");
         } else {
             // calculate damage
-            let attackTypes = Object.values(this.enemy.weapon.attackTypes);
-            let weaponDamage = attackTypes[Math.floor(Math.random() * attackTypes.length)];
+            let attackTypes = Object.keys(this.enemy.weapon.attackTypes);
+            let attackType = attackTypes[Math.floor(Math.random() * attackTypes.length)];
+            let weaponDamage = this.enemy.weapon.attackTypes[attackType];
+
+            let damageReduction = this.calculateDamageReduction(attackType, "enemy");
             let damageDealt = (weaponDamage - this.player.armor.armorRate) * this.enemy.characteristics.might;
+            let reduction = Math.floor(damageDealt / 100 * damageReduction);
+            damageDealt = damageDealt - reduction;
             if (damageDealt <= 0) {
                 damageDealt = 1;
             }

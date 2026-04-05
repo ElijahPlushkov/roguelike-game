@@ -1,6 +1,9 @@
 import {gameData, eventDescription, eventOptions, doorData, levelData, eventBox} from "./gameData.js";
-import {appendContinueButton, endEvent, appendRejectionMessage, hasSeenEvent, markEventSeen} from "./helperFunctions.js";
+import {appendContinueButton, endEvent, hasSeenEvent, markEventSeen} from "./helperFunctions.js";
 import {ChangeStats} from "./ChangeStats.js";
+import {AdventureLogHandler} from "./AdventureLogHandler.js";
+
+const adventureLogHandler = new AdventureLogHandler();
 
 export function accessDoor(x, y) {
     const doors = [...(levelData.tileData.doors) || []];
@@ -24,7 +27,7 @@ export function accessDoor(x, y) {
                 //if not, the rejection appears and the tiletype sets to unwalkable
                 if ((gameData.playerCharacteristics[charKey] || 0) < requiredValue) {
                     doorTile.type = "unwalkable";
-                    appendRejectionMessage(door);
+                    adventureLogHandler.appendRejectionMessage(door);
                     return false;
                 }
             }

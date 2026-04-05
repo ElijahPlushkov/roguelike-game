@@ -1,6 +1,7 @@
 import {displayPollen, gameData} from "./gameData.js";
 import {displayAdventureLogMessage} from "./helperFunctions.js";
 import {playerObject} from "./main.js";
+import {AdventureLogHandler} from "./AdventureLogHandler.js";
 
 export class ChangeStats {
 
