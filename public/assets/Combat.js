@@ -47,7 +47,7 @@ export class Combat {
 
         this.actionTypes.append(fightButton, negotiateButton, fleeButton);
 
-        this.initRounds(this.enemyId);
+        this.initRounds();
     }
 
     initRounds() {
@@ -111,6 +111,9 @@ export class Combat {
 
         if (action === "fight") {
             this.toggleCombatButtons();
+            if (!this.initiative) {
+                this.enemyAttack();
+            }
         }
         if (action === "negotiate") {
             if (this.checkReputation()) {
