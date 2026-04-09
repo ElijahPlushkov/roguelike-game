@@ -12,5 +12,6 @@ export const chapterOneIds = {
     ITEMS: "chapter_1_items",
     ENEMIES: "chapter_1_enemies",
     QUESTS: "chapter_1_quests",
-    NPCS: "chapter_1_npcs"
+    NPCS: "chapter_1_npcs",
+    ARMOR: "armors"
 }

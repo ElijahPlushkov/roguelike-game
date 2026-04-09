@@ -1,4 +1,5 @@
 import {ChangeAttributes} from "./ChangeAttributes.js";
+import {armorData} from "./armorData.js";
 
 export class Player {
 
@@ -20,7 +21,7 @@ export class Player {
     evasion = 0;
     spellChance = 15;
 
-    constructor(might, reputation, prayer, agility, pollen, weapon, armor, shield, rangedWeapon) {
+    constructor(might, reputation, prayer, agility, pollen, weapon, armorId, shield, rangedWeapon) {
         this.health = this.BASE_HEALTH;
         this.mysticism = this.BASE_MYSTICISM;
         this.willpower = this.BASE_WILLPOWER;
@@ -32,7 +33,7 @@ export class Player {
         this.pollen = pollen;
 
         this.weapon = weapon;
-        this.armor = armor;
+        this.armor = this.setArmor(armorId);
         this.shield = shield;
         this.rangedWeapon = rangedWeapon;
 
@@ -83,6 +84,11 @@ export class Player {
 
     setSpellChance(newValue) {
         this.spellChance = newValue;
+    }
+
+    setArmor(armorId) {
+        this.armor = armorData.armors.find(armor => armor.id === armorId);
+        return this.armor;
     }
 
     getMight() {

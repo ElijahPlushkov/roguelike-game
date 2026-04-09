@@ -2,6 +2,7 @@ import {chapterOneIds, CHAPTERS} from "./ids.js";
 import {mapRender} from "./mapRender.js";
 import {spears} from "./weaponsAll.js";
 import {mediumCuirasses} from "./armorAll.js";
+import {Player} from "./Player.js";
 
 export const gameData = {
     playerCoordinates: {x: 0, y: 1},
@@ -13,7 +14,8 @@ export const gameData = {
     willpower: 10,
 
     weapon: spears[0],
-    armor: mediumCuirasses[0],
+    // armor: mediumCuirasses[0],
+    armor: 'wax_cuirass',
     shield: {
         name: 'shield',
         id: 'shield',
@@ -134,6 +136,7 @@ let doorData = {};
 let enemyData = {};
 let questData = {};
 let npcData = {};
+// let armorData = armorData;
 
 export function loadLevelData(id = CHAPTERS.CHAPTER_1, spawnPosition) {
     fetch("/roguelike-game/load-level?id=" + id)
@@ -222,4 +225,28 @@ export function loadNpcData(id = chapterOneIds.NPCS) {
         });
 }
 
-export {levelData, chapterId, chapterName, map, playerCoordinates, tileSet, dialogueData, eventData, doorData, enemyData, questData, npcData};
+// export function loadArmorData(id = chapterOneIds.ARMOR) {
+//     fetch("/roguelike-game/load-script?id=" + id)
+//         .then(response => response.json())
+//         .then(armor => {
+//             armorData = armor
+//         })
+//         .catch(err => {
+//             console.error("Failed to load armors:", err);
+//         });
+// }
+
+export {levelData, chapterId, chapterName, map, playerCoordinates, tileSet, dialogueData, eventData, doorData,
+    enemyData, questData, npcData};
+
+export let player = new Player(
+    gameData.playerCharacteristics.might,
+    gameData.playerCharacteristics.reputation,
+    gameData.playerCharacteristics.prayer,
+    gameData.playerCharacteristics.agility,
+    gameData.pollen,
+    gameData.weapon,
+    gameData.armor,
+    gameData.shield,
+    gameData.rangedWeapon
+);

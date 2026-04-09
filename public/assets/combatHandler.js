@@ -1,11 +1,11 @@
 import {
     enemyData,
-    npcData
+    npcData,
+    player
 } from "./gameData.js";
 import {RandomEnemyFactory} from "./RandomEnemyFactory.js";
 import {NpcFactory} from "./NpcFactory.js";
 import {Combat} from "./Combat.js";
-import {playerObject} from "./main.js";
 import {UniqueEnemyFactory} from "./UniqueEnemyFactory.js";
 
 export function initCombat(enemyId, enemyType) {
@@ -28,6 +28,6 @@ export function initCombat(enemyId, enemyType) {
     }
 
     // start a new combat
-    let newCombat = new Combat(enemy, playerObject, enemyId);
+    let newCombat = new Combat(enemy, player, enemyId);
     newCombat.startCombat();
 }

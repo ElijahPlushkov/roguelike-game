@@ -1,6 +1,5 @@
-import {displayPollen, gameData} from "./gameData.js";
+import {displayPollen, gameData, player} from "./gameData.js";
 import {displayAdventureLogMessage} from "./helperFunctions.js";
-import {playerObject} from "./main.js";
 import {AdventureLogHandler} from "./AdventureLogHandler.js";
 
 export class ChangeStats {
@@ -16,7 +15,7 @@ export class ChangeStats {
             }
             this.updateDomStats(key, value);
             this.updatePlayerObjectStats(key);
-            playerObject.changeAttributes(key);
+            player.changeAttributes(key);
         }
     }
 
@@ -37,15 +36,15 @@ export class ChangeStats {
 
     updatePlayerObjectStats(key) {
         if (key === "pollen") {
-            playerObject.setPollen(gameData.pollen);
+            player.setPollen(gameData.pollen);
         } else if (key === "might") {
-            playerObject.setMight(gameData.playerCharacteristics.might);
+            player.setMight(gameData.playerCharacteristics.might);
         } else if (key === "reputation") {
-            playerObject.setReputation(gameData.playerCharacteristics.reputation);
+            player.setReputation(gameData.playerCharacteristics.reputation);
         } else if (key === "prayer") {
-            playerObject.setPrayer(gameData.playerCharacteristics.prayer);
+            player.setPrayer(gameData.playerCharacteristics.prayer);
         } else {
-            playerObject.setAgility(gameData.playerCharacteristics.agility);
+            player.setAgility(gameData.playerCharacteristics.agility);
         }
     }
 }

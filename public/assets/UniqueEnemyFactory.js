@@ -1,6 +1,7 @@
 import {NewEnemy} from "./NewEnemy.js";
 import {weaponsByClass} from "./weaponsByClass.js";
 import {armorByClass} from "./armorByClass.js";
+import {armorData} from "./armorData.js";
 
 export class UniqueEnemyFactory {
 
@@ -26,9 +27,9 @@ export class UniqueEnemyFactory {
         }
         let armor;
         if (enemy.armor === "random") {
-            armor = this.setArmor(enemyClass);
+            armor = this.setRandomArmor(enemyClass);
         } else {
-            armor = enemy.armor;
+            armor = this.setArmor(enemy);
         }
         let shield;
         if (enemy.shield === "random") {
@@ -138,7 +139,13 @@ export class UniqueEnemyFactory {
         }
     }
 
-    setArmor(enemyClass) {
+    setArmor(enemy) {
+        let armorId = enemy.armor;
+        this.armor = armorData.armors.find(armor => armor.id === armorId);
+        return this.armor;
+    }
+
+    setRandomArmor(enemyClass) {
         if (enemyClass === "knight") {
             let randomArmorIndex = Math.floor(Math.random() * armorByClass.knight.length);
             this.armor = armorByClass.knight[randomArmorIndex];

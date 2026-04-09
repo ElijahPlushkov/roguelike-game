@@ -1,5 +1,5 @@
-import {playerObject} from "./main.js";
-import {displayCurrentHealth, displayCurrentMysticism, displayMaxHealth, displayMaxMysticism, displayWillpower, gameData} from "./gameData.js";
+
+import {displayCurrentHealth, displayCurrentMysticism, displayMaxHealth, displayMaxMysticism, displayWillpower, gameData, player} from "./gameData.js";
 
 export class ChangeAttributes {
     HEALTH_MODIFIER = 2;
@@ -12,53 +12,53 @@ export class ChangeAttributes {
         }
         if (stat === "agility") {
             gameData.accuracy = this.changeAccuracy();
-            playerObject.setAccuracy(gameData.accuracy);
+            player.setAccuracy(gameData.accuracy);
             gameData.evasion = this.changeEvasion();
-            playerObject.setEvasion(gameData.evasion);
+            player.setEvasion(gameData.evasion);
         }
         if (stat === "might") {
             gameData.health = this.changeHealth();
-            playerObject.setHealth(gameData.health);
+            player.setHealth(gameData.health);
         }
         if (stat === "prayer") {
             gameData.mysticism = this.changeMysticism();
-            playerObject.setMysticism(gameData.mysticism);
+            player.setMysticism(gameData.mysticism);
             gameData.willpower = this.changeWillpower();
-            playerObject.setWillpower(gameData.willpower);
+            player.setWillpower(gameData.willpower);
             gameData.spellChance = this.changeSpellChance();
-            playerObject.setSpellChance(gameData.spellChance);
+            player.setSpellChance(gameData.spellChance);
         }
         this.updateDomAttributes();
     }
 
     changeHealth() {
-        let health = playerObject.getHealth();
-        let might = playerObject.getMight();
-        return playerObject.BASE_HEALTH + (might + Math.floor(might * this.HEALTH_MODIFIER));
+        let health = player.getHealth();
+        let might = player.getMight();
+        return player.BASE_HEALTH + (might + Math.floor(might * this.HEALTH_MODIFIER));
     }
 
     changeMysticism() {
-        let mysticism = playerObject.getMysticism();
-        let prayer = playerObject.getPrayer();
-        return playerObject.BASE_MYSTICISM + (prayer + Math.floor(prayer * this.MYSTICISM_MODIFIER));
+        let mysticism = player.getMysticism();
+        let prayer = player.getPrayer();
+        return player.BASE_MYSTICISM + (prayer + Math.floor(prayer * this.MYSTICISM_MODIFIER));
     }
 
     changeWillpower() {
-        let willpower = playerObject.getWillpower();
-        let prayer = playerObject.getPrayer();
-        return playerObject.BASE_WILLPOWER + (prayer + Math.floor(prayer * this.WILLPOWER_MODIFIER));
+        let willpower = player.getWillpower();
+        let prayer = player.getPrayer();
+        return player.BASE_WILLPOWER + (prayer + Math.floor(prayer * this.WILLPOWER_MODIFIER));
     }
 
     changeAccuracy() {
-        return playerObject.agility;
+        return player.agility;
     }
 
     changeEvasion() {
-        return playerObject.agility;
+        return player.agility;
     }
 
     changeSpellChance() {
-        return playerObject.getPrayer();
+        return player.getPrayer();
     }
 
     updateDomAttributes() {

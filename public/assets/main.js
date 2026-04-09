@@ -1,7 +1,7 @@
 import {
     gameData, adventureLog, journalClose, levelData, map, playerCoordinates, tileSet, dialogueData, eventData,
     loadLevelData, loadDialogueData, loadEventData, loadDoorData, loadEnemyData, loadQuestData, loadNpcData, eventBox,
-    chapterId
+    chapterId, player
 } from "./gameData.js";
 import {initEvent} from "./eventHandler.js";
 import {mapRender} from "./mapRender.js";
@@ -14,22 +14,8 @@ import {saveGame} from "./saveGame.js";
 import {loadSavedGame} from "./loadGame.js";
 import {QuestJournalUpdater} from "./QuestJournalUpdater.js";
 import {handleDeath} from "./deathHandler.js";
-import {Player} from "./Player.js";
 import {exitDungeon, loadDungeon} from "./dungeonHandler.js";
 import {AdventureLogHandler} from "./AdventureLogHandler.js";
-
-export let playerObject = new Player(
-    gameData.playerCharacteristics.might,
-    gameData.playerCharacteristics.reputation,
-    gameData.playerCharacteristics.prayer,
-    gameData.playerCharacteristics.agility,
-    gameData.pollen,
-    gameData.weapon,
-    gameData.armor,
-    gameData.shield,
-    gameData.rangedWeapon
-);
-console.log(playerObject);
 
 let spawnPosition;
 let spawnChapter;
@@ -49,6 +35,9 @@ document.addEventListener("DOMContentLoaded", () => {
     loadEnemyData();
     loadQuestData();
     loadNpcData();
+    // loadArmorData();
+
+    console.log(player);
 
     //movement
     document.addEventListener("keydown", (e) => {
