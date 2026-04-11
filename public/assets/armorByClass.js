@@ -1,7 +1,5 @@
-import {heavyCuirasses, mediumCuirasses, shirts} from "./armorAll.js";
-
 export const armorByClass = {
-    knight: heavyCuirasses,
-    monk: mediumCuirasses,
-    mystic: shirts
+    knight: ['walnut_cuirass', 'wax_cuirass'],
+    monk: ['cotton_shirt', 'wax_cuirass'],
+    mystic: ['cotton_shirt']
 }

@@ -100,6 +100,8 @@ export class Combat {
 
         if (this.player.health <= 0) {
             handleDeath();
+            this.shield.removeEventListener("click", this.toggleShield);
+            this.attackTypes.removeEventListener("click", this.handleAttackButtons);
         }
     }
 
@@ -113,6 +115,11 @@ export class Combat {
             this.toggleCombatButtons();
             if (!this.initiative) {
                 this.enemyAttack();
+                if (this.player.health <= 0) {
+                    handleDeath();
+                    this.shield.removeEventListener("click", this.toggleShield);
+                    this.attackTypes.removeEventListener("click", this.handleAttackButtons);
+                }
             }
         }
         if (action === "negotiate") {
@@ -196,7 +203,7 @@ export class Combat {
 
     equipShield() {
         this.player.armor.armorRate = this.player.armor.armorRate + this.player.shield.armorRate;
-        this.player.agility = this.player.agility - this.player.shield.armorRate / 2;
+        this.player.agility = this.player.agility - this.player.shield.armorRate;
         this.isShieldEquipped = true;
 
         armorRateModifier.classList.add("positiveBuff");

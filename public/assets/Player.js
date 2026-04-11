@@ -1,5 +1,7 @@
 import {ChangeAttributes} from "./ChangeAttributes.js";
 import {armorData} from "./armorData.js";
+import {weaponData} from "./weaponData.js";
+import {shieldData} from "./shieldData.js";
 
 export class Player {
 
@@ -21,7 +23,7 @@ export class Player {
     evasion = 0;
     spellChance = 15;
 
-    constructor(might, reputation, prayer, agility, pollen, weapon, armorId, shield, rangedWeapon) {
+    constructor(might, reputation, prayer, agility, pollen, weaponId, armorId, shieldId, rangedWeapon) {
         this.health = this.BASE_HEALTH;
         this.mysticism = this.BASE_MYSTICISM;
         this.willpower = this.BASE_WILLPOWER;
@@ -32,9 +34,9 @@ export class Player {
         this.agility = agility;
         this.pollen = pollen;
 
-        this.weapon = weapon;
+        this.weapon = this.setWeapon(weaponId);
         this.armor = this.setArmor(armorId);
-        this.shield = shield;
+        this.shield = this.setShield(shieldId);
         this.rangedWeapon = rangedWeapon;
 
         this.accuracy = this.agility;
@@ -89,6 +91,16 @@ export class Player {
     setArmor(armorId) {
         this.armor = armorData.armors.find(armor => armor.id === armorId);
         return this.armor;
+    }
+
+    setWeapon(weaponId) {
+        this.weapon = weaponData.weapons.find(weapon => weapon.id === weaponId);
+        return this.weapon;
+    }
+
+    setShield(shieldId) {
+        this.shield = shieldData.shields.find(shield => shield.id === shieldId);
+        return this.shield;
     }
 
     getMight() {

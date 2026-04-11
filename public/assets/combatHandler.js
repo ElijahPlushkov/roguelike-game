@@ -4,7 +4,7 @@ import {
     player
 } from "./gameData.js";
 import {RandomEnemyFactory} from "./RandomEnemyFactory.js";
-import {NpcFactory} from "./NpcFactory.js";
+import {NpcEnemyFactory} from "./NpcEnemyFactory.js";
 import {Combat} from "./Combat.js";
 import {UniqueEnemyFactory} from "./UniqueEnemyFactory.js";
 
@@ -21,7 +21,7 @@ export function initCombat(enemyId, enemyType) {
         enemy = enemyFactory.createRandomEnemy(enemyType);
         console.log(enemy);
     } else if (enemyType === "npc") {
-        let npcFactory = new NpcFactory();
+        let npcFactory = new NpcEnemyFactory();
         let npc = npcData.npcs.find(npc => npc.id === enemyId);
         enemy = npcFactory.createNpcEnemy(npc);
         console.log(enemy);

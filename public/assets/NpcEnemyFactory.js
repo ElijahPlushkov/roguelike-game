@@ -1,6 +1,8 @@
 import {NewEnemy} from "./NewEnemy.js";
+import {armorData} from "./armorData.js";
+import {weaponData} from "./weaponData.js";
 
-export class NpcFactory {
+export class NpcEnemyFactory {
 
     HEALTH_MODIFIER = 2;
     MYSTICISM_MODIFIER = 1;
@@ -15,8 +17,8 @@ export class NpcFactory {
     createNpcEnemy(npc) {
         let race = npc.race;
         let enemyClass = npc.npcClass;
-        let weapon = npc.weapon;
-        let armor = npc.armor;
+        let weapon = this.setWeapon(npc.weapon);
+        let armor = this.setArmor(npc.armor);
         let shield = npc.shield;
         let spells = npc.spells; // object or array ?
         let characteristics = npc.characteristics;
@@ -60,6 +62,18 @@ export class NpcFactory {
             prayer: Math.floor(characteristics.prayer / 2),
             agility: Math.floor(characteristics.agility / 2)
         }
+    }
+
+    setArmor(id) {
+        let armorId = id;
+        this.armor = armorData.armors.find(armor => armor.id === armorId);
+        return this.armor;
+    }
+
+    setWeapon(id) {
+        let weaponId = id;
+        this.weapon = weaponData.weapons.find(weapon => weapon.id === weaponId);
+        return this.weapon;
     }
 
     setCombatVictory() {

@@ -35,7 +35,6 @@ document.addEventListener("DOMContentLoaded", () => {
     loadEnemyData();
     loadQuestData();
     loadNpcData();
-    // loadArmorData();
 
     console.log(player);
 
@@ -148,6 +147,7 @@ function checkForAnyEvent(x, y) {
 
         if (newEvent.type === "npc") {
             const npcId = newEvent.id;
+            eventBox.classList.toggle("hidden");
             gameData.isEventActive = true;
             initNpc(npcId);
         }

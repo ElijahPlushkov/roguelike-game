@@ -1,6 +1,8 @@
 import {NewEnemy} from "./NewEnemy.js";
 import {weaponsByClass} from "./weaponsByClass.js";
 import {armorByClass} from "./armorByClass.js";
+import {weaponData} from "./weaponData.js";
+import {armorData} from "./armorData.js";
 
 export class RandomEnemyFactory {
 
@@ -86,37 +88,45 @@ export class RandomEnemyFactory {
     }
 
     setWeapon(enemyClass) {
+        let weaponId;
+        let randomWeaponIndex;
+
         if (enemyClass === "knight") {
-            let randomWeaponIndex = Math.floor(Math.random() * weaponsByClass.knight.length);
-            this.weapon = weaponsByClass.knight[randomWeaponIndex];
+            randomWeaponIndex = Math.floor(Math.random() * weaponsByClass.knight.length);
+            weaponId = weaponsByClass.knight[randomWeaponIndex];
+            this.weapon = weaponData.weapons.find(weapon => weapon.id === weaponId);
             return this.weapon;
-        }
-        if (enemyClass === "monk") {
-            let randomWeaponIndex = Math.floor(Math.random() * weaponsByClass.monk.length);
-            this.weapon = weaponsByClass.monk[randomWeaponIndex];
+        } else if (enemyClass === "monk") {
+            randomWeaponIndex = Math.floor(Math.random() * weaponsByClass.monk.length);
+            weaponId = weaponsByClass.monk[randomWeaponIndex];
+            this.weapon = weaponData.weapons.find(weapon => weapon.id === weaponId);
             return this.weapon;
-        }
-        if (enemyClass === "mystic") {
-            let randomWeaponIndex = Math.floor(Math.random() * weaponsByClass.mystic.length);
-            this.weapon = weaponsByClass.mystic[randomWeaponIndex];
+        } else {
+            randomWeaponIndex = Math.floor(Math.random() * weaponsByClass.mystic.length);
+            weaponId = weaponsByClass.mystic[randomWeaponIndex];
+            this.weapon = weaponData.weapons.find(weapon => weapon.id === weaponId);
             return this.weapon;
         }
     }
 
     setArmor(enemyClass) {
+        let randomArmorIndex;
+        let armorId;
+
         if (enemyClass === "knight") {
             let randomArmorIndex = Math.floor(Math.random() * armorByClass.knight.length);
-            this.armor = armorByClass.knight[randomArmorIndex];
+            armorId = armorByClass.knight[randomArmorIndex];
+            this.armor = armorData.armors.find(armor => armor.id === armorId);
             return this.armor;
-        }
-        if (enemyClass === "monk") {
-            let randomArmorIndex = Math.floor(Math.random() * armorByClass.monk.length);
-            this.armor = armorByClass.monk[randomArmorIndex];
+        } else if(enemyClass === "monk") {
+            randomArmorIndex = Math.floor(Math.random() * armorByClass.monk.length);
+            armorId = armorByClass.monk[randomArmorIndex];
+            this.armor = armorData.armors.find(armor => armor.id === armorId);
             return this.armor;
-        }
-        if (enemyClass === "mystic") {
-            let randomArmorIndex = Math.floor(Math.random() * armorByClass.mystic.length);
-            this.armor = armorByClass.mystic[randomArmorIndex];
+        } else {
+            randomArmorIndex = Math.floor(Math.random() * armorByClass.mystic.length);
+            armorId = armorByClass.mystic[randomArmorIndex];
+            this.armor = armorData.armors.find(armor => armor.id === armorId);
             return this.armor;
         }
     }

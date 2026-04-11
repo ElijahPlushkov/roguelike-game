@@ -1,7 +1,5 @@
 import {chapterOneIds, CHAPTERS} from "./ids.js";
 import {mapRender} from "./mapRender.js";
-import {spears} from "./weaponsAll.js";
-import {mediumCuirasses} from "./armorAll.js";
 import {Player} from "./Player.js";
 
 export const gameData = {
@@ -13,17 +11,9 @@ export const gameData = {
     currentMysticism: 10,
     willpower: 10,
 
-    weapon: spears[0],
-    // armor: mediumCuirasses[0],
-    armor: 'wax_cuirass',
-    shield: {
-        name: 'shield',
-        id: 'shield',
-        armorRate: 2,
-        durability: 60,
-        weight: 5,
-        value: 15
-    },
+    weapon: 'oak_staff',
+    armor: 'cotton_shirt',
+    shield: 'birch_shield',
     rangedWeapon: {
         name: 'dart',
         id: 'dart',
@@ -55,6 +45,18 @@ export const gameData = {
 
     pollen: 0,
 };
+
+export let player = new Player(
+    gameData.playerCharacteristics.might,
+    gameData.playerCharacteristics.reputation,
+    gameData.playerCharacteristics.prayer,
+    gameData.playerCharacteristics.agility,
+    gameData.pollen,
+    gameData.weapon,
+    gameData.armor,
+    gameData.shield,
+    gameData.rangedWeapon
+);
 
 const adventureLog = document.querySelector(".adventure-log");
 
@@ -89,10 +91,10 @@ const displayPollen = document.querySelector(".pollen-stat-value");
 displayPollen.textContent = gameData.pollen;
 
 const displayArmorRate = document.querySelector(".armor-rate");
-displayArmorRate.textContent = gameData.armor.armorRate;
+displayArmorRate.textContent = player.armor.armorRate;
 
 const displayWeapon = document.querySelector(".combat-weapon");
-displayWeapon.textContent = gameData.weapon.name;
+displayWeapon.textContent = player.weapon.name;
 
 const armorRateModifier = document.querySelector(".armor-rate-modifier");
 
@@ -225,28 +227,5 @@ export function loadNpcData(id = chapterOneIds.NPCS) {
         });
 }
 
-// export function loadArmorData(id = chapterOneIds.ARMOR) {
-//     fetch("/roguelike-game/load-script?id=" + id)
-//         .then(response => response.json())
-//         .then(armor => {
-//             armorData = armor
-//         })
-//         .catch(err => {
-//             console.error("Failed to load armors:", err);
-//         });
-// }
-
 export {levelData, chapterId, chapterName, map, playerCoordinates, tileSet, dialogueData, eventData, doorData,
     enemyData, questData, npcData};
-
-export let player = new Player(
-    gameData.playerCharacteristics.might,
-    gameData.playerCharacteristics.reputation,
-    gameData.playerCharacteristics.prayer,
-    gameData.playerCharacteristics.agility,
-    gameData.pollen,
-    gameData.weapon,
-    gameData.armor,
-    gameData.shield,
-    gameData.rangedWeapon
-);

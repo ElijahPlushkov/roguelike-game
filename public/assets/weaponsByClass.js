@@ -1,7 +1,5 @@
-import {spears, staffs, daggers} from "./weaponsAll.js";
-
 export const weaponsByClass = {
-    knight: spears,
-    monk: staffs,
-    mystic: daggers
+    knight: ['oak_spear', 'oak_staff'],
+    monk: ['oak_staff'],
+    mystic: ['stone_dagger']
 }
