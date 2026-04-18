@@ -3,7 +3,6 @@ import {
     displayCurrentHealth,
     eventDescription,
     eventOptions,
-    adventureLog,
     combatWindow, combatLog, displayPollen, armorRateModifier, agilityModifier, playerCoordinates
 } from "./gameData.js";
 import {endEvent, markEventSeen} from "./helperFunctions.js";
@@ -11,6 +10,7 @@ import {ChangeStats} from "./ChangeStats.js";
 import {handleDeath} from "./deathHandler.js";
 import {previousCoordinates} from "./main.js";
 import {mapRender} from "./mapRender.js";
+import {AdventureLogHandler} from "./AdventureLogHandler.js";
 
 export class Combat {
 
@@ -22,6 +22,7 @@ export class Combat {
     isShieldEquipped = false;
 
     statChanger = new ChangeStats();
+    adventureLogHandler = new AdventureLogHandler();
 
     actionTypes = document.querySelector(".combat-action-types");
     attackTypes = document.querySelector(".combat-attack-types");
@@ -59,7 +60,7 @@ export class Combat {
     finishCombat() {
         this.isCombatOn = false;
         let isSuccessful = true;
-        this.registerCombatOutcome(this.enemy.difficulty, isSuccessful);
+        this.resolveCombat(this.enemy.difficulty, this.enemy.race);
         endEvent(this.enemyId, isSuccessful, eventDescription, eventOptions);
         markEventSeen(this.enemyId);
         this.clearCombatState();
@@ -159,18 +160,10 @@ export class Combat {
         gameData.playerCoordinates.x = previousCoordinates.x;
         gameData.playerCoordinates.y = previousCoordinates.y;
 
-        this.statChanger.changeStats({["pollen"]: -10});
-        this.statChanger.changeStats({["reputation"]: -1});
-        this.displayFleeMessage(this.enemy.fleeSuccess);
+        this.statChanger.changeStats({["pollen"]: -10}, {["reputation"]: -1});
+        this.adventureLogHandler.appendFleeMessage(this.enemy.fleeSuccess);
         this.clearCombatState();
         mapRender();
-    }
-
-    displayFleeMessage(message) {
-        const fleeMessage = document.createElement("p");
-        fleeMessage.className = "combat-text-color";
-        fleeMessage.textContent = message;
-        adventureLog.prepend(fleeMessage);
     }
 
     hasFled() {
@@ -225,6 +218,10 @@ export class Combat {
     }
 
     playerAttack(weaponDamage, attackType) {
+        if (attackType === "ranged" && this.player.ammunition <= 0) {
+            this.displayPlayerCombatMessage("Your ammunition is depleted.");
+            return;
+        }
         // calculate if an attack was successful
         let hitChance = Math.floor((this.player.agility / (this.enemy.characteristics.agility * 1.5)) * 100 + (this.player.accuracy / 2));
         let dodgeChance = Math.floor((this.enemy.characteristics.agility / this.player.agility)  * 10 + (this.enemy.evasion / 2));
@@ -241,7 +238,13 @@ export class Combat {
 
         if (roll > chance && luckyRoll > luckyStrikeChance) {
             this.displayPlayerCombatMessage("You miss.");
+            if (attackType === "ranged") {
+                this.player.ammunition -= 1;
+            }
         } else {
+            if (attackType === "ranged") {
+                this.player.ammunition -= 1;
+            }
             // calculate damage
             let damageReduction = this.calculateDamageReduction(attackType, "player");
             let damageDealt = (weaponDamage - this.enemy.armor.armorRate) * this.player.might;
@@ -356,10 +359,10 @@ export class Combat {
         thrustBtn.dataset.damage = player.weapon.attackTypes.thrust;
 
         let rangedDamage = document.querySelector(".weapon-ranged-damage");
-        rangedDamage.textContent = player.rangedWeapon.attack;
+        rangedDamage.textContent = player.rangedWeapon.damage;
 
         let rangedBtn = document.querySelector(".ranged-btn");
-        rangedBtn.dataset.damage = player.rangedWeapon.attack;
+        rangedBtn.dataset.damage = player.rangedWeapon.damage;
     }
 
     displayEnemyInfo(enemy) {
@@ -420,55 +423,37 @@ export class Combat {
         combatLog.append(newMessage);
     }
 
-    registerCombatOutcome(enemyDifficulty, isSuccessful) {
+    resolveCombat(enemyDifficulty, race) {
 
         let increase;
-        let decrease;
+        let pollenChange;
 
         const characteristics = Object.keys(gameData.playerCharacteristics);
         const charKey = characteristics[Math.floor(Math.random() * characteristics.length)];
 
-        const displayCharacteristic = document.querySelector(`.${charKey}-stat-value`);
-
         if (enemyDifficulty === "flimsy") {
             increase = 1;
-            decrease = -1;
-            gameData.pollenChange = Math.floor(Math.random() * 7) + 1;
+            pollenChange = Math.floor(Math.random() * 7) + 1;
         } else if (enemyDifficulty === "weak") {
             increase = 1;
-            decrease = -1;
-            gameData.pollenChange = Math.floor(Math.random() * 10) + 1;
+            pollenChange = Math.floor(Math.random() * 10) + 1;
         } else if (enemyDifficulty === "average") {
             increase = 2;
-            decrease = -2;
-            gameData.pollenChange = Math.floor(Math.random() * (20 - 10 + 1)) + 10;
+            pollenChange = Math.floor(Math.random() * (20 - 10 + 1)) + 10;
         } else if (enemyDifficulty === "tough") {
             increase = 3;
-            decrease = -4;
-            gameData.pollenChange = Math.floor(Math.random() * (40 - 20 + 1)) + 20;
+            pollenChange = Math.floor(Math.random() * (40 - 20 + 1)) + 20;
         } else if (enemyDifficulty === "master") {
             increase = 4;
-            decrease = -6;
-            gameData.pollenChange = Math.floor(Math.random() * (60 - 40 + 1)) + 40;
+            pollenChange = Math.floor(Math.random() * (60 - 40 + 1)) + 40;
         } else if (enemyDifficulty === "boss") {
             increase = 5;
-            decrease = -8;
-            gameData.pollenChange = Math.floor(Math.random() * (80 - 60 + 1)) + 60;
+            pollenChange = Math.floor(Math.random() * (80 - 60 + 1)) + 60;
         }
 
-        const combatResolution = document.createElement("p");
-        combatResolution.classList.add("combat-text-color");
+        displayPollen.textContent = gameData.pollen += pollenChange;
+        this.statChanger.changeStats({[charKey]: increase });
+        this.adventureLogHandler.appendCombatResolutionMessage(charKey, increase, pollenChange, race);
 
-        if (isSuccessful === false) {
-            displayPollen.textContent = gameData.pollen -= gameData.pollenChange;
-            // combatResolution.textContent = `Your ${charKey} decreased by ${Math.abs(decrease)}. You lose ${gameData.pollenChange} pollen grains.`;
-            // adventureLog.prepend(combatResolution);
-            this.statChanger.changeStats({[charKey]: decrease });
-        } else {
-            displayPollen.textContent = gameData.pollen += gameData.pollenChange;
-            // combatResolution.textContent = `Your ${charKey} increased by ${increase}. You collect ${gameData.pollenChange} pollen grains.`;
-            // adventureLog.prepend(combatResolution);
-            this.statChanger.changeStats({[charKey]: increase });
-        }
     }
 }

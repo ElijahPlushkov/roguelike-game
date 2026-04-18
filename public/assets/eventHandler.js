@@ -2,6 +2,9 @@ import {eventDescription, eventOptions, eventData} from "./gameData.js";
 import {appendContinueButton, endEvent} from "./helperFunctions.js";
 import {QuestJournalUpdater} from "./QuestJournalUpdater.js";
 import {ChangeStats} from "./ChangeStats.js";
+import {AdventureLogHandler} from "./AdventureLogHandler.js";
+
+const adventureLogHandler = new AdventureLogHandler();
 
 export function initEvent(eventId) {
 
@@ -26,5 +29,6 @@ export function initEvent(eventId) {
         console.log(reward);
         let statChanger = new ChangeStats();
         statChanger.changeStats(reward);
+        adventureLogHandler.appendEventMessage(reward);
     });
 }

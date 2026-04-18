@@ -14,14 +14,8 @@ export const gameData = {
     weapon: 'oak_staff',
     armor: 'cotton_shirt',
     shield: 'birch_shield',
-    rangedWeapon: {
-        name: 'dart',
-        id: 'dart',
-        attack: 3,
-        weight: 2,
-        durability: 30,
-        value: 5
-    },
+    rangedWeapon: 'pine_needle_dart',
+    ammunition: 3,
 
     accuracy: 1,
     evasion: 1,
@@ -55,10 +49,9 @@ export let player = new Player(
     gameData.weapon,
     gameData.armor,
     gameData.shield,
-    gameData.rangedWeapon
+    gameData.rangedWeapon,
+    gameData.ammunition
 );
-
-const adventureLog = document.querySelector(".adventure-log");
 
 const displayMaxHealth = document.querySelector(".max-health");
 displayMaxHealth.textContent = gameData.health;
@@ -115,8 +108,7 @@ const journalClose = document.querySelector(".journal-close");
 const combatWindow = document.querySelector(".combat-box");
 const combatLog = document.querySelector(".combat-log");
 
-export {adventureLog,
-    displayMaxHealth, displayCurrentHealth, displayMaxMysticism, displayCurrentMysticism, displayWillpower,
+export {displayMaxHealth, displayCurrentHealth, displayMaxMysticism, displayCurrentMysticism, displayWillpower,
     displayReputation, displayMight, displayPrayer, displayAgility, displayPollen, displayArmorRate, armorRateModifier,
     agilityModifier,
     eventBox, eventDescription, eventOptions, eventInfo,

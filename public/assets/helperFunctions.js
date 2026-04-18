@@ -1,4 +1,4 @@
-import {adventureLog, eventBox, gameData} from "./gameData.js";
+import {eventBox, gameData} from "./gameData.js";
 
 export function appendContinueButton() {
     const continueButton = document.createElement("button");
@@ -6,37 +6,6 @@ export function appendContinueButton() {
     continueButton.className = "option-button option-button_small";
 
     return continueButton;
-}
-
-export function displayAdventureLogMessage(key, value, ccsClass) {
-    const adventureLogMessage = document.createElement("p");
-    adventureLogMessage.className = ccsClass;
-
-    let text;
-
-    if (value < 0) {
-        if (key === "pollen") {
-            if (value === -1) {
-                text = `You lose: ${value} pollen grain.`;
-            } else {
-                text = `You lose: ${value} pollen grains.`;
-            }
-        } else {
-            text = `You lose: ${value} ${key}.`;
-        }
-    } else {
-        if (key === "pollen") {
-            if (value === 1) {
-                text = `Your reward: ${value} pollen grain.`;
-            } else {
-                text = `Your reward: ${value} pollen grains.`;
-            }
-        } else {
-            text = `Your reward: ${value} ${key}.`;
-        }
-    }
-    adventureLogMessage.textContent = text;
-    adventureLog.prepend(adventureLogMessage);
 }
 
 export function endEvent(id, status, description, options) {

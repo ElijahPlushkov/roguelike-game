@@ -1,5 +1,5 @@
 import {
-    gameData, adventureLog, journalClose, levelData, map, playerCoordinates, tileSet, dialogueData, eventData,
+    gameData, journalClose, levelData, map, playerCoordinates, tileSet, dialogueData, eventData,
     loadLevelData, loadDialogueData, loadEventData, loadDoorData, loadEnemyData, loadQuestData, loadNpcData, eventBox,
     chapterId, player
 } from "./gameData.js";
@@ -171,10 +171,7 @@ function isWalkable(x, y) {
     const currentTile = tileSet[tileType];
 
     if (currentTile.walkable === false) {
-        const newLogEntry = document.createElement("p");
-        newLogEntry.className = "log-entry";
-        newLogEntry.textContent = "You can't walk here!";
-        adventureLog.prepend(newLogEntry);
+        adventureLogHandler.appendSystemMessage("You can't walk here!");
         return false;
     }
     if (currentTile.type === "door") {

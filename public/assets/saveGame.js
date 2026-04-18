@@ -1,8 +1,11 @@
-import {adventureLog, gameData} from "./gameData.js";
+import {gameData} from "./gameData.js";
+import {AdventureLogHandler} from "./AdventureLogHandler.js";
+
+const adventureLogHandler = new AdventureLogHandler();
 
 export function saveGame() {
     if (gameData.isEventActive) {
-        adventureLog.prepend("Cannot save now.");
+        adventureLogHandler.appendSystemMessage("Cannot save now.");
         return;
     }
     fetch("/roguelike-game/saveGame", {
@@ -12,9 +15,7 @@ export function saveGame() {
     })
         .then(result => result.json())
         .then(data => {
-            let saveMessage = document.createElement("p");
-            saveMessage.textContent = "Game saved.";
-            adventureLog.prepend(saveMessage);
+            adventureLogHandler.appendSystemMessage("Game saved.");
             console.log("game saved:", data);
         })
         .catch(error => console.error("save failed:", error));

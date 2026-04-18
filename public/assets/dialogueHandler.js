@@ -65,6 +65,7 @@ export function initDialogue(dialogueId, stateKey) {
                 if (option.characteristics) {
                     let statChanger = new ChangeStats();
                     statChanger.changeStats(option.characteristics);
+                    adventureLogHandler.appendEventMessage(option.characteristics);
                 }
 
                 // if an option has a quest marker
@@ -120,6 +121,7 @@ export function initDialogue(dialogueId, stateKey) {
             if (finalState.characteristics) {
                 let statChanger = new ChangeStats();
                 statChanger.changeStats(finalState.characteristics);
+                adventureLogHandler.appendEventMessage(finalState.characteristics);
             }
         });
 

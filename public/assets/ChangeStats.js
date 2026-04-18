@@ -1,10 +1,6 @@
 import {displayPollen, gameData, player} from "./gameData.js";
-import {displayAdventureLogMessage} from "./helperFunctions.js";
-import {AdventureLogHandler} from "./AdventureLogHandler.js";
 
 export class ChangeStats {
-
-    adventureLogHandler = new AdventureLogHandler();
 
     changeStats(reward) {
         for (const [key, value] of Object.entries(reward)) {
@@ -13,21 +9,19 @@ export class ChangeStats {
             } else {
                 gameData.playerCharacteristics[key] += value;
             }
-            this.updateDomStats(key, value);
+            this.updateDomStats(key);
             this.updatePlayerObjectStats(key);
             player.changeAttributes(key);
         }
     }
 
-    updateDomStats(key, value) {
+    updateDomStats(key) {
         if (key === "pollen") {
             displayPollen.textContent = gameData.pollen;
-            displayAdventureLogMessage(key, value, "event-text-color");
         } else {
             const displayCharacteristic = document.querySelector(`.${key}-stat-value`);
             if (displayCharacteristic) {
                 displayCharacteristic.textContent = gameData.playerCharacteristics[key];
-                displayAdventureLogMessage(key, value, "event-text-color");
             } else {
                 console.warn(`Missing DOM element for: .${key}-characteristic-count`);
             }

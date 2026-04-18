@@ -1,9 +1,10 @@
-import {adventureLog, gameData} from "./gameData.js";
+import {gameData} from "./gameData.js";
+import {AdventureLogHandler} from "./AdventureLogHandler.js";
+
+const adventureLogHandler = new AdventureLogHandler();
 
 export function handleDeath() {
-    const deathMessage = document.createElement("div");
-    deathMessage.textContent = "you are dead";
-    adventureLog.prepend(deathMessage);
+    adventureLogHandler.appendDeathMessage("You are dead.");
 
     gameData.isEventActive = true;
 

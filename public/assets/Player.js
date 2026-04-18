@@ -2,6 +2,7 @@ import {ChangeAttributes} from "./ChangeAttributes.js";
 import {armorData} from "./armorData.js";
 import {weaponData} from "./weaponData.js";
 import {shieldData} from "./shieldData.js";
+import {rangedWeaponsData} from "./rangedWeaponsData.js";
 
 export class Player {
 
@@ -23,7 +24,9 @@ export class Player {
     evasion = 0;
     spellChance = 15;
 
-    constructor(might, reputation, prayer, agility, pollen, weaponId, armorId, shieldId, rangedWeapon) {
+    ammunition = 0;
+
+    constructor(might, reputation, prayer, agility, pollen, weaponId, armorId, shieldId, rangedWeaponId, ammunition) {
         this.health = this.BASE_HEALTH;
         this.mysticism = this.BASE_MYSTICISM;
         this.willpower = this.BASE_WILLPOWER;
@@ -37,7 +40,8 @@ export class Player {
         this.weapon = this.setWeapon(weaponId);
         this.armor = this.setArmor(armorId);
         this.shield = this.setShield(shieldId);
-        this.rangedWeapon = rangedWeapon;
+        this.rangedWeapon = this.setRangedWeapon(rangedWeaponId);
+        this.ammunition = ammunition;
 
         this.accuracy = this.agility;
         this.evasion = this.agility;
@@ -96,6 +100,11 @@ export class Player {
     setWeapon(weaponId) {
         this.weapon = weaponData.weapons.find(weapon => weapon.id === weaponId);
         return this.weapon;
+    }
+
+    setRangedWeapon(rangedWeaponId) {
+        this.rangedWeapon = rangedWeaponsData.rangedWeapons.find(rangedWeapon => rangedWeapon.id = rangedWeaponId);
+        return this.rangedWeapon;
     }
 
     setShield(shieldId) {

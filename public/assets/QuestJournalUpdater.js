@@ -1,8 +1,10 @@
-import {adventureLog, gameData, journalBox, questData} from "./gameData.js";
+import {gameData, journalBox, questData} from "./gameData.js";
 import {ChangeStats} from "./ChangeStats.js";
+import {AdventureLogHandler} from "./AdventureLogHandler.js";
 
 export class QuestJournalUpdater {
-    journalBox = journalBox
+    journalBox = journalBox;
+    adventureLogHandler = new AdventureLogHandler();
 
     toggleJournal() {
         this.journalBox.classList.toggle("hidden");
@@ -50,18 +52,18 @@ export class QuestJournalUpdater {
         if (finishingStates.includes(questState)) {
             this.updateQuest(questId, questState, currentQuest, activeQuests, allActiveQuests);
             this.finishQuest(questId, activeQuests, allActiveQuests);
-            this.questFinishNotification();
+            this.questFinishNotification(currentQuest.title);
             this.giveReward(questState, currentQuest);
             this.updateGameDataObject(questId, questState, "completed");
         }
         else if (this.doesQuestExistInDom(allActiveQuests, questId) && !finishingStates.includes(questState)) {
             this.updateQuest(questId, questState, currentQuest, activeQuests, allActiveQuests);
-            this.questUpdateNotification();
+            this.questUpdateNotification(currentQuest.title);
             this.updateGameDataObject(questId, questState, "active");
         }
          else {
             this.addNewQuest(questId, questState, currentQuest);
-            this.questUpdateNotification();
+            this.questStartNotification(currentQuest.title);
             this.updateGameDataObject(questId, questState, "active");
         }
     }
@@ -132,16 +134,16 @@ export class QuestJournalUpdater {
         }
     }
 
-    questUpdateNotification() {
-        let newNotification = document.createElement("p");
-        newNotification.textContent = "Journal updated."
-        adventureLog.prepend(newNotification);
+    questStartNotification(questTitle) {
+        this.adventureLogHandler.appendQuestJournalMessage("Quest started: " + questTitle);
     }
 
-    questFinishNotification() {
-        let finishNotification = document.createElement("p");
-        finishNotification.textContent = "Quest completed."
-        adventureLog.prepend(finishNotification);
+    questUpdateNotification(questTitle) {
+        this.adventureLogHandler.appendQuestJournalMessage("Quest updated: " + questTitle);
+    }
+
+    questFinishNotification(questTitle) {
+        this.adventureLogHandler.appendQuestJournalMessage("Quest completed: " + questTitle);
     }
 
     removeAllQuests() {

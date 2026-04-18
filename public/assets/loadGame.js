@@ -1,10 +1,13 @@
-import {adventureLog, displayMight, displayPollen, displayPrayer, displayAgility, displayReputation, gameData, playerCoordinates} from "./gameData.js";
+import {displayMight, displayPollen, displayPrayer, displayAgility, displayReputation, gameData, playerCoordinates} from "./gameData.js";
 import {mapRender} from "./mapRender.js";
 import {QuestJournalUpdater} from "./QuestJournalUpdater.js";
+import {AdventureLogHandler} from "./AdventureLogHandler.js";
+
+const adventureLogHandler = new AdventureLogHandler();
 
 export async function loadSavedGame() {
     if (gameData.isEventActive) {
-        adventureLog.prepend("Cannot load now.");
+        adventureLogHandler.appendSystemMessage("Cannot load now.");
         return
     }
     try {
@@ -36,11 +39,8 @@ export async function loadSavedGame() {
         let journalUpdater = new QuestJournalUpdater();
         journalUpdater.loadSeenQuests(gameData.quests);
 
-        adventureLog.innerHTML = "";
-
-        let loadMessage = document.createElement("p");
-        loadMessage.textContent = "Game loaded.";
-        adventureLog.prepend(loadMessage);
+        adventureLogHandler.clearAdventureLog();
+        adventureLogHandler.appendSystemMessage("Game loaded.");
 
     } catch (error) {
         console.log("Failed to load game:", error);
