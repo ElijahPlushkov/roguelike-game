@@ -79,14 +79,12 @@ require_once __DIR__ . "/../views/header.php";
                                 <div>WEAPON: <span class="enemy-weapon">Obsidian Spear</span></div>
                             </div>
                         </div>
+                        <br>
                         <hr>
                         <br>
                         <hr>
+                        <br>
                         <div class="combat-action-types">
-<!--                            <div>AVAILABLE ACTIONS: </div>-->
-<!--                            <button class="combat-button action-button fight-btn">Fight</button>-->
-<!--                            <button class="combat-button action-button negotiate-btn">Negotiate</button>-->
-<!--                            <button class="combat-button action-button flee-btn">Flee</button>-->
                         </div>
                         <div class="combat-attack-types hidden">
                             <button class="combat-button attack-button chop-btn" data-damage=""
@@ -96,7 +94,8 @@ require_once __DIR__ . "/../views/header.php";
                             <button class="combat-button attack-button thrust-btn" data-damage=""
                                     data-attack-type="thrust">Thrust: <span class="weapon-thrust-damage">7</span>D</button>
                             <button class="combat-button attack-button ranged-btn" data-damage=""
-                                    data-attack-type="ranged">Ranged: <span class="weapon-ranged-damage">7</span>D</button>
+                                    data-attack-type="ranged">Ranged: <span class="weapon-ranged-damage">7</span>D
+                                [<span class="ammunition-counter">3</span>]</button>
                             <button class="combat-button shield">Shield</button>
                         </div>
                     </div>

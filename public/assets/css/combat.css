@@ -60,6 +60,15 @@
     width: 85px;
 }
 
+.ranged-btn {
+    width: 110px;
+}
+
+.ammunition-counter {
+    font-size: 14px;
+    padding: 3px;
+}
+
 .shield-active {
     background: var(--water-tile);
 }

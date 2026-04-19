@@ -103,7 +103,7 @@ export class Player {
     }
 
     setRangedWeapon(rangedWeaponId) {
-        this.rangedWeapon = rangedWeaponsData.rangedWeapons.find(rangedWeapon => rangedWeapon.id = rangedWeaponId);
+        this.rangedWeapon = rangedWeaponsData.rangedWeapons.find(rangedWeapon => rangedWeapon.id === rangedWeaponId) || "none";
         return this.rangedWeapon;
     }
 

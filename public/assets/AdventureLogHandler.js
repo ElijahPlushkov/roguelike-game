@@ -57,10 +57,22 @@ export class AdventureLogHandler {
         combatMessage.className = "log-entry";
 
         let text;
-        text = `You defeated: ${race}. Your ${key} increased by ${value}. You collect ${pollenChange} pollen grains.`
+        text = `Your ${key} increased by ${value}. You collect ${pollenChange} pollen grains.`
 
         combatMessage.textContent = text;
         this.adventureLog.prepend(combatMessage);
+        this.appendDefeatMessage(race);
+    }
+
+    appendDefeatMessage(race) {
+        const defeatMessage = document.createElement("p");
+        defeatMessage.className = "log-entry";
+
+        let text;
+        text = `You defeated: ${race}.`
+
+        defeatMessage.textContent = text;
+        this.adventureLog.prepend(defeatMessage);
     }
 
     appendFleeMessage(message) {

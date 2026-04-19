@@ -27,6 +27,7 @@ export class Combat {
     actionTypes = document.querySelector(".combat-action-types");
     attackTypes = document.querySelector(".combat-attack-types");
     shield = document.querySelector(".shield");
+    ammunitionCounter = document.querySelector(".ammunition-counter");
 
     constructor(enemy, player, enemyId) {
         this.enemy = enemy;
@@ -240,10 +241,12 @@ export class Combat {
             this.displayPlayerCombatMessage("You miss.");
             if (attackType === "ranged") {
                 this.player.ammunition -= 1;
+                this.ammunitionCounter.textContent = this.player.ammunition;
             }
         } else {
             if (attackType === "ranged") {
                 this.player.ammunition -= 1;
+                this.ammunitionCounter.textContent = this.player.ammunition;
             }
             // calculate damage
             let damageReduction = this.calculateDamageReduction(attackType, "player");
@@ -282,9 +285,6 @@ export class Combat {
                 return armorData[attackType];
             }
         }
-
-        // console.warn(`Unknown armor type "${enemyArmorType}" or attack type "${attackType}"`);
-        // return 0;
     }
 
     enemyAttack() {
@@ -334,12 +334,6 @@ export class Combat {
         let playerWeapon = document.querySelector(".combat-weapon");
         playerWeapon.textContent = player.weapon.name;
 
-        // let playerAccuracy = document.querySelector(".player-accuracy");
-        // playerAccuracy.textContent = player.accuracy;
-        //
-        // let playerEvasion = document.querySelector(".player-evasion");
-        // playerEvasion.textContent = player.evasion;
-
         let chopDamage = document.querySelector(".weapon-chop-damage");
         chopDamage.textContent = player.weapon.attackTypes.chop;
 
@@ -358,11 +352,17 @@ export class Combat {
         let thrustBtn = document.querySelector(".thrust-btn");
         thrustBtn.dataset.damage = player.weapon.attackTypes.thrust;
 
-        let rangedDamage = document.querySelector(".weapon-ranged-damage");
-        rangedDamage.textContent = player.rangedWeapon.damage;
-
         let rangedBtn = document.querySelector(".ranged-btn");
-        rangedBtn.dataset.damage = player.rangedWeapon.damage;
+
+        if (player.rangedWeapon === "none") {
+            rangedBtn.className = "hidden";
+        } else {
+            let rangedDamage = document.querySelector(".weapon-ranged-damage");
+            rangedDamage.textContent = player.rangedWeapon.damage;
+            rangedBtn.dataset.damage = player.rangedWeapon.damage;
+
+            this.ammunitionCounter.textContent = player.ammunition;
+        }
     }
 
     displayEnemyInfo(enemy) {
@@ -454,6 +454,5 @@ export class Combat {
         displayPollen.textContent = gameData.pollen += pollenChange;
         this.statChanger.changeStats({[charKey]: increase });
         this.adventureLogHandler.appendCombatResolutionMessage(charKey, increase, pollenChange, race);
-
     }
 }

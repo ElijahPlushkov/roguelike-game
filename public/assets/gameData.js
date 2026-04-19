@@ -15,7 +15,7 @@ export const gameData = {
     armor: 'cotton_shirt',
     shield: 'birch_shield',
     rangedWeapon: 'pine_needle_dart',
-    ammunition: 3,
+    ammunition: 7,
 
     accuracy: 1,
     evasion: 1,
