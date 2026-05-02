@@ -1,0 +1,169 @@
+.hidden {
+    display: none;
+}
+
+.game-interface {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 1280px;
+    height: 720px;
+}
+
+.player-stats {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin: 5px;
+}
+
+.stats-display {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+}
+
+.stat-item {
+    font-size: 16px;
+}
+
+.game-menu {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 10px;
+    gap: 10px;
+    border: var(--main-text-color) 1px solid;
+    padding: 10px;
+    width: 1280px;
+}
+
+.game-menu-item {
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.game-menu-link {
+    color: var(--main-text-color);
+    text-decoration: none;
+}
+
+.game-menu-link_ingame:visited,
+.game-menu-link_ingame:active, a {
+    color: var(--main-text-color);
+}
+
+.level-title__heading {
+    margin: 10px;
+}
+
+.game-view {
+    max-width: 1280px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 20px;
+    padding: 20px;
+}
+
+.map-display {
+    width: 1200px;
+    height: 420px;
+    overflow: hidden;
+    border-radius: 5px;
+    overflow-y: auto;
+}
+
+.event-box {
+    position: fixed;
+    top: 70px;
+    right: 500px;
+    width: 680px;
+    height: 420px;
+    background: var(--event-box-background-color);
+    border-radius: 5px;
+    padding: 5px;
+}
+
+.event-content {
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    height: 95%;
+    gap: 10px;
+}
+
+.event-description {
+    font-size: 14px;
+    overflow-y: auto;
+    min-height: 0;
+
+}
+
+.event-options {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    border-top: 1px solid var(--main-text-color);
+}
+
+.option-button {
+    font-size: 14px;
+    color: var(--main-text-color);
+    background: var(--option-button-background);
+    border: 1px solid black;
+    border-radius: 3px;
+    margin: 5px;
+    padding: 3px;
+    width: 300px;
+    text-align: left;
+}
+
+.option-button_small {
+    width: 90px;
+    text-align: center;
+}
+
+.positiveBuff {
+    color: var(--water-tile);
+}
+
+.negativeBuff {
+    color: var(--rejection-text-color);
+}
+
+.player-interface {
+    width: 1280px;
+    display: flex;
+    justify-content: start;
+    align-items: start;
+    gap: 30px;
+}
+
+.adventure-log {
+    height: 190px;
+    width: 420px;
+    overflow: hidden;
+    font-size: 12px;
+    padding: 10px;
+    background: var(--event-box-background-color);
+    border: 1px solid var(--main-text-color);
+    border-radius: 5px;
+    overflow-y: auto;
+}
+
+.event-text-color {
+    color: var(--event-text-color);
+}
+
+.log-entry {
+    color: var(--log-entry-text-color);
+}
+
+.rejection-text-color {
+    color: var(--rejection-text-color);
+}
+
+.dialogue-text-color {
+    color: var(--main-text-color);
+}

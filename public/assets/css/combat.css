@@ -1,0 +1,139 @@
+.combat-box {
+    position: fixed;
+    top: 70px;
+    right: 500px;
+    width: 680px;
+    height: 420px;
+    background: var(--event-box-background-color);
+    border: 2px solid var(--enemy-tile);
+    border-radius: 8px;
+    margin-left: 440px;
+    padding: 10px;
+    z-index: 5;
+}
+
+.combat-description {
+    color: var(--combat-text-color);
+}
+
+.combat-display {
+    display: flex;
+    gap: 5px;
+}
+
+.combat-player-window {
+    width: 190px;
+    background: rgba(156, 156, 156, 0.3);
+}
+
+.combat-player-info {
+    display: flex;
+    flex-direction: column;
+    margin: 5px;
+}
+
+.combat-attack-types,
+.combat-action-types {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.combat-weapon {
+    color: var(--log-entry-text-color);
+    margin: 5px;
+}
+
+.combat-button {
+    font-size: 14px;
+    color: var(--main-text-color);
+    border: 1px solid black;
+    border-radius: 3px;
+    margin: 5px;
+    padding: 3px;
+    text-align: left;
+}
+
+.attack-button,
+.shield {
+    background: var(--log-entry-text-color);
+    width: 85px;
+}
+
+.ranged-btn {
+    width: 110px;
+}
+
+.ammunition-counter {
+    font-size: 14px;
+    padding: 3px;
+}
+
+.shield-active {
+    background: var(--water-tile);
+}
+
+.action-button {
+    background: var(--water-tile);
+    width: 75px;
+    text-align: center;
+}
+
+.combat-log {
+    width: 280px;
+    height: 390px;
+    border: 1px solid var(--main-text-color);
+    scroll-behavior: smooth;
+    overflow-y: auto;
+}
+
+.combat-player-message {
+    text-align: left;
+    margin: 5px;
+}
+
+.combat-enemy-message {
+    text-align: right;
+    margin: 5px;
+}
+
+.combat-player-message {
+    color: var(--event-text-color);
+}
+
+.combat-enemy-message {
+    color: var(--log-entry-text-color);
+}
+
+.combat-enemy-status {
+    display: flex;
+    flex-direction: row;
+    margin: 5px;
+}
+
+.enemy-stats {
+    display: flex;
+    flex-direction: column;
+}
+
+.enemy-race {
+    color: var(--log-entry-text-color);
+}
+
+.enemy-difficulty,
+.enemy-class,
+.enemy-weapon {
+    margin: 5px;
+}
+
+.combat-footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.combat-text-color {
+    color: var(--combat-text-color);
+}
