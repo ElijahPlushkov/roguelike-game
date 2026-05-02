@@ -1,0 +1,251 @@
+import {
+    gameData, journalClose, levelData, map, playerCoordinates, tileSet, dialogueData, eventData,
+    loadLevelData, loadDialogueData, loadEventData, loadDoorData, loadEnemyData, loadQuestData, loadNpcData, eventBox,
+    chapterId, player
+} from "./gameData.js";
+import {initEvent} from "./eventHandler.js";
+import {mapRender} from "./mapRender.js";
+import {initDialogue} from "./dialogueHandler.js";
+import {initCombat} from "./combatHandler.js";
+import {accessDoor} from "./doorHandler.js";
+import {initNpc} from "./npcHandler.js";
+import {hasSeenEvent, markEventSeen} from "./helperFunctions.js";
+import {saveGame} from "./saveGame.js";
+import {loadSavedGame} from "./loadGame.js";
+import {QuestJournalUpdater} from "./QuestJournalUpdater.js";
+import {handleDeath} from "./deathHandler.js";
+import {exitDungeon, loadDungeon} from "./dungeonHandler.js";
+import {AdventureLogHandler} from "./AdventureLogHandler.js";
+
+let spawnPosition;
+let spawnChapter;
+
+export let previousCoordinates = {
+    x: 0,
+    y: 0
+}
+
+const adventureLogHandler = new AdventureLogHandler();
+
+document.addEventListener("DOMContentLoaded", () => {
+    loadLevelData();
+    loadDialogueData();
+    loadEventData();
+    loadDoorData();
+    loadEnemyData();
+    loadQuestData();
+    loadNpcData();
+
+    console.log(player);
+
+    //movement
+    document.addEventListener("keydown", (e) => {
+        checkMight();
+        if (gameData.isEventActive) {
+            return;
+        }
+
+        let dx = 0, dy = 0;
+
+        switch (e.key) {
+            case "w":
+                dy = -1;
+                break;
+            case "s":
+                dy = 1;
+                break;
+            case "a":
+                dx = -1;
+                break;
+            case "d":
+                dx = 1;
+                break;
+
+            case "ц":
+                dy = -1;
+                break;
+            case "ы":
+                dy = 1;
+                break;
+            case "ф":
+                dx = -1;
+                break;
+            case "в":
+                dx = 1;
+                break;
+            default:
+                return;
+        }
+
+        previousCoordinates = {
+            x: playerCoordinates.x,
+            y: playerCoordinates.y
+        }
+
+        const newX = playerCoordinates.x + dx;
+        const newY = playerCoordinates.y + dy;
+
+        gameData.playerCoordinates.x = newX;
+        gameData.playerCoordinates.y = newY;
+
+        if (isWalkable(newX, newY)) {
+            playerCoordinates.x = newX;
+            playerCoordinates.y = newY;
+        }
+
+        mapRender();
+        checkForAnyEvent(playerCoordinates.x, playerCoordinates.y);
+    });
+});
+
+function checkForAnyEvent(x, y) {
+
+    const allEvents = [
+        ...(levelData.tileData.events || []),
+        ...(levelData.tileData.dialogues || []),
+        ...(levelData.tileData.enemies || []),
+        ...(levelData.tileData.npcs || []),
+        ...(levelData.tileData.dungeons || []),
+        ...(levelData.tileData.dungeonExit || [])
+    ]
+
+    const newEvent = allEvents.find(event => event.x === x && event.y === y);
+
+    if (newEvent) {
+        //an event cannot start unless the player meets the requirements
+        if (!requirementsCheck(newEvent)) {
+            return;
+        }
+
+        if (newEvent.type === "event") {
+            const eventId = newEvent.id;
+            if (!hasSeenEvent(eventId)) {
+                eventBox.classList.toggle("hidden");
+                gameData.isEventActive = true;
+                initEvent(eventId);
+                markEventSeen(eventId);
+            }
+        }
+
+        if (newEvent.type === "dialogue") {
+            const dialogueId = newEvent.id;
+            if (!hasSeenEvent(dialogueId)) {
+                eventBox.classList.toggle("hidden");
+                gameData.isEventActive = true;
+                initDialogue(dialogueId, gameData.stateKey);
+                markEventSeen(dialogueId);
+            }
+        }
+
+        if (newEvent.type === "enemy") {
+            const enemyId = newEvent.id;
+            const enemyType = newEvent.enemyType;
+            if (!hasSeenEvent(enemyId)) {
+                initCombat(enemyId, enemyType);
+            }
+        }
+
+        if (newEvent.type === "npc") {
+            const npcId = newEvent.id;
+            eventBox.classList.toggle("hidden");
+            gameData.isEventActive = true;
+            initNpc(npcId);
+        }
+
+        if (newEvent.type === "dungeon") {
+            spawnPosition = {x: newEvent.x, y: newEvent.y};
+            spawnChapter = chapterId;
+            const dungeonId = newEvent.id;
+            loadDungeon(dungeonId);
+        }
+
+        if (newEvent.type === "dungeonExit") {
+            exitDungeon(spawnChapter, spawnPosition);
+        }
+    }
+}
+
+function isWalkable(x, y) {
+    const tileType = map[y][x];
+
+    const currentTile = tileSet[tileType];
+
+    if (currentTile.walkable === false) {
+        adventureLogHandler.appendSystemMessage("You can't walk here!");
+        return false;
+    }
+    if (currentTile.type === "door") {
+        return accessDoor(x, y);
+    }
+    return true;
+}
+
+function checkMight() {
+    if (gameData.playerCharacteristics.might <= -3) {
+        handleDeath();
+    }
+}
+
+function isRequirementPassed(requirements, event) {
+    let currentEvent = gameData.eventOutcomes.find(currentEvent => currentEvent.event === event);
+    if (currentEvent) {
+        if (currentEvent.outcome === requirements.eventOutcome) {
+            return true;
+        }
+        adventureLogHandler.appendRejectionMessage(event);
+        return false;
+    }
+
+    for (const [key, value] of Object.entries(requirements)) {
+        if (gameData.playerCharacteristics[key] < value) {
+            adventureLogHandler.appendRejectionMessage(event);
+            return false;
+        }
+    }
+    return true;
+}
+
+function requirementsCheck(newEvent) {
+
+    let isPassed = true;
+
+    if (newEvent.type === "dialogue") {
+        const dialogueId = newEvent.id;
+        const dialogue = dialogueData.dialogues.find(dialogue => dialogue.id === dialogueId);
+
+        if (!dialogue.requirements) {
+            isPassed = true;
+        } else {
+            const requirements = dialogue.requirements;
+            isPassed = isRequirementPassed(requirements, dialogue);
+        }
+    }
+    if (newEvent.type === "event") {
+        const eventId = newEvent.id;
+        const event = eventData.events.find(event => event.id === eventId);
+
+        if (!event.requirements) {
+            isPassed = true;
+        } else {
+            const requirements = event.requirements;
+            isPassed = isRequirementPassed(requirements, event);
+        }
+    }
+    return isPassed;
+}
+
+const saveGameButton = document.getElementById("saveGame");
+saveGameButton.addEventListener("click", saveGame);
+
+const loadGameButton = document.getElementById("loadGame");
+loadGameButton.addEventListener("click", loadSavedGame);
+
+const questJournal = document.getElementById("questJournal");
+let journalUpdater = new QuestJournalUpdater();
+questJournal.addEventListener("click", () => {
+    journalUpdater.toggleJournal();
+});
+
+journalClose.addEventListener("click", () => {
+    journalUpdater.closeJournal();
+});
