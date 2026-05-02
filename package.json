@@ -1,0 +1,30 @@
+{
+  "name": "beetlejust-game",
+  "version": "1.0.0",
+  "description": "my rpg roguelike",
+  "keywords": [
+    "game",
+    "roguelike",
+    "rpg",
+    "fantasy"
+  ],
+  "homepage": "https://github.com/ElijahPlushkov/roguelike-game#readme",
+  "bugs": {
+    "url": "https://github.com/ElijahPlushkov/roguelike-game/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ElijahPlushkov/roguelike-game.git"
+  },
+  "license": "MIT",
+  "author": "Elijah Plushkov",
+  "type": "commonjs",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "test": "beetle-run"
+  },
+  "devDependencies": {
+    "electron": "^41.5.0"
+  }
+}
