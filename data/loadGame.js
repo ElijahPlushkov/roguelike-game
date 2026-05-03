@@ -8,33 +8,30 @@ const adventureLogHandler = new AdventureLogHandler();
 export async function loadSavedGame() {
     if (gameData.isEventActive) {
         adventureLogHandler.appendSystemMessage("Cannot load now.");
-        return
+        return;
     }
+
     try {
-        const response = await fetch("/roguelike-game/loadGame");
-        const savedGame = await response.json();
+        const payload = await window.api.loadGame();
 
-        gameData.playerCoordinates.x = savedGame.playerCoordinates.x
-        gameData.playerCoordinates.y = savedGame.playerCoordinates.y;
+        if (payload.version !== 1) {
+            throw new Error("Unsupported save version");
+        }
 
-        gameData.playerCharacteristics.might = savedGame.playerCharacteristics.might;
-        gameData.playerCharacteristics.reputation = savedGame.playerCharacteristics.reputation;
-        gameData.playerCharacteristics.prayer = savedGame.playerCharacteristics.prayer;
-        gameData.playerCharacteristics.agility = savedGame.playerCharacteristics.agility;
-
-        gameData.pollen = savedGame.pollen;
-
-        gameData.eventOutcomes = savedGame.eventOutcomes || [];
-        gameData.seenEvents = savedGame.seenEvents || [];
-
-        gameData.quests = savedGame.quests || [];
-        gameData.npcs = savedGame.npcs || [];
+        Object.assign(gameData, payload.data);
 
         console.log("Game successfully loaded:", gameData);
 
+        updatePlayerCharacteristics(
+            displayMight,
+            displayReputation,
+            displayPrayer,
+            displayAgility,
+            displayPollen
+        );
         updatePlayerPosition(gameData.playerCoordinates.x, gameData.playerCoordinates.y, playerCoordinates);
+
         mapRender();
-        updatePlayerCharacteristics(displayMight, displayReputation, displayPrayer, displayAgility, displayPollen);
 
         let journalUpdater = new QuestJournalUpdater();
         journalUpdater.loadSeenQuests(gameData.quests);
@@ -44,6 +41,7 @@ export async function loadSavedGame() {
 
     } catch (error) {
         console.log("Failed to load game:", error);
+        adventureLogHandler.appendSystemMessage("Load failed.");
     }
 }
 

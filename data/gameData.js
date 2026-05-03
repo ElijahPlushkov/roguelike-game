@@ -17,6 +17,7 @@ export const gameData = {
     mysticism: 10,
     currentMysticism: 10,
     willpower: 10,
+    statusEffects: 'none',
 
     weapon: 'oak_staff',
     armor: 'cotton_shirt',
