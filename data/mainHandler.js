@@ -1,7 +1,7 @@
 import {
     gameData, journalClose, levelData, map, playerCoordinates, tileSet, dialogueData, eventData,
-    loadLevelData, loadDialogueData, loadEventData, loadDoorData, loadEnemyData, loadQuestData, loadNpcData, eventBox,
-    chapterId, player
+    parseLevelData, loadDialogueData, loadEventData, loadDoorData, loadEnemyData, loadQuestData, loadNpcData,
+    eventBox, chapterId, player
 } from "./gameData.js";
 import {initEvent} from "./eventHandler.js";
 import {mapRender} from "./mapRender.js";
@@ -28,7 +28,7 @@ export let previousCoordinates = {
 const adventureLogHandler = new AdventureLogHandler();
 
 document.addEventListener("DOMContentLoaded", () => {
-    loadLevelData();
+    parseLevelData("chapter_1");
     loadDialogueData();
     loadEventData();
     loadDoorData();

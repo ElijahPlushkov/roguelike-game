@@ -1,7 +1,7 @@
 import {chapterOneIds, CHAPTERS} from "./ids.js";
 import {mapRender} from "./mapRender.js";
 import {Player} from "./Player.js";
-import {mainLevelData} from "./levelData.js";
+import { getLevel } from './levels/levelsData.js';
 import {dialogueDataChapter1} from "./dialogueData.js";
 import {eventDataChapter1} from "./eventDataChapter1.js";
 import {doorDataChapter1} from "./doorDataChapter1.js";
@@ -138,11 +138,11 @@ let doorData = {};
 let enemyData = {};
 let questData = {};
 let npcData = {};
-// let armorData = armorData;
 
-export function loadLevelData(id = CHAPTERS.CHAPTER_1, spawnPosition) {
+export function parseLevelData(id, spawnPosition) {
 
-    let level = mainLevelData;
+
+    let level = getLevel(id);
 
     levelData = level;
     chapterName = level.name;
