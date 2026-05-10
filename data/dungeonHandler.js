@@ -1,5 +1,4 @@
-import {playerCoordinates, parseLevelData} from "./gameData.js";
-import {mapRender} from "./mapRender.js";
+import { parseLevelData } from "./gameData.js";
 
 export function loadDungeon(id) {
     parseLevelData(id);

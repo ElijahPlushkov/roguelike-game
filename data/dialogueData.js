@@ -1,4 +1,4 @@
-export const dialogueDataChapter1 = {
+export const dialogueData = {
     "id": "chapter_1_dialogues",
     "dialogues": [
         {

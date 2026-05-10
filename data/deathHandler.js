@@ -1,5 +1,5 @@
-import {gameData} from "./gameData.js";
-import {AdventureLogHandler} from "./AdventureLogHandler.js";
+import { gameData } from "./gameData.js";
+import { AdventureLogHandler } from "./AdventureLogHandler.js";
 
 const adventureLogHandler = new AdventureLogHandler();
 
@@ -10,7 +10,7 @@ export function handleDeath() {
 
     try{
         setTimeout(function() {
-            window.location.replace('death-screen');
+            window.location.replace("death-screen.html");
         }, 5000);
     } catch (e) {
         console.log("an error occurred");

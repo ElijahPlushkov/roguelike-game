@@ -1,8 +1,8 @@
-import {ChangeAttributes} from "./ChangeAttributes.js";
-import {armorData} from "./armorData.js";
-import {weaponData} from "./weaponData.js";
-import {shieldData} from "./shieldData.js";
-import {rangedWeaponsData} from "./rangedWeaponsData.js";
+import { ChangeAttributes } from "./ChangeAttributes.js";
+import { armorData } from "./armorData.js";
+import { weaponData } from "./weaponData.js";
+import { shieldData } from "./shieldData.js";
+import { rangedWeaponsData } from "./rangedWeaponsData.js";
 
 export class Player {
 

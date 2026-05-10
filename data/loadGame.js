@@ -1,7 +1,13 @@
-import {displayMight, displayPollen, displayPrayer, displayAgility, displayReputation, gameData, playerCoordinates} from "./gameData.js";
-import {mapRender} from "./mapRender.js";
-import {QuestJournalUpdater} from "./QuestJournalUpdater.js";
-import {AdventureLogHandler} from "./AdventureLogHandler.js";
+import { displayMight,
+    displayPollen,
+    displayPrayer,
+    displayAgility,
+    displayReputation,
+    gameData,
+    playerCoordinates } from "./gameData.js";
+import { mapRender } from "./mapRender.js";
+import { QuestJournalUpdater } from "./QuestJournalUpdater.js";
+import { AdventureLogHandler } from "./AdventureLogHandler.js";
 
 const adventureLogHandler = new AdventureLogHandler();
 

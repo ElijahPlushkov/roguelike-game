@@ -1,11 +1,12 @@
-import {gameData, eventDescription, eventOptions, dialogueData} from "./gameData.js";
+import { gameData, eventDescription, eventOptions } from "./gameData.js";
+import { dialogueData } from "./dialogueData.js";
 import {endEvent, appendContinueButton} from "./helperFunctions.js";
-import {handleDeath} from "./deathHandler.js";
-import {QuestJournalUpdater} from "./QuestJournalUpdater.js";
-import {registerNpcDeath} from "./npcHandler.js";
-import {ChangeStats} from "./ChangeStats.js";
-import {initCombat} from "./combatHandler.js";
-import {AdventureLogHandler} from "./AdventureLogHandler.js";
+import { handleDeath } from "./deathHandler.js";
+import { QuestJournalUpdater } from "./QuestJournalUpdater.js";
+import { registerNpcDeath } from "./npcHandler.js";
+import { ChangeStats } from "./ChangeStats.js";
+import { initCombat } from "./combatHandler.js";
+import { AdventureLogHandler } from "./AdventureLogHandler.js";
 
 const adventureLogHandler = new AdventureLogHandler();
 

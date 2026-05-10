@@ -1,6 +1,7 @@
-import {gameData, journalBox, questData} from "./gameData.js";
-import {ChangeStats} from "./ChangeStats.js";
-import {AdventureLogHandler} from "./AdventureLogHandler.js";
+import { gameData, journalBox } from "./gameData.js";
+import { questData } from "./questData.js";
+import { ChangeStats } from "./ChangeStats.js";
+import { AdventureLogHandler } from "./AdventureLogHandler.js";
 
 export class QuestJournalUpdater {
     journalBox = journalBox;

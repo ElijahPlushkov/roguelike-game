@@ -1,4 +1,4 @@
-export const enemyDataChapter1 = {
+export const enemyData = {
     "id": "chapter_1_enemies",
     "enemies": [
         {

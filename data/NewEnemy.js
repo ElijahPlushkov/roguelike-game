@@ -1,4 +1,3 @@
-
 export class NewEnemy {
 
     health = 0 // int

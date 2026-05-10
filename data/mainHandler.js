@@ -1,21 +1,22 @@
 import {
-    gameData, journalClose, levelData, map, playerCoordinates, tileSet, dialogueData, eventData,
-    parseLevelData, loadDialogueData, loadEventData, loadDoorData, loadEnemyData, loadQuestData, loadNpcData,
-    eventBox, chapterId, player
+    gameData, journalClose, levelData, map, playerCoordinates, tileSet,
+    parseLevelData, eventBox, chapterId, player
 } from "./gameData.js";
-import {initEvent} from "./eventHandler.js";
-import {mapRender} from "./mapRender.js";
-import {initDialogue} from "./dialogueHandler.js";
-import {initCombat} from "./combatHandler.js";
-import {accessDoor} from "./doorHandler.js";
-import {initNpc} from "./npcHandler.js";
-import {hasSeenEvent, markEventSeen} from "./helperFunctions.js";
-import {saveGame} from "./saveGame.js";
-import {loadSavedGame} from "./loadGame.js";
-import {QuestJournalUpdater} from "./QuestJournalUpdater.js";
-import {handleDeath} from "./deathHandler.js";
-import {exitDungeon, loadDungeon} from "./dungeonHandler.js";
-import {AdventureLogHandler} from "./AdventureLogHandler.js";
+import { dialogueData } from "./dialogueData.js";
+import { eventData } from "./eventData.js";
+import { initEvent } from "./eventHandler.js";
+import { mapRender } from "./mapRender.js";
+import { initDialogue } from "./dialogueHandler.js";
+import { initCombat } from "./combatHandler.js";
+import { accessDoor } from "./doorHandler.js";
+import { initNpc } from "./npcHandler.js";
+import { hasSeenEvent, markEventSeen } from "./helperFunctions.js";
+import { saveGame } from "./saveGame.js";
+import { loadSavedGame } from "./loadGame.js";
+import { QuestJournalUpdater } from "./QuestJournalUpdater.js";
+import { handleDeath } from "./deathHandler.js";
+import { exitDungeon, loadDungeon } from "./dungeonHandler.js";
+import { AdventureLogHandler } from "./AdventureLogHandler.js";
 
 let spawnPosition;
 let spawnChapter;
@@ -29,12 +30,6 @@ const adventureLogHandler = new AdventureLogHandler();
 
 document.addEventListener("DOMContentLoaded", () => {
     parseLevelData("chapter_1");
-    loadDialogueData();
-    loadEventData();
-    loadDoorData();
-    loadEnemyData();
-    loadQuestData();
-    loadNpcData();
 
     console.log(player);
 

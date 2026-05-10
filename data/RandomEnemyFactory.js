@@ -1,8 +1,8 @@
-import {NewEnemy} from "./NewEnemy.js";
-import {weaponsByClass} from "./weaponsByClass.js";
-import {armorByClass} from "./armorByClass.js";
-import {weaponData} from "./weaponData.js";
-import {armorData} from "./armorData.js";
+import { NewEnemy } from "./NewEnemy.js";
+import { weaponsByClass } from "./weaponsByClass.js";
+import { armorByClass } from "./armorByClass.js";
+import { weaponData } from "./weaponData.js";
+import { armorData } from "./armorData.js";
 
 export class RandomEnemyFactory {
 

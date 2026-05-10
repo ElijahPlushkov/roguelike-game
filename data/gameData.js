@@ -1,13 +1,6 @@
-import {chapterOneIds, CHAPTERS} from "./ids.js";
-import {mapRender} from "./mapRender.js";
-import {Player} from "./Player.js";
+import { mapRender } from "./mapRender.js";
+import { Player } from "./Player.js";
 import { getLevel } from './levels/levelsData.js';
-import {dialogueDataChapter1} from "./dialogueData.js";
-import {eventDataChapter1} from "./eventDataChapter1.js";
-import {doorDataChapter1} from "./doorDataChapter1.js";
-import {enemyDataChapter1} from "./enemyDataChapter1.js";
-import {questDataChapter1} from "./questDataChapter1.js";
-import {npcDataChapter1} from "./npcDataChapter1.js";
 
 export const gameData = {
     playerCoordinates: {x: 0, y: 1},
@@ -132,15 +125,7 @@ let map = [];
 let playerCoordinates = {x: 0, y: 0};
 let tileSet = {};
 
-let dialogueData = {};
-let eventData = {};
-let doorData = {};
-let enemyData = {};
-let questData = {};
-let npcData = {};
-
 export function parseLevelData(id, spawnPosition) {
-
 
     let level = getLevel(id);
 
@@ -154,29 +139,4 @@ export function parseLevelData(id, spawnPosition) {
     mapRender(map, playerCoordinates);
 }
 
-export function loadDialogueData(id = chapterOneIds.DIALOGUES) {
-    dialogueData = dialogueDataChapter1;
-}
-
-export function loadEventData(id = chapterOneIds.EVENTS) {
-    eventData = eventDataChapter1
-}
-
-export function loadDoorData(id = chapterOneIds.DOORS) {
-    doorData = doorDataChapter1;
-}
-
-export function loadEnemyData(id = chapterOneIds.ENEMIES) {
-    enemyData = enemyDataChapter1;
-}
-
-export function loadQuestData(id = chapterOneIds.QUESTS) {
-    questData = questDataChapter1;
-}
-
-export function loadNpcData(id = chapterOneIds.NPCS) {
-    npcData = npcDataChapter1;
-}
-
-export {levelData, chapterId, chapterName, map, playerCoordinates, tileSet, dialogueData, eventData, doorData,
-    enemyData, questData, npcData};
+export { levelData, chapterId, chapterName, map, playerCoordinates, tileSet };

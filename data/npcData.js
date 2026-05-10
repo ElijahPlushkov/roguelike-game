@@ -1,4 +1,4 @@
-export const npcDataChapter1 = {
+export const npcData = {
     "id": "chapter_1_npcs",
     "npcs": [
         {

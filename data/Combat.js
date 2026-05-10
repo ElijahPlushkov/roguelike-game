@@ -5,12 +5,12 @@ import {
     eventOptions,
     combatWindow, combatLog, displayPollen, armorRateModifier, agilityModifier, playerCoordinates
 } from "./gameData.js";
-import {endEvent, markEventSeen} from "./helperFunctions.js";
-import {ChangeStats} from "./ChangeStats.js";
-import {handleDeath} from "./deathHandler.js";
-import {previousCoordinates} from "./mainHandler.js";
-import {mapRender} from "./mapRender.js";
-import {AdventureLogHandler} from "./AdventureLogHandler.js";
+import { endEvent, markEventSeen } from "./helperFunctions.js";
+import { ChangeStats } from "./ChangeStats.js";
+import { handleDeath } from "./deathHandler.js";
+import { previousCoordinates } from "./mainHandler.js";
+import { mapRender } from "./mapRender.js";
+import { AdventureLogHandler } from "./AdventureLogHandler.js";
 
 export class Combat {
 

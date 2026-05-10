@@ -1,5 +1,11 @@
-
-import {displayCurrentHealth, displayCurrentMysticism, displayMaxHealth, displayMaxMysticism, displayWillpower, gameData, player} from "./gameData.js";
+import {
+    displayCurrentHealth,
+    displayCurrentMysticism,
+    displayMaxHealth,
+    displayMaxMysticism,
+    displayWillpower,
+    gameData, player
+} from "./gameData.js";
 
 export class ChangeAttributes {
     HEALTH_MODIFIER = 2;

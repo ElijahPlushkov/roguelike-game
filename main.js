@@ -4,14 +4,14 @@ const path = require('path');
 
 const createWindow = () => {
     const win = new BrowserWindow({
-        width: 800,
-        height: 600,
+        width: 1440,
+        height: 800,
         webPreferences: {
             preload: path.join(__dirname, 'preload.js')
         }
     })
 
-    win.loadFile('index.html')
+    win.loadFile('index.html');
 }
 
 app.whenReady().then(() => {
@@ -42,6 +42,18 @@ app.whenReady().then(() => {
 
         const raw = fs.readFileSync(savePath, 'utf-8');
         return JSON.parse(raw);
+    });
+
+    ipcMain.handle('handle-death', () => {
+        const win = new BrowserWindow({
+            width: 1440,
+            height: 800,
+            webPreferences: {
+                preload: path.join(__dirname, 'preload.js')
+            }
+        })
+
+        win.loadFile('death-screen.html');
     });
 
     createWindow();

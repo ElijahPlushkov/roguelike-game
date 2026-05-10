@@ -1,4 +1,4 @@
-export const eventDataChapter1 = {
+export const eventData = {
     "id": "chapter_1_events",
     "events": [
         {

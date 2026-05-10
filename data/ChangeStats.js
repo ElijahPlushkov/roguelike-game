@@ -1,4 +1,4 @@
-import {displayPollen, gameData, player} from "./gameData.js";
+import { displayPollen, gameData, player } from "./gameData.js";
 
 export class ChangeStats {
 

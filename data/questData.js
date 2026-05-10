@@ -1,4 +1,4 @@
-export const questDataChapter1 = {
+export const questData = {
     "id": "chapter_1_quests",
     "quests": [
         {

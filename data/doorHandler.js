@@ -1,7 +1,8 @@
-import {gameData, eventDescription, eventOptions, doorData, levelData, eventBox} from "./gameData.js";
-import {appendContinueButton, endEvent, hasSeenEvent, markEventSeen} from "./helperFunctions.js";
-import {ChangeStats} from "./ChangeStats.js";
-import {AdventureLogHandler} from "./AdventureLogHandler.js";
+import { doorData } from "./doorData.js";
+import { gameData, eventDescription, eventOptions, levelData, eventBox } from "./gameData.js";
+import { appendContinueButton, endEvent, hasSeenEvent, markEventSeen } from "./helperFunctions.js";
+import { ChangeStats } from "./ChangeStats.js";
+import { AdventureLogHandler } from "./AdventureLogHandler.js";
 
 const adventureLogHandler = new AdventureLogHandler();
 

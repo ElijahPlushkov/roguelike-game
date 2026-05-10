@@ -1,4 +1,4 @@
-import {NewEnemy} from "./NewEnemy.js";
+import { NewEnemy } from "./NewEnemy.js";
 
 class NewNpcEnemy {
 

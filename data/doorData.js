@@ -1,4 +1,4 @@
-export const doorDataChapter1 = {
+export const doorData = {
     "id": "chapter_1_doors",
     "doors": [
         {
