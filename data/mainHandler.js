@@ -80,12 +80,11 @@ document.addEventListener("DOMContentLoaded", () => {
         const newX = playerCoordinates.x + dx;
         const newY = playerCoordinates.y + dy;
 
-        gameData.playerCoordinates.x = newX;
-        gameData.playerCoordinates.y = newY;
-
         if (isWalkable(newX, newY)) {
             playerCoordinates.x = newX;
             playerCoordinates.y = newY;
+            gameData.playerCoordinates.x = newX;
+            gameData.playerCoordinates.y = newY;
         }
 
         mapRender();

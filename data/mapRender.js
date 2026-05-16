@@ -1,43 +1,21 @@
-import{ map, playerCoordinates } from "./gameData.js";
-
-// export const cameraView = {
-//     height: 101,
-//     width: 101 // change later to 21
-// }
+import { gameData, map, playerCoordinates } from "./gameData.js";
+import { Movement } from "./Movement.js";
 
 export function mapRender() {
-
-    // let cameraXStart = playerCoordinates.x - Math.floor(cameraView.width / 2);
-    // let cameraYStart = playerCoordinates.y - Math.floor(cameraView.height / 2);
-    // let cameraXEnd = cameraXStart + cameraView.width;
-    // let cameraYEnd = cameraYStart + cameraView.height;
-    //
-    // if (cameraXStart < 0) {
-    //     cameraXStart = 0;
-    // }
-    // if (cameraYStart < 0) {
-    //     cameraYStart = 0;
-    // }
-    // if (cameraXEnd > map[0].length)
-    //     cameraXEnd = map[0].length;
-    //
-    // if (cameraYEnd > map.length) {
-    //     cameraYEnd = map.length;
-    // }
 
     const gameContainer = document.getElementById("game-map");
     gameContainer.innerHTML = "";
 
-    // for (let y = cameraYStart; y < cameraYEnd; y++)
     for (let y = 0; y < map.length; y++) {
         const row = document.createElement("div");
         row.classList.add("tile-row");
 
-        // for (let x = cameraXStart; x < cameraXEnd; x++)
         for (let x = 0; x < map[y].length; x++) {
             const tileType = map[y][x];
             const tile = document.createElement("div");
             tile.classList.add("tile");
+            tile.dataset.x = x;
+            tile.dataset.y = y;
 
             if (x === playerCoordinates.x && y === playerCoordinates.y) {
                 tile.classList.add("player");
@@ -105,6 +83,12 @@ export function mapRender() {
                     case "Δ":
                         tile.classList.add("camp");
                         break;
+                    case "⌂":
+                        // tile.classList.add("camp");
+                        break;
+                    case "F":
+                        // tile.classList.add("camp");
+                        break;
                     default:
                         tile.classList.add("unknown");
                         break;
@@ -114,4 +98,7 @@ export function mapRender() {
         }
         gameContainer.appendChild(row);
     }
+
+    let movement = new Movement();
+    movement.defineFieldOfView(gameData.playerCoordinates.x, gameData.playerCoordinates.y);
 }

@@ -15,6 +15,12 @@
     text-align: center;
     box-sizing: border-box;
     color: black;
+    background: #5a5a5a;
+    filter: brightness(0.5);
+}
+
+.tile-fov {
+    filter: brightness(1);
 }
 
 .wall {
@@ -81,6 +87,7 @@
 
 .player {
     background-color: var(--player-tile);
+    filter: brightness(1);
 }
 
 .camp {
