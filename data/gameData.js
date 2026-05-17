@@ -5,8 +5,8 @@ import { getLevel } from './levels/levelsData.js';
 export const gameData = {
     playerCoordinates: {x: 0, y: 1},
 
-    health: 10,
-    currentHealth: 10,
+    health: 20,
+    currentHealth: 20,
     mysticism: 10,
     currentMysticism: 10,
     willpower: 10,
@@ -26,6 +26,8 @@ export const gameData = {
 
     npcs: [],
 
+    locations: [],
+
     eventOutcomes: [],
     seenEvents: [],
 
@@ -33,9 +35,9 @@ export const gameData = {
 
     playerCharacteristics: {
         reputation: 1,
-        might: 1,
+        might: 5,
         prayer: 1,
-        agility: 1
+        agility: 5
     },
 
     pollen: 0,
@@ -134,6 +136,8 @@ export function parseLevelData(id, spawnPosition) {
     chapterId = level.id;
     map = level.tilemap;
     playerCoordinates = spawnPosition || level.player;
+    gameData.playerCoordinates.x = playerCoordinates.x;
+    gameData.playerCoordinates.y = playerCoordinates.y;
     tileSet = level.tileset;
 
     mapRender(map, playerCoordinates);

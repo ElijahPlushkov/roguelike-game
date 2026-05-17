@@ -61,7 +61,3 @@ export function registerNpcDeath(npcId) {
     let deadNpc = gameData.npcs.find(npc => npc.id === npcId);
     deadNpc.isAlive = false;
 }
-
-function npcCombat() {
-
-}

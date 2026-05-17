@@ -15,7 +15,7 @@ import { saveGame } from "./saveGame.js";
 import { loadSavedGame } from "./loadGame.js";
 import { QuestJournalUpdater } from "./QuestJournalUpdater.js";
 import { handleDeath } from "./deathHandler.js";
-import { exitDungeon, loadDungeon } from "./dungeonHandler.js";
+import {checkDungeonAccess, exitDungeon, loadDungeon} from "./locationHandler.js";
 import { AdventureLogHandler } from "./AdventureLogHandler.js";
 
 let spawnPosition;
@@ -85,10 +85,9 @@ document.addEventListener("DOMContentLoaded", () => {
             playerCoordinates.y = newY;
             gameData.playerCoordinates.x = newX;
             gameData.playerCoordinates.y = newY;
+            mapRender();
+            checkForAnyEvent(playerCoordinates.x, playerCoordinates.y);
         }
-
-        mapRender();
-        checkForAnyEvent(playerCoordinates.x, playerCoordinates.y);
     });
 });
 
@@ -150,7 +149,7 @@ function checkForAnyEvent(x, y) {
             spawnPosition = {x: newEvent.x, y: newEvent.y};
             spawnChapter = chapterId;
             const dungeonId = newEvent.id;
-            loadDungeon(dungeonId);
+            checkDungeonAccess(dungeonId);
         }
 
         if (newEvent.type === "dungeonExit") {

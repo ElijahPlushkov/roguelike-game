@@ -94,3 +94,11 @@
     background-color: var(--camp-tile);
     background-image: url("../tileImages/camp-tile-img.png");
 }
+
+.dungeon-door {
+    background-color: var(--door-tile);
+}
+
+.building {
+    background-color: var(--boulder-tile);
+}

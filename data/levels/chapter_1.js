@@ -71,8 +71,12 @@ export const levelData = {
             "type": "camp",
             "walkable": true
         },
-        "D": {
+        "⌂": {
             "type": "dungeon",
+            "walkable": true
+        },
+        "F": {
+            "type": "building",
             "walkable": true
         }
     },
@@ -86,7 +90,7 @@ export const levelData = {
             {
                 "type": "dungeon",
                 "id": "dungeon",
-                "x": 0,
+                "x": 12,
                 "y": 2
             }
         ],

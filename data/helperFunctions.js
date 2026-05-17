@@ -4,7 +4,6 @@ export function appendContinueButton() {
     const continueButton = document.createElement("button");
     continueButton.textContent = "Continue.";
     continueButton.className = "option-button option-button_small";
-
     return continueButton;
 }
 
@@ -37,4 +36,13 @@ export function hasSeenEvent(id) {
 
 export function markEventSeen(id) {
     gameData.seenEvents.push(id);
+}
+
+export function markLocationSeen(info) {
+    let locationId = info.id;
+    let location = gameData.locations.find(location => location.id === locationId);
+    if (!location) {
+        gameData.locations.push(info);
+        console.log(gameData.locations);
+    }
 }

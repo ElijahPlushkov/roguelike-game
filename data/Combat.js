@@ -60,11 +60,14 @@ export class Combat {
 
     finishCombat() {
         this.isCombatOn = false;
-        let isSuccessful = true;
         this.resolveCombat(this.enemy.difficulty, this.enemy.race);
-        endEvent(this.enemyId, isSuccessful, eventDescription, eventOptions);
+        endEvent(this.enemyId, true, eventDescription, eventOptions);
         markEventSeen(this.enemyId);
         this.clearCombatState();
+
+        document.dispatchEvent(
+            new CustomEvent("combatEnded")
+        );
     }
 
     clearCombatState() {

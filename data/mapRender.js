@@ -1,6 +1,8 @@
 import { gameData, map, playerCoordinates } from "./gameData.js";
 import { Movement } from "./Movement.js";
 
+let movement = new Movement();
+
 export function mapRender() {
 
     const gameContainer = document.getElementById("game-map");
@@ -84,10 +86,12 @@ export function mapRender() {
                         tile.classList.add("camp");
                         break;
                     case "⌂":
-                        // tile.classList.add("camp");
+                        tile.classList.add("dungeon-door");
+                        tile.textContent = "⌂";
                         break;
                     case "F":
-                        // tile.classList.add("camp");
+                        tile.classList.add("building");
+                        tile.textContent = "F";
                         break;
                     default:
                         tile.classList.add("unknown");
@@ -97,8 +101,6 @@ export function mapRender() {
             row.appendChild(tile);
         }
         gameContainer.appendChild(row);
+        movement.defineFieldOfView(gameData.playerCoordinates.x, gameData.playerCoordinates.y);
     }
-
-    let movement = new Movement();
-    movement.defineFieldOfView(gameData.playerCoordinates.x, gameData.playerCoordinates.y);
 }
