@@ -20,27 +20,7 @@ export const enemyData = {
                 "prayer": 0,
                 "agility": 0
             },
-            "description": "You meet a hostile mosquito scout.'Goway o yall see ma big sabler'.",
-            "options": [
-                {
-                    "key": "fight",
-                    "label": "Fight."
-                },
-                {
-                    "key": "negotiate",
-                    "label": "Negotiate."
-                },
-                {
-                    "key": "flee",
-                    "label": "Flee."
-                }
-            ],
-            "combatVictory": "The mosquito scout screams and tries to insert his rusty dagger in you. Gracefully, you manage to reflect his blow. By striking back, you penetrate the mosquito's body with your chitin spear. He sheds some pale drops of blood before falling to the side of the road.",
-            "combatDefeat": "You didn't have the strength to defeat even a weak mosquito. You are a disgrace for the Order.",
-            "negotiationVictory": "Mosquito is bewildered by your words. He thinks for a while. Then thinks again. He doesn't understand that he doesn't understand a word you say therefore understands. He assumes a respectful posture with his wings upwards, he bows and lets you proceed.",
-            "negotiationDefeat": "Mosquito is too dumb to understand your eloquent speech. He gets angry at the big brain bug. With all his strength he strikes a blow.",
-            "fleeSuccess": "The mosquito laughs so hard, he nearly wets his pants. He is not even embarrassed. You are the one who should be.",
-            "fleeFailure": "The mosquito laughs so hard, he nearly wets his pants. He is not even embarrassed. You are the one who should be."
+            "description": "You meet a hostile mosquito scout.'Goway o yall see ma big sabler'."
         },
         {
             "id": "mosquito_guard_1",
@@ -61,27 +41,7 @@ export const enemyData = {
                 "prayer": 1,
                 "agility": 1
             },
-            "description": "A mosquito guard stands mothionless in the dim torch light. Upon seeing you he lifts his spear and prepares to attack you.",
-            "options": [
-                {
-                    "key": "fight",
-                    "label": "Fight."
-                },
-                {
-                    "key": "negotiate",
-                    "label": "Negotiate."
-                },
-                {
-                    "key": "flee",
-                    "label": "Flee."
-                }
-            ],
-            "combatVictory": "Blinded by the dark of the corridor, the mosquito guard misses his strike. However, your strike is precise. He drops his weapon to lean against the wall, but his strength leaves him. He slid down the wall. A weak almost unnoticeable body is to remain in the dark.",
-            "combatDefeat": "You didn't have enough strength to defeat the mosquito guard. You are a disgrace for the Order",
-            "negotiationVictory": "The mosquito remains silent for a second, then he steps away gesturing you to pass.",
-            "negotiationDefeat": "The mosquito is not impressed by your speech. He remains determined to guard his post.",
-            "fleeSuccess": "You hear a low chuckle from the other end of the corridor. Such a disgrace.",
-            "fleeFailure": "You hear a low chuckle from the other end of the corridor. Such a disgrace."
+            "description": "A mosquito guard stands mothionless in the dim torch light. Upon seeing you he lifts his spear and prepares to attack you."
         },
         {
             "id": "flies_gang",

@@ -80,7 +80,7 @@
 }
 
 .combat-log {
-    width: 280px;
+    min-width: 280px;
     height: 390px;
     border: 1px solid var(--main-text-color);
     scroll-behavior: smooth;
@@ -116,7 +116,8 @@
     flex-direction: column;
 }
 
-.enemy-race {
+.enemy-race,
+.enemy-description {
     color: var(--log-entry-text-color);
 }
 

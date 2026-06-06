@@ -17,18 +17,10 @@ export class NewEnemy {
     characteristics = null // Object
     fleeConditions = null // Object
     description = null // String
-    combatVictory = null // String
-    combatDefeat = null // String
-    negotiationVictory = null // String
-    negotiationDefeat = null // String
-    fleeSuccess = null // String
-    fleeFailure = null // String
-    options = null // Array
 
     constructor(difficulty, race, enemyClass, weapon, armor, shield, spells, characteristics,
                 health, mysticism, willpower, accuracy, evasion, spellChance,
-                fleeConditions, description, combatVictory, combatDefeat, negotiationVictory, negotiationDefeat,
-                fleeSuccess, fleeFailure, options) {
+                fleeConditions, description) {
         this.difficulty = difficulty
         this.race = race
         this.enemyClass = enemyClass
@@ -45,16 +37,5 @@ export class NewEnemy {
         this.spellChance = spellChance
         this.fleeConditions = fleeConditions
         this.description = description
-        this.combatVictory = combatVictory
-        this.combatDefeat = combatDefeat
-        this.negotiationVictory = negotiationVictory
-        this.negotiationDefeat = negotiationDefeat
-        this.fleeSuccess = fleeSuccess
-        this.fleeFailure = fleeFailure
-        this.options = options
-    }
-
-    attack(attackType) {
-        return this.weapon.attackTypes[attackType];
     }
 }

@@ -369,6 +369,9 @@ export class Combat {
     }
 
     displayEnemyInfo(enemy) {
+        let enemyDescription = document.querySelector(".enemy-description");
+        enemyDescription.textContent = enemy.description;
+
         let enemyRace = document.querySelector(".enemy-race");
         enemyRace.textContent = enemy.race;
 

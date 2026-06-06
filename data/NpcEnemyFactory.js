@@ -16,6 +16,7 @@ export class NpcEnemyFactory {
 
     createNpcEnemy(npc) {
         let race = npc.race;
+        let difficulty = npc.difficulty;
         let enemyClass = npc.npcClass;
         let weapon = this.setWeapon(npc.weapon);
         let armor = this.setArmor(npc.armor);
@@ -30,16 +31,10 @@ export class NpcEnemyFactory {
         let spellChance = this.BASE_SPELL_CHANCE + npc.characteristics.prayer;
         let fleeConditions = this.setFleeConditions(npc.characteristics);
         let description = npc.description;
-        let combatVictory = this.setCombatVictory();
-        let combatDefeat = this.setCombatDefeat();
-        let fleeSuccess = this.setFleeSuccess();
-        let fleeFailure = this.setFleeFailure();
-        let options = this.setOptions();
 
-        return new NewEnemy("none", race, enemyClass, weapon, armor, shield, spells,
+        return new NewEnemy(difficulty, race, enemyClass, weapon, armor, shield, spells,
             characteristics, health, mysticism, willpower, accuracy, evasion, spellChance,
-            fleeConditions, description,
-            combatVictory, combatDefeat,"none", "none", fleeSuccess, fleeFailure, options)
+            fleeConditions, description)
     }
 
     setHealth(might) {
@@ -74,38 +69,5 @@ export class NpcEnemyFactory {
         let weaponId = id;
         this.weapon = weaponData.weapons.find(weapon => weapon.id === weaponId);
         return this.weapon;
-    }
-
-    setCombatVictory() {
-        return "You win a victory.";
-    }
-
-    setCombatDefeat() {
-        return "You lose. What a shame.";
-    }
-
-    setFleeSuccess() {
-        return "You avoid combat.";
-    }
-
-    setFleeFailure() {
-        return "It's impossible to avoid combat.";
-    }
-
-    setOptions() {
-        return [
-            {
-                key: "fight",
-                label: "Fight."
-            },
-            {
-                key: "negotiate",
-                label: "Negotiate."
-            },
-            {
-                key: "flee",
-                label: "Flee."
-            }
-        ]
     }
 }

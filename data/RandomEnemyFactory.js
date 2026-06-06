@@ -37,33 +37,25 @@ export class RandomEnemyFactory {
 
     createRandomEnemy(enemyType) {
         let enemyDifficulty = enemyType.slice(7);
-        let race = this.setRace(enemyDifficulty)
-        let enemyClass = this.setEnemyClass()
-        let weapon = this.setWeapon(enemyClass)
-        let armor = this.setArmor(enemyClass)
-        let shield = this.setShield(enemyClass)
-        let spells = this.setSpells(enemyClass)
-        let characteristics = this.setCharacteristics(enemyDifficulty)
-        let health = this.setHealth(characteristics.might, enemyDifficulty)
-        let mysticism = this.setMysticism(characteristics.prayer, enemyDifficulty)
-        let willpower = this.setWillpower(characteristics.prayer, enemyDifficulty)
-        let accuracy = characteristics.agility
-        let evasion = characteristics.agility
-        let spellChance = this.BASE_SPELL_CHANCE
-        let fleeConditions = this.setFleeConditions()
-        let description = this.setDescription() + race
-        let combatVictory = this.setCombatVictory()
-        let combatDefeat = this.setCombatDefeat()
-        let negotiationVictory = this.setNegotiationVictory()
-        let negotiationDefeat = this.setNegotiationDefeat()
-        let fleeSuccess = this.setFleeSuccess()
-        let fleeFailure = this.setFleeFailure()
-        let options = this.setOptions()
+        let race = this.setRace(enemyDifficulty);
+        let enemyClass = this.setEnemyClass();
+        let weapon = this.setWeapon(enemyClass);
+        let armor = this.setArmor(enemyClass);
+        let shield = this.setShield(enemyClass);
+        let spells = this.setSpells(enemyClass);
+        let characteristics = this.setCharacteristics(enemyDifficulty);
+        let health = this.setHealth(characteristics.might, enemyDifficulty);
+        let mysticism = this.setMysticism(characteristics.prayer, enemyDifficulty);
+        let willpower = this.setWillpower(characteristics.prayer, enemyDifficulty);
+        let accuracy = characteristics.agility;
+        let evasion = characteristics.agility;
+        let spellChance = this.BASE_SPELL_CHANCE;
+        let fleeConditions = this.setFleeConditions();
+        let description = this.setDescription() + race;
 
         return new NewEnemy(enemyDifficulty, race, enemyClass, weapon, armor, shield, spells,
             characteristics, health, mysticism, willpower, accuracy, evasion, spellChance,
-            fleeConditions, description,
-            combatVictory, combatDefeat, negotiationVictory, negotiationDefeat, fleeSuccess, fleeFailure, options)
+            fleeConditions, description)
     }
 
     setRace(difficulty) {
@@ -190,47 +182,6 @@ export class RandomEnemyFactory {
 
     setDescription() {
         return "You meet a ";
-    }
-
-    setCombatVictory() {
-        return "You win a victory.";
-    }
-
-    setCombatDefeat() {
-        return "You lose. What a shame.";
-    }
-
-    setNegotiationVictory() {
-        return "Your words are heard.";
-    }
-
-    setNegotiationDefeat() {
-        return "No one listens to your false speeches.";
-    }
-
-    setFleeSuccess() {
-        return "You avoid combat.";
-    }
-
-    setFleeFailure() {
-        return "It's impossible to avoid combat.";
-    }
-
-    setOptions() {
-        return [
-            {
-                key: "fight",
-                label: "Fight."
-            },
-            {
-                key: "negotiate",
-                label: "Negotiate."
-            },
-            {
-                key: "flee",
-                label: "Flee."
-            }
-        ]
     }
 
     getRandomNumber(min, max) {

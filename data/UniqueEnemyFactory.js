@@ -53,18 +53,10 @@ export class UniqueEnemyFactory {
         let spellChance = this.BASE_SPELL_CHANCE + enemy.characteristics.prayer;
         let fleeConditions = this.setFleeConditions(enemy.characteristics);
         let description = enemy.description;
-        let combatVictory = this.setCombatVictory();
-        let combatDefeat = this.setCombatDefeat();
-        let negotiationVictory = this.setNegotiationVictory();
-        let negotiationDefeat = this.setNegotiationDefeat();
-        let fleeSuccess = this.setFleeSuccess();
-        let fleeFailure = this.setFleeFailure();
-        let options = this.setOptions();
 
         return new NewEnemy(enemyDifficulty, race, enemyClass, weapon, armor, shield, spells,
             characteristics, health, mysticism, willpower, accuracy, evasion, spellChance,
-            fleeConditions, description,
-            combatVictory, combatDefeat,negotiationVictory, negotiationDefeat, fleeSuccess, fleeFailure, options)
+            fleeConditions, description)
     }
 
     setHealth(might) {
@@ -87,39 +79,6 @@ export class UniqueEnemyFactory {
             prayer: Math.floor(characteristics.prayer / 2),
             agility: Math.floor(characteristics.agility / 2)
         }
-    }
-
-    setCombatVictory() {
-        return "You win a victory.";
-    }
-
-    setCombatDefeat() {
-        return "You lose. What a shame.";
-    }
-
-    setFleeSuccess() {
-        return "You avoid combat.";
-    }
-
-    setFleeFailure() {
-        return "It's impossible to avoid combat.";
-    }
-
-    setOptions() {
-        return [
-            {
-                key: "fight",
-                label: "Fight."
-            },
-            {
-                key: "negotiate",
-                label: "Negotiate."
-            },
-            {
-                key: "flee",
-                label: "Flee."
-            }
-        ]
     }
 
     setWeapon(id) {
@@ -172,14 +131,6 @@ export class UniqueEnemyFactory {
 
     setShield(enemyClass) {
 
-    }
-
-    setNegotiationVictory() {
-        return "Your words are heard.";
-    }
-
-    setNegotiationDefeat() {
-        return "No one listens to your false speeches.";
     }
 
     setSpells(enemyClass) {
