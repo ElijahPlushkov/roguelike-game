@@ -57,10 +57,10 @@ export class AdventureLogHandler {
 
         combatMessage.textContent = text;
         this.adventureLog.prepend(combatMessage);
-        this.appendDefeatMessage(race);
+        this.appendVictoryMessage(race);
     }
 
-    appendDefeatMessage(race) {
+    appendVictoryMessage(race) {
         const defeatMessage = document.createElement("p");
         defeatMessage.className = "log-entry";
 
