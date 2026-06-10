@@ -15,7 +15,7 @@ import { saveGame } from "./saveGame.js";
 import { loadSavedGame } from "./loadGame.js";
 import { QuestJournalUpdater } from "./QuestJournalUpdater.js";
 import { handleDeath } from "./deathHandler.js";
-import {checkDungeonAccess, exitDungeon, loadDungeon} from "./locationHandler.js";
+import {changeTileColor, checkDungeonAccess, exitDungeon} from "./locationHandler.js";
 import { AdventureLogHandler } from "./AdventureLogHandler.js";
 
 let spawnPosition;
@@ -150,6 +150,7 @@ function checkForAnyEvent(x, y) {
             spawnChapter = chapterId;
             const dungeonId = newEvent.id;
             checkDungeonAccess(dungeonId);
+            changeTileColor(newEvent.x, newEvent.y);
         }
 
         if (newEvent.type === "dungeonExit") {

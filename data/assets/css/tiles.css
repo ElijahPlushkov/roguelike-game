@@ -17,10 +17,21 @@
     color: black;
     background: #5a5a5a;
     filter: brightness(0.5);
+    cursor: pointer;
+}
+
+.tile:hover {
+    filter: brightness(1);
 }
 
 .tile-fov {
     filter: brightness(1);
+}
+
+.explored-location-tile {
+    filter: brightness(5);
+    background: red;
+    color: red;
 }
 
 .wall {
@@ -101,4 +112,15 @@
 
 .building {
     background-color: var(--boulder-tile);
+}
+
+.tooltip {
+    position:fixed;
+    background:#000;
+    color:#fff;
+    padding:4px 8px;
+    font-size:12px;
+    border-radius:4px;
+    pointer-events:none;
+    z-index:1000;
 }

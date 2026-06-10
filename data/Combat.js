@@ -165,7 +165,7 @@ export class Combat {
         gameData.playerCoordinates.y = previousCoordinates.y;
 
         this.statChanger.changeStats({["pollen"]: -10}, {["reputation"]: -1});
-        this.adventureLogHandler.appendFleeMessage(this.enemy.fleeSuccess);
+        this.adventureLogHandler.appendFleeMessage("You flee from your enemy.");
         this.clearCombatState();
         mapRender();
     }

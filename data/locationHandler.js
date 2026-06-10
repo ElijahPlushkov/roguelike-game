@@ -36,21 +36,14 @@ export function checkDungeonAccess(id) {
 
     if (level.isGuarded && !isGuardianDefeated && level.isLocked) {
         handleGuardian(isGuardianDefeated, level);
-    }
-
-    else if (level.isGuarded && !isGuardianDefeated) {
+    } else if (level.isGuarded && !isGuardianDefeated) {
         handleGuardian(isGuardianDefeated, level);
-    }
-
-    else if (level.isLocked) {
+    } else if (level.isLocked) {
         handleLock(level);
-    }
-
-    else {
+    } else {
         dungeonDescription.textContent = "You found a " + level.type + " called " + level.name + ". Do you wish to enter?";
     }
 }
-
 
 export function loadDungeon(id) {
     parseLevelData(id);
@@ -127,4 +120,14 @@ function handleLock(level) {
             adventureLogHandler.appendSystemMessage("You are too weak to bash this door.");
         }
     }
+}
+
+export function changeTileColor(x, y) {
+    let tiles = document.querySelectorAll(".tile");
+
+    tiles.forEach(tile => {
+        if (parseInt(tile.dataset.x) === x && parseInt(tile.dataset.y) === y) {
+            tile.textContent = "%";
+        }
+    });
 }
