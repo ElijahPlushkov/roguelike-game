@@ -15,11 +15,12 @@ let fightGuardianBtn = dungeonWindow.querySelector(".fight-guardian");
 let unlockBtn = dungeonWindow.querySelector(".unlock-button");
 let bashBtn = dungeonWindow.querySelector(".bash-button");
 
-export function checkDungeonAccess(id) {
+export function handleDungeonAccess(id, locationCoordinates) {
     gameData.isEventActive = true;
     dungeonWindow.classList.remove("hidden");
     let level = getLevel(id);
-    markLocationSeen({id: level.id, name: level.name, type: level.type});
+    markLocationSeen({id: level.id, name: level.name, type: level.type, locationCoordinates: locationCoordinates});
+    adventureLogHandler.appendLocationDiscoveryMessage(level.name);
 
     yesBtn.onclick = () => {
         gameData.isEventActive = false;
@@ -120,14 +121,4 @@ function handleLock(level) {
             adventureLogHandler.appendSystemMessage("You are too weak to bash this door.");
         }
     }
-}
-
-export function changeTileColor(x, y) {
-    let tiles = document.querySelectorAll(".tile");
-
-    tiles.forEach(tile => {
-        if (parseInt(tile.dataset.x) === x && parseInt(tile.dataset.y) === y) {
-            tile.textContent = "%";
-        }
-    });
 }

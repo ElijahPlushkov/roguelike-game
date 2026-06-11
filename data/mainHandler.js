@@ -15,8 +15,9 @@ import { saveGame } from "./saveGame.js";
 import { loadSavedGame } from "./loadGame.js";
 import { QuestJournalUpdater } from "./QuestJournalUpdater.js";
 import { handleDeath } from "./deathHandler.js";
-import {changeTileColor, checkDungeonAccess, exitDungeon} from "./locationHandler.js";
+import { handleDungeonAccess, exitDungeon } from "./locationHandler.js";
 import { AdventureLogHandler } from "./AdventureLogHandler.js";
+import {displayMapInfo} from "./mapHandler.js";
 
 let spawnPosition;
 let spawnChapter;
@@ -149,8 +150,8 @@ function checkForAnyEvent(x, y) {
             spawnPosition = {x: newEvent.x, y: newEvent.y};
             spawnChapter = chapterId;
             const dungeonId = newEvent.id;
-            checkDungeonAccess(dungeonId);
-            changeTileColor(newEvent.x, newEvent.y);
+            handleDungeonAccess(dungeonId, {x: newEvent.x, y: newEvent.y});
+            changeTileType(newEvent.x, newEvent.y);
         }
 
         if (newEvent.type === "dungeonExit") {
@@ -243,3 +244,7 @@ questJournal.addEventListener("click", () => {
 journalClose.addEventListener("click", () => {
     journalUpdater.closeJournal();
 });
+
+function changeTileType(x, y) {
+    map[y][x] = "⌂";
+}

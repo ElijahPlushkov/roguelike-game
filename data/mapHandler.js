@@ -1,3 +1,5 @@
+import { gameData } from "./gameData.js";
+
 export function displayMapInfo() {
     let tiles = document.querySelectorAll(".tile");
 
@@ -17,7 +19,28 @@ function showTileInfo(tile, event) {
         document.body.appendChild(tooltip);
     }
 
-    tooltip.textContent = `Position: ${tile.dataset.x}, ${tile.dataset.y} | Type: ${tile.dataset.type || 'Unknown'}`;
+    let tileX = parseInt(tile.dataset.x);
+    let tileY = parseInt(tile.dataset.y);
+
+    let tooltipText = "";
+
+    if (tile.dataset.type === "dungeon") {
+        let foundLocation = gameData.locations.find(location =>
+            location.locationCoordinates.x === tileX &&
+            location.locationCoordinates.y === tileY
+        );
+
+        if (foundLocation) {
+            tile.dataset.name = foundLocation.name;
+            tooltipText = `Position: ${tileX}, ${tileY} | Name: ${foundLocation.name}`;
+        } else {
+            tooltipText = `Position: ${tileX}, ${tileY} | Type: Dungeon (Unnamed)`;
+        }
+    } else {
+        tooltipText = `Position: ${tileX}, ${tileY} | Type: ${tile.dataset.type || 'Unknown'}`;
+    }
+
+    tooltip.textContent = tooltipText;
     tooltip.style.left = event.clientX + 10 + 'px';
     tooltip.style.top = event.clientY + 10 + 'px';
     tooltip.style.display = 'block';

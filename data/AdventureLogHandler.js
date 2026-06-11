@@ -95,6 +95,13 @@ export class AdventureLogHandler {
         this.adventureLog.prepend(systemMessage);
     }
 
+    appendLocationDiscoveryMessage(locationName) {
+        const locationMessage = this.createDomElementMessage();
+        locationMessage.className = "dialogue-text-color";
+        locationMessage.textContent = "You discovered: " + locationName;
+        this.adventureLog.prepend(locationMessage);
+    }
+
     clearAdventureLog() {
         this.adventureLog.innerHTML = "";
     }

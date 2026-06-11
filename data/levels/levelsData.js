@@ -1,9 +1,9 @@
 import { levelData as chapter1 } from './chapter_1.js';
-import { levelData as dungeon } from './dungeon.js';
+import { levelData as spider_liar } from './spider-liar.js';
 
 export const levelRegistry = {
     "chapter_1": chapter1,
-    "dungeon": dungeon
+    "spider-liar": spider_liar
 };
 
 export function getLevel(id) {

@@ -89,7 +89,7 @@ export const levelData = {
         "dungeons": [
             {
                 "type": "dungeon",
-                "id": "dungeon",
+                "id": "spider-liar",
                 "x": 12,
                 "y": 2
             }
