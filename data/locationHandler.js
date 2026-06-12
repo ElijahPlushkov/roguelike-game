@@ -1,4 +1,4 @@
-import { gameData, parseLevelData } from "./gameData.js";
+import { gameData, parseLevelData, dungeonWindow } from "./gameData.js";
 import { getLevel } from "./levels/levelsData.js";
 import { markLocationSeen } from "./helperFunctions.js";
 import { initCombat } from "./combatHandler.js";
@@ -6,7 +6,6 @@ import { AdventureLogHandler } from "./AdventureLogHandler.js";
 
 let adventureLogHandler = new AdventureLogHandler();
 
-let dungeonWindow = document.querySelector(".dungeon-box");
 let dungeonDescription = dungeonWindow.querySelector(".dungeon-description");
 
 let yesBtn = dungeonWindow.querySelector(".dungeon-door-button-yes");

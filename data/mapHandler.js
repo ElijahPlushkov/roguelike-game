@@ -32,12 +32,12 @@ function showTileInfo(tile, event) {
 
         if (foundLocation) {
             tile.dataset.name = foundLocation.name;
-            tooltipText = `Position: ${tileX}, ${tileY} | Name: ${foundLocation.name}`;
+            tooltipText = `Position: ${tileX}, ${tileY} | ${foundLocation.name}`;
         } else {
-            tooltipText = `Position: ${tileX}, ${tileY} | Type: Dungeon (Unnamed)`;
+            tooltipText = `Position: ${tileX}, ${tileY} | Unknown`;
         }
     } else {
-        tooltipText = `Position: ${tileX}, ${tileY} | Type: ${tile.dataset.type || 'Unknown'}`;
+        tooltipText = `Position: ${tileX}, ${tileY} | You see ${tile.dataset.type || 'Unknown'}`;
     }
 
     tooltip.textContent = tooltipText;

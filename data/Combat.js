@@ -3,7 +3,7 @@ import {
     displayCurrentHealth,
     eventDescription,
     eventOptions,
-    combatWindow, combatLog, displayPollen, armorRateModifier, agilityModifier, playerCoordinates
+    combatWindow, combatLog, displayPollen, armorRateModifier, agilityModifier, playerCoordinates, dungeonWindow
 } from "./gameData.js";
 import { endEvent, markEventSeen } from "./helperFunctions.js";
 import { ChangeStats } from "./ChangeStats.js";
@@ -167,6 +167,8 @@ export class Combat {
         this.statChanger.changeStats({["pollen"]: -10}, {["reputation"]: -1});
         this.adventureLogHandler.appendFleeMessage("You flee from your enemy.");
         this.clearCombatState();
+        // closes dungeon window after fleeing combat
+        dungeonWindow.classList.add("hidden");
         mapRender();
     }
 
