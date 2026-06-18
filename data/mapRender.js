@@ -54,14 +54,14 @@ export function mapRender() {
                         tile.classList.add("tree");
                         tile.dataset.type = "tree";
                         break;
-                    case "N":
+                    case "c":
                         tile.classList.add("npc");
-                        tile.textContent = "N";
+                        tile.textContent = "c";
                         tile.dataset.type = "npc";
                         break;
-                    case "E":
+                    case "e":
                         tile.classList.add("enemy");
-                        tile.textContent = "E";
+                        tile.textContent = "e";
                         tile.dataset.type = "enemy";
                         break;
                     case "Ω":
@@ -110,6 +110,14 @@ export function mapRender() {
                         tile.classList.add("building");
                         tile.textContent = "F";
                         tile.dataset.type = "building";
+                        break;
+                    case "<":
+                        // tile.classList.add("");
+                        tile.textContent = "<";
+                        break;
+                    case "▣":
+                        // tile.classList.add("");
+                        tile.textContent = "▣";
                         break;
                     default:
                         tile.classList.add("unknown");

@@ -99,8 +99,8 @@ function checkForAnyEvent(x, y) {
         ...(levelData.tileData.dialogues || []),
         ...(levelData.tileData.enemies || []),
         ...(levelData.tileData.npcs || []),
-        ...(levelData.tileData.dungeons || []),
-        ...(levelData.tileData.dungeonExit || [])
+        ...(levelData.tileData.locations || []),
+        ...(levelData.tileData.locationExit || [])
     ]
 
     const newEvent = allEvents.find(event => event.x === x && event.y === y);
@@ -146,15 +146,15 @@ function checkForAnyEvent(x, y) {
             initNpc(npcId);
         }
 
-        if (newEvent.type === "dungeon") {
+        if (newEvent.type === "location") {
             spawnPosition = {x: newEvent.x, y: newEvent.y};
             spawnChapter = chapterId;
-            const dungeonId = newEvent.id;
-            handleDungeonAccess(dungeonId, {x: newEvent.x, y: newEvent.y});
+            const locationId = newEvent.id;
+            handleDungeonAccess(locationId, {x: newEvent.x, y: newEvent.y});
             changeTileType(newEvent.x, newEvent.y);
         }
 
-        if (newEvent.type === "dungeonExit") {
+        if (newEvent.type === "locationExit") {
             exitDungeon(spawnChapter, spawnPosition);
         }
     }
