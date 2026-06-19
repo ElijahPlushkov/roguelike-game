@@ -4,12 +4,14 @@ import { appendContinueButton, endEvent } from "./helperFunctions.js";
 import { QuestJournalUpdater } from "./QuestJournalUpdater.js";
 import { ChangeStats } from "./ChangeStats.js";
 import { AdventureLogHandler } from "./AdventureLogHandler.js";
+import {getEvent} from "./data/dataManager.js";
 
 const adventureLogHandler = new AdventureLogHandler();
 
 export function initEvent(eventId) {
 
-    const event = eventData.events.find(event => event.id === eventId);
+    // const event = eventData.events.find(event => event.id === eventId);
+    const event = getEvent(eventId);
 
     eventDescription.className = "event-text-color";
     eventDescription.textContent = event.event;

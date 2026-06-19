@@ -1,4 +1,4 @@
-import {eventBox, gameData, map} from "./gameData.js";
+import {eventBox, gameData } from "./gameData.js";
 
 export function appendContinueButton() {
     const continueButton = document.createElement("button");
