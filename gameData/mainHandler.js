@@ -1,9 +1,8 @@
 import {
     gameData, journalClose, levelData, map, playerCoordinates, tileSet,
     parseLevelData, eventBox, chapterId, player
-} from "./gameData.js";
-import { dialogueData } from "./dialogueData.js";
-import { eventData } from "./eventData.js";
+} from "./data/gameData.js";
+import { dialogueData } from "./data/dialogueData.js";
 import { initEvent } from "./eventHandler.js";
 import { mapRender } from "./mapRender.js";
 import { initDialogue } from "./dialogueHandler.js";
@@ -17,7 +16,7 @@ import { QuestJournalUpdater } from "./QuestJournalUpdater.js";
 import { handleDeath } from "./deathHandler.js";
 import { handleDungeonAccess, exitDungeon } from "./locationHandler.js";
 import { AdventureLogHandler } from "./AdventureLogHandler.js";
-import {displayMapInfo} from "./mapHandler.js";
+import {getEvent} from "./data/eventData/eventDataManager.js";
 
 let spawnPosition;
 let spawnChapter;
@@ -217,7 +216,7 @@ function requirementsCheck(newEvent) {
     }
     if (newEvent.type === "event") {
         const eventId = newEvent.id;
-        const event = eventData.events.find(event => event.id === eventId);
+        const event = getEvent(eventId);
 
         if (!event.requirements) {
             isPassed = true;

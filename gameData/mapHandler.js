@@ -1,4 +1,4 @@
-import { gameData } from "./gameData.js";
+import { gameData } from "./data/gameData.js";
 
 export function displayMapInfo() {
     let tiles = document.querySelectorAll(".tile");

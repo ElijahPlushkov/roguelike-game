@@ -1,5 +1,5 @@
-import { gameData, eventDescription, eventOptions } from "./gameData.js";
-import { dialogueData } from "./dialogueData.js";
+import { gameData, eventDescription, eventOptions } from "./data/gameData.js";
+import { dialogueData } from "./data/dialogueData.js";
 import {endEvent, appendContinueButton} from "./helperFunctions.js";
 import { handleDeath } from "./deathHandler.js";
 import { QuestJournalUpdater } from "./QuestJournalUpdater.js";

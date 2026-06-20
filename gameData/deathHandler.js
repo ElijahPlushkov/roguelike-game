@@ -1,4 +1,4 @@
-import { gameData } from "./gameData.js";
+import { gameData } from "./data/gameData.js";
 import { AdventureLogHandler } from "./AdventureLogHandler.js";
 
 const adventureLogHandler = new AdventureLogHandler();

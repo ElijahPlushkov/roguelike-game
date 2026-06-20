@@ -1,5 +1,5 @@
-import { mapRender } from "./mapRender.js";
-import { Player } from "./Player.js";
+import { mapRender } from "../mapRender.js";
+import { Player } from "../Player.js";
 import { getLevel } from './levels/levelsData.js';
 
 export const gameData = {
@@ -12,10 +12,10 @@ export const gameData = {
     willpower: 10,
     statusEffects: 'none',
 
-    weapon: 'oak_staff',
-    armor: 'cotton_shirt',
-    shield: 'birch_shield',
-    rangedWeapon: 'pine_needle_dart',
+    weapon: 'oak-staff',
+    armor: 'cotton-shirt',
+    shield: 'birch-shield',
+    rangedWeapon: 'pine-needle-dart',
     ammunition: 7,
 
     accuracy: 1,

@@ -1,6 +1,6 @@
 import { NewEnemy } from "./NewEnemy.js";
-import { armorData } from "./armorData.js";
-import { weaponData } from "./weaponData.js";
+import { armorData } from "./data/armorData.js";
+import { weaponData } from "./data/weaponData.js";
 
 export class NpcEnemyFactory {
 

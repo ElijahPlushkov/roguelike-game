@@ -4,7 +4,7 @@ import {
     eventDescription,
     eventOptions,
     combatWindow, combatLog, displayPollen, armorRateModifier, agilityModifier, playerCoordinates, dungeonWindow
-} from "./gameData.js";
+} from "./data/gameData.js";
 import { endEvent, markEventSeen } from "./helperFunctions.js";
 import { ChangeStats } from "./ChangeStats.js";
 import { handleDeath } from "./deathHandler.js";

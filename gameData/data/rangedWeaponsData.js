@@ -3,7 +3,7 @@ export const rangedWeaponsData = {
     "rangedWeapons": [
         {
             "name": "Pine Needle Dart",
-            "id": "pine_needle_dart",
+            "id": "pine-needle-dart",
             "damage": 1,
             "enchantment": "none",
             "durability": 1,

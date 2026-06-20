@@ -3,7 +3,7 @@ export const shieldData = {
     "shields": [
         {
             "name": "Oak Shield",
-            "id": "oak_shield",
+            "id": "oak-shield",
             "armorRate": 2,
             "type": "medium",
             "effect": 25,
@@ -14,7 +14,7 @@ export const shieldData = {
         },
         {
             "name": "Birch Shield",
-            "id": "birch_shield",
+            "id": "birch-shield",
             "armorRate": 1,
             "type": "light",
             "effect": 15,

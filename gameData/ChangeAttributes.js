@@ -5,7 +5,7 @@ import {
     displayMaxMysticism,
     displayWillpower,
     gameData, player
-} from "./gameData.js";
+} from "./data/gameData.js";
 
 export class ChangeAttributes {
     HEALTH_MODIFIER = 2;

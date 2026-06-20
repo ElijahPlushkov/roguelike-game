@@ -1,16 +1,16 @@
-import { player } from "./gameData.js";
-import { enemyData } from "./enemyData.js";
+import { player } from "./data/gameData.js";
 import { RandomEnemyFactory } from "./RandomEnemyFactory.js";
 import { NpcEnemyFactory } from "./NpcEnemyFactory.js";
 import { Combat } from "./Combat.js";
 import { UniqueEnemyFactory } from "./UniqueEnemyFactory.js";
-import { npcData } from "./npcData.js";
+import { npcData } from "./data/npcData.js";
+import {getEnemy} from "./data/enemyData/enemyDataManager.js";
 
 export function initCombat(enemyId, enemyType) {
     let enemy;
 
     if (enemyType === "unique") {
-        enemy = enemyData.enemies.find(enemy => enemy.id === enemyId);
+        enemy = getEnemy(enemyId);
         let uniqueEnemyFactory = new UniqueEnemyFactory();
         enemy = uniqueEnemyFactory.createUniqueEnemy(enemy);
         console.log(enemy);

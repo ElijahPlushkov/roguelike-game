@@ -1,5 +1,5 @@
-import { gameData, parseLevelData, dungeonWindow } from "./gameData.js";
-import { getLevel } from "./levels/levelsData.js";
+import { gameData, parseLevelData, dungeonWindow } from "./data/gameData.js";
+import { getLevel } from "./data/levels/levelsData.js";
 import { markLocationSeen } from "./helperFunctions.js";
 import { initCombat } from "./combatHandler.js";
 import { AdventureLogHandler } from "./AdventureLogHandler.js";
@@ -53,11 +53,11 @@ export function exitDungeon(id, spawnPosition) {
     parseLevelData(id, spawnPosition);
 }
 
-function pickLock(agility, lock) {
+export function canPickLock(agility, lock) {
     return (agility + Math.floor(Math.random() * agility)) > lock;
 }
 
-function bashDoor(might, lock) {
+export function canBashDoor(might, lock) {
     return (might + Math.floor(Math.random() * might)) > lock;
 }
 
@@ -92,7 +92,7 @@ function handleLock(level) {
     yesBtn.classList.add("hidden");
 
     unlockBtn.onclick = () => {
-        let isUnlocked = pickLock(gameData.playerCharacteristics.agility, level.isLocked);
+        let isUnlocked = canPickLock(gameData.playerCharacteristics.agility, level.isLocked);
         if (isUnlocked) {
             level.isLocked = "";
             yesBtn.classList.remove("hidden");
@@ -107,7 +107,7 @@ function handleLock(level) {
     }
 
     bashBtn.onclick = () => {
-        let isBashed = bashDoor(gameData.playerCharacteristics.might, level.isLocked);
+        let isBashed = canBashDoor(gameData.playerCharacteristics.might, level.isLocked);
         if (isBashed) {
             level.isLocked = "";
             yesBtn.classList.remove("hidden");

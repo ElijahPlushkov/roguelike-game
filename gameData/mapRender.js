@@ -1,4 +1,4 @@
-import { gameData, map, playerCoordinates } from "./gameData.js";
+import { gameData, map, playerCoordinates } from "./data/gameData.js";
 import { Movement } from "./Movement.js";
 import { displayMapInfo } from "./mapHandler.js";
 

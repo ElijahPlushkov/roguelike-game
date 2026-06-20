@@ -4,7 +4,7 @@ import { displayMight,
     displayAgility,
     displayReputation,
     gameData,
-    playerCoordinates } from "./gameData.js";
+    playerCoordinates } from "./data/gameData.js";
 import { mapRender } from "./mapRender.js";
 import { QuestJournalUpdater } from "./QuestJournalUpdater.js";
 import { AdventureLogHandler } from "./AdventureLogHandler.js";

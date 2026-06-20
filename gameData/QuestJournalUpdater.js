@@ -1,5 +1,5 @@
-import { gameData, journalBox } from "./gameData.js";
-import { questData } from "./questData.js";
+import { gameData, journalBox } from "./data/gameData.js";
+import { questData } from "./data/questData.js";
 import { ChangeStats } from "./ChangeStats.js";
 import { AdventureLogHandler } from "./AdventureLogHandler.js";
 
