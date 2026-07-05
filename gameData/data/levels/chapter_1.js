@@ -124,8 +124,8 @@ export const levelData = {
                 "type": "enemy",
                 "id": "mosquito_guard_1",
                 "enemyType": "unique",
-                "x": 6,
-                "y": 2
+                "x": 100,
+                "y": 100
             },
             {
                 "type": "enemy",

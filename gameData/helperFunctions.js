@@ -1,18 +1,18 @@
-import {eventBox, gameData } from "./data/gameData.js";
+import { gameData } from "./data/gameData.js";
 
-export function appendContinueButton() {
+export function createContinueButton() {
     const continueButton = document.createElement("button");
     continueButton.textContent = "Continue.";
     continueButton.className = "option-button option-button_small";
     return continueButton;
 }
 
-export function endEvent(id, status, description, options) {
+export function endEvent(id, status, description, options, activeWindow) {
     gameData.isEventActive = false;
     updateGameProgress(id, status);
     description.textContent = "";
     options.textContent = "";
-    eventBox.classList.add("hidden");
+    activeWindow.classList.add("hidden");
 }
 
 function updateGameProgress(id, finalState) {

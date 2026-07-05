@@ -1,16 +1,14 @@
-import { eventDescription, eventOptions } from "./data/gameData.js";
-import { eventData } from "./eventData.js";
-import { appendContinueButton, endEvent } from "./helperFunctions.js";
+import { eventDescription, eventOptions, eventWindow } from "./data/gameData.js";
+import { createContinueButton, endEvent } from "./helperFunctions.js";
 import { QuestJournalUpdater } from "./QuestJournalUpdater.js";
 import { ChangeStats } from "./ChangeStats.js";
 import { AdventureLogHandler } from "./AdventureLogHandler.js";
-import {getEvent} from "./data/eventData/eventDataManager.js";
+import { getEvent } from "./data/eventData/eventDataManager.js";
 
 const adventureLogHandler = new AdventureLogHandler();
 
 export function initEvent(eventId) {
 
-    // const event = eventData.events.find(event => event.id === eventId);
     const event = getEvent(eventId);
 
     eventDescription.className = "event-text-color";
@@ -18,7 +16,7 @@ export function initEvent(eventId) {
 
     eventOptions.innerHTML = "";
 
-    let continueButton = appendContinueButton();
+    let continueButton = createContinueButton();
     eventOptions.prepend(continueButton);
     continueButton.addEventListener("click", function () {
 
@@ -27,7 +25,7 @@ export function initEvent(eventId) {
             journalUpdater.journalUpdater(event.quest);
         }
 
-        endEvent(eventId, "completed", eventDescription, eventOptions);
+        endEvent(eventId, "completed", eventDescription, eventOptions, eventWindow);
         const reward = event.reward;
         console.log(reward);
         let statChanger = new ChangeStats();

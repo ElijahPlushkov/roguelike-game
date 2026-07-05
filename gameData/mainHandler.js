@@ -1,6 +1,6 @@
 import {
     gameData, journalClose, levelData, map, playerCoordinates, tileSet,
-    parseLevelData, eventBox, chapterId, player
+    parseLevelData, eventWindow, chapterId, player
 } from "./data/gameData.js";
 import { dialogueData } from "./data/dialogueData.js";
 import { initEvent } from "./eventHandler.js";
@@ -16,7 +16,8 @@ import { QuestJournalUpdater } from "./QuestJournalUpdater.js";
 import { handleDeath } from "./deathHandler.js";
 import { handleDungeonAccess, exitDungeon } from "./locationHandler.js";
 import { AdventureLogHandler } from "./AdventureLogHandler.js";
-import {getEvent} from "./data/eventData/eventDataManager.js";
+import { getEvent } from "./data/eventData/eventDataManager.js";
+import { changeTileType } from "./mapHandler.js";
 
 let spawnPosition;
 let spawnChapter;
@@ -99,7 +100,8 @@ function checkForAnyEvent(x, y) {
         ...(levelData.tileData.enemies || []),
         ...(levelData.tileData.npcs || []),
         ...(levelData.tileData.locations || []),
-        ...(levelData.tileData.locationExit || [])
+        ...(levelData.tileData.locationExit || []),
+        ...(levelData.tileData.doors || [])
     ]
 
     const newEvent = allEvents.find(event => event.x === x && event.y === y);
@@ -113,7 +115,7 @@ function checkForAnyEvent(x, y) {
         if (newEvent.type === "event") {
             const eventId = newEvent.id;
             if (!hasSeenEvent(eventId)) {
-                eventBox.classList.toggle("hidden");
+                eventWindow.classList.toggle("hidden");
                 gameData.isEventActive = true;
                 initEvent(eventId);
                 markEventSeen(eventId);
@@ -123,7 +125,7 @@ function checkForAnyEvent(x, y) {
         if (newEvent.type === "dialogue") {
             const dialogueId = newEvent.id;
             if (!hasSeenEvent(dialogueId)) {
-                eventBox.classList.toggle("hidden");
+                eventWindow.classList.toggle("hidden");
                 gameData.isEventActive = true;
                 initDialogue(dialogueId, gameData.stateKey);
                 markEventSeen(dialogueId);
@@ -134,13 +136,13 @@ function checkForAnyEvent(x, y) {
             const enemyId = newEvent.id;
             const enemyType = newEvent.enemyType;
             if (!hasSeenEvent(enemyId)) {
-                initCombat(enemyId, enemyType);
+                initCombat(enemyId, enemyType, {x: newEvent.x, y: newEvent.y});
             }
         }
 
         if (newEvent.type === "npc") {
             const npcId = newEvent.id;
-            eventBox.classList.toggle("hidden");
+            eventWindow.classList.toggle("hidden");
             gameData.isEventActive = true;
             initNpc(npcId);
         }
@@ -150,12 +152,17 @@ function checkForAnyEvent(x, y) {
             spawnChapter = chapterId;
             const locationId = newEvent.id;
             handleDungeonAccess(locationId, {x: newEvent.x, y: newEvent.y});
-            changeTileType(newEvent.x, newEvent.y);
+            // changeTileType(newEvent.x, newEvent.y, "x");
         }
 
         if (newEvent.type === "locationExit") {
             exitDungeon(spawnChapter, spawnPosition);
         }
+
+        // if (newEvent.type === "door") {
+        //     const doorId = newEvent.id;
+        //     accessDoor(doorId);
+        // }
     }
 }
 
@@ -243,7 +250,3 @@ questJournal.addEventListener("click", () => {
 journalClose.addEventListener("click", () => {
     journalUpdater.closeJournal();
 });
-
-function changeTileType(x, y) {
-    map[y][x] = "⌂";
-}

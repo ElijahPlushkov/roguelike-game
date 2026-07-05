@@ -104,8 +104,9 @@ export const levelData = {
         "npcs": [
             {
                 "type": "npc",
-                "x": 24,
-                "y": 7
+                "x": 30,
+                "y": 7,
+                "id": "spider"
             }
         ],
         "enemies": [

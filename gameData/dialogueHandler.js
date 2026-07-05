@@ -1,18 +1,19 @@
 import { gameData, eventDescription, eventOptions } from "./data/gameData.js";
 import { dialogueData } from "./data/dialogueData.js";
-import {endEvent, appendContinueButton} from "./helperFunctions.js";
+import { endEvent, createContinueButton } from "./helperFunctions.js";
 import { handleDeath } from "./deathHandler.js";
 import { QuestJournalUpdater } from "./QuestJournalUpdater.js";
 import { registerNpcDeath } from "./npcHandler.js";
 import { ChangeStats } from "./ChangeStats.js";
 import { initCombat } from "./combatHandler.js";
 import { AdventureLogHandler } from "./AdventureLogHandler.js";
+import { getDialogue } from "./data/dialogueData/dialogueDataManager.js";
 
 const adventureLogHandler = new AdventureLogHandler();
 
 export function initDialogue(dialogueId, stateKey) {
     //find the dialogue
-    const dialogue = dialogueData.dialogues.find(dialogue => dialogue.id === dialogueId);
+    const dialogue = getDialogue(dialogueId);
 
     //initiate the starting key
     let currentStateKey = stateKey || defineDialogueEntryPoint(dialogue);
@@ -105,12 +106,12 @@ export function initDialogue(dialogueId, stateKey) {
             return;
         }
 
-        gameData.eventOutcomes[dialogueId] = {
-            eventOutcome: stateKey
-        };
+        // gameData.eventOutcomes[dialogueId] = {
+        //     eventOutcome: stateKey
+        // };
 
         eventOptions.innerHTML = "";
-        let continueButton = appendContinueButton();
+        let continueButton = createContinueButton();
         eventOptions.prepend(continueButton);
 
         continueButton.addEventListener("click", function () {
@@ -128,10 +129,8 @@ export function initDialogue(dialogueId, stateKey) {
 
         if (stateKey === "death") {
             handleDeath();
-            return;
         }
 
-        console.log(gameData.eventOutcomes);
     }
 }
 

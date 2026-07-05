@@ -6,7 +6,7 @@ import { UniqueEnemyFactory } from "./UniqueEnemyFactory.js";
 import { npcData } from "./data/npcData.js";
 import {getEnemy} from "./data/enemyData/enemyDataManager.js";
 
-export function initCombat(enemyId, enemyType) {
+export function initCombat(enemyId, enemyType, enemyCoordinates) {
     let enemy;
 
     if (enemyType === "unique") {
@@ -26,6 +26,6 @@ export function initCombat(enemyId, enemyType) {
     }
 
     // start a new combat
-    let newCombat = new Combat(enemy, player, enemyId);
+    let newCombat = new Combat(enemy, player, enemyId, enemyCoordinates);
     newCombat.startCombat();
 }

@@ -1,0 +1,42 @@
+.dungeon-box {
+    position: fixed;
+    top: 140px;
+    right: 500px;
+    width: 340px;
+    height: 210px;
+    background: var(--event-box-background-color);
+    border-radius: 5px;
+    padding: 5px;
+}
+
+.dungeon-box-content {
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    height: 95%;
+    gap: 10px;
+}
+
+.dungeon-description {
+    font-size: 14px;
+    overflow-y: auto;
+    min-height: 0;
+}
+
+.dungeon-door-options {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    border-top: 1px solid var(--main-text-color);
+}
+
+.dungeon-door-button {
+    font-size: 14px;
+    color: var(--main-text-color);
+    background: var(--mountain-tile);
+    border: 1px solid var(--water-tile);
+    border-radius: 3px;
+    margin: 5px;
+    padding: 3px;
+    width: 100px;
+    text-align: left;
+}

@@ -5,8 +5,8 @@ import { getLevel } from './levels/levelsData.js';
 export const gameData = {
     playerCoordinates: {x: 0, y: 1},
 
-    health: 20,
-    currentHealth: 20,
+    health: 50,
+    currentHealth: 50,
     mysticism: 10,
     currentMysticism: 10,
     willpower: 10,
@@ -34,10 +34,10 @@ export const gameData = {
     isEventActive: false,
 
     playerCharacteristics: {
-        reputation: 1,
-        might: 5,
-        prayer: 1,
-        agility: 5
+        reputation: 10,
+        might: 10,
+        prayer: 10,
+        agility: 10
     },
 
     pollen: 0,
@@ -96,7 +96,7 @@ const armorRateModifier = document.querySelector(".armor-rate-modifier");
 
 const agilityModifier = document.querySelector(".agility-modifier");
 
-const eventBox = document.querySelector(".event-box");
+const eventWindow = document.querySelector(".event-box");
 
 const eventDescription = document.querySelector(".event-description");
 
@@ -104,7 +104,7 @@ const eventOptions = document.querySelector(".event-options");
 
 const eventInfo = document.querySelector(".event-info");
 
-const journalBox = document.querySelector(".journal-box");
+const journalWindow = document.querySelector(".journal-box");
 
 const journalClose = document.querySelector(".journal-close");
 
@@ -113,11 +113,11 @@ const combatLog = document.querySelector(".combat-log");
 
 const dungeonWindow = document.querySelector(".dungeon-box");
 
-export {displayMaxHealth, displayCurrentHealth, displayMaxMysticism, displayCurrentMysticism, displayWillpower,
+export { displayMaxHealth, displayCurrentHealth, displayMaxMysticism, displayCurrentMysticism, displayWillpower,
     displayReputation, displayMight, displayPrayer, displayAgility, displayPollen, displayArmorRate, armorRateModifier,
     agilityModifier,
-    eventBox, eventDescription, eventOptions, eventInfo,
-    journalBox, journalClose, combatWindow, combatLog, dungeonWindow};
+    eventWindow, eventDescription, eventOptions, eventInfo,
+    journalWindow, journalClose, combatWindow, combatLog, dungeonWindow };
 
 let levelData = {};
 

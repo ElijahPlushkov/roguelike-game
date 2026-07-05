@@ -1,4 +1,4 @@
-import { gameData } from "./data/gameData.js";
+import {gameData, map} from "./data/gameData.js";
 
 export function displayMapInfo() {
     let tiles = document.querySelectorAll(".tile");
@@ -48,4 +48,8 @@ function showTileInfo(tile, event) {
     tile.onmouseleave = () => {
         tooltip.style.display = 'none';
     };
+}
+
+export function changeTileType(x, y, newTile) {
+    map[y][x] = newTile;
 }

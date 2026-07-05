@@ -1,31 +1,39 @@
 import { doorData } from "./data/doorData.js";
-import { gameData, eventDescription, eventOptions, levelData, eventBox } from "./data/gameData.js";
-import { appendContinueButton, endEvent, hasSeenEvent, markEventSeen } from "./helperFunctions.js";
+import { gameData, levelData } from "./data/gameData.js";
+import { createContinueButton, endEvent, hasSeenEvent, markEventSeen } from "./helperFunctions.js";
 import { ChangeStats } from "./ChangeStats.js";
 import { AdventureLogHandler } from "./AdventureLogHandler.js";
 import { canBashDoor, canPickLock } from "./locationHandler.js";
 
+const doorWindow = document.querySelector(".door-box");
+const doorDescription = document.querySelector(".door-description");
+const doorOptions = document.querySelector(".door-options");
+
 const adventureLogHandler = new AdventureLogHandler();
-const unlockButton = eventOptions.querySelector(".unlock-button");
-const bashButton = eventOptions.querySelector(".bash-button");
 
 export function accessDoor(x, y) {
     const doors = [...(levelData.tileData.doors) || []];
 
     const doorTile = doors.find(doorTile => doorTile.x === x && doorTile.y === y);
 
-    console.log(doorTile);
+    const doorId = doorTile.id;
 
-    if (!doorTile) {
-        return true;
-    }
+    let status;
 
-    if (doorTile.id) {
-        const doorId = doorTile.id;
+    if (!hasSeenEvent(doorId)) {
+        const unlockButton = createActionButton("unlock");
+        const bashButton = createActionButton("bash");
 
         const door = doorData.doors.find(door => door.id === doorId);
 
-        let status = "completed";
+        doorWindow.classList.remove("hidden");
+        doorDescription.className = "event-text-color";
+        doorDescription.textContent = door.description;
+        gameData.isEventActive = true;
+
+        console.log(doorWindow);
+
+        let continueButton = createContinueButton();
 
         //check if the player can enter the door
         if (door.isLocked) {
@@ -40,6 +48,8 @@ export function accessDoor(x, y) {
                     unlockButton.classList.add("hidden");
                     bashButton.classList.add("hidden");
                     adventureLogHandler.appendSystemMessage("You successfully unlocked the door.");
+
+                    resolveDoorEncounter(continueButton, doorId, status, door);
                 } else {
                     adventureLogHandler.appendSystemMessage("You failed to unlock the door.");
                     doorTile.type = "unwalkable";
@@ -55,30 +65,42 @@ export function accessDoor(x, y) {
                     unlockButton.classList.add("hidden");
                     bashButton.classList.add("hidden");
                     adventureLogHandler.appendSystemMessage("You bashed the door with all your might.");
+
+                    resolveDoorEncounter(continueButton, doorId, status, door);
                 } else {
                     adventureLogHandler.appendSystemMessage("You are too weak to bash this door.");
                     doorTile.type = "unwalkable";
                     return false;
                 }
             }
+        } else {
+            resolveDoorEncounter(continueButton, doorId, status, door);
         }
-
-        if (!hasSeenEvent(doorId)) {
-            eventBox.classList.toggle("hidden");
-            eventDescription.className = "event-text-color";
-            eventDescription.textContent = door.description;
-            gameData.isEventActive = true;
-            let continueButton = appendContinueButton();
-            eventOptions.prepend(continueButton);
-            continueButton.addEventListener("click", function () {
-                endEvent(doorId, status, eventDescription, eventOptions);
-                const reward = door.reward;
-                let statChanger = new ChangeStats();
-                statChanger.changeStats(reward);
-                markEventSeen(doorId);
-                gameData.isEventActive = false;
-            });
-        }
+    } else {
         return true;
     }
+}
+
+function resolveDoorEncounter(continueButton, doorId, status, door) {
+    doorOptions.prepend(continueButton);
+    continueButton.addEventListener("click", function () {
+        endEvent(doorId, status, doorDescription, doorOptions, doorWindow);
+        const reward = door.reward;
+        let statChanger = new ChangeStats();
+        statChanger.changeStats(reward);
+        markEventSeen(doorId);
+        gameData.isEventActive = false;
+    });
+}
+
+function createActionButton(type) {
+    const button = document.createElement("button");
+    button.classList.add("door-button", "hidden", `${type}-button`);
+    if (type === "unlock") {
+        button.textContent = "Unlock";
+    } else {
+        button.textContent = "Bash";
+    }
+    doorOptions.prepend(button);
+    return button;
 }

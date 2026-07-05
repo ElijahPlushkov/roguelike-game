@@ -3,7 +3,8 @@ import {
     displayCurrentHealth,
     eventDescription,
     eventOptions,
-    combatWindow, combatLog, displayPollen, armorRateModifier, agilityModifier, playerCoordinates, dungeonWindow
+    combatWindow, combatLog, displayPollen, armorRateModifier, agilityModifier, playerCoordinates, dungeonWindow,
+    eventWindow
 } from "./data/gameData.js";
 import { endEvent, markEventSeen } from "./helperFunctions.js";
 import { ChangeStats } from "./ChangeStats.js";
@@ -11,6 +12,7 @@ import { handleDeath } from "./deathHandler.js";
 import { previousCoordinates } from "./mainHandler.js";
 import { mapRender } from "./mapRender.js";
 import { AdventureLogHandler } from "./AdventureLogHandler.js";
+import { changeTileType } from "./mapHandler.js";
 
 export class Combat {
 
@@ -20,6 +22,7 @@ export class Combat {
     player = null;
     enemyId = null;
     isShieldEquipped = false;
+    enemyCoordinates = null;
 
     statChanger = new ChangeStats();
     adventureLogHandler = new AdventureLogHandler();
@@ -29,10 +32,11 @@ export class Combat {
     shield = document.querySelector(".shield");
     ammunitionCounter = document.querySelector(".ammunition-counter");
 
-    constructor(enemy, player, enemyId) {
+    constructor(enemy, player, enemyId, enemyCoordinates) {
         this.enemy = enemy;
         this.player = player;
         this.enemyId = enemyId;
+        this.enemyCoordinates = enemyCoordinates;
     }
 
     startCombat() {
@@ -61,9 +65,10 @@ export class Combat {
     finishCombat() {
         this.isCombatOn = false;
         this.resolveCombat(this.enemy.difficulty, this.enemy.race);
-        endEvent(this.enemyId, true, eventDescription, eventOptions);
+        endEvent(this.enemyId, true, eventDescription, eventOptions, eventWindow);
         markEventSeen(this.enemyId);
         this.clearCombatState();
+        changeTileType(this.enemyCoordinates.x, this.enemyCoordinates.y, ".");
 
         document.dispatchEvent(
             new CustomEvent("combatEnded")

@@ -2,27 +2,40 @@ export const doorData = {
     "id": "chapter_1_doors",
     "doors": [
         {
-            "id": "spider_door_1",
+            "id": "spider-liar-door-1",
             "type": "door",
             "tileType": "door",
             "requirements": {},
+            "isLocked": "",
             "rejection": "",
-            "description": "A decayed door with many wooden planks missing opens into a dark dank corridor. You see moss-grown bricks and hear water dripping. A clammy wind walks out. You feel chilly.",
+            "description": "You see a decayed door with some wooden planks missing. A clammy wind is seeping out through the gaps. Water is dripping down from moss-covered bricks above you. You feel chilly.",
             "reward": {
                 "pollen": 1
             }
         },
+
         {
-            "id": "spider_door_2",
+            "id": "spider-liar-door-2",
             "type": "door",
             "tileType": "door",
-            "requirements": {
-                "might": 1
-            },
-            "rejection": "The steady door won't open.",
+            "requirements": {},
+            "isLocked": "",
+            "rejection": "",
             "description": "You open the door to a large webby room.",
             "reward": {
                 "pollen": 3
+            }
+        },
+        {
+            "id": "spider-liar-door-3",
+            "type": "door",
+            "tileType": "door",
+            "requirements": {},
+            "isLocked": "3",
+            "rejection": "",
+            "description": "A sturdy oak door looks battered from unfruitful attempts at bashing it. It has a lock.",
+            "reward": {
+                "pollen": 1
             }
         },
         {
