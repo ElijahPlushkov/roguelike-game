@@ -1,4 +1,4 @@
-import { gameData, eventDescription, eventOptions } from "./data/gameData.js";
+import { gameData, eventDescription, eventOptions, eventWindow } from "./data/gameData.js";
 import { dialogueData } from "./data/dialogueData.js";
 import { endEvent, createContinueButton } from "./helperFunctions.js";
 import { handleDeath } from "./deathHandler.js";
@@ -115,7 +115,7 @@ export function initDialogue(dialogueId, stateKey) {
         eventOptions.prepend(continueButton);
 
         continueButton.addEventListener("click", function () {
-            endEvent(dialogueId, stateKey, eventDescription, eventOptions);
+            endEvent(dialogueId, stateKey, eventDescription, eventOptions, eventWindow);
             if (dialogue.quest) {
                 let journalUpdater = new QuestJournalUpdater();
                 journalUpdater.journalUpdater(dialogue.quest);

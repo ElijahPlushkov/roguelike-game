@@ -114,6 +114,7 @@ export const levelData = {
                 "type": "enemy",
                 "id": "mosquito-scout-spider-gang",
                 "enemyType": "unique",
+                "aggressive": 1,
                 "x": 16,
                 "y": 7
             },

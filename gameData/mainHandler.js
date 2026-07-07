@@ -17,7 +17,6 @@ import { handleDeath } from "./deathHandler.js";
 import { handleDungeonAccess, exitDungeon } from "./locationHandler.js";
 import { AdventureLogHandler } from "./AdventureLogHandler.js";
 import { getEvent } from "./data/eventData/eventDataManager.js";
-import { changeTileType } from "./mapHandler.js";
 
 let spawnPosition;
 let spawnChapter;
@@ -81,6 +80,11 @@ document.addEventListener("DOMContentLoaded", () => {
         const newX = playerCoordinates.x + dx;
         const newY = playerCoordinates.y + dy;
 
+        scanSurroundingsForEnemies(newX - 1, newY);
+        scanSurroundingsForEnemies(newX + 1, newY);
+        scanSurroundingsForEnemies(newX, newY - 1);
+        scanSurroundingsForEnemies(newX, newY + 1);
+
         if (isWalkable(newX, newY)) {
             playerCoordinates.x = newX;
             playerCoordinates.y = newY;
@@ -92,19 +96,35 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
-function checkForAnyEvent(x, y) {
-
-    const allEvents = [
+function  findAllEvents() {
+    return [
         ...(levelData.tileData.events || []),
         ...(levelData.tileData.dialogues || []),
         ...(levelData.tileData.enemies || []),
         ...(levelData.tileData.npcs || []),
         ...(levelData.tileData.locations || []),
-        ...(levelData.tileData.locationExit || []),
-        ...(levelData.tileData.doors || [])
+        ...(levelData.tileData.locationExit || [])
     ]
+}
 
-    const newEvent = allEvents.find(event => event.x === x && event.y === y);
+function scanSurroundingsForEnemies(x, y) {
+    const newEvent = findAllEvents().find(event => event.x === x && event.y === y);
+
+    if (newEvent) {
+        if (newEvent.type === "enemy" && newEvent.aggressive) {
+            const enemyId = newEvent.id;
+            const enemyType = newEvent.enemyType;
+            if (!hasSeenEvent(enemyId)) {
+                initCombat(enemyId, enemyType, {x: newEvent.x, y: newEvent.y});
+            }
+        } else {
+            return;
+        }
+    }
+}
+
+function checkForAnyEvent(x, y) {
+    const newEvent = findAllEvents().find(event => event.x === x && event.y === y);
 
     if (newEvent) {
         //an event cannot start unless the player meets the requirements
@@ -152,17 +172,11 @@ function checkForAnyEvent(x, y) {
             spawnChapter = chapterId;
             const locationId = newEvent.id;
             handleDungeonAccess(locationId, {x: newEvent.x, y: newEvent.y});
-            // changeTileType(newEvent.x, newEvent.y, "x");
         }
 
         if (newEvent.type === "locationExit") {
             exitDungeon(spawnChapter, spawnPosition);
         }
-
-        // if (newEvent.type === "door") {
-        //     const doorId = newEvent.id;
-        //     accessDoor(doorId);
-        // }
     }
 }
 

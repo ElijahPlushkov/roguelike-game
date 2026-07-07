@@ -16,7 +16,7 @@
     box-sizing: border-box;
     color: black;
     background: #5a5a5a;
-    filter: brightness(0.5);
+    filter: brightness(0.8);
     cursor: pointer;
 }
 
@@ -26,12 +26,6 @@
 
 .tile-fov {
     filter: brightness(1);
-}
-
-.explored-location-tile {
-    filter: brightness(5);
-    background: red;
-    color: red;
 }
 
 .wall {

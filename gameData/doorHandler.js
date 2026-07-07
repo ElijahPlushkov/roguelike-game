@@ -31,8 +31,6 @@ export function accessDoor(x, y) {
         doorDescription.textContent = door.description;
         gameData.isEventActive = true;
 
-        console.log(doorWindow);
-
         let continueButton = createContinueButton();
 
         //check if the player can enter the door

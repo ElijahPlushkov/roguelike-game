@@ -4,7 +4,7 @@ import { NpcEnemyFactory } from "./NpcEnemyFactory.js";
 import { Combat } from "./Combat.js";
 import { UniqueEnemyFactory } from "./UniqueEnemyFactory.js";
 import { npcData } from "./data/npcData.js";
-import {getEnemy} from "./data/enemyData/enemyDataManager.js";
+import { getEnemy } from "./data/enemyData/enemyDataManager.js";
 
 export function initCombat(enemyId, enemyType, enemyCoordinates) {
     let enemy;
