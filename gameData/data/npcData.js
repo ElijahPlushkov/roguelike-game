@@ -69,7 +69,7 @@ export const npcData = {
         },
         {
             "name": "Ah'Ruhn",
-            "id": "ant_shaman",
+            "id": "ant-shaman",
             "characteristics": {
                 "might": 6,
                 "reputation": 8,

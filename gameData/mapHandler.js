@@ -1,4 +1,5 @@
-import {gameData, map} from "./data/gameData.js";
+import { gameData, map } from "./data/gameData.js";
+import { mapRender } from "./mapRender.js";
 
 export function displayMapInfo() {
     let tiles = document.querySelectorAll(".tile");
@@ -52,4 +53,5 @@ function showTileInfo(tile, event) {
 
 export function changeTileType(x, y, newTile) {
     map[y][x] = newTile;
+    mapRender();
 }

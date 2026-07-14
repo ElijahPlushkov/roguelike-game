@@ -92,6 +92,12 @@ export const levelData = {
                 "id": "spider-liar",
                 "x": 12,
                 "y": 2
+            },
+            {
+                "type": "location",
+                "id": "ant-colony",
+                "x": 6,
+                "y": 9
             }
         ],
         "npcs": [

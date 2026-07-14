@@ -1,9 +1,11 @@
 import { levelData as chapter1 } from './chapter_1.js';
 import { levelData as spiderLiar } from './spider-liar.js';
+import { levelData as antColony } from './ant-colony.js';
 
 const levelRegistry = {
     "chapter_1": chapter1,
-    "spider-liar": spiderLiar
+    "spider-liar": spiderLiar,
+    "ant-colony": antColony
 };
 
 export function getLevel(id) {
