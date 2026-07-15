@@ -1,5 +1,5 @@
 export const weaponsByClass = {
-    knight: ['oak_spear', 'oak_staff'],
-    monk: ['oak_staff'],
-    mystic: ['stone_dagger']
+    knight: ['oak-spear', 'oak-staff'],
+    monk: ['oak-staff'],
+    mystic: ['stone-dagger']
 }

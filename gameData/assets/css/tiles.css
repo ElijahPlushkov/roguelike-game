@@ -108,6 +108,10 @@
     background-color: var(--boulder-tile);
 }
 
+.trap {
+    background-color: var(--rejection-text-color);
+}
+
 .tooltip {
     position:fixed;
     background:#000;

@@ -119,9 +119,9 @@ export function mapRender() {
                         // tile.classList.add("");
                         tile.textContent = "▣";
                         break;
-                    case "⁜":
-                        tile.classList.add("dirt");
-                        tile.textContent = ".";
+                    case "o":
+                        tile.classList.add("trap");
+                        tile.textContent = "o";
                         break;
                     default:
                         tile.classList.add("unknown");

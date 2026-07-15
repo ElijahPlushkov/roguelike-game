@@ -142,10 +142,10 @@ export class RandomEnemyFactory {
         }
         if (difficulty === "weak") {
             return {
-                might: this.getRandomNumber(1, 10),
-                reputation: this.getRandomNumber(1, 10),
-                prayer: this.getRandomNumber(1, 10),
-                agility: this.getRandomNumber(1, 10)
+                might: this.getRandomNumber(1, 5),
+                reputation: this.getRandomNumber(1, 5),
+                prayer: this.getRandomNumber(1, 5),
+                agility: this.getRandomNumber(1, 5)
             }
         }
         if (difficulty === "average") {

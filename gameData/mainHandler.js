@@ -17,6 +17,8 @@ import { handleDeath } from "./deathHandler.js";
 import { handleDungeonAccess, exitDungeon } from "./locationHandler.js";
 import { AdventureLogHandler } from "./AdventureLogHandler.js";
 import { getEvent } from "./data/eventData/eventDataManager.js";
+import { changeTileType } from "./mapHandler.js";
+import { trapData } from "./data/trapData.js";
 
 let spawnPosition;
 let spawnChapter;
@@ -80,10 +82,10 @@ document.addEventListener("DOMContentLoaded", () => {
         const newX = playerCoordinates.x + dx;
         const newY = playerCoordinates.y + dy;
 
-        scanSurroundingsForEnemies(newX - 1, newY);
-        scanSurroundingsForEnemies(newX + 1, newY);
-        scanSurroundingsForEnemies(newX, newY - 1);
-        scanSurroundingsForEnemies(newX, newY + 1);
+        scanSurroundingsForDangers(newX - 1, newY);
+        scanSurroundingsForDangers(newX + 1, newY);
+        scanSurroundingsForDangers(newX, newY - 1);
+        scanSurroundingsForDangers(newX, newY + 1);
 
         if (isWalkable(newX, newY)) {
             playerCoordinates.x = newX;
@@ -103,11 +105,12 @@ function  findAllEvents() {
         ...(levelData.tileData.enemies || []),
         ...(levelData.tileData.npcs || []),
         ...(levelData.tileData.locations || []),
-        ...(levelData.tileData.locationExit || [])
+        ...(levelData.tileData.locationExit || []),
+        ...(levelData.tileData.traps || [])
     ]
 }
 
-function scanSurroundingsForEnemies(x, y) {
+function scanSurroundingsForDangers(x, y) {
     const newEvent = findAllEvents().find(event => event.x === x && event.y === y);
 
     if (newEvent) {
@@ -117,10 +120,24 @@ function scanSurroundingsForEnemies(x, y) {
             if (!hasSeenEvent(enemyId)) {
                 initCombat(enemyId, enemyType, {x: newEvent.x, y: newEvent.y});
             }
-        } else {
-            return;
+        }
+        if (newEvent.type === "trap") {
+            const trapId = newEvent.id;
+            isTrapDetected(x, y, trapId);
         }
     }
+}
+
+function isTrapDetected(x, y, trapId) {
+    let isDetected;
+    let trap = trapData.traps.find(trap => trapId === trap.id);
+    isDetected = trap.requirements.prayer <= player.prayer;
+    if (isDetected) {
+        trap.detected = true;
+        adventureLogHandler.appendSystemMessage("You see a trap!");
+        changeTileType(x, y, "o");
+    }
+    return isDetected;
 }
 
 function checkForAnyEvent(x, y) {

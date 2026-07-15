@@ -1,5 +1,5 @@
 export const armorByClass = {
-    knight: ['walnut_cuirass', 'wax_cuirass'],
-    monk: ['cotton_shirt', 'wax_cuirass'],
-    mystic: ['cotton_shirt']
+    knight: ['walnut-cuirass', 'wax-cuirass'],
+    monk: ['cotton-shirt', 'wax-cuirass'],
+    mystic: ['cotton-shirt']
 }
