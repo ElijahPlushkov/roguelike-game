@@ -28,7 +28,7 @@ export function mapRender() {
                     case "#":
                         tile.classList.add("wall");
                         tile.textContent = "#";
-                        tile.dataset.type = "wall";
+                        tile.dataset.type = "stone wall";
                         break;
                     case "=":
                         tile.classList.add("wooden-wall");
@@ -65,7 +65,7 @@ export function mapRender() {
                         tile.dataset.type = "enemy";
                         break;
                     case "Ω":
-                        tile.classList.add("item");
+                        tile.classList.add("altar");
                         tile.textContent = "Ω";
                         tile.dataset.type = "altar";
                         break;
@@ -73,10 +73,6 @@ export function mapRender() {
                         tile.classList.add("door");
                         tile.textContent = "П";
                         tile.dataset.type = "door";
-                        break;
-                    case "Θ":
-                        tile.classList.add("altar");
-                        tile.textContent = "Θ";
                         break;
                     case "t":
                         tile.classList.add("birch");
@@ -114,14 +110,17 @@ export function mapRender() {
                     case "<":
                         // tile.classList.add("");
                         tile.textContent = "<";
+                        tile.dataset.type = "exit";
                         break;
                     case "▣":
                         // tile.classList.add("");
                         tile.textContent = "▣";
+                        tile.dataset.type = "chest";
                         break;
-                    case "o":
+                    case "⁜":
                         tile.classList.add("trap");
-                        tile.textContent = "o";
+                        tile.textContent = "⁜";
+                        tile.dataset.type = "trap";
                         break;
                     default:
                         tile.classList.add("unknown");

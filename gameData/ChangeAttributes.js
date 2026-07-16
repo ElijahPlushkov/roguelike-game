@@ -23,12 +23,25 @@ export class ChangeAttributes {
             player.setEvasion(gameData.evasion);
         }
         if (stat === "might") {
-            gameData.health = this.changeHealth();
-            player.setHealth(gameData.health);
+            if (player.getCurrentHealth() === player.getHealth()) {
+                gameData.health = this.changeHealth();
+                player.setHealth(gameData.health);
+                player.setCurrentHealth(player.getHealth());
+            } else {
+                gameData.health = this.changeHealth();
+                player.setHealth(gameData.health);
+            }
         }
         if (stat === "prayer") {
-            gameData.mysticism = this.changeMysticism();
-            player.setMysticism(gameData.mysticism);
+            if (player.getCurrentMysticism() === player.getMysticism()) {
+                gameData.mysticism = this.changeMysticism();
+                player.setMysticism(gameData.mysticism);
+                player.setCurrentMysticism(player.getMysticism());
+            } else {
+                gameData.mysticism = this.changeMysticism();
+                player.setMysticism(gameData.mysticism);
+            }
+
             gameData.willpower = this.changeWillpower();
             player.setWillpower(gameData.willpower);
             gameData.spellChance = this.changeSpellChance();
@@ -38,19 +51,16 @@ export class ChangeAttributes {
     }
 
     changeHealth() {
-        let health = player.getHealth();
         let might = player.getMight();
         return player.BASE_HEALTH + (might + Math.floor(might * this.HEALTH_MODIFIER));
     }
 
     changeMysticism() {
-        let mysticism = player.getMysticism();
         let prayer = player.getPrayer();
         return player.BASE_MYSTICISM + (prayer + Math.floor(prayer * this.MYSTICISM_MODIFIER));
     }
 
     changeWillpower() {
-        let willpower = player.getWillpower();
         let prayer = player.getPrayer();
         return player.BASE_WILLPOWER + (prayer + Math.floor(prayer * this.WILLPOWER_MODIFIER));
     }
@@ -68,18 +78,12 @@ export class ChangeAttributes {
     }
 
     updateDomAttributes() {
-        if (displayMaxHealth.textContent === displayCurrentHealth.textContent) {
-            displayCurrentHealth.textContent = gameData.health;
-            displayMaxHealth.textContent = gameData.health;
-        } else {
-            displayMaxHealth.textContent = gameData.health;
-        }
-        if (displayMaxMysticism.textContent === displayCurrentMysticism.textContent) {
-            displayCurrentMysticism.textContent = gameData.mysticism;
-            displayMaxMysticism.textContent = gameData.mysticism;
-        } else {
-            displayMaxMysticism.textContent = gameData.mysticism;
-        }
+        displayMaxHealth.textContent = player.getHealth();
+        displayCurrentHealth.textContent = player.getCurrentHealth();
+
+        displayMaxMysticism.textContent = player.getMysticism();
+        displayCurrentMysticism.textContent = player.getCurrentMysticism();
+
         displayWillpower.textContent = gameData.willpower;
     }
 }

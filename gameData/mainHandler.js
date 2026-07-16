@@ -17,8 +17,7 @@ import { handleDeath } from "./deathHandler.js";
 import { handleDungeonAccess, exitDungeon } from "./locationHandler.js";
 import { AdventureLogHandler } from "./AdventureLogHandler.js";
 import { getEvent } from "./data/eventData/eventDataManager.js";
-import { changeTileType } from "./mapHandler.js";
-import { trapData } from "./data/trapData.js";
+import { initTrap, isTrapDetected } from "./trapHandler.js";
 
 let spawnPosition;
 let spawnChapter;
@@ -128,18 +127,6 @@ function scanSurroundingsForDangers(x, y) {
     }
 }
 
-function isTrapDetected(x, y, trapId) {
-    let isDetected;
-    let trap = trapData.traps.find(trap => trapId === trap.id);
-    isDetected = trap.requirements.prayer <= player.prayer;
-    if (isDetected) {
-        trap.detected = true;
-        adventureLogHandler.appendSystemMessage("You see a trap!");
-        changeTileType(x, y, "o");
-    }
-    return isDetected;
-}
-
 function checkForAnyEvent(x, y) {
     const newEvent = findAllEvents().find(event => event.x === x && event.y === y);
 
@@ -193,6 +180,11 @@ function checkForAnyEvent(x, y) {
 
         if (newEvent.type === "locationExit") {
             exitDungeon(spawnChapter, spawnPosition);
+        }
+
+        if (newEvent.type === "trap") {
+            const trapId = newEvent.id;
+            initTrap(trapId);
         }
     }
 }
@@ -252,6 +244,7 @@ function requirementsCheck(newEvent) {
             isPassed = isRequirementPassed(requirements, dialogue);
         }
     }
+
     if (newEvent.type === "event") {
         const eventId = newEvent.id;
         const event = getEvent(eventId);
@@ -274,6 +267,7 @@ loadGameButton.addEventListener("click", loadSavedGame);
 
 const questJournal = document.getElementById("questJournal");
 let journalUpdater = new QuestJournalUpdater();
+
 questJournal.addEventListener("click", () => {
     journalUpdater.toggleJournal();
 });

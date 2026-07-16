@@ -10,8 +10,14 @@ export class Player {
     BASE_MYSTICISM = 10;
     BASE_WILLPOWER = 10;
 
+    HEALTH_MODIFIER = 2;
+    MYSTICISM_MODIFIER = 1;
+    WILLPOWER_MODIFIER = 0.5;
+
     health = 0;
+    currentHealth = 0;
     mysticism = 0;
+    currentMysticism = 0;
     willpower = 0;
 
     might = 0;
@@ -27,9 +33,12 @@ export class Player {
     ammunition = 0;
 
     constructor(might, reputation, prayer, agility, pollen, weaponId, armorId, shieldId, rangedWeaponId, ammunition) {
-        this.health = this.BASE_HEALTH;
-        this.mysticism = this.BASE_MYSTICISM;
-        this.willpower = this.BASE_WILLPOWER;
+        /* TO DO */
+        this.health = this.BASE_HEALTH * this.HEALTH_MODIFIER;
+        this.currentHealth = this.health;
+        this.mysticism = this.BASE_MYSTICISM * this.MYSTICISM_MODIFIER;
+        this.currentMysticism = this.mysticism;
+        this.willpower = this.BASE_WILLPOWER * this.WILLPOWER_MODIFIER;
 
         this.might = might;
         this.reputation = reputation;
@@ -72,8 +81,16 @@ export class Player {
         this.health = newValue;
     }
 
+    setCurrentHealth(newValue) {
+        this.currentHealth = newValue;
+    }
+
     setMysticism(newValue) {
         this.mysticism = newValue;
+    }
+
+    setCurrentMysticism(newValue) {
+        this.currentMysticism = newValue;
     }
 
     setWillpower(newValue) {
@@ -132,8 +149,16 @@ export class Player {
         return this.health;
     }
 
+    getCurrentHealth() {
+        return this.currentHealth;
+    }
+
     getMysticism() {
         return this.mysticism;
+    }
+
+    getCurrentMysticism() {
+        return this.currentMysticism;
     }
 
     getWillpower() {

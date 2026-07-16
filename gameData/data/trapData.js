@@ -4,13 +4,13 @@ export const trapData = {
         {
             "id": "ant-col-trap-1",
             "type": "trap",
-            "active": "true",
-            "detected": "false",
+            "active": true,
+            "detected": false,
             "requirements": {
-                "prayer": 2
+                "prayer": 20
             },
-            "damage": {
-                "health": -5
+            "effect": {
+                "health": 5
             },
             "reward": {
                 "pollen": 1

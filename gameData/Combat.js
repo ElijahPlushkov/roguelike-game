@@ -108,7 +108,7 @@ export class Combat {
 
         this.enemyAttack();
 
-        if (this.player.health <= 0) {
+        if (this.player.currentHealth <= 0) {
             handleDeath();
             this.shield.removeEventListener("click", this.toggleShield);
             this.attackTypes.removeEventListener("click", this.handleAttackButtons);
@@ -417,9 +417,10 @@ export class Combat {
 
     decreasePlayerHealth(damageDealt) {
         console.log("enemy deals: " + damageDealt);
-        this.player.health = this.player.health - damageDealt;
-        gameData.currentHealth = this.player.health;
-        displayCurrentHealth.textContent = gameData.currentHealth;
+        // this.player.currentHealth = this.player.currentHealth - damageDealt;
+        this.player.setCurrentHealth(this.player.getCurrentHealth() - damageDealt);
+        gameData.currentHealth = this.player.currentHealth;
+        displayCurrentHealth.textContent = this.player.currentHealth;
     }
 
     displayPlayerCombatMessage(message) {

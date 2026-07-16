@@ -5,8 +5,8 @@ import { getLevel } from './levels/levelsData.js';
 export const gameData = {
     playerCoordinates: {x: 0, y: 1},
 
-    health: 50,
-    currentHealth: 50,
+    health: 10,
+    currentHealth: 10,
     mysticism: 10,
     currentMysticism: 10,
     willpower: 10,
@@ -36,31 +36,32 @@ export const gameData = {
     playerCharacteristics: {
         reputation: 10,
         might: 10,
-        prayer: 10,
-        agility: 10
+        prayer: 5,
+        agility: 5
     },
 
     pollen: 0,
 };
 
 export let player = new Player(
-    gameData.playerCharacteristics.might,
-    gameData.playerCharacteristics.reputation,
-    gameData.playerCharacteristics.prayer,
-    gameData.playerCharacteristics.agility,
-    gameData.pollen,
-    gameData.weapon,
-    gameData.armor,
-    gameData.shield,
-    gameData.rangedWeapon,
-    gameData.ammunition
+        gameData.playerCharacteristics.might,
+        gameData.playerCharacteristics.reputation,
+        gameData.playerCharacteristics.prayer,
+        gameData.playerCharacteristics.agility,
+        gameData.pollen,
+        gameData.weapon,
+        gameData.armor,
+        gameData.shield,
+        gameData.rangedWeapon,
+        gameData.ammunition
 );
 
+
 const displayMaxHealth = document.querySelector(".max-health");
-displayMaxHealth.textContent = gameData.health;
+displayMaxHealth.textContent = player.getHealth();
 
 const displayCurrentHealth = document.querySelector(".current-health");
-displayCurrentHealth.textContent = gameData.currentHealth;
+displayCurrentHealth.textContent = player.getCurrentHealth();
 
 const displayMaxMysticism = document.querySelector(".max-mysticism");
 displayMaxMysticism.textContent = gameData.mysticism;
