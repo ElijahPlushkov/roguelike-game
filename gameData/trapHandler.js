@@ -1,18 +1,65 @@
 import { trapData } from "./data/trapData.js";
-import { displayCurrentHealth, gameData, player } from "./data/gameData.js";
+import { displayCurrentHealth, displayCurrentMysticism, gameData, map, player } from "./data/gameData.js";
 import { changeTileType } from "./mapHandler.js";
 import { AdventureLogHandler } from "./AdventureLogHandler.js";
+import { endEvent, markEventSeen } from "./helperFunctions.js";
+import { ChangeStats } from "./ChangeStats.js";
 
 const adventureLogHandler = new AdventureLogHandler();
 
-export function initTrap(trapId) {
+const trapWindow = document.querySelector(".trap-box");
+const trapDescription = document.querySelector(".trap-description");
+const trapOptions = document.querySelector(".trap-options");
+
+export function initTrap(trapId, x, y) {
     let trap = trapData.traps.find(trap => trapId === trap.id);
+
     if (trap.active && !trap.detected) {
         applyEffect(trap.effect);
         adventureLogHandler.appendSystemMessage("You fall into a trap.");
-    } else {
-        adventureLogHandler.appendSystemMessage("You avoid a trap.");
+        trap.detected = true;
+        changeTileType(x, y, "⁜");
+    } else if (trap.active && trap.detected) {
+        trapWindow.classList.remove("hidden");
+        trapDescription.className = "event-text-color";
+        trapDescription.textContent = "Do you want to disarm the trap?";
+
+        const disarmButton = createActionButton("disarm");
+        const leaveButton = createActionButton("leave");
+
+        disarmButton.onclick = () => {
+            if (canDisarm(gameData.playerCharacteristics.agility, trap.disarm)) {
+                trap.active = false;
+                changeTileType(x, y, ".");
+                resolveTrapEncounter(trap, trapId, "disarmed", trapDescription, trapOptions, trapWindow);
+                adventureLogHandler.appendSystemMessage("You disarmed the trap.");
+            } else {
+                applyEffect(trap.effect);
+                adventureLogHandler.appendSystemMessage("You fail to disarm the trap.");
+            }
+        }
+
+        leaveButton.onclick = () => {
+            gameData.isEventActive = false;
+            trapWindow.classList.add("hidden");
+            trapDescription.textContent = "";
+            trapOptions.textContent = "";
+            adventureLogHandler.appendSystemMessage("You stay away from the trap.");
+        }
     }
+}
+
+function resolveTrapEncounter(trap, trapId, status, trapDescription, trapOptions, trapWindow) {
+    endEvent(trapId, status, trapDescription, trapOptions, trapWindow);
+    const reward = trap.reward;
+    let statChanger = new ChangeStats();
+    statChanger.changeStats(reward);
+    markEventSeen(trapId);
+    gameData.isEventActive = false;
+}
+
+function canDisarm(agility, disarm) {
+    return (agility + Math.floor(Math.random() * agility)) > disarm;
 }
 
 export function isTrapDetected(x, y, trapId) {
@@ -34,5 +81,22 @@ function applyEffect(effect) {
             gameData.currentHealth = player.currentHealth;
             displayCurrentHealth.textContent = player.currentHealth;
         }
+        if (key === "mysticism") {
+            player.setCurrentMysticism(player.getCurrentMysticism() - value);
+            gameData.currentMysticism = player.currentMysticism;
+            displayCurrentMysticism.textContent = player.currentMysticism;
+        }
     }
+}
+
+function createActionButton(type) {
+    const button = document.createElement("button");
+    button.classList.add("trap-button", `${type}-button`);
+    if (type === "leave") {
+        button.textContent = "Leave";
+    } else {
+        button.textContent = "Disarm";
+    }
+    trapOptions.prepend(button);
+    return button;
 }

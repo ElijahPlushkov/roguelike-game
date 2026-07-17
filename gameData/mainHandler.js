@@ -184,7 +184,7 @@ function checkForAnyEvent(x, y) {
 
         if (newEvent.type === "trap") {
             const trapId = newEvent.id;
-            initTrap(trapId);
+            initTrap(trapId, x, y);
         }
     }
 }

@@ -6,6 +6,7 @@ export const trapData = {
             "type": "trap",
             "active": true,
             "detected": false,
+            "disarm": 20,
             "requirements": {
                 "prayer": 20
             },

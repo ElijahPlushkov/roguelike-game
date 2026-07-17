@@ -29,6 +29,7 @@ export const gameData = {
     locations: [],
 
     eventOutcomes: [],
+
     seenEvents: [],
 
     isEventActive: false,
