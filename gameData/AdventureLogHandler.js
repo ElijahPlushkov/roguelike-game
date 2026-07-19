@@ -17,13 +17,14 @@ export class AdventureLogHandler {
     appendEventMessage(reward) {
         for (const [key, value] of Object.entries(reward)) {
 
-            const eventMessage = document.createElement("p");
-            eventMessage.className = "event-text-color";
+            const eventMessage = this.createDomElementMessage();
+
             let text;
 
             if (value < 0) {
                 if (key === "pollen") {
                     if (value === -1) {
+                        eventMessage.className = "log-entry";
                         text = `You lose: ${value} pollen grain.`;
                     } else {
                         text = `You lose: ${value} pollen grains.`;
@@ -32,6 +33,7 @@ export class AdventureLogHandler {
                     text = `You lose: ${value} ${key}.`;
                 }
             } else {
+                eventMessage.className = "dialogue-text-color";
                 if (key === "pollen") {
                     if (value === 1) {
                         text = `Your reward: ${value} pollen grain.`;
@@ -54,7 +56,7 @@ export class AdventureLogHandler {
 
     appendCombatResolutionMessage(key, value, pollenChange, race) {
         const combatMessage = this.createDomElementMessage();
-        combatMessage.className = "log-entry";
+        combatMessage.className = "dialogue-text-color";
         combatMessage.textContent = `Your ${key} increased by ${value}. You collect ${pollenChange} pollen grains.`;
         this.adventureLog.prepend(combatMessage);
         this.appendVictoryMessage(race);
@@ -62,7 +64,7 @@ export class AdventureLogHandler {
 
     appendVictoryMessage(race) {
         const defeatMessage = this.createDomElementMessage();
-        defeatMessage.className = "log-entry";
+        defeatMessage.className = "event-text-color";
         defeatMessage.textContent = `You defeated: ${race}.`;
         this.adventureLog.prepend(defeatMessage);
     }
@@ -76,19 +78,26 @@ export class AdventureLogHandler {
 
     appendQuestJournalMessage(message) {
         const questJournalMessage = this.createDomElementMessage();
-        questJournalMessage.className = "dialogue-text-color";
+        questJournalMessage.className = "event-text-color";
         questJournalMessage.textContent = message;
         this.adventureLog.prepend(questJournalMessage);
     }
 
     appendDeathMessage(message) {
         const deathMessage = this.createDomElementMessage();
-        deathMessage.className = "dialogue-text-color";
+        deathMessage.className = "log-entry";
         deathMessage.textContent = message;
         this.adventureLog.prepend(deathMessage);
     }
 
-    appendSystemMessage(message) {
+    appendSuccessfulMessage(message) {
+        const systemMessage = this.createDomElementMessage();
+        systemMessage.className = "dialogue-text-color";
+        systemMessage.textContent = message;
+        this.adventureLog.prepend(systemMessage);
+    }
+
+    appendFailMessage(message) {
         const systemMessage = this.createDomElementMessage();
         systemMessage.className = "log-entry";
         systemMessage.textContent = message;

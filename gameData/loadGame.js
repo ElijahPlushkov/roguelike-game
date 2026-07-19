@@ -13,7 +13,7 @@ const adventureLogHandler = new AdventureLogHandler();
 
 export async function loadSavedGame() {
     if (gameData.isEventActive) {
-        adventureLogHandler.appendSystemMessage("Cannot load now.");
+        adventureLogHandler.appendFailMessage("Cannot load now.");
         return;
     }
 
@@ -43,11 +43,11 @@ export async function loadSavedGame() {
         journalUpdater.loadSeenQuests(gameData.quests);
 
         adventureLogHandler.clearAdventureLog();
-        adventureLogHandler.appendSystemMessage("Game loaded.");
+        adventureLogHandler.appendSuccessfulMessage("Game loaded.");
 
     } catch (error) {
         console.log("Failed to load game:", error);
-        adventureLogHandler.appendSystemMessage("Load failed.");
+        adventureLogHandler.appendFailMessage("Load failed.");
     }
 }
 

@@ -1,6 +1,6 @@
 import { doorData } from "./data/doorData.js";
 import { gameData, levelData } from "./data/gameData.js";
-import { createContinueButton, endEvent, hasSeenEvent, markEventSeen } from "./helperFunctions.js";
+import { endEvent, hasSeenEvent, markEventSeen } from "./helperFunctions.js";
 import { ChangeStats } from "./ChangeStats.js";
 import { AdventureLogHandler } from "./AdventureLogHandler.js";
 import { canBashDoor, canPickLock } from "./locationHandler.js";
@@ -28,10 +28,13 @@ export function accessDoor(x, y) {
 
         doorWindow.classList.remove("hidden");
         doorDescription.className = "event-text-color";
-        doorDescription.textContent = door.description;
-        gameData.isEventActive = true;
+        if (door.isLocked) {
+            doorDescription.textContent = door.description + " It is locked.";
+        } else {
+            doorDescription.textContent = door.description;
+        }
 
-        let continueButton = createContinueButton();
+        gameData.isEventActive = true;
 
         //check if the player can enter the door
         if (door.isLocked) {
@@ -45,11 +48,11 @@ export function accessDoor(x, y) {
                     status = "unlocked";
                     unlockButton.classList.add("hidden");
                     bashButton.classList.add("hidden");
-                    adventureLogHandler.appendSystemMessage("You successfully unlocked the door.");
+                    adventureLogHandler.appendSuccessfulMessage("You successfully unlocked the door.");
 
-                    resolveDoorEncounter(continueButton, doorId, status, door);
+                    resolveDoorEncounter(door, doorId, status, doorDescription, doorOptions, doorWindow);
                 } else {
-                    adventureLogHandler.appendSystemMessage("You failed to unlock the door.");
+                    adventureLogHandler.appendFailMessage("You failed to unlock the door.");
                     doorTile.type = "unwalkable";
                     return false;
                 }
@@ -62,33 +65,30 @@ export function accessDoor(x, y) {
                     status = "bashed";
                     unlockButton.classList.add("hidden");
                     bashButton.classList.add("hidden");
-                    adventureLogHandler.appendSystemMessage("You bashed the door with all your might.");
+                    adventureLogHandler.appendSuccessfulMessage("You bashed the door with all your might.");
 
-                    resolveDoorEncounter(continueButton, doorId, status, door);
+                    resolveDoorEncounter(door, doorId, status, doorDescription, doorOptions, doorWindow);
                 } else {
-                    adventureLogHandler.appendSystemMessage("You are too weak to bash this door.");
+                    adventureLogHandler.appendFailMessage("You are too weak to bash this door.");
                     doorTile.type = "unwalkable";
                     return false;
                 }
             }
         } else {
-            resolveDoorEncounter(continueButton, doorId, status, door);
+            resolveDoorEncounter(door, doorId, status, doorDescription, doorOptions, doorWindow);
         }
     } else {
         return true;
     }
 }
 
-function resolveDoorEncounter(continueButton, doorId, status, door) {
-    doorOptions.prepend(continueButton);
-    continueButton.addEventListener("click", function () {
-        endEvent(doorId, status, doorDescription, doorOptions, doorWindow);
-        const reward = door.reward;
-        let statChanger = new ChangeStats();
-        statChanger.changeStats(reward);
-        markEventSeen(doorId);
-        gameData.isEventActive = false;
-    });
+function resolveDoorEncounter(door, doorId, status, doorDescription, doorOptions, doorWindow) {
+    endEvent(doorId, status, doorDescription, doorOptions, doorWindow);
+    const reward = door.reward;
+    let statChanger = new ChangeStats();
+    statChanger.changeStats(reward);
+    markEventSeen(doorId);
+    gameData.isEventActive = false;
 }
 
 function createActionButton(type) {

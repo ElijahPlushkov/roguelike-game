@@ -99,10 +99,10 @@ function handleLock(level) {
 
             unlockBtn.classList.add("hidden");
             bashBtn.classList.add("hidden");
-            adventureLogHandler.appendSystemMessage("You successfully unlocked the door.");
+            adventureLogHandler.appendSuccessfulMessage("You successfully unlocked the door.");
             dungeonDescription.textContent = "You found a " + level.type + " called " + level.name + ". It's unlocked. Do you wish to enter?";
         } else {
-            adventureLogHandler.appendSystemMessage("You failed to unlock the door.");
+            adventureLogHandler.appendFailMessage("You failed to unlock the door.");
         }
     }
 
@@ -114,10 +114,10 @@ function handleLock(level) {
 
             unlockBtn.classList.add("hidden");
             bashBtn.classList.add("hidden");
-            adventureLogHandler.appendSystemMessage("You bashed the door with all your might.");
+            adventureLogHandler.appendSuccessfulMessage("You bashed the door with all your might.");
             dungeonDescription.textContent = "You found a " + level.type + " called " + level.name + ". The door is destroyed. Do you wish to enter?";
         } else {
-            adventureLogHandler.appendSystemMessage("You are too weak to bash this door.");
+            adventureLogHandler.appendFailMessage("You are too weak to bash this door.");
         }
     }
 }

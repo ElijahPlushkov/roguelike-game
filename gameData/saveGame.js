@@ -5,15 +5,15 @@ const adventureLogHandler = new AdventureLogHandler();
 
 export async function saveGame() {
     if (gameData.isEventActive) {
-        adventureLogHandler.appendSystemMessage("Cannot save now.");
+        adventureLogHandler.appendFailMessage("Cannot save now.");
         return;
     }
 
     try {
         await window.api.saveGame(gameData);
-        adventureLogHandler.appendSystemMessage("Game saved.");
+        adventureLogHandler.appendSuccessfulMessage("Game saved.");
     } catch (err) {
         console.error(err);
-        adventureLogHandler.appendSystemMessage("Save failed.");
+        adventureLogHandler.appendFailMessage("Save failed.");
     }
 }

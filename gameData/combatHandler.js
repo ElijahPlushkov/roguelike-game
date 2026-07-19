@@ -6,7 +6,7 @@ import { UniqueEnemyFactory } from "./UniqueEnemyFactory.js";
 import { npcData } from "./data/npcData.js";
 import { getEnemy } from "./data/enemyData/enemyDataManager.js";
 
-export function initCombat(enemyId, enemyType, enemyCoordinates) {
+export function initCombat(enemyId, enemyType, enemyCoordinates, enemyRace) {
     let enemy;
 
     if (enemyType === "unique") {
@@ -16,7 +16,7 @@ export function initCombat(enemyId, enemyType, enemyCoordinates) {
         console.log(enemy);
     } else if (enemyType.includes("random")) {
         let enemyFactory = new RandomEnemyFactory();
-        enemy = enemyFactory.createRandomEnemy(enemyType);
+        enemy = enemyFactory.createRandomEnemy(enemyType, enemyRace);
         console.log(enemy);
     } else if (enemyType === "npc") {
         let npcFactory = new NpcEnemyFactory();

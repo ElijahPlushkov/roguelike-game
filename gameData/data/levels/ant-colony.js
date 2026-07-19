@@ -10,13 +10,49 @@ export const levelData = {
             "type": "stonewall",
             "walkable": false
         },
+        "=": {
+            "type": "woodenwall",
+            "walkable": false
+        },
         ".": {
             "type": "floor",
+            "walkable": true
+        },
+        "α": {
+            "type": "boulder",
+            "walkable": true
+        },
+        "□": {
+            "type": "cobble",
             "walkable": true
         },
         "П": {
             "type": "door",
             "walkable": true
+        },
+        "Ω": {
+            "type": "altar",
+            "walkable": true
+        },
+        "T": {
+            "type": "tree",
+            "walkable": false
+        },
+        "t": {
+            "type": "shorttree",
+            "walkable": false
+        },
+        "*": {
+            "type": "pinetree",
+            "walkable": false
+        },
+        "▲": {
+            "type": "mountain",
+            "walkable": false
+        },
+        "≈": {
+            "type": "water",
+            "walkable": false
         },
         "e": {
             "type": "enemy",
@@ -24,6 +60,18 @@ export const levelData = {
         },
         "c": {
             "type": "npc",
+            "walkable": true
+        },
+        "Δ": {
+            "type": "camp",
+            "walkable": true
+        },
+        "⌂": {
+            "type": "dungeon",
+            "walkable": true
+        },
+        "F": {
+            "type": "building",
             "walkable": true
         },
         "▣": {
@@ -58,6 +106,18 @@ export const levelData = {
                 "y": 8,
                 "type": "trap",
                 "id": "ant-col-trap-1"
+            },
+            {
+                "x": 12,
+                "y": 10,
+                "type": "trap",
+                "id": "ant-col-trap-2"
+            },
+            {
+                "x": 12,
+                "y": 15,
+                "type": "trap",
+                "id": "ant-col-trap-3"
             }
         ],
         "events": [],
@@ -137,6 +197,7 @@ export const levelData = {
                 "type": "enemy",
                 "id": "ant-col-diseased-ant-1",
                 "enemyType": "random-weak",
+                "race": "ant",
                 "x": 9,
                 "y": 5
             },
@@ -144,6 +205,7 @@ export const levelData = {
                 "type": "enemy",
                 "id": "ant-col-diseased-ant-2",
                 "enemyType": "random-weak",
+                "race": "ant",
                 "aggressive": 1,
                 "x": 16,
                 "y": 5
@@ -152,6 +214,7 @@ export const levelData = {
                 "type": "enemy",
                 "id": "ant-col-diseased-ant-3",
                 "enemyType": "random-weak",
+                "race": "ant",
                 "x": 16,
                 "y": 8
             },
@@ -159,6 +222,7 @@ export const levelData = {
                 "type": "enemy",
                 "id": "ant-col-diseased-ant-4",
                 "enemyType": "random-weak",
+                "race": "ant",
                 "x": 19,
                 "y": 7
             },
@@ -166,6 +230,7 @@ export const levelData = {
                 "type": "enemy",
                 "id": "ant-col-diseased-ant-5",
                 "enemyType": "random-weak",
+                "race": "ant",
                 "x": 25,
                 "y": 10
             },
@@ -173,6 +238,7 @@ export const levelData = {
                 "type": "enemy",
                 "id": "ant-col-diseased-ant-6",
                 "enemyType": "random-weak",
+                "race": "ant",
                 "x": 25,
                 "y": 12
             },
@@ -180,6 +246,7 @@ export const levelData = {
                 "type": "enemy",
                 "id": "ant-col-diseased-ant-7",
                 "enemyType": "random-weak",
+                "race": "ant",
                 "x": 24,
                 "y": 15
             },
@@ -187,6 +254,7 @@ export const levelData = {
                 "type": "enemy",
                 "id": "ant-col-diseased-ant-8",
                 "enemyType": "random-weak",
+                "race": "ant",
                 "x": 21,
                 "y": 16
             }

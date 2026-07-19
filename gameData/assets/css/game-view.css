@@ -124,14 +124,6 @@
     text-align: center;
 }
 
-.positiveBuff {
-    color: var(--water-tile);
-}
-
-.negativeBuff {
-    color: var(--rejection-text-color);
-}
-
 .player-interface {
     width: 1280px;
     display: flex;
@@ -161,7 +153,7 @@
 }
 
 .rejection-text-color {
-    color: var(--rejection-text-color);
+    color: var(--log-entry-text-color);
 }
 
 .dialogue-text-color {

@@ -1,5 +1,5 @@
 import { trapData } from "./data/trapData.js";
-import { displayCurrentHealth, displayCurrentMysticism, gameData, map, player } from "./data/gameData.js";
+import { displayCurrentHealth, displayCurrentMysticism, gameData, player } from "./data/gameData.js";
 import { changeTileType } from "./mapHandler.js";
 import { AdventureLogHandler } from "./AdventureLogHandler.js";
 import { endEvent, markEventSeen } from "./helperFunctions.js";
@@ -16,7 +16,7 @@ export function initTrap(trapId, x, y) {
 
     if (trap.active && !trap.detected) {
         applyEffect(trap.effect);
-        adventureLogHandler.appendSystemMessage("You fall into a trap.");
+        adventureLogHandler.appendFailMessage("You fall into a trap.");
         trap.detected = true;
         changeTileType(x, y, "⁜");
     } else if (trap.active && trap.detected) {
@@ -32,10 +32,10 @@ export function initTrap(trapId, x, y) {
                 trap.active = false;
                 changeTileType(x, y, ".");
                 resolveTrapEncounter(trap, trapId, "disarmed", trapDescription, trapOptions, trapWindow);
-                adventureLogHandler.appendSystemMessage("You disarmed the trap.");
+                adventureLogHandler.appendSuccessfulMessage("You disarmed the trap.");
             } else {
                 applyEffect(trap.effect);
-                adventureLogHandler.appendSystemMessage("You fail to disarm the trap.");
+                adventureLogHandler.appendFailMessage("You fail to disarm the trap.");
             }
         }
 
@@ -44,7 +44,7 @@ export function initTrap(trapId, x, y) {
             trapWindow.classList.add("hidden");
             trapDescription.textContent = "";
             trapOptions.textContent = "";
-            adventureLogHandler.appendSystemMessage("You stay away from the trap.");
+            adventureLogHandler.appendSuccessfulMessage("You stay away from the trap.");
         }
     }
 }
@@ -68,13 +68,15 @@ export function isTrapDetected(x, y, trapId) {
     isDetected = trap.requirements.prayer <= player.prayer;
     if (isDetected) {
         trap.detected = true;
-        adventureLogHandler.appendSystemMessage("You see a trap!");
+        adventureLogHandler.appendFailMessage("You see a trap!");
         changeTileType(x, y, "⁜");
     }
     return isDetected;
 }
 
 function applyEffect(effect) {
+    const attributes = ["might", "agility", "prayer", "reputation"];
+
     for (const [key, value] of Object.entries(effect)) {
         if (key === "health") {
             player.setCurrentHealth(player.getCurrentHealth() - value);
@@ -85,6 +87,11 @@ function applyEffect(effect) {
             player.setCurrentMysticism(player.getCurrentMysticism() - value);
             gameData.currentMysticism = player.currentMysticism;
             displayCurrentMysticism.textContent = player.currentMysticism;
+        }
+        if (attributes.includes(key)) {
+            let statChanger = new ChangeStats();
+            statChanger.changeStats(effect);
+            adventureLogHandler.appendEventMessage(effect);
         }
     }
 }

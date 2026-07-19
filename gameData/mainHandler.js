@@ -116,8 +116,9 @@ function scanSurroundingsForDangers(x, y) {
         if (newEvent.type === "enemy" && newEvent.aggressive) {
             const enemyId = newEvent.id;
             const enemyType = newEvent.enemyType;
+            let enemyRace = newEvent.race || "";
             if (!hasSeenEvent(enemyId)) {
-                initCombat(enemyId, enemyType, {x: newEvent.x, y: newEvent.y});
+                initCombat(enemyId, enemyType, {x: newEvent.x, y: newEvent.y}, enemyRace);
             }
         }
         if (newEvent.type === "trap") {
@@ -157,10 +158,11 @@ function checkForAnyEvent(x, y) {
         }
 
         if (newEvent.type === "enemy") {
-            const enemyId = newEvent.id;
-            const enemyType = newEvent.enemyType;
+            let enemyId = newEvent.id;
+            let enemyType = newEvent.enemyType;
+            let enemyRace = newEvent.race || "";
             if (!hasSeenEvent(enemyId)) {
-                initCombat(enemyId, enemyType, {x: newEvent.x, y: newEvent.y});
+                initCombat(enemyId, enemyType, {x: newEvent.x, y: newEvent.y}, enemyRace);
             }
         }
 
@@ -195,7 +197,7 @@ function isWalkable(x, y) {
     const currentTile = tileSet[tileType];
 
     if (currentTile.walkable === false) {
-        adventureLogHandler.appendSystemMessage("You can't walk here!");
+        adventureLogHandler.appendFailMessage("You can't walk here!");
         return false;
     }
     if (currentTile.type === "door") {
@@ -205,13 +207,14 @@ function isWalkable(x, y) {
 }
 
 function checkMight() {
-    if (gameData.playerCharacteristics.might <= -3) {
+    if (player.getMight() <= -3) {
         handleDeath();
     }
 }
 
 function isRequirementPassed(requirements, event) {
     let currentEvent = gameData.eventOutcomes.find(currentEvent => currentEvent.event === event);
+
     if (currentEvent) {
         if (currentEvent.outcome === requirements.eventOutcome) {
             return true;

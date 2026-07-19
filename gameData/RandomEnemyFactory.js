@@ -35,9 +35,9 @@ export class RandomEnemyFactory {
         average: 1.5
     }
 
-    createRandomEnemy(enemyType) {
+    createRandomEnemy(enemyType, enemyRace) {
         let enemyDifficulty = enemyType.slice(7);
-        let race = this.setRace(enemyDifficulty);
+        let race = enemyRace || this.setRace(enemyDifficulty);
         let enemyClass = this.setEnemyClass();
         let weapon = this.setWeapon(enemyClass);
         let armor = this.setArmor(enemyClass);

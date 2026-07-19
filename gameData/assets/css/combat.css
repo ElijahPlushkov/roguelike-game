@@ -5,7 +5,7 @@
     width: 680px;
     height: 420px;
     background: var(--event-box-background-color);
-    border: 2px solid var(--enemy-tile);
+    border: 2px solid var(--combat-text-color);
     border-radius: 8px;
     margin-left: 440px;
     padding: 10px;
@@ -40,7 +40,7 @@
 }
 
 .combat-weapon {
-    color: var(--log-entry-text-color);
+    color: var(--combat-text-color);
     margin: 5px;
 }
 
@@ -56,7 +56,7 @@
 
 .attack-button,
 .shield {
-    background: var(--log-entry-text-color);
+    background: var(--combat-text-color);
     width: 85px;
 }
 
@@ -102,7 +102,7 @@
 }
 
 .combat-enemy-message {
-    color: var(--log-entry-text-color);
+    color: var(--combat-text-color);
 }
 
 .combat-enemy-status {
@@ -118,7 +118,7 @@
 
 .enemy-race,
 .enemy-description {
-    color: var(--log-entry-text-color);
+    color: var(--combat-text-color);
 }
 
 .enemy-difficulty,
@@ -137,4 +137,12 @@
 
 .combat-text-color {
     color: var(--combat-text-color);
+}
+
+.positiveBuff {
+    color: var(--water-tile);
+}
+
+.negativeBuff {
+    color: var(--rejection-text-color);
 }

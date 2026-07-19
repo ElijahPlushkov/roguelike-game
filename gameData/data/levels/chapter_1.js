@@ -27,16 +27,8 @@ export const levelData = {
             "type": "door",
             "walkable": true
         },
-        "H": {
-            "type": "closedDoor",
-            "walkable": false
-        },
-        "Θ": {
-            "type": "altar",
-            "walkable": true
-        },
         "Ω": {
-            "type": "item",
+            "type": "altar",
             "walkable": true
         },
         "T": {
@@ -59,11 +51,11 @@ export const levelData = {
             "type": "water",
             "walkable": false
         },
-        "E": {
+        "e": {
             "type": "enemy",
             "walkable": true
         },
-        "N": {
+        "c": {
             "type": "npc",
             "walkable": true
         },
@@ -77,6 +69,18 @@ export const levelData = {
         },
         "F": {
             "type": "building",
+            "walkable": true
+        },
+        "▣": {
+            "type": "chest",
+            "walkable": true
+        },
+        "<": {
+            "type": "locationExit",
+            "walkable": true
+        },
+        "⁜": {
+            "type": "trap",
             "walkable": true
         }
     },
