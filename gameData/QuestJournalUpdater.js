@@ -2,6 +2,7 @@ import { gameData, journalWindow } from "./data/gameData.js";
 import { questData } from "./data/questData.js";
 import { ChangeStats } from "./ChangeStats.js";
 import { AdventureLogHandler } from "./AdventureLogHandler.js";
+import { getQuest } from "./data/questData/questManager.js";
 
 export class QuestJournalUpdater {
     journalBox = journalWindow;
@@ -16,7 +17,7 @@ export class QuestJournalUpdater {
     }
 
     findQuest(questId) {
-        return questData.quests.find(quest => quest.id === questId);
+        return getQuest(questId);
     }
 
     findCurrentState(currentQuest, questState) {

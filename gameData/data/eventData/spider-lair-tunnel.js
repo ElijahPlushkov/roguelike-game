@@ -1,5 +1,5 @@
 export const eventData = {
-    "id": "spider-tunnel",
+    "id": "spider-lair-tunnel",
     "name": "spider tunnel",
     "type": "event",
     "requirements": {},

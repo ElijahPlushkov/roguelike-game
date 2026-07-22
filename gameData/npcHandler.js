@@ -2,10 +2,11 @@ import { npcData } from "./data/npcData.js";
 import { eventDescription, eventOptions, gameData } from "./data/gameData.js";
 import { initDialogue } from "./dialogueHandler.js";
 import { initCombat } from "./combatHandler.js";
+import { getNpc } from "./data/npcData/npcDataManager.js";
 
 export function initNpc(id) {
 
-    let npc = npcData.npcs.find(npc => npc.id === id);
+    let npc = getNpc(id);
 
     if (!hasMetNpc(npc)) {
         gameData.npcs.push({id: npc.id, isAlive: npc.isAlive});
@@ -18,12 +19,12 @@ export function initNpc(id) {
 
     console.log(gameData.npcs);
 
-    eventDescription.textContent = npc.description;
+    eventDescription.textContent = npc.characterDescription;
     eventDescription.className = "event-text-color";
 
     eventOptions.innerHTML = '';
 
-    npc.options.forEach(option => {
+    npc.interactionOptions.forEach(option => {
         const button = document.createElement("button");
         button.textContent = option.label;
         button.className = 'option-button';

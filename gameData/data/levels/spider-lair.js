@@ -1,6 +1,6 @@
 export const levelData = {
-    "id": "spider-liar",
-    "name": "Spider Liar",
+    "id": "spider-lair",
+    "name": "Spider Lair",
     "isLocked": "",
     "isGuarded": "",
     "type": "location",
@@ -105,7 +105,7 @@ export const levelData = {
                 "x": 14,
                 "y": 7,
                 "type": "event",
-                "id": "spider-tunnel"
+                "id": "spider-lair-tunnel"
             },
             {
                 "x": 25,

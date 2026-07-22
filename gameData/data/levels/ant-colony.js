@@ -169,6 +169,12 @@ export const levelData = {
         "npcs": [
             {
                 "type": "npc",
+                "x": 11,
+                "y": 3,
+                "id": "ant-col-agim-sa"
+            },
+            {
+                "type": "npc",
                 "x": 6,
                 "y": 4,
                 "id": "ladybug"

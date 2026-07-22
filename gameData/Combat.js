@@ -417,7 +417,6 @@ export class Combat {
 
     decreasePlayerHealth(damageDealt) {
         console.log("enemy deals: " + damageDealt);
-        // this.player.currentHealth = this.player.currentHealth - damageDealt;
         this.player.setCurrentHealth(this.player.getCurrentHealth() - damageDealt);
         gameData.currentHealth = this.player.currentHealth;
         displayCurrentHealth.textContent = this.player.currentHealth;
