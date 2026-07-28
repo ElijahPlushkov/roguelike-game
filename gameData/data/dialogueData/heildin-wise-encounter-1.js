@@ -1,5 +1,5 @@
 export const dialogueData =   {
-    "id": "spider-encounter-1",
+    "id": "heildin-wise-encounter-1",
     "type": "dialogue",
     "requirements": {},
     "rejection": "",
@@ -10,13 +10,13 @@ export const dialogueData =   {
             "stateConditions": {
                 "anyOf": [
                     {
-                        "eventOutcome": "escape"
+                        "dialogueOutcome": "escape"
                     },
                     {
-                        "eventOutcome": "leave"
+                        "dialogueOutcome": "leave"
                     },
                     {
-                        "eventOutcome": "refuseInvestigate"
+                        "dialogueOutcome": "refuseInvestigate"
                     }
                 ]
             }
@@ -26,7 +26,7 @@ export const dialogueData =   {
             "stateConditions": {
                 "anyOf": [
                     {
-                        "eventOutcome": "investigate"
+                        "dialogueOutcome": "investigate"
                     }
                 ]
             }
@@ -36,7 +36,7 @@ export const dialogueData =   {
             "stateConditions": {
                 "anyOf": [
                     {
-                        "eventOutcome": "appreciate"
+                        "dialogueOutcome": "appreciate"
                     }
                 ]
             }

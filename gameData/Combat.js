@@ -65,7 +65,7 @@ export class Combat {
     finishCombat() {
         this.isCombatOn = false;
         this.resolveCombat(this.enemy.difficulty, this.enemy.race);
-        endEvent(this.enemyId, true, eventDescription, eventOptions, eventWindow);
+        endEvent(this.enemyId, true, eventDescription, eventOptions, eventWindow, "combat");
         markEventSeen(this.enemyId);
         this.clearCombatState();
         changeTileType(this.enemyCoordinates.x, this.enemyCoordinates.y, ".");

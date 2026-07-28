@@ -83,7 +83,7 @@ export function accessDoor(x, y) {
 }
 
 function resolveDoorEncounter(door, doorId, status, doorDescription, doorOptions, doorWindow) {
-    endEvent(doorId, status, doorDescription, doorOptions, doorWindow);
+    endEvent(doorId, status, doorDescription, doorOptions, doorWindow, "door");
     const reward = door.reward;
     let statChanger = new ChangeStats();
     statChanger.changeStats(reward);

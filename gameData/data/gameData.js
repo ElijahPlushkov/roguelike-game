@@ -5,6 +5,15 @@ import { getLevel } from './levels/levelsData.js';
 export const gameData = {
     playerCoordinates: {x: 0, y: 1},
 
+    playerCharacteristics: {
+        reputation: 10,
+        might: 10,
+        prayer: 1,
+        agility: 10
+    },
+
+    pollen: 0,
+
     health: 10,
     currentHealth: 10,
     mysticism: 10,
@@ -22,26 +31,17 @@ export const gameData = {
     evasion: 1,
     spellChance: 1,
 
-    quests: [],
-
     npcs: [],
-
+    quests: [],
     locations: [],
-
     eventOutcomes: [],
-
+    dialogueOutcomes: [],
+    combatOutcomes: [],
+    doorOutcomes: [],
+    trapOutcomes: [],
     seenEvents: [],
 
     isEventActive: false,
-
-    playerCharacteristics: {
-        reputation: 10,
-        might: 10,
-        prayer: 1,
-        agility: 10
-    },
-
-    pollen: 0,
 };
 
 export let player = new Player(

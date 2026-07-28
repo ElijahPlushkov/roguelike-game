@@ -159,7 +159,7 @@ export const levelData = {
                 "type": "npc",
                 "x": 30,
                 "y": 7,
-                "id": "spider"
+                "id": "heildin-wise-spider"
             }
         ],
         "enemies": [

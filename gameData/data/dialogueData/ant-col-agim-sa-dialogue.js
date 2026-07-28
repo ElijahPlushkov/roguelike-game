@@ -14,10 +14,10 @@ export const dialogueData = {
                         "state": "diseased-ants-killed"
                     },
                     {
-                        "eventOutcome": "gladlyAssist"
+                        "dialogueOutcome": "gladlyAssist"
                     },
                     {
-                        "eventOutcome": "notSlain"
+                        "dialogueOutcome": "notSlain"
                     }
                 ]
             }
@@ -27,7 +27,7 @@ export const dialogueData = {
             "stateConditions": {
                 "anyOf": [
                     {
-                        "eventOutcome": "refuseAssist"
+                        "dialogueOutcome": "refuseAssist"
                     }
                 ]
             }
@@ -37,7 +37,7 @@ export const dialogueData = {
             "stateConditions": {
                 "anyOf": [
                     {
-                        "eventOutcome": "fightAnt"
+                        "dialogueOutcome": "fightAnt"
                     }
                 ]
             }

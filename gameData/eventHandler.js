@@ -25,7 +25,7 @@ export function initEvent(eventId) {
             journalUpdater.journalUpdater(event.quest);
         }
 
-        endEvent(eventId, "completed", eventDescription, eventOptions, eventWindow);
+        endEvent(eventId, "completed", eventDescription, eventOptions, eventWindow, "event");
         const reward = event.reward;
         console.log(reward);
         let statChanger = new ChangeStats();

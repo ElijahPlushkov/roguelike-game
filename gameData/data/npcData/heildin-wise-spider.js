@@ -8,7 +8,7 @@ export const npcData = {
         "agility": 45
     },
     "isAlive": true,
-    "desposition": 50,
+    "disposition": 50,
     "characterClass": "psychic-knight",
     "characterDescription": "You can hear, but rather sense that something or someone is present and watching you closely. Looking around you notice no one.",
     "combatDescription": "Facing such a formidable enemy, you realize that the fight is not going to be easy.",

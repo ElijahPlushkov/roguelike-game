@@ -50,7 +50,7 @@ export function initTrap(trapId, x, y) {
 }
 
 function resolveTrapEncounter(trap, trapId, status, trapDescription, trapOptions, trapWindow) {
-    endEvent(trapId, status, trapDescription, trapOptions, trapWindow);
+    endEvent(trapId, status, trapDescription, trapOptions, trapWindow, "trap");
     const reward = trap.reward;
     let statChanger = new ChangeStats();
     statChanger.changeStats(reward);

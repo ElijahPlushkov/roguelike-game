@@ -8,6 +8,8 @@ import { ChangeStats } from "./ChangeStats.js";
 import { initCombat } from "./combatHandler.js";
 import { AdventureLogHandler } from "./AdventureLogHandler.js";
 import { getDialogue } from "./data/dialogueData/dialogueDataManager.js";
+import {getQuest} from "./data/questData/questManager.js";
+import {getNpc} from "./data/npcData/npcDataManager.js";
 
 const adventureLogHandler = new AdventureLogHandler();
 
@@ -106,16 +108,12 @@ export function initDialogue(dialogueId, stateKey) {
             return;
         }
 
-        // gameData.eventOutcomes[dialogueId] = {
-        //     eventOutcome: stateKey
-        // };
-
         eventOptions.innerHTML = "";
         let continueButton = createContinueButton();
         eventOptions.prepend(continueButton);
 
         continueButton.addEventListener("click", function () {
-            endEvent(dialogueId, stateKey, eventDescription, eventOptions, eventWindow);
+            endEvent(dialogueId, stateKey, eventDescription, eventOptions, eventWindow, "dialogue");
             if (dialogue.quest) {
                 let journalUpdater = new QuestJournalUpdater();
                 journalUpdater.journalUpdater(dialogue.quest);
@@ -142,17 +140,17 @@ function defineDialogueEntryPoint(dialogue) {
         if (entryPoint.stateConditions.anyOf) {
             const isConditionMet = entryPoint.stateConditions.anyOf.some(condition => {
                 if (condition.id && condition.state) {
-                    const quest = gameData.quests.find(q => q.id === condition.id);
+                    const quest = getQuest(condition.id);
                     if (quest) {
                         return quest.states.includes(condition.state);
                     }
                 }
-                else if (condition.eventOutcome) {
-                    const eventOutcome = gameData.eventOutcomes.find(outcome => outcome.event === dialogue.id);
-                    if (!eventOutcome) {
+                else if (condition.dialogueOutcome) {
+                    const dialogueOutcome = gameData.dialogueOutcomes.find(outcome => outcome.dialogue === dialogue.id);
+                    if (!dialogueOutcome) {
                         return;
                     }
-                    return condition.eventOutcome === eventOutcome.outcome;
+                    return condition.dialogueOutcome === dialogueOutcome.outcome;
                 }
             });
             if (isConditionMet) {
@@ -169,7 +167,7 @@ function checkOptionConditions(optionConditions) {
     }
     if (optionConditions.quest) {
         const { id, state } = optionConditions.quest;
-        const quest = gameData.quests.find(quest => quest.id === id);
+        const quest = getQuest(id);
         if (quest) {
             return quest.states.includes(state);
         } else {
@@ -178,8 +176,8 @@ function checkOptionConditions(optionConditions) {
     }
 
     if (optionConditions.npc) {
-        const {name, isAlive} = optionConditions.npc;
-        const npc = gameData.npcs.find(npc => npc.name === name);
+        const {id, isAlive} = optionConditions.npc;
+        const npc = getNpc(id);
         if (npc) {
             return npc.isAlive === isAlive;
         } else {

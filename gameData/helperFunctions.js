@@ -7,27 +7,80 @@ export function createContinueButton() {
     return continueButton;
 }
 
-export function endEvent(id, status, description, options, activeWindow) {
+export function endEvent(id, status, description, options, activeWindow, eventType) {
     gameData.isEventActive = false;
-    updateGameProgress(id, status);
+    updateGameProgress(id, status, eventType);
     description.textContent = "";
     options.textContent = "";
     activeWindow.classList.add("hidden");
 }
 
-function updateGameProgress(id, finalState) {
-    let event = gameData.eventOutcomes.find(e => e.event === id);
-    if (event) {
-        if (event.outcome !== finalState) {
-            event.outcome = finalState;
+function updateGameProgress(id, finalState, eventType) {
+    if (eventType === "dialogue") {
+        let dialogue = gameData.dialogueOutcomes.find(dialogue => dialogue.dialogue === id);
+        if (dialogue) {
+            if (dialogue.outcome !== finalState) {
+                dialogue.outcome = finalState
+            }
+        } else {
+            gameData.dialogueOutcomes.push({
+                dialogue: id,
+                outcome: finalState
+            })
         }
-    } else {
-        gameData.eventOutcomes.push({
-            event: id,
-            outcome: finalState
-        });
     }
-    console.log(gameData.eventOutcomes);
+    if (eventType === "combat") {
+        let enemy = gameData.combatOutcomes.find(enemy => enemy.enemy === id);
+        if (enemy) {
+            if (enemy.outcome !== finalState) {
+                enemy.outcome = finalState
+            }
+        } else {
+            gameData.combatOutcomes.push({
+                enemy: id,
+                outcome: finalState
+            })
+        }
+    }
+    if (eventType === "event") {
+        let event = gameData.eventOutcomes.find(event => event.event === id);
+        if (event) {
+            if (event.outcome !== finalState) {
+                event.outcome = finalState;
+            }
+        } else {
+            gameData.eventOutcomes.push({
+                event: id,
+                outcome: finalState
+            });
+        }
+    }
+    if (eventType === "door") {
+        let door = gameData.doorOutcomes.find(door => door.door === id);
+        if (door) {
+            if (door.outcome !== finalState) {
+                door.outcome = finalState
+            }
+        } else {
+            gameData.doorOutcomes.push({
+                door: id,
+                outcome: finalState
+            })
+        }
+    }
+    if (eventType === "trap") {
+        let trap = gameData.trapOutcomes.find(trap => trap.trap === id);
+        if (trap) {
+            if (trap.outcome !== finalState) {
+                trap.outcome = finalState
+            }
+        } else {
+            gameData.trapOutcomes.push({
+                trap: id,
+                outcome: finalState
+            })
+        }
+    }
 }
 
 export function hasSeenEvent(id) {
