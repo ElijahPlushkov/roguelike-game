@@ -168,9 +168,9 @@ function checkForAnyEvent(x, y) {
 
         if (newEvent.type === "npc") {
             const npcId = newEvent.id;
-            eventWindow.classList.toggle("hidden");
+            // eventWindow.classList.toggle("hidden");
             gameData.isEventActive = true;
-            initNpc(npcId);
+            initNpc(npcId, {x: newEvent.x, y: newEvent.y});
         }
 
         if (newEvent.type === "location") {

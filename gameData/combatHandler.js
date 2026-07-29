@@ -5,8 +5,9 @@ import { Combat } from "./Combat.js";
 import { UniqueEnemyFactory } from "./UniqueEnemyFactory.js";
 import { npcData } from "./data/npcData.js";
 import { getEnemy } from "./data/enemyData/enemyDataManager.js";
+import { getNpc } from "./data/npcData/npcDataManager.js";
 
-export function initCombat(enemyId, enemyType, enemyCoordinates, enemyRace) {
+export function initCombat(enemyId, enemyType, enemyCoordinates = null, enemyRace = null) {
     let enemy;
 
     if (enemyType === "unique") {
@@ -20,12 +21,12 @@ export function initCombat(enemyId, enemyType, enemyCoordinates, enemyRace) {
         console.log(enemy);
     } else if (enemyType === "npc") {
         let npcFactory = new NpcEnemyFactory();
-        let npc = npcData.npcs.find(npc => npc.id === enemyId);
+        let npc = getNpc(enemyId);
         enemy = npcFactory.createNpcEnemy(npc);
         console.log(enemy);
     }
 
     // start a new combat
-    let newCombat = new Combat(enemy, player, enemyId, enemyCoordinates);
+    let newCombat = new Combat(enemy, player, enemyId, enemyCoordinates, enemyType);
     newCombat.startCombat();
 }

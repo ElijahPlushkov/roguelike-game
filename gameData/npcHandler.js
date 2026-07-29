@@ -1,10 +1,10 @@
 import { npcData } from "./data/npcData.js";
-import { eventDescription, eventOptions, gameData } from "./data/gameData.js";
+import {eventDescription, eventOptions, eventWindow, gameData} from "./data/gameData.js";
 import { initDialogue } from "./dialogueHandler.js";
 import { initCombat } from "./combatHandler.js";
 import { getNpc } from "./data/npcData/npcDataManager.js";
 
-export function initNpc(id) {
+export function initNpc(id, coordinates) {
 
     let npc = getNpc(id);
 
@@ -18,6 +18,8 @@ export function initNpc(id) {
     }
 
     console.log(gameData.npcs);
+
+    eventWindow.classList.toggle("hidden");
 
     eventDescription.textContent = npc.characterDescription;
     eventDescription.className = "event-text-color";
@@ -36,7 +38,7 @@ export function initNpc(id) {
                 initDialogue(npcDialogue);
             }
             if (button.textContent === "Fight.") {
-                initCombat(npc.id, "npc");
+                initCombat(npc.id, "npc", coordinates);
             }
         })
     })

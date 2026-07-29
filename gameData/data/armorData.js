@@ -1,4 +1,4 @@
-export const armorData = {
+export const armorData = 	{
     "id": "armors",
     "armors": [
         {
@@ -76,6 +76,19 @@ export const armorData = {
             "durability": 20,
             "weight": 2,
             "value": 40
+        },
+        {
+            "name": "Oak Cuirass",
+            "id": "oak-cuirass",
+            "armorRate": 4,
+            "type": "heavy",
+            "effect": {
+                "agility": -1
+            },
+            "enchantment": "none",
+            "durability": 90,
+            "weight": 7,
+            "value": 80
         }
     ]
 }

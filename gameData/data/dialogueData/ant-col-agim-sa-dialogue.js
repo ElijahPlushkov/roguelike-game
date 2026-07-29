@@ -105,7 +105,12 @@ export const dialogueData = {
         "options": [
             {
                 "label": "Fight the ant.",
-                "key": "fightAnt"
+                "key": "fightAnt",
+                "initCombat": {
+                    "id": "ant-col-agim-sa",
+                    "type": "npc",
+                    "coordinates": {x: 11, y: 3}
+                }
             },
             {
                 "label": "Back down and leave.",
@@ -115,8 +120,7 @@ export const dialogueData = {
     },
     "fightAnt": {
         "description": "Let it be.",
-        "initCombat": true,
-        "options": []
+        "options": [],
     },
     "backDown": {
         "description": "Right choice",
@@ -131,7 +135,12 @@ export const dialogueData = {
         "options": [
             {
                 "label": "Fight the ant.",
-                "key": "fightAnt"
+                "key": "fightAnt",
+                "initCombat": {
+                    "id": "ant-col-agim-sa",
+                    "type": "npc",
+                    "coordinates": {x: 11, y: 3}
+                }
             }
         ]
     },

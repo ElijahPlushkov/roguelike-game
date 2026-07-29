@@ -20,6 +20,7 @@ export function initTrap(trapId, x, y) {
         trap.detected = true;
         changeTileType(x, y, "⁜");
     } else if (trap.active && trap.detected) {
+        gameData.isEventActive = true;
         trapWindow.classList.remove("hidden");
         trapDescription.className = "event-text-color";
         trapDescription.textContent = "Do you want to disarm the trap?";
@@ -67,9 +68,13 @@ export function isTrapDetected(x, y, trapId) {
     let trap = trapData.traps.find(trap => trapId === trap.id);
     isDetected = trap.requirements.prayer <= player.prayer;
     if (isDetected) {
-        trap.detected = true;
-        adventureLogHandler.appendFailMessage("You see a trap!");
-        changeTileType(x, y, "⁜");
+        if (!trap.active) {
+            changeTileType(x, y, ".");
+        } else {
+            trap.detected = true;
+            adventureLogHandler.appendFailMessage("You see a trap!");
+            changeTileType(x, y, "⁜");
+        }
     }
     return isDetected;
 }

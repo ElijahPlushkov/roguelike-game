@@ -8,10 +8,10 @@ import { ChangeStats } from "./ChangeStats.js";
 import { initCombat } from "./combatHandler.js";
 import { AdventureLogHandler } from "./AdventureLogHandler.js";
 import { getDialogue } from "./data/dialogueData/dialogueDataManager.js";
-import {getQuest} from "./data/questData/questManager.js";
-import {getNpc} from "./data/npcData/npcDataManager.js";
+import { getQuest } from "./data/questData/questManager.js";
 
 const adventureLogHandler = new AdventureLogHandler();
+const journalUpdater = new QuestJournalUpdater();
 
 export function initDialogue(dialogueId, stateKey) {
     //find the dialogue
@@ -74,7 +74,6 @@ export function initDialogue(dialogueId, stateKey) {
 
                 // if an option has a quest marker
                 if (option.quest) {
-                    let journalUpdater = new QuestJournalUpdater();
                     journalUpdater.journalUpdater(option.quest);
                 }
 
@@ -84,8 +83,8 @@ export function initDialogue(dialogueId, stateKey) {
                 }
 
                 // if an option has a combat marker
-                if (option.combat) {
-                    initCombat(option.combat.id, option.combat.type);
+                if (option.initCombat) {
+                    initCombat(option.initCombat.id, option.initCombat.type, option.initCombat.coordinates);
                 }
 
                 // initiate next dialogue stage
@@ -115,7 +114,6 @@ export function initDialogue(dialogueId, stateKey) {
         continueButton.addEventListener("click", function () {
             endEvent(dialogueId, stateKey, eventDescription, eventOptions, eventWindow, "dialogue");
             if (dialogue.quest) {
-                let journalUpdater = new QuestJournalUpdater();
                 journalUpdater.journalUpdater(dialogue.quest);
             }
             if (finalState.characteristics) {
@@ -167,7 +165,7 @@ function checkOptionConditions(optionConditions) {
     }
     if (optionConditions.quest) {
         const { id, state } = optionConditions.quest;
-        const quest = getQuest(id);
+        const quest = gameData.quests.find(quest => quest.id === id);
         if (quest) {
             return quest.states.includes(state);
         } else {
@@ -177,7 +175,7 @@ function checkOptionConditions(optionConditions) {
 
     if (optionConditions.npc) {
         const {id, isAlive} = optionConditions.npc;
-        const npc = getNpc(id);
+        const npc = gameData.npcs.find(npc => npc.id === id);
         if (npc) {
             return npc.isAlive === isAlive;
         } else {

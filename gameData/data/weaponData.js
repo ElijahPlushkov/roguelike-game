@@ -84,6 +84,20 @@ export const weaponData = {
                 "slash": 4,
                 "thrust": 3
             }
+        },
+        {
+            "name": "Stone Warhammer",
+            "id": "stone-warhammer",
+            "type": "blunt",
+            "enchantment": "none",
+            "durability": 150,
+            "weight": 7,
+            "value": 30,
+            "attackTypes": {
+                "chop": 5,
+                "slash": 1,
+                "thrust": 1
+            }
         }
     ]
 }

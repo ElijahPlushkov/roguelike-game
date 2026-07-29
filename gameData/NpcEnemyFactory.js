@@ -15,9 +15,9 @@ export class NpcEnemyFactory {
     BASE_SPELL_CHANCE = 10
 
     createNpcEnemy(npc) {
+        let difficulty = npc.combatDifficulty;
         let race = npc.race;
-        let difficulty = npc.difficulty;
-        let enemyClass = npc.npcClass;
+        let enemyClass = npc.characterClass;
         let weapon = this.setWeapon(npc.weapon);
         let armor = this.setArmor(npc.armor);
         let shield = npc.shield;
@@ -30,7 +30,7 @@ export class NpcEnemyFactory {
         let evasion = npc.characteristics.agility;
         let spellChance = this.BASE_SPELL_CHANCE + npc.characteristics.prayer;
         let fleeConditions = this.setFleeConditions(npc.characteristics);
-        let description = npc.description;
+        let description = npc.combatDescription;
 
         return new NewEnemy(difficulty, race, enemyClass, weapon, armor, shield, spells,
             characteristics, health, mysticism, willpower, accuracy, evasion, spellChance,

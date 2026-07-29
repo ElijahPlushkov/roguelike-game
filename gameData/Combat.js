@@ -13,6 +13,7 @@ import { previousCoordinates } from "./mainHandler.js";
 import { mapRender } from "./mapRender.js";
 import { AdventureLogHandler } from "./AdventureLogHandler.js";
 import { changeTileType } from "./mapHandler.js";
+import { registerNpcDeath } from "./npcHandler.js";
 
 export class Combat {
 
@@ -32,11 +33,12 @@ export class Combat {
     shield = document.querySelector(".shield");
     ammunitionCounter = document.querySelector(".ammunition-counter");
 
-    constructor(enemy, player, enemyId, enemyCoordinates) {
+    constructor(enemy, player, enemyId, enemyCoordinates, enemyType) {
         this.enemy = enemy;
         this.player = player;
         this.enemyId = enemyId;
         this.enemyCoordinates = enemyCoordinates;
+        this.enemyType = enemyType
     }
 
     startCombat() {
@@ -69,6 +71,10 @@ export class Combat {
         markEventSeen(this.enemyId);
         this.clearCombatState();
         changeTileType(this.enemyCoordinates.x, this.enemyCoordinates.y, ".");
+
+        if (this.enemyType === "npc") {
+            registerNpcDeath(this.enemyId);
+        }
 
         document.dispatchEvent(
             new CustomEvent("combatEnded")

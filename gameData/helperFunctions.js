@@ -1,4 +1,7 @@
 import { gameData } from "./data/gameData.js";
+import {questScript} from "./questScript.js";
+import { QuestJournalUpdater } from "./QuestJournalUpdater.js";
+
 
 export function createContinueButton() {
     const continueButton = document.createElement("button");
@@ -7,12 +10,25 @@ export function createContinueButton() {
     return continueButton;
 }
 
+let isConsequenceTriggered = false;
+
 export function endEvent(id, status, description, options, activeWindow, eventType) {
     gameData.isEventActive = false;
     updateGameProgress(id, status, eventType);
     description.textContent = "";
     options.textContent = "";
     activeWindow.classList.add("hidden");
+
+    // TODO this is a temporary solution
+    const questActive = questScript();
+
+    if (questActive && !isConsequenceTriggered) {
+        let journalUpdater = new QuestJournalUpdater();
+        journalUpdater.journalUpdater({id: "strike-back", state: "diseased-ants-killed"});
+        isConsequenceTriggered = true;
+    } else if (questActive && isConsequenceTriggered) {
+        return;
+    }
 }
 
 function updateGameProgress(id, finalState, eventType) {

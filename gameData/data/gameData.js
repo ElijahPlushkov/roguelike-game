@@ -8,7 +8,7 @@ export const gameData = {
     playerCharacteristics: {
         reputation: 10,
         might: 10,
-        prayer: 1,
+        prayer: 5,
         agility: 10
     },
 
