@@ -49,11 +49,17 @@ export class Combat {
         this.initiative = this.defineInitiative(); // bool
         this.isCombatOn = true;
 
-        let fightButton = this.createActionButtons("fight-btn", "Fight.", "fight");
-        let negotiateButton = this.createActionButtons("negotiate-btn", "Negotiate.", "negotiate");
-        let fleeButton = this.createActionButtons("flee-btn", "Flee.", "flee");
-
-        this.actionTypes.append(fightButton, negotiateButton, fleeButton);
+        //TODO this is a temporary solution, later fights and flights will affect npcs' disposition
+        if (this.enemyType === "npc") {
+            let fightButton = this.createActionButtons("fight-btn", "Fight.", "fight");
+            let negotiateButton = this.createActionButtons("negotiate-btn", "Negotiate.", "negotiate");
+            this.actionTypes.append(fightButton, negotiateButton);
+        } else {
+            let fightButton = this.createActionButtons("fight-btn", "Fight.", "fight");
+            let negotiateButton = this.createActionButtons("negotiate-btn", "Negotiate.", "negotiate");
+            let fleeButton = this.createActionButtons("flee-btn", "Flee.", "flee");
+            this.actionTypes.append(fightButton, negotiateButton, fleeButton);
+        }
 
         this.initRounds();
     }
@@ -178,8 +184,9 @@ export class Combat {
         this.statChanger.changeStats({["pollen"]: -10}, {["reputation"]: -1});
         this.adventureLogHandler.appendFleeMessage("You flee from your enemy.");
         this.clearCombatState();
-        // closes dungeon window after fleeing combat
+        // closes dungeon and event windows after fleeing combat
         dungeonWindow.classList.add("hidden");
+        eventWindow.classList.add("hidden");
         mapRender();
     }
 

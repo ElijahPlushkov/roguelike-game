@@ -4,6 +4,7 @@ import { endEvent, hasSeenEvent, markEventSeen } from "./helperFunctions.js";
 import { ChangeStats } from "./ChangeStats.js";
 import { AdventureLogHandler } from "./AdventureLogHandler.js";
 import { canBashDoor, canPickLock } from "./locationHandler.js";
+import { getQuest } from "./data/questData/questManager.js";
 
 const doorWindow = document.querySelector(".door-box");
 const doorDescription = document.querySelector(".door-description");
@@ -21,10 +22,14 @@ export function accessDoor(x, y) {
     let status;
 
     if (!hasSeenEvent(doorId)) {
+        const door = doorData.doors.find(door => door.id === doorId);
+
+        if (door.requirements) {
+            return hasDoorSpecialRequirements(door);
+        }
+
         const unlockButton = createActionButton("unlock");
         const bashButton = createActionButton("bash");
-
-        const door = doorData.doors.find(door => door.id === doorId);
 
         doorWindow.classList.remove("hidden");
         doorDescription.className = "event-text-color";
@@ -101,4 +106,30 @@ function createActionButton(type) {
     }
     doorOptions.prepend(button);
     return button;
+}
+
+function hasDoorSpecialRequirements(door) {
+    const isConditionMet = door.requirements.anyOf.some(condition => {
+        if (condition.id && condition.isAlive !== undefined) {
+            const npc = gameData.npcs.find(n => n.id === condition.id);
+            return npc ? npc.isAlive === condition.isAlive : false;
+        }
+
+        if (condition.id && condition.state) {
+            const quest = gameData.quests.find(quest => quest.id === condition.id);
+            return quest ? quest.states.includes(condition.state) : false;
+        }
+
+        if (condition.dialogueOutcome) {
+            const dialogueOutcome = gameData.dialogueOutcomes.find(
+                outcome => outcome.dialogue === condition.id
+            );
+            return dialogueOutcome
+                ? condition.dialogueOutcome === dialogueOutcome.outcome
+                : false;
+        }
+        return false;
+    });
+
+    return isConditionMet;
 }
