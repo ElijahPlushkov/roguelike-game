@@ -1,7 +1,32 @@
 import { gameData } from "./data/gameData.js";
-import {questScript} from "./questScript.js";
+import { questScript } from "./questScript.js";
 import { QuestJournalUpdater } from "./QuestJournalUpdater.js";
 
+export function hasSpecialRequirements(event) {
+    let isConditionMet = event.requirements.anyOf.some(condition => {
+        if (condition.id && condition.isAlive !== undefined) {
+            const npc = gameData.npcs.find(npc => npc.id === condition.id);
+            return npc ? npc.isAlive === condition.isAlive : false;
+        }
+
+        if (condition.id && condition.state) {
+            const quest = gameData.quests.find(quest => quest.id === condition.id);
+            return quest ? quest.states.includes(condition.state) : false;
+        }
+
+        if (condition.dialogueOutcome) {
+            const dialogueOutcome = gameData.dialogueOutcomes.find(
+                outcome => outcome.dialogue === condition.id
+            );
+            return dialogueOutcome
+                ? condition.dialogueOutcome === dialogueOutcome.outcome
+                : false;
+        }
+        return false;
+    });
+
+    return isConditionMet;
+}
 
 export function createContinueButton() {
     const continueButton = document.createElement("button");

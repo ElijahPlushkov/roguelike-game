@@ -24,12 +24,12 @@ export function initNpc(id, coordinates) {
     eventDescription.textContent = npc.characterDescription;
     eventDescription.className = "event-text-color";
 
-    eventOptions.innerHTML = '';
+    eventOptions.innerHTML = "";
 
     npc.interactionOptions.forEach(option => {
         const button = document.createElement("button");
         button.textContent = option.label;
-        button.className = 'option-button';
+        button.className = "option-button";
         eventOptions.appendChild(button);
 
         button.addEventListener("click", () => {
@@ -41,7 +41,22 @@ export function initNpc(id, coordinates) {
                 initCombat(npc.id, "npc", coordinates);
             }
         })
-    })
+    });
+
+    eventOptions.appendChild(createFarewellButton());
+}
+
+function createFarewellButton() {
+    const button = document.createElement("button");
+    button.textContent = "Farewell";
+    button.className = "option-button";
+    button.addEventListener("click", () => {
+        gameData.isEventActive = false;
+        eventWindow.classList.toggle("hidden");
+        eventOptions.innerHTML = "";
+    });
+
+    return button;
 }
 
 function hasMetNpc(npc) {

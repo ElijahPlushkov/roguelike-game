@@ -1,6 +1,6 @@
 import { gameData, eventDescription, eventOptions, eventWindow } from "./data/gameData.js";
 import { dialogueData } from "./data/dialogueData.js";
-import { endEvent, createContinueButton } from "./helperFunctions.js";
+import { endEvent, createContinueButton, hasSpecialRequirements } from "./helperFunctions.js";
 import { handleDeath } from "./deathHandler.js";
 import { QuestJournalUpdater } from "./QuestJournalUpdater.js";
 import { registerNpcDeath } from "./npcHandler.js";
@@ -16,6 +16,14 @@ const journalUpdater = new QuestJournalUpdater();
 export function initDialogue(dialogueId, stateKey) {
     //find the dialogue
     const dialogue = getDialogue(dialogueId);
+
+    if (dialogue.requirements) {
+        if (!hasSpecialRequirements(dialogue)) {
+            eventDescription.textContent = dialogue.rejection;
+            return;
+        }
+    }
+
 
     //initiate the starting key
     let currentStateKey = stateKey || defineDialogueEntryPoint(dialogue);

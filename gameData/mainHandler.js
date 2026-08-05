@@ -133,9 +133,9 @@ function checkForAnyEvent(x, y) {
 
     if (newEvent) {
         //an event cannot start unless the player meets the requirements
-        if (!requirementsCheck(newEvent)) {
-            return;
-        }
+        // if (!requirementsCheck(newEvent)) {
+        //     return;
+        // }
 
         if (newEvent.type === "event") {
             const eventId = newEvent.id;

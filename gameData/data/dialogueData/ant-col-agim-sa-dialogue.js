@@ -1,7 +1,6 @@
 export const dialogueData = {
     "id": "ant-col-agim-sa-dialogue",
     "type": "dialogue",
-    "requirements": {},
     "rejection": "",
     "start": "greetings",
     "entryPoints": [
@@ -123,7 +122,7 @@ export const dialogueData = {
         "options": [],
     },
     "backDown": {
-        "description": "Right choice",
+        "description": "Right choice.",
         "options": []
     },
     "refuseAssist": {

@@ -98,6 +98,34 @@ export const weaponData = {
                 "slash": 1,
                 "thrust": 1
             }
+        },
+        {
+            "name": "Wing Bane",
+            "id": "wing-bane",
+            "type": "spear",
+            "enchantment": "poison/fire",
+            "durability": 2000,
+            "weight": 15,
+            "value": 10000,
+            "attackTypes": {
+                "chop": 15,
+                "slash": 15,
+                "thrust": 50
+            }
+        },
+        {
+            "name": "Obsidian Dagger",
+            "id": "obsidian-dagger",
+            "type": "blades",
+            "enchantment": "none",
+            "durability": 300,
+            "weight": 2,
+            "value": 3500,
+            "attackTypes": {
+                "chop": 5,
+                "slash": 10,
+                "thrust": 25
+            }
         }
     ]
 }

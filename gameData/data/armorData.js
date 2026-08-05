@@ -1,4 +1,4 @@
-export const armorData = 	{
+export const armorData = {
     "id": "armors",
     "armors": [
         {
@@ -58,7 +58,7 @@ export const armorData = 	{
             "id": "birch-cuirass",
             "armorRate": 1,
             "type": "light",
-            "effect": "",
+            "effect": "none",
             "enchantment": "none",
             "durability": 50,
             "weight": 2,
@@ -89,6 +89,32 @@ export const armorData = 	{
             "durability": 90,
             "weight": 7,
             "value": 80
+        },
+        {
+            "name": "Scale Cuirass",
+            "id": "scale-cuirass",
+            "armorRate": 20,
+            "type": "medium",
+            "effect": {
+                "agility": 5
+            },
+            "enchantment": "prayer: +5",
+            "durability": 300,
+            "weight": 10,
+            "value": 5000
+        },
+        {
+            "name": "Wool Robe",
+            "id": "wool-robe",
+            "armorRate": 1,
+            "type": "clothes",
+            "effect": {
+                "prayer": 2
+            },
+            "enchantment": "agility: +2",
+            "durability": 50,
+            "weight": 3,
+            "value": 500
         }
     ]
 }

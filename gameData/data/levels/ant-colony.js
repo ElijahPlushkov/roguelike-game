@@ -183,7 +183,7 @@ export const levelData = {
                 "type": "npc",
                 "x": 6,
                 "y": 4,
-                "id": "ladybug"
+                "id": "jaemah-roseborn-ladybug"
             },
             {
                 "type": "npc",
