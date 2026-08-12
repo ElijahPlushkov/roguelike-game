@@ -121,7 +121,14 @@ export const levelData = {
             }
         ],
         "events": [],
-        "dialogues": [],
+        "dialogues": [
+            {
+                "x": 11,
+                "y": 19,
+                "type": "dialogue",
+                "id": "ant-col-ancient-moss"
+            },
+        ],
         "doors": [
             {
                 "x": 8,
@@ -189,13 +196,19 @@ export const levelData = {
                 "type": "npc",
                 "x": 18,
                 "y": 5,
-                "id": "ant-shaman"
+                "id": "ah-ruhn-ant-shaman"
             },
             {
                 "type": "npc",
                 "x": 24,
                 "y": 17,
-                "id": "ant-warchief"
+                "id": "agra-warchief"
+            },
+            {
+                "type": "npc",
+                "x": 19,
+                "y": 16,
+                "id": "ant-col-asa-la"
             },
             {
                 "type": "npc",

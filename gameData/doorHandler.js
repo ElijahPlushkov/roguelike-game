@@ -52,7 +52,7 @@ export function accessDoor(x, y) {
                     status = "unlocked";
                     unlockButton.classList.add("hidden");
                     bashButton.classList.add("hidden");
-                    adventureLogHandler.appendSuccessfulMessage("You successfully unlocked the door.");
+                    adventureLogHandler.appendSuccessfulMessage("You successfully unlocked the door. You gained " + door.reward.pollen + " pollen.");
 
                     resolveDoorEncounter(door, doorId, status, doorDescription, doorOptions, doorWindow);
                 } else {
@@ -69,7 +69,7 @@ export function accessDoor(x, y) {
                     status = "bashed";
                     unlockButton.classList.add("hidden");
                     bashButton.classList.add("hidden");
-                    adventureLogHandler.appendSuccessfulMessage("You bashed the door with all your might.");
+                    adventureLogHandler.appendSuccessfulMessage("You bashed the door with all your might. You gained " + door.reward.pollen + " pollen.");
 
                     resolveDoorEncounter(door, doorId, status, doorDescription, doorOptions, doorWindow);
                 } else {

@@ -1,7 +1,6 @@
 export const dialogueData = {
     "id": "spider-lair-dying-ant",
     "type": "dialogue",
-    "requirements": {},
     "rejection": "",
     "start": "greetings",
     "greetings": {

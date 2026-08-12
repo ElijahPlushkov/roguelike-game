@@ -43,10 +43,10 @@ export const armorData = {
         {
             "name": "Walnut Cuirass",
             "id": "walnut-cuirass",
-            "armorRate": 3,
+            "armorRate": 5,
             "type": "heavy",
             "effect": {
-                "agility": -3
+                "agility": -1
             },
             "enchantment": "none",
             "durability": 80,
@@ -80,10 +80,10 @@ export const armorData = {
         {
             "name": "Oak Cuirass",
             "id": "oak-cuirass",
-            "armorRate": 4,
+            "armorRate": 3,
             "type": "heavy",
             "effect": {
-                "agility": -1
+                "agility": -3
             },
             "enchantment": "none",
             "durability": 90,
@@ -113,8 +113,34 @@ export const armorData = {
             },
             "enchantment": "agility: +2",
             "durability": 50,
-            "weight": 3,
+            "weight": 2,
             "value": 500
+        },
+        {
+            "name": "Fur Cloak",
+            "id": "fur-cloak",
+            "armorRate": 2,
+            "type": "light",
+            "effect": {
+                "agility": 1
+            },
+            "enchantment": "none",
+            "durability": 60,
+            "weight": 3,
+            "value": 200
+        },
+        {
+            "name": "Fur Cuirass",
+            "id": "fur-cuirass",
+            "armorRate": 4,
+            "type": "light",
+            "effect": {
+                "agility": 2
+            },
+            "enchantment": "none",
+            "durability": 100,
+            "weight": 4,
+            "value": 400
         }
     ]
 }

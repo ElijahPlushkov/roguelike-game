@@ -108,7 +108,9 @@ export function initDialogue(dialogueId, stateKey) {
     } else {
 
         const finalStateKey = stateKey || currentStateKey;
+        console.log(finalStateKey);
         const finalState = dialogue[finalStateKey];
+        console.log(finalState);
 
         if (!finalState) {
             console.error("Invalid final state:", finalStateKey);
@@ -120,7 +122,8 @@ export function initDialogue(dialogueId, stateKey) {
         eventOptions.prepend(continueButton);
 
         continueButton.addEventListener("click", function () {
-            endEvent(dialogueId, stateKey, eventDescription, eventOptions, eventWindow, "dialogue");
+            endEvent(dialogueId, finalStateKey, eventDescription, eventOptions, eventWindow, "dialogue");
+            console.log(gameData.dialogueOutcomes);
             if (dialogue.quest) {
                 journalUpdater.journalUpdater(dialogue.quest);
             }
@@ -134,7 +137,6 @@ export function initDialogue(dialogueId, stateKey) {
         if (stateKey === "death") {
             handleDeath();
         }
-
     }
 }
 
@@ -171,6 +173,15 @@ function checkOptionConditions(optionConditions) {
     if (!optionConditions) {
         return true;
     }
+
+    if (optionConditions.dialogueOutcome) {
+        const { id, outcome } = optionConditions.dialogueOutcome;
+        const dialogue = gameData.dialogueOutcomes.find(dialogue => dialogue.id === id);
+        if (dialogue) {
+            return dialogue.outcome = outcome;
+        }
+    }
+
     if (optionConditions.quest) {
         const { id, state } = optionConditions.quest;
         const quest = gameData.quests.find(quest => quest.id === id);

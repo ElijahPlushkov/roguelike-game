@@ -81,7 +81,7 @@ export const doorData = {
             "tileType": "door",
             "isLocked": "7",
             "rejection": "",
-            "description": "You see a study door made of stone. The inscription says: 'Armory.'",
+            "description": "You see a sturdy door made of stone. The inscription says: 'Armory.'",
             "reward": {
                 "pollen": 5
             }

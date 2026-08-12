@@ -1,5 +1,5 @@
 import { npcData } from "./data/npcData.js";
-import {eventDescription, eventOptions, eventWindow, gameData} from "./data/gameData.js";
+import { eventDescription, eventOptions, eventWindow, gameData } from "./data/gameData.js";
 import { initDialogue } from "./dialogueHandler.js";
 import { initCombat } from "./combatHandler.js";
 import { getNpc } from "./data/npcData/npcDataManager.js";
@@ -48,7 +48,7 @@ export function initNpc(id, coordinates) {
 
 function createFarewellButton() {
     const button = document.createElement("button");
-    button.textContent = "Farewell";
+    button.textContent = "Farewell.";
     button.className = "option-button";
     button.addEventListener("click", () => {
         gameData.isEventActive = false;

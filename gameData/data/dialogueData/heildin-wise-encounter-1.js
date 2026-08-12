@@ -1,7 +1,6 @@
 export const dialogueData =   {
     "id": "heildin-wise-encounter-1",
     "type": "dialogue",
-    "requirements": {},
     "rejection": "",
     "start": "greetings",
     "entryPoints": [
@@ -64,19 +63,11 @@ export const dialogueData =   {
         "options": [
             {
                 "label": "I want to talk.",
-                "key": "talk",
-                "quest": {
-                    "id": "spider_threats",
-                    "state": "mercy"
-                }
+                "key": "talk"
             },
             {
                 "label": "I am here to slay you.",
-                "key": "slay",
-                "quest": {
-                    "id": "spider_threats",
-                    "state": "execute"
-                }
+                "key": "slay"
             },
             {
                 "label": "I haven’t decided yet.",
@@ -89,19 +80,11 @@ export const dialogueData =   {
         "options": [
             {
                 "label": "I want to talk.",
-                "key": "talk",
-                "quest": {
-                    "id": "spider_threats",
-                    "state": "mercy"
-                }
+                "key": "talk"
             },
             {
                 "label": "I am here to slay you.",
-                "key": "slay",
-                "quest": {
-                    "id": "spider_threats",
-                    "state": "execute"
-                }
+                "key": "slay"
             },
             {
                 "label": "I haven’t decided yet.",
@@ -118,11 +101,7 @@ export const dialogueData =   {
             },
             {
                 "label": "I am here to slay you.",
-                "key": "slay",
-                "quest": {
-                    "id": "spider_threats",
-                    "state": "execute"
-                }
+                "key": "slay"
             },
             {
                 "label": "I haven’t decided yet.",
@@ -261,11 +240,7 @@ export const dialogueData =   {
         "options": [
             {
                 "label": "Enough talk. I will slay you!",
-                "key": "slay",
-                "quest": {
-                    "id": "spider_threats",
-                    "state": "execute"
-                }
+                "key": "slay"
             },
             {
                 "label": "Lady Butterfly tasked me to deal with you.",
@@ -291,11 +266,7 @@ export const dialogueData =   {
         "options": [
             {
                 "label": "Never! Defend yourself.",
-                "key": "slay",
-                "quest": {
-                    "id": "spider_threats",
-                    "state": "execute"
-                }
+                "key": "slay"
             },
             {
                 "label": "Sheath your spear.",

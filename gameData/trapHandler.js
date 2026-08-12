@@ -33,7 +33,7 @@ export function initTrap(trapId, x, y) {
                 trap.active = false;
                 changeTileType(x, y, ".");
                 resolveTrapEncounter(trap, trapId, "disarmed", trapDescription, trapOptions, trapWindow);
-                adventureLogHandler.appendSuccessfulMessage("You disarmed the trap.");
+                adventureLogHandler.appendSuccessfulMessage("You disarmed the trap. You gained " + trap.reward.pollen + " pollen.");
             } else {
                 applyEffect(trap.effect);
                 adventureLogHandler.appendFailMessage("You fail to disarm the trap.");

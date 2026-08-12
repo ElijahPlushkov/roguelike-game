@@ -17,8 +17,8 @@ export const dialogueData = {
             "stateConditions": {
                 "anyOf": [
                     {
-                        "id": "ants_and_queens",
-                        "state": "aftermath_colony_saved"
+                        "id": "ants-and-queens",
+                        "state": "aftermath-colony-saved"
                     }
                 ]
             }
@@ -28,7 +28,7 @@ export const dialogueData = {
             "stateConditions": {
                 "anyOf": [
                     {
-                        "eventOutcome": "setoff"
+                        "dialogueOutcome": "setoff"
                     }
                 ]
             }
@@ -38,8 +38,8 @@ export const dialogueData = {
             "stateConditions": {
                 "anyOf": [
                     {
-                        "id": "ants_and_queens",
-                        "state": "meet_queen"
+                        "id": "ants-and-queens",
+                        "state": "meet-queen"
                     }
                 ]
             }
@@ -49,12 +49,12 @@ export const dialogueData = {
             "stateConditions": {
                 "anyOf": [
                     {
-                        "id": "ants_and_queens",
-                        "state": "shaman_killed"
+                        "id": "ants-and-queens",
+                        "state": "shaman-killed"
                     },
                     {
-                        "id": "ants_and_queens",
-                        "state": "kill_shaman"
+                        "id": "ants-and-queens",
+                        "state": "kill-shaman"
                     }
                 ]
             }
@@ -64,12 +64,12 @@ export const dialogueData = {
             "stateConditions": {
                 "anyOf": [
                     {
-                        "id": "ants_and_queens",
-                        "state": "found_evidence_against_shaman"
+                        "id": "ants-and-queens",
+                        "state": "found-evidence-against-shaman"
                     },
                     {
-                        "id": "ants_and_queens",
-                        "state": "find_evidence_against_shaman"
+                        "id": "ants-and-queens",
+                        "state": "find-evidence-against-shaman"
                     }
                 ]
             }
@@ -79,21 +79,18 @@ export const dialogueData = {
             "stateConditions": {
                 "anyOf": [
                     {
-                        "id": "ants_and_queens",
-                        "state": "deal_with_warchief"
+                        "id": "ants-and-queens",
+                        "state": "deal-with-warchief"
                     }
                 ]
             }
         },
         {
-            "state": "postRefuseAssist",
+            "state": "refuseAssist",
             "stateConditions": {
                 "anyOf": [
                     {
-                        "eventOutcome": "refuseAssist"
-                    },
-                    {
-                        "eventOutcome": "postRefuseAssist2"
+                        "dialogueOutcome": "refuseAssist"
                     }
                 ]
             }
@@ -111,7 +108,7 @@ export const dialogueData = {
                 "key": "task",
                 "optionConditions": {
                     "quest": {
-                        "id": "ants_and_queens",
+                        "id": "ants-and-queens",
                         "state": "start"
                     }
                 }
@@ -127,107 +124,107 @@ export const dialogueData = {
         ]
     },
     "task": {
-        "description": "—Don't interrupt me! She respects only brute force, so perhaps you have had sufficient training to prove yourself a decent match. On the other hand, any subterfuge will suffice. Now go. I don't have time for you. The lady turns away.",
+        "description": "—Don't interrupt me! She respects only brute force, so perhaps you have had sufficient training to prove yourself a decent match. On the other hand, any subterfuge will suffice. And don't kill her; she will be of use to me later. Now go. I don't have time for you. *The lady turns away*.",
         "options": [
             {
                 "label": "Ask the lady about her purpose here.",
                 "key": "ignoring",
                 "quest": {
-                    "id": "ants_and_queens",
-                    "state": "deal_with_warchief"
+                    "id": "ants-and-queens",
+                    "state": "deal-with-warchief"
                 }
             },
             {
                 "label": "Say that you are here to investigate the ants unusual behavior.",
                 "key": "ignoring",
                 "quest": {
-                    "id": "ants_and_queens",
-                    "state": "deal_with_warchief"
+                    "id": "ants-and-queens",
+                    "state": "deal-with-warchief"
                 }
             },
             {
                 "label": "Ask about the colony.",
                 "key": "ignoring",
                 "quest": {
-                    "id": "ants_and_queens",
-                    "state": "deal_with_warchief"
+                    "id": "ants-and-queens",
+                    "state": "deal-with-warchief"
                 }
             },
             {
                 "label": "Ask about the War Chief.",
                 "key": "ignoring",
                 "quest": {
-                    "id": "ants_and_queens",
-                    "state": "deal_with_warchief"
+                    "id": "ants-and-queens",
+                    "state": "deal-with-warchief"
                 }
             },
             {
                 "label": "Ask about the Queen.",
                 "key": "ignoring",
                 "quest": {
-                    "id": "ants_and_queens",
-                    "state": "deal_with_warchief"
+                    "id": "ants-and-queens",
+                    "state": "deal-with-warchief"
                 }
             },
             {
                 "label": "Ask about the Shaman.",
                 "key": "ignoring",
                 "quest": {
-                    "id": "ants_and_queens",
-                    "state": "deal_with_warchief"
+                    "id": "ants-and-queens",
+                    "state": "deal-with-warchief"
                 }
             }
         ]
     },
     "listen": {
-        "description": "—She respects only brute force, so perhaps you have had sufficient training to prove yourself a decent match. On the other hand, any subterfuge will suffice. It's imperative that you don't kill her. Now go. The lady turns away.",
+        "description": "—Don't interrupt me! She respects only brute force, so perhaps you have had sufficient training to prove yourself a decent match. On the other hand, any subterfuge will suffice. And don't kill her; she will be of use to me later. Now go. I don't have time for you. *The lady turns away*.",
         "options": [
             {
                 "label": "Ask the lady about her purpose here.",
                 "key": "ignoring",
                 "quest": {
-                    "id": "ants_and_queens",
-                    "state": "deal_with_warchief"
+                    "id": "ants-and-queens",
+                    "state": "deal-with-warchief"
                 }
             },
             {
                 "label": "Say that you are here to investigate the ants unusual behavior.",
                 "key": "ignoring",
                 "quest": {
-                    "id": "ants_and_queens",
-                    "state": "deal_with_warchief"
+                    "id": "ants-and-queens",
+                    "state": "deal-with-warchief"
                 }
             },
             {
                 "label": "Ask about the colony.",
                 "key": "ignoring",
                 "quest": {
-                    "id": "ants_and_queens",
-                    "state": "deal_with_warchief"
+                    "id": "ants-and-queens",
+                    "state": "deal-with-warchief"
                 }
             },
             {
                 "label": "Ask about the War Chief.",
                 "key": "ignoring",
                 "quest": {
-                    "id": "ants_and_queens",
-                    "state": "deal_with_warchief"
+                    "id": "ants-and-queens",
+                    "state": "deal-with-warchief"
                 }
             },
             {
                 "label": "Ask about the Queen.",
                 "key": "ignoring",
                 "quest": {
-                    "id": "ants_and_queens",
-                    "state": "deal_with_warchief"
+                    "id": "ants-and-queens",
+                    "state": "deal-with-warchief"
                 }
             },
             {
                 "label": "Ask about the Shaman.",
                 "key": "ignoring",
                 "quest": {
-                    "id": "ants_and_queens",
-                    "state": "deal_with_warchief"
+                    "id": "ants-and-queens",
+                    "state": "deal-with-warchief"
                 }
             }
         ]
@@ -244,13 +241,13 @@ export const dialogueData = {
                 "key": "warchiefDealtWith",
                 "optionConditions": {
                     "quest": {
-                        "id": "ants_and_queens",
+                        "id": "ants-and-queens",
                         "state": "warchiefDealtWith"
                     }
                 },
                 "quest": {
-                    "id": "ants_and_queens",
-                    "state": "find_evidence_against_shaman"
+                    "id": "ants-and-queens",
+                    "state": "find-evidence-against-shaman"
                 }
             },
             {
@@ -261,26 +258,22 @@ export const dialogueData = {
                 "label": "Say that you refuse to assist the lady.",
                 "key": "refuseAssist",
                 "quest": {
-                    "id": "ants_and_queens",
-                    "state": "abandon_ladybug"
+                    "id": "ants-and-queens",
+                    "state": "abandon-ladybug"
                 }
             }
         ]
     },
     "warchiefDealtWith": {
-        "description": "—Excellent! But we must act quickly now. I suspect that with the warchief on our side, the local shaman will make his move. Some of the ants are wary of him, but they refuse to speak with me on the matter. Perhaps, you will have more luck. Talk to me when you are done.",
+        "description": "—Excellent! But we must act quickly now. I suspect that with the warchief on our side, the local shaman will make his next move. Some of the ants are wary of him, but they refuse to speak with me on the matter. Perhaps, you will have more luck. Talk to me when you are done.",
         "options": []
     },
     "warchiefNotDealtWith": {
-        "description": "—Don't come back untill you perform your task!",
+        "description": "—Don't come back until you perform your task!",
         "options": []
     },
     "refuseAssist": {
         "description": "—I don't need you then! Disappear!",
-        "options": []
-    },
-    "postRefuseAssist": {
-        "description": "She ignores you. You walk away.",
         "options": []
     },
     "evidenceAgainstShaman": {
@@ -291,8 +284,8 @@ export const dialogueData = {
                 "key": "foundEvidence",
                 "optionConditions": {
                     "quest": {
-                        "id": "ants_and_queens",
-                        "state": "found_evidence_against_shaman"
+                        "id": "ants-and-queens",
+                        "state": "found-evidence-against-shaman"
                     }
                 }
             },
@@ -304,8 +297,8 @@ export const dialogueData = {
                 "label": "Say that you refuse to assist the lady.",
                 "key": "refuseAssist",
                 "quest": {
-                    "id": "ants_and_queens",
-                    "state": "abandon_ladybug"
+                    "id": "ants-and-queens",
+                    "state": "abandon-ladybug"
                 }
             }
         ]
@@ -317,16 +310,16 @@ export const dialogueData = {
                 "label": "I will do it immediately.",
                 "key": "acceptKillShaman",
                 "quest": {
-                    "id": "ants_and_queens",
-                    "state": "kill_shaman"
+                    "id": "ants-and-queens",
+                    "state": "kill-shaman"
                 }
             },
             {
                 "label": "Say that you refuse to assist the lady.",
                 "key": "refuseAssist",
                 "quest": {
-                    "id": "ants_and_queens",
-                    "state": "abandon_ladybug"
+                    "id": "ants-and-queens",
+                    "state": "abandon-ladybug"
                 }
             }
         ]
@@ -336,7 +329,7 @@ export const dialogueData = {
         "options": []
     },
     "foundNothing": {
-        "description": "—Do not come back untill you find something.",
+        "description": "—Do not come back until you find something.",
         "options": []
     },
     "shamanDead": {
@@ -346,13 +339,13 @@ export const dialogueData = {
                 "label": "The shaman has been executed.",
                 "key": "shamanExecuted",
                 "quest": {
-                    "id": "ants_and_queens",
-                    "state": "meet_queen"
+                    "id": "ants-and-queens",
+                    "state": "meet-queen"
                 },
                 "optionConditions": {
                     "quest": {
-                        "id": "ants_and_queens",
-                        "state": "shaman_killed"
+                        "id": "ants-and-queens",
+                        "state": "shaman-killed"
                     }
                 }
             },
@@ -364,8 +357,8 @@ export const dialogueData = {
                 "label": "Say that you refuse to assist the lady.",
                 "key": "refuseAssist",
                 "quest": {
-                    "id": "ants_and_queens",
-                    "state": "abandon_ladybug"
+                    "id": "ants-and-queens",
+                    "state": "abandon-ladybug"
                 }
             }
         ]
@@ -375,7 +368,7 @@ export const dialogueData = {
         "options": []
     },
     "shamanNotExecuted": {
-        "description": "—Oh! Do not tell me you are just wasting time.",
+        "description": "—Oh! Do not tell me you are just wasting our time.",
         "options": []
     },
     "talkToQueen": {
@@ -415,11 +408,6 @@ export const dialogueData = {
     },
     "setoff": {
         "description": "—Take care.",
-        "options": [],
-        "characteristics": {}
-    },
-    "finalOutcome": {
-        "description": "",
-        "characteristics": {}
+        "options": []
     }
 }

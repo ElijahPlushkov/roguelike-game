@@ -126,6 +126,20 @@ export const weaponData = {
                 "slash": 10,
                 "thrust": 25
             }
+        },
+        {
+            "name": "Bone Staff",
+            "id": "bone-staff",
+            "type": "blunt",
+            "enchantment": "none",
+            "durability": 40,
+            "weight": 3,
+            "value": 30,
+            "attackTypes": {
+                "chop": 4,
+                "slash": 4,
+                "thrust": 2
+            }
         }
     ]
 }
