@@ -1,14 +1,14 @@
 import { gameData } from "./data/gameData.js";
 
 const requirements = [
-    {enemy: "ant-col-diseased-ant-1", outcome: true},
-    {enemy: "ant-col-diseased-ant-2", outcome: true},
-    {enemy: "ant-col-diseased-ant-3", outcome: true},
-    {enemy: "ant-col-diseased-ant-4", outcome: true},
-    {enemy: "ant-col-diseased-ant-5", outcome: true},
-    {enemy: "ant-col-diseased-ant-6", outcome: true},
-    {enemy: "ant-col-diseased-ant-7", outcome: true},
-    {enemy: "ant-col-diseased-ant-8", outcome: true}
+    {id: "ant-col-diseased-ant-1", outcome: true},
+    {id: "ant-col-diseased-ant-2", outcome: true},
+    {id: "ant-col-diseased-ant-3", outcome: true},
+    {id: "ant-col-diseased-ant-4", outcome: true},
+    {id: "ant-col-diseased-ant-5", outcome: true},
+    {id: "ant-col-diseased-ant-6", outcome: true},
+    {id: "ant-col-diseased-ant-7", outcome: true},
+    {id: "ant-col-diseased-ant-8", outcome: true}
 
 ]
 

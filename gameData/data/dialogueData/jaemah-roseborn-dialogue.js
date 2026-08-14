@@ -1,14 +1,14 @@
 export const dialogueData = {
     "id": "jaemah-roseborn-dialogue",
     "type": "dialogue",
-    "requirements": {
-        "anyOf": [
-            {
-                "id": "strike-back",
-                "state": "siege-lifted"
-            }
-        ]
-    },
+    // "requirements": {
+    //     "anyOf": [
+    //         {
+    //             "id": "strike-back",
+    //             "state": "siege-lifted"
+    //         }
+    //     ]
+    // },
     "rejection": "—I cannot speak with you now, as we are resisting the attack. Join or leave.",
     "start": "greetings",
     "entryPoints": [
@@ -75,22 +75,28 @@ export const dialogueData = {
             }
         },
         {
+            "state": "refuseAssist",
+            "stateConditions": {
+                "anyOf": [
+                    {
+                        "dialogueOutcome": "refuseAssist"
+                    }
+                ]
+            }
+        },
+        {
             "state": "isWarchiefDealtWith",
             "stateConditions": {
                 "anyOf": [
                     {
                         "id": "ants-and-queens",
                         "state": "deal-with-warchief"
-                    }
-                ]
-            }
-        },
-        {
-            "state": "refuseAssist",
-            "stateConditions": {
-                "anyOf": [
+                    },
                     {
-                        "dialogueOutcome": "refuseAssist"
+                        "dialogueOutcome": "ignoring"
+                    },
+                    {
+                        "dialogueOutcome": "warchiefNotDealtWith"
                     }
                 ]
             }
@@ -137,9 +143,11 @@ export const dialogueData = {
             {
                 "label": "Say that you are here to investigate the ants unusual behavior.",
                 "key": "ignoring",
-                "quest": {
-                    "id": "ants-and-queens",
-                    "state": "deal-with-warchief"
+                "optionConditions": {
+                    "quest": {
+                        "id": "ants-and-queens",
+                        "state": "start"
+                    }
                 }
             },
             {

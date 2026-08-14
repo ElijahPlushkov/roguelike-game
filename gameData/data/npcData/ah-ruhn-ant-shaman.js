@@ -2,6 +2,7 @@ export const npcData = {
     "name": "Ah'Ruhn",
     "id": "ah-ruhn-ant-shaman",
     "race": "ant",
+    "coordinates": {"x": 18, "y": 5},
     "characteristics": {
         "might": 6,
         "reputation": 8,

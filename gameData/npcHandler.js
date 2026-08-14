@@ -3,6 +3,7 @@ import { eventDescription, eventOptions, eventWindow, gameData } from "./data/ga
 import { initDialogue } from "./dialogueHandler.js";
 import { initCombat } from "./combatHandler.js";
 import { getNpc } from "./data/npcData/npcDataManager.js";
+import {changeTileType} from "./mapHandler.js";
 
 export function initNpc(id, coordinates) {
 
@@ -78,4 +79,6 @@ function isNpcAlive(npcId) {
 export function registerNpcDeath(npcId) {
     let deadNpc = gameData.npcs.find(npc => npc.id === npcId);
     deadNpc.isAlive = false;
+    let npc = getNpc(npcId);
+    changeTileType(npc.coordinates.x, npc.coordinates.y, ".");
 }

@@ -58,66 +58,66 @@ export function endEvent(id, status, description, options, activeWindow, eventTy
 
 function updateGameProgress(id, finalState, eventType) {
     if (eventType === "dialogue") {
-        let dialogue = gameData.dialogueOutcomes.find(dialogue => dialogue.dialogue === id);
+        let dialogue = gameData.dialogueOutcomes.find(dialogue => dialogue.id === id);
         if (dialogue) {
             if (dialogue.outcome !== finalState) {
                 dialogue.outcome = finalState
             }
         } else {
             gameData.dialogueOutcomes.push({
-                dialogue: id,
+                id: id,
                 outcome: finalState
             })
         }
     }
     if (eventType === "combat") {
-        let enemy = gameData.combatOutcomes.find(enemy => enemy.enemy === id);
+        let enemy = gameData.combatOutcomes.find(enemy => enemy.id === id);
         if (enemy) {
             if (enemy.outcome !== finalState) {
                 enemy.outcome = finalState
             }
         } else {
             gameData.combatOutcomes.push({
-                enemy: id,
+                id: id,
                 outcome: finalState
             })
         }
     }
     if (eventType === "event") {
-        let event = gameData.eventOutcomes.find(event => event.event === id);
+        let event = gameData.eventOutcomes.find(event => event.id === id);
         if (event) {
             if (event.outcome !== finalState) {
                 event.outcome = finalState;
             }
         } else {
             gameData.eventOutcomes.push({
-                event: id,
+                id: id,
                 outcome: finalState
             });
         }
     }
     if (eventType === "door") {
-        let door = gameData.doorOutcomes.find(door => door.door === id);
+        let door = gameData.doorOutcomes.find(door => door.id === id);
         if (door) {
             if (door.outcome !== finalState) {
                 door.outcome = finalState
             }
         } else {
             gameData.doorOutcomes.push({
-                door: id,
+                id: id,
                 outcome: finalState
             })
         }
     }
     if (eventType === "trap") {
-        let trap = gameData.trapOutcomes.find(trap => trap.trap === id);
+        let trap = gameData.trapOutcomes.find(trap => trap.id === id);
         if (trap) {
             if (trap.outcome !== finalState) {
                 trap.outcome = finalState
             }
         } else {
             gameData.trapOutcomes.push({
-                trap: id,
+                id: id,
                 outcome: finalState
             })
         }

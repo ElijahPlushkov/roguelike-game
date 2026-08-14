@@ -106,14 +106,14 @@ export const dialogueData = {
         "options": [
             {
                 "label": "Accept the blessing.",
-                "key": "acceptBlessing",
+                "key": "acceptMossBlessing",
                 "characteristics": {
                     "prayer": 2
                 }
             }
         ]
     },
-    "acceptBlessing": {
+    "acceptMossBlessing": {
         "description": "You can hear the moss no more.",
         "options": []
     },

@@ -8,7 +8,6 @@ import { ChangeStats } from "./ChangeStats.js";
 import { initCombat } from "./combatHandler.js";
 import { AdventureLogHandler } from "./AdventureLogHandler.js";
 import { getDialogue } from "./data/dialogueData/dialogueDataManager.js";
-import { getQuest } from "./data/questData/questManager.js";
 
 const adventureLogHandler = new AdventureLogHandler();
 const journalUpdater = new QuestJournalUpdater();
@@ -23,7 +22,6 @@ export function initDialogue(dialogueId, stateKey) {
             return;
         }
     }
-
 
     //initiate the starting key
     let currentStateKey = stateKey || defineDialogueEntryPoint(dialogue);
@@ -48,6 +46,7 @@ export function initDialogue(dialogueId, stateKey) {
             checkOptionConditions(option.optionConditions)
         );
 
+        console.log(gameData.quests);
         let optionsCount = 1;
 
         visibleOptions.forEach(option => {
@@ -64,7 +63,7 @@ export function initDialogue(dialogueId, stateKey) {
                     for (const [charKey, requiredValue] of Object.entries(option.requirements)) {
                         if ((gameData.playerCharacteristics[charKey] || 0) < requiredValue) {
                             canProceed = false;
-                            adventureLogHandler.appendRejectionMessage(option);
+                            eventDescription.textContent = option.rejection;
                             break;
                         }
                     }
@@ -148,13 +147,13 @@ function defineDialogueEntryPoint(dialogue) {
         if (entryPoint.stateConditions.anyOf) {
             const isConditionMet = entryPoint.stateConditions.anyOf.some(condition => {
                 if (condition.id && condition.state) {
-                    const quest = getQuest(condition.id);
+                    const quest = gameData.quests.find(quest => quest.id === condition.id);
                     if (quest) {
                         return quest.states.includes(condition.state);
                     }
                 }
                 else if (condition.dialogueOutcome) {
-                    const dialogueOutcome = gameData.dialogueOutcomes.find(outcome => outcome.dialogue === dialogue.id);
+                    const dialogueOutcome = gameData.dialogueOutcomes.find(dialogue => condition.dialogueOutcome === dialogue.outcome);
                     if (!dialogueOutcome) {
                         return;
                     }
@@ -177,9 +176,13 @@ function checkOptionConditions(optionConditions) {
     if (optionConditions.dialogueOutcome) {
         const { id, outcome } = optionConditions.dialogueOutcome;
         const dialogue = gameData.dialogueOutcomes.find(dialogue => dialogue.id === id);
-        if (dialogue) {
-            return dialogue.outcome = outcome;
-        }
+        console.log(dialogue);
+        return dialogue ? dialogue.outcome === outcome : false;
+        // if (dialogue) {
+        //     return dialogue.outcome === outcome;
+        // } else {
+        //     return false;
+        // }
     }
 
     if (optionConditions.quest) {

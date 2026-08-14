@@ -80,7 +80,111 @@ export const dialogueData = {
         }
     ],
     "greetings": {
-        "description": "—Whacha want from ma Queen? You not seem like an ant.",
+        "description": "—Whacha want from ma Queen?",
+        "options": [
+            {
+                "label": "I am a Knight of the Pine Order. I would like to request an audience from your queen.",
+                "key": "queenAudience",
+                "optionConditions": {
+                    "quest": {
+                        "id": "ants-and-queens",
+                        "state": "deal-with-warchief"
+                    }
+                }
+            },
+            {
+                "label": "The ladybug wants to talk to the queen. I am here on her behalf.",
+                "key": "ladybugBehalf",
+                "optionConditions": {
+                    "quest": {
+                        "id": "ants-and-queens",
+                        "state": "deal-with-warchief"
+                    }
+                }
+            }
+        ]
+    },
+    "queenAudience": {
+        "description": "Ah! You are a famous bunch. But ma Queen is not accepring anyone right now. Sorry.",
+        "options": [
+            {
+                "label": "Challenge to a fair fight.",
+                "key": "fairFight",
+                "optionConditions": {
+                    "quest": {
+                        "id": "ants-and-queens",
+                        "state": "deal-with-warchief"
+                    }
+                },
+                "rejection": "You not worth ma time, buggie.",
+                "requirements": {
+                    "might": 8
+                }
+            },
+            {
+                "label": "Tell a silly joke.",
+                "key": "tellJoke",
+                "optionConditions": {
+                    "quest": {
+                        "id": "ants-and-queens",
+                        "state": "deal-with-warchief"
+                    }
+                },
+                "rejection": "The warchief is not impressed.",
+                "requirements": {
+                    "pollen": 30
+                }
+            },
+            {
+                "label": "Explain the situation in detail and politely ask admission to the Queen's chamber.",
+                "key": "explainSituation",
+                "optionConditions": {
+                    "quest": {
+                        "id": "ants-and-queens",
+                        "state": "deal-with-warchief"
+                    }
+                },
+                "rejection": "You not the first to come with such requests.",
+                "requirements": {
+                    "reputation": 6
+                }
+            },
+            {
+                "label": "Say that you have an urgent letter from the Emperor.",
+                "key": "emperorLetter",
+                "optionConditions": {
+                    "quest": {
+                        "id": "ants-and-queens",
+                        "state": "deal-with-warchief"
+                    }
+                },
+                "rejection": "You lie.",
+                "requirements": {
+                    "reputation": 6
+                }
+            },
+            {
+                "label": "Admire the warchief's armor and weapon.",
+                "key": "admireWarchief",
+                "optionConditions": {
+                    "quest": {
+                        "id": "ants-and-queens",
+                        "state": "deal-with-warchief"
+                    }
+                },
+                "rejection": "Good compliment, but not sincere.",
+                "requirements": {
+                    "reputation": 5
+                }
+            },
+            {
+                "label": "Leave.",
+                "key": "leave"
+            }
+        ]
+    },
+    "ladybugBehalf": {
+        "description": "I don't trust this ladybug. Our shaman say she is the root of trouble. If you are with 'er, I don trust you neither.",
         "options": [
             {
                 "label": "Challenge to a fair fight.",
@@ -153,25 +257,23 @@ export const dialogueData = {
                 }
             },
             {
-                "label": "Ask if there is anything you can do to help the warchief.",
-                "key": "helpWarchief",
-                "optionConditions": {
-                    "quest": {
-                        "id": "ants-and-queens",
-                        "state": "deal-with-warchief"
-                    }
-                }
-            },
-            {
                 "label": "Leave.",
                 "key": "leave"
             }
         ]
     },
     "fairFight": {
-        "description": "—Finally a worthy opponent.",
-        "initCombat": true,
-        "options": []
+        "description": "—Finally a worthy opponent. *You spend some time sparring with the warchief. You show off your fighting skills, and she is impressed by your prowess.* —You surely did your homework back at the order. I like it. You may enter.",
+        "options": [
+            {
+                "label": "Thank and leave.",
+                "key": "leave",
+                "quest": {
+                    "id": "ants-and-queens",
+                    "state": "warchiefDealtWith"
+                }
+            }
+        ]
     },
     "tellJoke": {
         "description": "*The warchief laughs so hard you have an impression that that was the only joke she has heard in her entire life. Maybe the first ever joke she has actually understood.* —Well, you seem like good fella. I may let you in if you promise to behave.",
@@ -257,8 +359,7 @@ export const dialogueData = {
                 "label": "They did.",
                 "key": "fliesSlain",
                 "optionConditions": {
-                    "eventSlug": "scuttle-flies-gang",
-                    "eventOutcome": true
+
                 },
                 "quest": {
                     "id": "ants-and-queens",
@@ -317,7 +418,10 @@ export const dialogueData = {
     },
     "fight": {
         "description": "—I will pierce you down.",
-        "initCombat": true,
-        "options": []
+        "initCombat": {
+            "id": "agra-warchief",
+            "type": "npc",
+            "coordinates": {x: 24, y: 17}
+        }
     }
 }

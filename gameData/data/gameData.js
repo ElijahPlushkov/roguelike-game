@@ -6,10 +6,10 @@ export const gameData = {
     playerCoordinates: {x: 0, y: 1},
 
     playerCharacteristics: {
-        reputation: 10,
-        might: 10,
-        prayer: 5,
-        agility: 10
+        reputation: 100,
+        might: 100,
+        prayer: 100,
+        agility: 100
     },
 
     pollen: 0,

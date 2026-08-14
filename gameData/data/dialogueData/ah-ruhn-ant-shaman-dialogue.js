@@ -28,7 +28,7 @@ export const dialogueData = {
             "stateConditions": {
                 "anyOf": [
                     {
-                        "eventOutcome": "refuse"
+                        "dialogueOutcome": "refuse"
                     }
                 ]
             }
@@ -49,7 +49,7 @@ export const dialogueData = {
             "stateConditions": {
                 "anyOf": [
                     {
-                        "eventOutcome": "refuseKillWarchief"
+                        "dialogueOutcome": "refuseKillWarchief"
                     }
                 ]
             }
@@ -308,13 +308,11 @@ export const dialogueData = {
     },
     "acceptBlessing": {
         "description": "*Ah'Ruhn closes his eyes and puts his hands on your shoulders. He then starts speaking in the ants tongue. You feel stronger momentarily.* —Divine spirit, don't hesitate.",
-        "options": [],
-        "characteristics": {}
+        "options": []
     },
     "refuse": {
         "description": "—I am deeply saddened by your words. I hope that you will change your mind. *Ah'Ruhn turns away and goes to his patients.*",
-        "options": [],
-        "characteristics": {}
+        "options": []
     },
     "changeMindAboutLadybug": {
         "description": "—Divine spirit, have you changed your mind about my proposal?",
@@ -404,7 +402,7 @@ export const dialogueData = {
                 }
             },
             {
-                "label": "Say that you must proceed on your quest.",
+                "label": "Refuse to kill the warchief.",
                 "key": "refuseKillWarchief"
             }
         ]
@@ -421,15 +419,14 @@ export const dialogueData = {
                 }
             },
             {
-                "label": "Say that you must proceed on your quest.",
+                "label": "Refuse to kill the warchief.",
                 "key": "refuseKillWarchief"
             }
         ]
     },
     "acceptKillWarchief": {
         "description": "—I must warn you that the warchief is a mighty warrior. I will put a spell on her when you engage into battle with her. It will assist you. Now, let's do what must be done.",
-        "options": [],
-        "characteristics": {}
+        "options": []
     },
     "isWarchiefDead": {
         "description": "—Is the might warchief dead?",
@@ -456,8 +453,7 @@ export const dialogueData = {
     },
     "refuseKillWarchief": {
         "description": "—I hope you will change your mind. You have already done enough for us and could do more.",
-        "options": [],
-        "characteristics": {}
+        "options": []
     },
     "changeMindAboutWarchief": {
         "description": "—Divine spirit, are you ready to finish what we started?",
@@ -471,7 +467,7 @@ export const dialogueData = {
                 }
             },
             {
-                "label": "Say that you must proceed on your quest.",
+                "label": "Say that you must proceed on your main quest.",
                 "key": "refuseKillWarchief"
             }
         ]
@@ -507,7 +503,7 @@ export const dialogueData = {
         "options": []
     },
     "explanation": {
-        "description": "—Divine spirit, what explanation do you need? See for yourself. We are the subjects of the new king. He will dethrone the old gods and establish a new kingdom. Perhaps, there will be a place for you, some reward for your help here. But now, divine spirit, the savior of the colony, you must leave. I take mercy on you, but you have only one chance.",
+        "description": "—Divine spirit, what explanation do you need? See for yourself. We are the subjects of the new King. He will dethrone the old gods and establish a new kingdom. Perhaps, there will be a place for you, some reward for your help here. But now, divine spirit, the savior of the colony, you must leave. I take mercy on you, but you have only one chance.",
         "options": [
             {
                 "label": "Try to kill the shaman.",
@@ -531,7 +527,7 @@ export const dialogueData = {
                 "optionConditions": {
                     "dialogueOutcome": {
                         "id": "ant-col-ancient-moss",
-                        "outcome": "acceptBlessing"
+                        "outcome": "acceptMossBlessing"
                     }
                 }
             }
@@ -579,9 +575,12 @@ export const dialogueData = {
     },
     "postInfecting": {
         "description": "—Knight, I warned you against coming back to my colony. There is no place for you here. You will die now.",
-        "initCombat": true,
-        "options": [],
-        "characteristics": {}
+        "options": [
+            {
+                "label": "Try to kill the shaman.",
+                "key": "death"
+            }
+        ]
     },
     "evidenceAgainstShaman": {
         "description": "—They are saying so because they are afraid. They do not want to believe in gods. They feel abandoned. They feel betrayed by their spiritual leader who is himself powerless against the epidemic. I work day and night to tend for the infected, and all in vain. If someone has to give up, I should be the first, but I will never do that. I am the shaman of this colony and I will take care of it till the end.",
@@ -618,7 +617,12 @@ export const dialogueData = {
             },
             {
                 "label": "Sentence the shaman to death for his betrayal.",
-                "key": "npcCombat"
+                "key": "npcCombat",
+                "initCombat": {
+                    "id": "ah-ruhn-ant-shaman",
+                    "type": "npc",
+                    "coordinates": {x: 18, y: 5}
+                }
             }
         ]
     },
@@ -631,7 +635,12 @@ export const dialogueData = {
             },
             {
                 "label": "Enough. Sentence the shaman to death for his betrayal.",
-                "key": "npcCombat"
+                "key": "npcCombat",
+                "initCombat": {
+                    "id": "ah-ruhn-ant-shaman",
+                    "type": "npc",
+                    "coordinates": {x: 18, y: 5}
+                }
             }
         ]
     },
@@ -640,7 +649,12 @@ export const dialogueData = {
         "options": [
             {
                 "label": "Sentence the shaman to death for his betrayal.",
-                "key": "npcCombat"
+                "key": "npcCombat",
+                "initCombat": {
+                    "id": "ah-ruhn-ant-shaman",
+                    "type": "npc",
+                    "coordinates": {x: 18, y: 5}
+                }
             },
             {
                 "label": "The disease will kill you.",
@@ -657,7 +671,12 @@ export const dialogueData = {
         "options": [
             {
                 "label": "Sentence the shaman to death for his betrayal.",
-                "key": "npcCombat"
+                "key": "npcCombat",
+                "initCombat": {
+                    "id": "ah-ruhn-ant-shaman",
+                    "type": "npc",
+                    "coordinates": {x: 18, y: 5}
+                }
             },
             {
                 "label": "The disease will kill you.",
@@ -670,7 +689,12 @@ export const dialogueData = {
         "options": [
             {
                 "label": "Sentence the shaman to death for his betrayal.",
-                "key": "npcCombat"
+                "key": "npcCombat",
+                "initCombat": {
+                    "id": "ah-ruhn-ant-shaman",
+                    "type": "npc",
+                    "coordinates": {x: 18, y: 5}
+                }
             },
             {
                 "label": "Tell the shaman what you have learnt from the moss.",
@@ -678,14 +702,14 @@ export const dialogueData = {
                 "optionConditions": {
                     "dialogueOutcome": {
                         "id": "ant-col-ancient-moss",
-                        "outcome": "acceptBlessing"
+                        "outcome": "acceptMossBlessing"
                     }
                 }
             }
         ]
     },
     "moss": {
-        "description": "Ah'Ruhn wants to say something, but stops mid-sentence. You look at his face and notic how old he is. His face is scared by wrinkles, his antanae are covered in colorless hair. He sits heavily on the floor. —I hear you, my queen. Yes, I still remember the warmth of your womb and the joy of being born. I went astray because I wanted to save us. There is no forgiveness for me I know. I know. *The shaman bursts into tears. After a minute he stands up.* —Leave unless you want to burn with me. *He laughs madly.*.",
+        "description": "Ah'Ruhn wants to say something, but stops mid-sentence. You look at his face and notice how old he is. His face is scared by wrinkles, his antanae are covered in colorless hair. He sits heavily on the floor. —I hear you, my queen. Yes, I still remember the warmth of your womb and the joy of being born. I went astray because I wanted to save us. There is no forgiveness for me I know. I know. *The shaman bursts into tears. After a minute he stands up.* —Leave unless you want to burn with me. *He falls silent.*.",
         "options": [
             {
                 "label": "Leave hastily.",
@@ -695,7 +719,7 @@ export const dialogueData = {
                     "state": "shaman-killed"
                 },
                 "npcDeath": {
-                    "id": "ant-shaman",
+                    "id": "ah-ruhn-ant-shaman",
                     "isAlive": false
                 }
             },
@@ -720,7 +744,7 @@ export const dialogueData = {
                     "state": "shaman-killed"
                 },
                 "npcDeath": {
-                    "id": "ant-shaman",
+                    "id": "ah-ruhn-ant-shaman",
                     "isAlive": false
                 }
             }
@@ -732,7 +756,6 @@ export const dialogueData = {
     },
     "npcCombat": {
         "description": "—I will not turn myself in! *Ah'Ruhn prepares to fight.*",
-        "initCombat": true,
         "options": []
     },
     "comeLater": {
