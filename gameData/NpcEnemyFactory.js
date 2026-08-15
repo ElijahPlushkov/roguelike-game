@@ -31,10 +31,11 @@ export class NpcEnemyFactory {
         let spellChance = this.BASE_SPELL_CHANCE + npc.characteristics.prayer;
         let fleeConditions = this.setFleeConditions(npc.characteristics);
         let description = npc.combatDescription;
+        let coordinates = npc.coordinates;
 
         return new NewEnemy(difficulty, race, enemyClass, weapon, armor, shield, spells,
             characteristics, health, mysticism, willpower, accuracy, evasion, spellChance,
-            fleeConditions, description)
+            fleeConditions, description, coordinates)
     }
 
     setHealth(might) {

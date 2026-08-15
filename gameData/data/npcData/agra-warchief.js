@@ -2,6 +2,8 @@ export const npcData = {
     "id": "agra-warchief",
     "name": "Ag'Ra",
     "race": "ant",
+    "coordinates": {"x": 24, "y": 17},
+    "tileImage": "",
     "characteristics": {
         "might": 15,
         "reputation": 10,

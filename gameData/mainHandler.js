@@ -2,7 +2,6 @@ import {
     gameData, journalClose, levelData, map, playerCoordinates, tileSet,
     parseLevelData, eventWindow, chapterId, player
 } from "./data/gameData.js";
-import { dialogueData } from "./data/dialogueData.js";
 import { initEvent } from "./eventHandler.js";
 import { mapRender } from "./mapRender.js";
 import { initDialogue } from "./dialogueHandler.js";
@@ -132,10 +131,6 @@ function checkForAnyEvent(x, y) {
     const newEvent = findAllEvents().find(event => event.x === x && event.y === y);
 
     if (newEvent) {
-        //an event cannot start unless the player meets the requirements
-        // if (!requirementsCheck(newEvent)) {
-        //     return;
-        // }
 
         if (newEvent.type === "event") {
             const eventId = newEvent.id;
@@ -168,7 +163,6 @@ function checkForAnyEvent(x, y) {
 
         if (newEvent.type === "npc") {
             const npcId = newEvent.id;
-            // eventWindow.classList.toggle("hidden");
             gameData.isEventActive = true;
             initNpc(npcId, {x: newEvent.x, y: newEvent.y});
         }
@@ -230,36 +224,6 @@ function isRequirementPassed(requirements, event) {
         }
     }
     return true;
-}
-
-function requirementsCheck(newEvent) {
-
-    let isPassed = true;
-
-    if (newEvent.type === "dialogue") {
-        const dialogueId = newEvent.id;
-        const dialogue = dialogueData.dialogues.find(dialogue => dialogue.id === dialogueId);
-
-        if (!dialogue.requirements) {
-            isPassed = true;
-        } else {
-            const requirements = dialogue.requirements;
-            isPassed = isRequirementPassed(requirements, dialogue);
-        }
-    }
-
-    if (newEvent.type === "event") {
-        const eventId = newEvent.id;
-        const event = getEvent(eventId);
-
-        if (!event.requirements) {
-            isPassed = true;
-        } else {
-            const requirements = event.requirements;
-            isPassed = isRequirementPassed(requirements, event);
-        }
-    }
-    return isPassed;
 }
 
 const saveGameButton = document.getElementById("saveGame");

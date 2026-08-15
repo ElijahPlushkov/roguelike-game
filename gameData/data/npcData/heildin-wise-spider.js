@@ -1,6 +1,9 @@
 export const npcData = {
     "id": "heildin-wise-spider",
     "name": "Heildin the Wise",
+    "race": "spider",
+    "coordinates": {"x": 30, "y": 7},
+    "tileImage": "",
     "characteristics": {
         "might": 45,
         "reputation": 40,

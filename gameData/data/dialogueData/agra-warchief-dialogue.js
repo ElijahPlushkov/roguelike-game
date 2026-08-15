@@ -1,14 +1,14 @@
 export const dialogueData = {
     "id": "agra-warchief-dialogue",
     "type": "dialogue",
-    "requirements": {
-        "anyOf": [
-            {
-                "id": "strike-back",
-                "state": "siege-lifted"
-            }
-        ]
-    },
+    // "requirements": {
+    //     "anyOf": [
+    //         {
+    //             "id": "strike-back",
+    //             "state": "siege-lifted"
+    //         }
+    //     ]
+    // },
     "rejection": "—Look how I squeeze this infected bastard. Gruaaagh! Stay away, Ag'Ra doesn't need your help!",
     "start": "greetings",
     "entryPoints": [
@@ -82,6 +82,10 @@ export const dialogueData = {
     "greetings": {
         "description": "—Whacha want from ma Queen?",
         "options": [
+            {
+                "label": "Sorry, for disturbing you",
+                "key": "leave"
+            },
             {
                 "label": "I am a Knight of the Pine Order. I would like to request an audience from your queen.",
                 "key": "queenAudience",
@@ -419,9 +423,7 @@ export const dialogueData = {
     "fight": {
         "description": "—I will pierce you down.",
         "initCombat": {
-            "id": "agra-warchief",
-            "type": "npc",
-            "coordinates": {x: 24, y: 17}
+            "id": "agra-warchief"
         }
     }
 }

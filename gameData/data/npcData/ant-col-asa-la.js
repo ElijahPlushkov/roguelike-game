@@ -2,6 +2,8 @@ export const npcData = {
     "name": "Asa-La",
     "id": "ant-col-asa-la",
     "race": "ant",
+    "coordinates": {"x": 19, "y": 16},
+    "tileImage": "",
     "characteristics": {
         "might": 2,
         "reputation": 2,

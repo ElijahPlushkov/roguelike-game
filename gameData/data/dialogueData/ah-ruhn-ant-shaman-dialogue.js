@@ -1,14 +1,14 @@
 export const dialogueData = {
     "id": "ah-ruhn-ant-shaman-dialogue",
     "type": "dialogue",
-    "requirements": {
-        "anyOf": [
-            {
-                "id": "strike-back",
-                "state": "siege-lifted"
-            }
-        ]
-    },
+    // "requirements": {
+    //     "anyOf": [
+    //         {
+    //             "id": "strike-back",
+    //             "state": "siege-lifted"
+    //         }
+    //     ]
+    // },
     "rejection": "—We are doomed. My magic is not able to stop this horde.",
     "start": "greetings",
     "entryPoints": [
@@ -34,6 +34,17 @@ export const dialogueData = {
             }
         },
         {
+            "state": "isWarchiefDead",
+            "stateConditions": {
+                "anyOf": [
+                    {
+                        "id": "ants-and-queens",
+                        "state": "kill-warchief"
+                    }
+                ]
+            }
+        },
+        {
             "state": "isLadybugKilled",
             "stateConditions": {
                 "anyOf": [
@@ -50,21 +61,6 @@ export const dialogueData = {
                 "anyOf": [
                     {
                         "dialogueOutcome": "refuseKillWarchief"
-                    }
-                ]
-            }
-        },
-        {
-            "state": "isWarchiefDead",
-            "stateConditions": {
-                "anyOf": [
-                    {
-                        "name": "warchief",
-                        "isAlive": "false"
-                    },
-                    {
-                        "id": "ants-and-queens",
-                        "state": "kill-warchief"
                     }
                 ]
             }
@@ -360,9 +356,9 @@ export const dialogueData = {
                 "label": "Ladybug is no more.",
                 "key": "ladybugKilled",
                 "optionConditions": {
-                    "quest": {
-                        "id": "ants-and-queens",
-                        "state": "ladybug-defeated"
+                    "npc": {
+                        "id": "jaemah-roseborn-ladybug",
+                        "isAlive": false
                     }
                 }
             },
@@ -429,15 +425,15 @@ export const dialogueData = {
         "options": []
     },
     "isWarchiefDead": {
-        "description": "—Is the might warchief dead?",
+        "description": "—Is the mighty warchief dead?",
         "options": [
             {
                 "label": "She is not a threat anymore.",
                 "key": "warchiefKilled",
                 "optionConditions": {
-                    "quest": {
-                        "id": "ants-and-queens",
-                        "state": "warchief-defeated"
+                    "npc": {
+                        "id": "agra-warchief",
+                        "isAlive": false
                     }
                 }
             },
@@ -494,7 +490,11 @@ export const dialogueData = {
             },
             {
                 "label": "Retreat from the colony.",
-                "key": "leave"
+                "key": "leave",
+                "quest": {
+                    "id": "ants-and-queens",
+                    "state": "aftermath-colony-infected"
+                }
             }
         ]
     },
@@ -619,9 +619,7 @@ export const dialogueData = {
                 "label": "Sentence the shaman to death for his betrayal.",
                 "key": "npcCombat",
                 "initCombat": {
-                    "id": "ah-ruhn-ant-shaman",
-                    "type": "npc",
-                    "coordinates": {x: 18, y: 5}
+                    "id": "ah-ruhn-ant-shaman"
                 }
             }
         ]
@@ -637,9 +635,7 @@ export const dialogueData = {
                 "label": "Enough. Sentence the shaman to death for his betrayal.",
                 "key": "npcCombat",
                 "initCombat": {
-                    "id": "ah-ruhn-ant-shaman",
-                    "type": "npc",
-                    "coordinates": {x: 18, y: 5}
+                    "id": "ah-ruhn-ant-shaman"
                 }
             }
         ]
@@ -651,9 +647,7 @@ export const dialogueData = {
                 "label": "Sentence the shaman to death for his betrayal.",
                 "key": "npcCombat",
                 "initCombat": {
-                    "id": "ah-ruhn-ant-shaman",
-                    "type": "npc",
-                    "coordinates": {x: 18, y: 5}
+                    "id": "ah-ruhn-ant-shaman"
                 }
             },
             {
@@ -673,9 +667,7 @@ export const dialogueData = {
                 "label": "Sentence the shaman to death for his betrayal.",
                 "key": "npcCombat",
                 "initCombat": {
-                    "id": "ah-ruhn-ant-shaman",
-                    "type": "npc",
-                    "coordinates": {x: 18, y: 5}
+                    "id": "ah-ruhn-ant-shaman"
                 }
             },
             {
@@ -691,9 +683,7 @@ export const dialogueData = {
                 "label": "Sentence the shaman to death for his betrayal.",
                 "key": "npcCombat",
                 "initCombat": {
-                    "id": "ah-ruhn-ant-shaman",
-                    "type": "npc",
-                    "coordinates": {x: 18, y: 5}
+                    "id": "ah-ruhn-ant-shaman"
                 }
             },
             {

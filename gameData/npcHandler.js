@@ -1,4 +1,3 @@
-import { npcData } from "./data/npcData.js";
 import { eventDescription, eventOptions, eventWindow, gameData } from "./data/gameData.js";
 import { initDialogue } from "./dialogueHandler.js";
 import { initCombat } from "./combatHandler.js";

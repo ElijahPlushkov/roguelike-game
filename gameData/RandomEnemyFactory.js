@@ -52,10 +52,11 @@ export class RandomEnemyFactory {
         let spellChance = this.BASE_SPELL_CHANCE;
         let fleeConditions = this.setFleeConditions();
         let description = this.setDescription() + race;
+        let coordinates;
 
         return new NewEnemy(enemyDifficulty, race, enemyClass, weapon, armor, shield, spells,
             characteristics, health, mysticism, willpower, accuracy, evasion, spellChance,
-            fleeConditions, description)
+            fleeConditions, description, coordinates = null)
     }
 
     setRace(difficulty) {

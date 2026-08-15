@@ -214,7 +214,7 @@ export const levelData = {
                 "type": "npc",
                 "x": 24,
                 "y": 20,
-                "id": "ant-queen"
+                "id": "mua-ranu-ant-queen"
             }
         ],
         "enemies": [

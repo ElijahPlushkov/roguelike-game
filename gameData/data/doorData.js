@@ -99,8 +99,20 @@ export const doorData = {
             "id": "ant-col-door-7",
             "type": "door",
             "tileType": "door",
+            "requirements": {
+                "anyOf": [
+                    {
+                        "id": "agra-warchief",
+                        "isAlive": false
+                    },
+                    {
+                        "id": "ants-and-queens",
+                        "state": "warchiefDealtWith"
+                    }
+                ]
+            },
             "isLocked": "",
-            "rejection": "",
+            "rejection": "Ag'Ra doesn't let you in.",
             "description": "You open the door to the Queen's chamber. It's dark and quiet.",
             "reward": {}
         },

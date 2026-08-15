@@ -22,6 +22,17 @@ export const shieldData = {
             "durability": 50,
             "weight": 3,
             "value": 40
+        },
+        {
+            "name": "Ivory Shield",
+            "id": "ivory-shield",
+            "armorRate": 6,
+            "type": "heavy",
+            "effect": 40,
+            "enchantment": "none",
+            "durability": 200,
+            "weight": 5,
+            "value": 3000
         }
     ]
 }

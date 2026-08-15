@@ -17,10 +17,11 @@ export class NewEnemy {
     characteristics = null // Object
     fleeConditions = null // Object
     description = null // String
+    coordinates = null // Object
 
     constructor(difficulty, race, enemyClass, weapon, armor, shield, spells, characteristics,
                 health, mysticism, willpower, accuracy, evasion, spellChance,
-                fleeConditions, description) {
+                fleeConditions, description, coordinates) {
         this.difficulty = difficulty
         this.race = race
         this.enemyClass = enemyClass
@@ -37,5 +38,6 @@ export class NewEnemy {
         this.spellChance = spellChance
         this.fleeConditions = fleeConditions
         this.description = description
+        this.coordinates = coordinates
     }
 }

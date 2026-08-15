@@ -4,6 +4,7 @@ import { npcData as jaemahRosebornLadybug } from './jaemah-roseborn-ladybug.js';
 import { npcData as ahRuhnAntShaman } from "./ah-ruhn-ant-shaman.js";
 import { npcData as antColAsaLa } from "./ant-col-asa-la.js";
 import { npcData as agraWarchief} from "./agra-warchief.js";
+import { npcData as muaRanuAntQueen } from "./mua-ranu-ant-queen.js";
 
 const npcRegistry = {
     "ant-col-agim-sa": antColAgimSa,
@@ -11,8 +12,8 @@ const npcRegistry = {
     "jaemah-roseborn-ladybug": jaemahRosebornLadybug,
     "ah-ruhn-ant-shaman": ahRuhnAntShaman,
     "ant-col-asa-la": antColAsaLa,
-    "agra-warchief": agraWarchief
-
+    "agra-warchief": agraWarchief,
+    "mua-ranu-ant-queen": muaRanuAntQueen
 }
 export function getNpc(id) {
     const npc = npcRegistry[id];

@@ -141,6 +141,19 @@ export const armorData = {
             "durability": 100,
             "weight": 4,
             "value": 400
+        },
+        {
+            "name": "Silk Robe",
+            "id": "silk-robe",
+            "armorRate": 2,
+            "type": "clothes",
+            "effect": {
+                "prayer": 4
+            },
+            "enchantment": "mysticism: +20",
+            "durability": 60,
+            "weight": 1,
+            "value": 1000
         }
     ]
 }

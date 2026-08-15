@@ -2,6 +2,8 @@ export const npcData = {
     "name": "Jaemah Roseborn",
     "id": "jaemah-roseborn-ladybug",
     "race": "ladybug",
+    "coordinates": {"x": 6, "y": 4},
+    "tileImage": "",
     "characteristics": {
         "might": 7,
         "reputation": 15,

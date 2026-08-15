@@ -1,5 +1,4 @@
 import { gameData, eventDescription, eventOptions, eventWindow } from "./data/gameData.js";
-import { dialogueData } from "./data/dialogueData.js";
 import { endEvent, createContinueButton, hasSpecialRequirements } from "./helperFunctions.js";
 import { handleDeath } from "./deathHandler.js";
 import { QuestJournalUpdater } from "./QuestJournalUpdater.js";
@@ -91,7 +90,7 @@ export function initDialogue(dialogueId, stateKey) {
 
                 // if an option has a combat marker
                 if (option.initCombat) {
-                    initCombat(option.initCombat.id, option.initCombat.type, option.initCombat.coordinates);
+                    initCombat(option.initCombat.id, "npc");
                 }
 
                 // initiate next dialogue stage
@@ -178,11 +177,6 @@ function checkOptionConditions(optionConditions) {
         const dialogue = gameData.dialogueOutcomes.find(dialogue => dialogue.id === id);
         console.log(dialogue);
         return dialogue ? dialogue.outcome === outcome : false;
-        // if (dialogue) {
-        //     return dialogue.outcome === outcome;
-        // } else {
-        //     return false;
-        // }
     }
 
     if (optionConditions.quest) {

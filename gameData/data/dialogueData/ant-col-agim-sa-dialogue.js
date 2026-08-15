@@ -106,9 +106,7 @@ export const dialogueData = {
                 "label": "Fight the ant.",
                 "key": "fightAnt",
                 "initCombat": {
-                    "id": "ant-col-agim-sa",
-                    "type": "npc",
-                    "coordinates": {x: 11, y: 3}
+                    "id": "ant-col-agim-sa"
                 }
             },
             {
@@ -136,9 +134,7 @@ export const dialogueData = {
                 "label": "Fight the ant.",
                 "key": "fightAnt",
                 "initCombat": {
-                    "id": "ant-col-agim-sa",
-                    "type": "npc",
-                    "coordinates": {x: 11, y: 3}
+                    "id": "ant-col-agim-sa"
                 }
             }
         ]

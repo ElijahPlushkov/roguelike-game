@@ -6,6 +6,7 @@ import { dialogueData as ahRuhnAntShamanDialogue } from "./ah-ruhn-ant-shaman-di
 import { dialogueData as antColAncientMoss } from "./ant-col-ancient-moss.js";
 import { dialogueData as antColAsaLaDialogue } from "./ant-col-asa-la-dialogue.js";
 import { dialogueData as agraWarchiefDialogue } from "./agra-warchief-dialogue.js";
+import { dialogueData as muaRanuAntQueenDialogue} from "./mua-ranu-ant-queen-dialogue.js";
 
 const dialogueRegistry = {
     "heildin-wise-encounter-1": heildinWiseEncounter1,
@@ -16,7 +17,8 @@ const dialogueRegistry = {
     "ah-ruhn-ant-shaman-dialogue": ahRuhnAntShamanDialogue,
     "ant-col-ancient-moss": antColAncientMoss,
     "ant-col-asa-la-dialogue": antColAsaLaDialogue,
-    "agra-warchief-dialogue": agraWarchiefDialogue
+    "agra-warchief-dialogue": agraWarchiefDialogue,
+    "mua-ranu-ant-queen-dialogue": muaRanuAntQueenDialogue
 }
 
 export function getDialogue(id) {

@@ -83,7 +83,7 @@ export const questData = {
         },
         {
             "id": "infecting",
-            "description": "The diseased ants take over the colony. The queen get infected by the demonic disease. You were instrumental in this catastrophy."
+            "description": "The diseased ants take over the colony. The queen get infected by the demonic disease. You were instrumental in this catastrophe."
         },
         {
             "id": "aftermath-colony-infected",

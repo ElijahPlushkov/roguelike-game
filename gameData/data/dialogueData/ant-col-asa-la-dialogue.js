@@ -1,14 +1,14 @@
 export const dialogueData = {
     "id": "ant-col-asa-la-dialogue",
     "type": "dialogue",
-    "requirements": {
-        "anyOf": [
-            {
-                "id": "strike-back",
-                "state": "siege-lifted"
-            }
-        ]
-    },
+    // "requirements": {
+    //     "anyOf": [
+    //         {
+    //             "id": "strike-back",
+    //             "state": "siege-lifted"
+    //         }
+    //     ]
+    // },
     "rejection": "—I have to defend the eggs, Sir Knight. If we survive the attack, please come back. I have something to tell you.",
     "start": "greetings",
     "entryPoints": [

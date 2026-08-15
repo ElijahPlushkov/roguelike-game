@@ -140,6 +140,20 @@ export const weaponData = {
                 "slash": 4,
                 "thrust": 2
             }
+        },
+        {
+            "name": "Ivory Sword",
+            "id": "ivory-sword",
+            "type": "blades",
+            "enchantment": "fire",
+            "durability": 200,
+            "weight": 5,
+            "value": 5000,
+            "attackTypes": {
+                "chop": 10,
+                "slash": 12,
+                "thrust": 9
+            }
         }
     ]
 }

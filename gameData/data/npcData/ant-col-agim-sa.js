@@ -2,6 +2,8 @@ export const npcData = {
     "id": "ant-col-agim-sa",
     "name": "Agim Sa",
     "race": "ant",
+    "coordinates": {x: 11, y: 3},
+    "tileImage": "",
     "characteristics": {
         "might": 5,
         "reputation": 4,

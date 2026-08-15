@@ -49,6 +49,10 @@ export const dialogueData = {
             "stateConditions": {
                 "anyOf": [
                     {
+                        "id": "ah-ruhn-ant-shaman",
+                        "isAlive": false
+                    },
+                    {
                         "id": "ants-and-queens",
                         "state": "shaman-killed"
                     },
@@ -70,6 +74,9 @@ export const dialogueData = {
                     {
                         "id": "ants-and-queens",
                         "state": "find-evidence-against-shaman"
+                    },
+                    {
+                        "dialogueOutcome": "warchiefSlain"
                     }
                 ]
             }
@@ -251,11 +258,25 @@ export const dialogueData = {
                     "quest": {
                         "id": "ants-and-queens",
                         "state": "warchiefDealtWith"
+                    },
+                    "npc": {
+                        "id": "agra-warchief",
+                        "isAlive": true
                     }
                 },
                 "quest": {
                     "id": "ants-and-queens",
                     "state": "find-evidence-against-shaman"
+                }
+            },
+            {
+                "label": "Say that you have slain the warchief.",
+                "key": "warchiefSlain",
+                "optionConditions": {
+                    "npc": {
+                        "id": "agra-warchief",
+                        "isAlive": false
+                    }
                 }
             },
             {
@@ -271,6 +292,10 @@ export const dialogueData = {
                 }
             }
         ]
+    },
+    "warchiefSlain": {
+        "description": "—That was the stupidest thing to do. She was supposed to become our ally! We must act quickly now. I suspect that with the warchief on our side, the local shaman will make his next move. Some of the ants are wary of him, but they refuse to speak with me on the matter. Perhaps, you will have more luck. Talk to me when you are done.",
+        "options": []
     },
     "warchiefDealtWith": {
         "description": "—Excellent! But we must act quickly now. I suspect that with the warchief on our side, the local shaman will make his next move. Some of the ants are wary of him, but they refuse to speak with me on the matter. Perhaps, you will have more luck. Talk to me when you are done.",
@@ -351,9 +376,9 @@ export const dialogueData = {
                     "state": "meet-queen"
                 },
                 "optionConditions": {
-                    "quest": {
-                        "id": "ants-and-queens",
-                        "state": "shaman-killed"
+                    "npc": {
+                        "id": "ah-ruhn-ant-shaman",
+                        "isAlive": false
                     }
                 }
             },
