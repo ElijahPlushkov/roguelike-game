@@ -21,7 +21,7 @@ export class NewEnemy {
 
     constructor(difficulty, race, enemyClass, weapon, armor, shield, spells, characteristics,
                 health, mysticism, willpower, accuracy, evasion, spellChance,
-                fleeConditions, description, coordinates) {
+                fleeConditions, description, coordinates, name) {
         this.difficulty = difficulty
         this.race = race
         this.enemyClass = enemyClass
@@ -39,5 +39,6 @@ export class NewEnemy {
         this.fleeConditions = fleeConditions
         this.description = description
         this.coordinates = coordinates
+        this.name = name
     }
 }

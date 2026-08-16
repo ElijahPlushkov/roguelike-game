@@ -1,5 +1,5 @@
 import { gameData } from "./data/gameData.js";
-import { questScript } from "./questScript.js";
+import { antColonyAreInfectedAntsDefeated, isAntColonyInfected } from "./questScript.js";
 import { QuestJournalUpdater } from "./QuestJournalUpdater.js";
 
 export function hasSpecialRequirements(event) {
@@ -45,7 +45,7 @@ export function endEvent(id, status, description, options, activeWindow, eventTy
     activeWindow.classList.add("hidden");
 
     // TODO this is a temporary solution
-    const questActive = questScript();
+    const questActive = antColonyAreInfectedAntsDefeated();
 
     if (questActive && !isConsequenceTriggered) {
         let journalUpdater = new QuestJournalUpdater();
@@ -54,6 +54,11 @@ export function endEvent(id, status, description, options, activeWindow, eventTy
     } else if (questActive && isConsequenceTriggered) {
         return;
     }
+
+    if (!hasSeenEvent("antColonyOutcome")) {
+        isAntColonyInfected();
+    }
+
 }
 
 function updateGameProgress(id, finalState, eventType) {

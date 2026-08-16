@@ -6,6 +6,10 @@ export const dialogueData = {
             {
                 "id": "ants-and-queens",
                 "state": "meet-queen"
+            },
+            {
+                "id": "ants-and-queens",
+                "state": "aftermath-colony-infected"
             }
         ]
     },
@@ -19,6 +23,17 @@ export const dialogueData = {
                     {
                         "id": "ants-and-queens",
                         "state": "aftermath-colony-saved"
+                    }
+                ]
+            }
+        },
+        {
+            "state": "colonyInfected",
+            "stateConditions": {
+                "anyOf": [
+                    {
+                        "id": "ants-and-queens",
+                        "state": "aftermath-colony-infected"
                     }
                 ]
             }
@@ -212,14 +227,6 @@ export const dialogueData = {
                     "id": "ants-and-queens",
                     "state": "aftermath-colony-saved"
                 }
-            },
-            {
-                "label": "Salvage valuables from the dead.",
-                "key": "salvageValuables",
-                "characteristics": {
-                    "reputation": -1,
-                    "pollen": 200
-                }
             }
         ]
     },
@@ -232,13 +239,6 @@ export const dialogueData = {
                 "quest": {
                     "id": "ants-and-queens",
                     "state": "aftermath-colony-saved"
-                }
-            },
-            {
-                "label": "Help the wounded.",
-                "key": "helpWounded",
-                "characteristics": {
-                    "prayer": 1
                 }
             }
         ]
@@ -257,7 +257,11 @@ export const dialogueData = {
         "options": []
     },
     "moreHelp": {
-        "description": "—Please, talk to me later.",
+        "description": "—I am grateful to you for saving my people. Please, talk to me later.",
+        "options": []
+    },
+    "colonyInfected": {
+        "description": "The queen's speech is unintelligible.",
         "options": []
     }
 }

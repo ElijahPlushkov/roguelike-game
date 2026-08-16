@@ -54,10 +54,11 @@ export class UniqueEnemyFactory {
         let fleeConditions = this.setFleeConditions(enemy.characteristics);
         let description = enemy.description;
         let coordinates;
+        let name;
 
         return new NewEnemy(enemyDifficulty, race, enemyClass, weapon, armor, shield, spells,
             characteristics, health, mysticism, willpower, accuracy, evasion, spellChance,
-            fleeConditions, description, coordinates = null)
+            fleeConditions, description, coordinates = null, name = null)
     }
 
     setHealth(might) {

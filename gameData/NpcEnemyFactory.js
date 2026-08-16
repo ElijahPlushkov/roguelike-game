@@ -32,10 +32,11 @@ export class NpcEnemyFactory {
         let fleeConditions = this.setFleeConditions(npc.characteristics);
         let description = npc.combatDescription;
         let coordinates = npc.coordinates;
+        let name = npc.name;
 
         return new NewEnemy(difficulty, race, enemyClass, weapon, armor, shield, spells,
             characteristics, health, mysticism, willpower, accuracy, evasion, spellChance,
-            fleeConditions, description, coordinates)
+            fleeConditions, description, coordinates, name)
     }
 
     setHealth(might) {

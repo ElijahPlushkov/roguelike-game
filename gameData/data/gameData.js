@@ -115,11 +115,16 @@ const combatLog = document.querySelector(".combat-log");
 
 const dungeonWindow = document.querySelector(".dungeon-box");
 
+const specialMessageWindow = document.querySelector(".special-message-box");
+const specialMessageDescription = document.querySelector(".special-message-description");
+const specialMessageOptions = document.querySelector(".special-message-options");
+
 export { displayMaxHealth, displayCurrentHealth, displayMaxMysticism, displayCurrentMysticism, displayWillpower,
     displayReputation, displayMight, displayPrayer, displayAgility, displayPollen, displayArmorRate, armorRateModifier,
     agilityModifier,
     eventWindow, eventDescription, eventOptions, eventInfo,
-    journalWindow, journalClose, combatWindow, combatLog, dungeonWindow };
+    journalWindow, journalClose, combatWindow, combatLog, dungeonWindow,
+    specialMessageWindow, specialMessageDescription, specialMessageOptions };
 
 let levelData = {};
 

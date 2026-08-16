@@ -15,7 +15,6 @@ import { QuestJournalUpdater } from "./QuestJournalUpdater.js";
 import { handleDeath } from "./deathHandler.js";
 import { handleDungeonAccess, exitDungeon } from "./locationHandler.js";
 import { AdventureLogHandler } from "./AdventureLogHandler.js";
-import { getEvent } from "./data/eventData/eventDataManager.js";
 import { initTrap, isTrapDetected } from "./trapHandler.js";
 
 let spawnPosition;

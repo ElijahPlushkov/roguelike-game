@@ -72,7 +72,12 @@ export class Combat {
 
     finishCombat() {
         this.isCombatOn = false;
-        this.resolveCombat(this.enemy.difficulty, this.enemy.race);
+        if (this.enemyType === "npc") {
+            this.resolveCombat(this.enemy.difficulty, this.enemy.name);
+        } else {
+            this.resolveCombat(this.enemy.difficulty, this.enemy.race);
+        }
+
         endEvent(this.enemyId, true, eventDescription, eventOptions, eventWindow, "combat");
         markEventSeen(this.enemyId);
         this.clearCombatState();

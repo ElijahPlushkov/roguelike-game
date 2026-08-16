@@ -13,6 +13,17 @@ export const dialogueData = {
     "start": "greetings",
     "entryPoints": [
         {
+            "state": "colonySaved",
+            "stateConditions": {
+                "anyOf": [
+                    {
+                        "id": "ants-and-queens",
+                        "state": "aftermath-colony-saved"
+                    }
+                ]
+            }
+        },
+        {
             "state": "shamanAskedKill",
             "stateConditions": {
                 "anyOf": [
@@ -425,5 +436,9 @@ export const dialogueData = {
         "initCombat": {
             "id": "agra-warchief"
         }
+    },
+    "colonySaved": {
+        "description": "—Ha! Don't judge a bug by its color. It seems I was wrong 'bout the ladybug. Nice work, friend!",
+        "options": []
     }
 }

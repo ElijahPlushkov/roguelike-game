@@ -587,7 +587,7 @@ export const dialogueData = {
         "options": [
             {
                 "label": "I believe you.",
-                "key": "believeShaman"
+                "key": "offerHelp"
             },
             {
                 "label": "I don't believe you.",
@@ -596,15 +596,6 @@ export const dialogueData = {
             {
                 "label": "You sound like you haven't told the whole story.",
                 "key": "notWholeStory"
-            }
-        ]
-    },
-    "believeShaman": {
-        "description": "—Ancient spirits guide me. I am but an instrument in their hands. Their purpose is my purpose.",
-        "options": [
-            {
-                "label": "I'll come back later.",
-                "key": "comeLater"
             }
         ]
     },
@@ -746,10 +737,6 @@ export const dialogueData = {
     },
     "npcCombat": {
         "description": "—I will not turn myself in! *Ah'Ruhn prepares to fight.*",
-        "options": []
-    },
-    "comeLater": {
-        "description": "Ah'Ruhn doesn't say anything.",
         "options": []
     }
 }

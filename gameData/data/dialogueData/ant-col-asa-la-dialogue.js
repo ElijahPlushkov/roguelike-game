@@ -13,14 +13,23 @@ export const dialogueData = {
     "start": "greetings",
     "entryPoints": [
         {
-            "state": "antRejected",
+            "state": "colonySaved",
             "stateConditions": {
                 "anyOf": [
                     {
-                        "dialogueOutcome": "rejectAnt"
-                    },
+                        "id": "ants-and-queens",
+                        "state": "aftermath-colony-saved"
+                    }
+                ]
+            }
+        },
+        {
+            "state": "colonyInfected",
+            "stateConditions": {
+                "anyOf": [
                     {
-                        "dialogueOutcome": "antRejected"
+                        "id": "ants-and-queens",
+                        "state": "aftermath-colony-infected"
                     }
                 ]
             }
@@ -48,17 +57,30 @@ export const dialogueData = {
             }
         },
         {
+            "state": "antRejected",
+            "stateConditions": {
+                "anyOf": [
+                    {
+                        "dialogueOutcome": "rejectAnt"
+                    },
+                    {
+                        "dialogueOutcome": "antRejected"
+                    }
+                ]
+            }
+        },
+        {
             "state": "evidenceReceived",
             "stateConditions": {
                 "anyOf": [
                     {
-                        dialogueOutcome: "appreciateHelp"
+                        "dialogueOutcome": "appreciateHelp"
                     },
                     {
-                        dialogueOutcome: "notAppreciateHelp"
+                        "dialogueOutcome": "notAppreciateHelp"
                     },
                     {
-                        dialogueOutcome: "evidenceReceived"
+                        "dialogueOutcome": "evidenceReceived"
                     }
                 ]
             }
@@ -167,6 +189,14 @@ export const dialogueData = {
     },
     "shamanDead": {
         "description": "—He finally got what he truly deserved. It pains me that one of our kind is able to betray our Queen. But we owe you and the ladybug. Thank you, Sir Knight.",
+        "options": []
+    },
+    "colonySaved": {
+        "description": "—Many of my people distrusted the ladybug, but she proved to be an honorable lady. Sir Knight, you made the right choice.",
+        "options": []
+    },
+    "colonyInfected": {
+        "description": "—The voice of my Queen has changed.",
         "options": []
     }
 }
