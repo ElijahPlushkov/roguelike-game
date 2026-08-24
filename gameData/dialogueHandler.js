@@ -2,7 +2,7 @@ import { gameData, eventDescription, eventOptions, eventWindow } from "./data/ga
 import { endEvent, createContinueButton, hasSpecialRequirements } from "./helperFunctions.js";
 import { handleDeath } from "./deathHandler.js";
 import { QuestJournalUpdater } from "./QuestJournalUpdater.js";
-import { registerNpcDeath } from "./npcHandler.js";
+import { npcBox, npcDialogueWindowDescription, npcDialogueWindowOptions, registerNpcDeath } from "./npcHandler.js";
 import { ChangeStats } from "./ChangeStats.js";
 import { initCombat } from "./combatHandler.js";
 import { AdventureLogHandler } from "./AdventureLogHandler.js";
@@ -11,13 +11,27 @@ import { getDialogue } from "./data/dialogueData/dialogueDataManager.js";
 const adventureLogHandler = new AdventureLogHandler();
 const journalUpdater = new QuestJournalUpdater();
 
-export function initDialogue(dialogueId, stateKey) {
+export function initDialogue(dialogueId, stateKey, dialogueSource = null) {
     //find the dialogue
     const dialogue = getDialogue(dialogueId);
 
+    let dialogueWindow;
+    let dialogueDescription;
+    let dialogueOptions;
+
+    if (dialogueSource === "npc") {
+        dialogueWindow = npcBox;
+        dialogueDescription = npcDialogueWindowDescription;
+        dialogueOptions = npcDialogueWindowOptions;
+    } else {
+        dialogueWindow = eventWindow;
+        dialogueDescription = eventDescription;
+        dialogueOptions = eventOptions;
+    }
+
     if (dialogue.requirements) {
         if (!hasSpecialRequirements(dialogue)) {
-            eventDescription.textContent = dialogue.rejection;
+            dialogueDescription.textContent = dialogue.rejection;
             return;
         }
     }
@@ -32,11 +46,11 @@ export function initDialogue(dialogueId, stateKey) {
     }
 
     //add dialogue state's description to the event-box
-    eventDescription.textContent = currentState.description;
-    eventDescription.className = "dialogue-text-color";
+    dialogueDescription.textContent = currentState.description;
+    dialogueDescription.className = "dialogue-text-color";
 
     // clear dialogue options
-    eventOptions.innerHTML = '';
+    dialogueOptions.innerHTML = '';
 
     //check for options, if no options left, the dialogue will end
     if (currentState.options && currentState.options.length > 0) {
@@ -62,7 +76,7 @@ export function initDialogue(dialogueId, stateKey) {
                     for (const [charKey, requiredValue] of Object.entries(option.requirements)) {
                         if ((gameData.playerCharacteristics[charKey] || 0) < requiredValue) {
                             canProceed = false;
-                            eventDescription.textContent = option.rejection;
+                            dialogueDescription.textContent = option.rejection;
                             break;
                         }
                     }
@@ -96,11 +110,11 @@ export function initDialogue(dialogueId, stateKey) {
                 // initiate next dialogue stage
                 const nextStateKey = option.key;
                 if (nextStateKey) {
-                    eventOptions.innerHTML = '';
-                    initDialogue(dialogueId, nextStateKey);
+                    dialogueOptions.innerHTML = '';
+                    initDialogue(dialogueId, nextStateKey, dialogueSource);
                 }
             });
-            eventOptions.appendChild(button);
+            dialogueOptions.appendChild(button);
         });
         //if no options left, register the final outcome
     } else {
@@ -115,12 +129,12 @@ export function initDialogue(dialogueId, stateKey) {
             return;
         }
 
-        eventOptions.innerHTML = "";
+        dialogueOptions.innerHTML = "";
         let continueButton = createContinueButton();
-        eventOptions.prepend(continueButton);
+        dialogueOptions.prepend(continueButton);
 
         continueButton.addEventListener("click", function () {
-            endEvent(dialogueId, finalStateKey, eventDescription, eventOptions, eventWindow, "dialogue");
+            endEvent(dialogueId, finalStateKey, dialogueDescription, dialogueOptions, dialogueWindow, "dialogue");
             console.log(gameData.dialogueOutcomes);
             if (dialogue.quest) {
                 journalUpdater.journalUpdater(dialogue.quest);

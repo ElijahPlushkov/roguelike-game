@@ -1,6 +1,5 @@
 import { gameData } from "./data/gameData.js";
-import { antColonyAreInfectedAntsDefeated, isAntColonyInfected } from "./questScript.js";
-import { QuestJournalUpdater } from "./QuestJournalUpdater.js";
+import { antColonyAreInfectedAntsDefeated, isAntColonyInfected } from "./specialEventsHandler.js";
 
 export function hasSpecialRequirements(event) {
     let isConditionMet = event.requirements.anyOf.some(condition => {
@@ -35,8 +34,6 @@ export function createContinueButton() {
     return continueButton;
 }
 
-let isConsequenceTriggered = false;
-
 export function endEvent(id, status, description, options, activeWindow, eventType) {
     gameData.isEventActive = false;
     updateGameProgress(id, status, eventType);
@@ -45,15 +42,9 @@ export function endEvent(id, status, description, options, activeWindow, eventTy
     activeWindow.classList.add("hidden");
 
     // TODO this is a temporary solution
-    const questActive = antColonyAreInfectedAntsDefeated();
-
-    if (questActive && !isConsequenceTriggered) {
-        let journalUpdater = new QuestJournalUpdater();
-        journalUpdater.journalUpdater({id: "strike-back", state: "diseased-ants-killed"});
-        isConsequenceTriggered = true;
-    } else if (questActive && isConsequenceTriggered) {
-        return;
-    }
+   if (!hasSeenEvent("antColonyAreInfectedAntsDefeatedEvent")) {
+       antColonyAreInfectedAntsDefeated();
+   }
 
     if (!hasSeenEvent("antColonyOutcome")) {
         isAntColonyInfected();
@@ -135,6 +126,7 @@ export function hasSeenEvent(id) {
 
 export function markEventSeen(id) {
     gameData.seenEvents.push(id);
+    console.log(gameData.seenEvents);
 }
 
 export function markLocationSeen(info) {

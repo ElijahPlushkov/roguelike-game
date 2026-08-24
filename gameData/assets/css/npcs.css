@@ -1,0 +1,61 @@
+.npc-box {
+    position: fixed;
+    top: 70px;
+    right: 500px;
+    width: 680px;
+    height: 420px;
+    background: var(--event-box-background-color);
+    border-radius: 5px;
+    padding: 5px;
+    font-size: 14px;
+}
+
+.npc-content {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    height: 100%;
+}
+
+.npc-personal-info {
+    min-width: 200px;
+    font-size: 14px;
+}
+
+.npc-personal-info-image {
+    width: 200px;
+    height: 200px;
+    border: 1px solid var(--main-text-color);
+}
+
+.npc-dialogue-window {
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    height: 100%;
+    gap: 10px;
+}
+
+.npc-dialogue-window-description {
+    font-size: 14px;
+    overflow-y: auto;
+    min-height: 0;
+}
+
+.npc-dialogue-window-options {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    border-top: 1px solid var(--main-text-color);
+}
+
+.option-button {
+    font-size: 14px;
+    color: var(--main-text-color);
+    background: var(--option-button-background);
+    border: 1px solid black;
+    border-radius: 3px;
+    margin: 5px;
+    padding: 3px;
+    width: 300px;
+    text-align: left;
+}

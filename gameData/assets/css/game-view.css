@@ -75,8 +75,7 @@
     overflow-y: auto;
 }
 
-.event-box,
-.special-message-box {
+.event-box {
     position: fixed;
     top: 70px;
     right: 500px;
@@ -87,24 +86,20 @@
     padding: 5px;
 }
 
-.event-content,
-.special-message-content {
+.event-content {
     display: grid;
     grid-template-rows: 1fr 1fr;
     height: 95%;
     gap: 10px;
 }
 
-.event-description,
-.special-message-description {
-    font-size: 14px;
+.event-description {
+    font-size: 16px;
     overflow-y: auto;
     min-height: 0;
-
 }
 
-.event-options,
-.special-message-options {
+.event-options {
     display: flex;
     flex-direction: column;
     gap: 8px;
@@ -112,7 +107,7 @@
 }
 
 .option-button {
-    font-size: 14px;
+    font-size: 16px;
     color: var(--main-text-color);
     background: var(--option-button-background);
     border: 1px solid black;

@@ -1,0 +1,25 @@
+.special-message-box {
+    position: fixed;
+    top: 140px;
+    right: 500px;
+    width: 340px;
+    height: 210px;
+    background: var(--event-box-background-color);
+    border-radius: 5px;
+    padding: 5px;
+}
+
+/*.special-message-content {*/
+/*    display: grid;*/
+/*    grid-template-rows: 1fr 1fr;*/
+/*    height: 95%;*/
+/*    gap: 10px;*/
+/*}*/
+
+.special-message-description {
+    font-size: 14px;
+    overflow-y: auto;
+    min-height: 0;
+    color: var(--log-entry-text-color);
+    text-align: center;
+}

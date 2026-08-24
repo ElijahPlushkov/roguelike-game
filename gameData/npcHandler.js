@@ -1,8 +1,18 @@
-import { eventDescription, eventOptions, eventWindow, gameData } from "./data/gameData.js";
+import { gameData } from "./data/gameData.js";
 import { initDialogue } from "./dialogueHandler.js";
 import { initCombat } from "./combatHandler.js";
 import { getNpc } from "./data/npcData/npcDataManager.js";
-import {changeTileType} from "./mapHandler.js";
+import { changeTileType } from "./mapHandler.js";
+
+export const npcBox = document.querySelector(".npc-box");
+
+let npcPersonalInfoName = document.querySelector(".npc-personal-info-name");
+let npcPersonalInfoRace = document.querySelector(".npc-personal-info-race");
+let npcPersonalInfoDisposition = document.querySelector(".npc-personal-info-disposition");
+let npcPersonalInfoFaction = document.querySelector(".npc-personal-info-faction");
+
+export const npcDialogueWindowDescription = document.querySelector(".npc-dialogue-window-description");
+export const npcDialogueWindowOptions = document.querySelector(".npc-dialogue-window-options");
 
 export function initNpc(id, coordinates) {
 
@@ -19,23 +29,28 @@ export function initNpc(id, coordinates) {
 
     console.log(gameData.npcs);
 
-    eventWindow.classList.toggle("hidden");
+    npcBox.classList.toggle("hidden");
 
-    eventDescription.textContent = npc.characterDescription;
-    eventDescription.className = "event-text-color";
+    npcDialogueWindowDescription.textContent = npc.characterDescription;
+    npcDialogueWindowDescription.className = "event-text-color";
 
-    eventOptions.innerHTML = "";
+    npcDialogueWindowOptions.innerHTML = "";
+
+    npcPersonalInfoName.textContent = "NAME: " + npc.name;
+    npcPersonalInfoRace.textContent = "RACE: " + npc.race;
+    npcPersonalInfoDisposition.textContent = "DISPOSITION: " + npc.disposition + "/100";
+    npcPersonalInfoFaction.textContent = "FACTION: " + npc.faction;
 
     npc.interactionOptions.forEach(option => {
         const button = document.createElement("button");
         button.textContent = option.label;
         button.className = "option-button";
-        eventOptions.appendChild(button);
+        npcDialogueWindowOptions.appendChild(button);
 
         button.addEventListener("click", () => {
             if (button.textContent === "Talk.") {
                 let npcDialogue = npc.dialogue;
-                initDialogue(npcDialogue);
+                initDialogue(npcDialogue, null, "npc");
             }
             if (button.textContent === "Fight.") {
                 initCombat(npc.id, "npc", coordinates);
@@ -43,7 +58,7 @@ export function initNpc(id, coordinates) {
         })
     });
 
-    eventOptions.appendChild(createFarewellButton());
+    npcDialogueWindowOptions.appendChild(createFarewellButton());
 }
 
 function createFarewellButton() {
@@ -52,8 +67,8 @@ function createFarewellButton() {
     button.className = "option-button";
     button.addEventListener("click", () => {
         gameData.isEventActive = false;
-        eventWindow.classList.toggle("hidden");
-        eventOptions.innerHTML = "";
+        npcBox.classList.toggle("hidden");
+        npcDialogueWindowOptions.innerHTML = "";
     });
 
     return button;
