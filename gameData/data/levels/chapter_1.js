@@ -87,9 +87,21 @@ export const levelData = {
     "player": {
         "type": "player",
         "x": 0,
-        "y": 1
+        "y": 0
     },
     "tileData": {
+        "npcs": [],
+        "dialogues": [
+            {
+                "type": "dialogue",
+                "id": "butterfly-encounter-1",
+                "x": 4,
+                "y": 2
+            }
+        ],
+        "events": [],
+        "enemies": [],
+        "doors": [],
         "locations": [
             {
                 "type": "location",
@@ -102,189 +114,6 @@ export const levelData = {
                 "id": "ant-colony",
                 "x": 6,
                 "y": 9
-            }
-        ],
-        "npcs": [
-            {
-                "x": 27,
-                "y": 5,
-                "type": "npc",
-                "id": "ladybug"
-            },
-            {
-                "x": 27,
-                "y": 6,
-                "type": "npc",
-                "id": "ant_warchief"
-            },
-            {
-                "x": 27,
-                "y": 7,
-                "type": "npc",
-                "id": "ant_shaman"
-            },
-            {
-                "x": 26,
-                "y": 8,
-                "type": "npc",
-                "id": "ant_queen"
-            }
-        ],
-        "enemies": [
-            {
-                "type": "enemy",
-                "id": "mosquito_guard_1",
-                "enemyType": "unique",
-                "x": 100,
-                "y": 100
-            },
-            {
-                "type": "enemy",
-                "id": "mosquito_guard_1",
-                "enemyType": "unique",
-                "x": 20,
-                "y": 6
-            },
-            {
-                "type": "enemy",
-                "id": "diseased_ant_1",
-                "enemyType": "random-flimsy",
-                "x": 14,
-                "y": 11
-            },
-            {
-                "type": "enemy",
-                "id": "diseased_ant_2",
-                "enemyType": "random-weak",
-                "x": 15,
-                "y": 16
-            },
-            {
-                "type": "enemy",
-                "id": "diseased_ant_3",
-                "enemyType": "random-average",
-                "x": 16,
-                "y": 18
-            }
-        ],
-        "dialogues": [
-            {
-                "x": 6,
-                "y": 4,
-                "type": "dialogue",
-                "id": "ant_nomad"
-            },
-            {
-                "x": 12,
-                "y": 4,
-                "type": "dialogue",
-                "id": "butterfly_encounter_1"
-            },
-            {
-                "x": 25,
-                "y": 6,
-                "type": "dialogue",
-                "id": "spider_encounter_1"
-            },
-            {
-                "x": 23,
-                "y": 8,
-                "type": "dialogue",
-                "id": "spider_lair_dying_ant"
-            },
-            {
-                "x": 15,
-                "y": 11,
-                "type": "dialogue",
-                "id": "flies_camp"
-            },
-            {
-                "x": 26,
-                "y": 4,
-                "type": "dialogue",
-                "id": "ant_witness"
-            }
-        ],
-        "events": [
-            {
-                "x": 100,
-                "y": 100,
-                "type": "event",
-                "id": "early_awakening"
-            },
-            {
-                "x": 300,
-                "y": 100,
-                "type": "event",
-                "id": "pinecone"
-            },
-            {
-                "x": 14,
-                "y": 6,
-                "type": "dialogue",
-                "id": "dead_steed"
-            },
-            {
-                "x": 18,
-                "y": 6,
-                "type": "event",
-                "id": "spider_tunnel"
-            },
-            {
-                "x": 22,
-                "y": 6,
-                "type": "event",
-                "id": "spider_lair_desc"
-            },
-            {
-                "x": 23,
-                "y": 4,
-                "type": "event",
-                "id": "spider_lair_prey_ant"
-            },
-            {
-                "x": 27,
-                "y": 4,
-                "type": "event",
-                "id": "spider_lair_prey_fly"
-            },
-            {
-                "x": 27,
-                "y": 8,
-                "type": "event",
-                "id": "test_note"
-            },
-            {
-                "x": 14,
-                "y": 9,
-                "type": "event",
-                "id": "barrenlands_desc"
-            },
-            {
-                "x": 15,
-                "y": 14,
-                "type": "event",
-                "id": "wasp_encounter_1"
-            }
-        ],
-        "doors": [
-            {
-                "x": 16,
-                "y": 6,
-                "type": "door",
-                "id": "spider_door_1"
-            },
-            {
-                "x": 21,
-                "y": 6,
-                "type": "door",
-                "id": "spider_door_2"
-            },
-            {
-                "x": 12,
-                "y": 10,
-                "type": "door",
-                "id": "wasp_lair_gates"
             }
         ]
     }

@@ -22,11 +22,6 @@
     gap: 5px;
 }
 
-.combat-player-window {
-    width: 190px;
-    background: rgba(156, 156, 156, 0.3);
-}
-
 .combat-player-info {
     display: flex;
     flex-direction: column;
@@ -38,6 +33,9 @@
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    border-top: 1px solid var(--main-text-color);
+    margin-top: 10px;
+    width: auto;
 }
 
 .combat-weapon {

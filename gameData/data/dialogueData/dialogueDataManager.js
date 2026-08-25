@@ -6,9 +6,13 @@ import { dialogueData as ahRuhnAntShamanDialogue } from "./ah-ruhn-ant-shaman-di
 import { dialogueData as antColAncientMoss } from "./ant-col-ancient-moss.js";
 import { dialogueData as antColAsaLaDialogue } from "./ant-col-asa-la-dialogue.js";
 import { dialogueData as agraWarchiefDialogue } from "./agra-warchief-dialogue.js";
-import { dialogueData as muaRanuAntQueenDialogue} from "./mua-ranu-ant-queen-dialogue.js";
+import { dialogueData as muaRanuAntQueenDialogue } from "./mua-ranu-ant-queen-dialogue.js";
+import { dialogueData as butterflyEncounter1 } from "./butterfly-encounter-1.js";
 
 const dialogueRegistry = {
+    //chapter-1
+    "butterfly-encounter-1": butterflyEncounter1,
+    //spider lair
     "heildin-wise-encounter-1": heildinWiseEncounter1,
     "spider-lair-dying-ant": dyingAnt,
     //ant-colony

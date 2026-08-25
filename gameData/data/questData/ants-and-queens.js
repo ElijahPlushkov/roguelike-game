@@ -6,7 +6,7 @@ export const questData = {
     },
     "states": [
         {
-            "id": "start",
+            "id": "spider-request",
             "description": "Heildin the Wise is anxious about a certain shapeshifter from his winter dreams. He asks you to investigate the strange behavior of the ants from the nearby colony."
         },
         {

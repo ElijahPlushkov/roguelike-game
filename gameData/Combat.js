@@ -13,7 +13,7 @@ import { previousCoordinates } from "./mainHandler.js";
 import { mapRender } from "./mapRender.js";
 import { AdventureLogHandler } from "./AdventureLogHandler.js";
 import { changeTileType } from "./mapHandler.js";
-import { registerNpcDeath } from "./npcHandler.js";
+import { npcDialogueWindowDescription, npcDialogueWindowOptions, npcBox, registerNpcDeath } from "./npcHandler.js";
 
 export class Combat {
 
@@ -54,6 +54,7 @@ export class Combat {
             let fightButton = this.createActionButtons("fight-btn", "Fight.", "fight");
             let negotiateButton = this.createActionButtons("negotiate-btn", "Negotiate.", "negotiate");
             this.actionTypes.append(fightButton, negotiateButton);
+            // this.toggleCombatButtons();
         } else {
             let fightButton = this.createActionButtons("fight-btn", "Fight.", "fight");
             let negotiateButton = this.createActionButtons("negotiate-btn", "Negotiate.", "negotiate");
@@ -74,18 +75,16 @@ export class Combat {
         this.isCombatOn = false;
         if (this.enemyType === "npc") {
             this.resolveCombat(this.enemy.difficulty, this.enemy.name);
+            endEvent(this.enemyId, true, npcDialogueWindowDescription, npcDialogueWindowOptions, npcBox, "combat");
+            registerNpcDeath(this.enemyId);
         } else {
             this.resolveCombat(this.enemy.difficulty, this.enemy.race);
+            endEvent(this.enemyId, true, eventDescription, eventOptions, eventWindow, "combat");
         }
 
-        endEvent(this.enemyId, true, eventDescription, eventOptions, eventWindow, "combat");
         markEventSeen(this.enemyId);
         this.clearCombatState();
         changeTileType(this.enemyCoordinates.x, this.enemyCoordinates.y, ".");
-
-        if (this.enemyType === "npc") {
-            registerNpcDeath(this.enemyId);
-        }
 
         document.dispatchEvent(
             new CustomEvent("combatEnded")

@@ -47,7 +47,7 @@ export function isAntColonyInfected() {
         if (antsAndQueens.states.includes("aftermath-colony-infected")) {
             gameData.isEventActive = true;
             specialMessageWindow.classList.remove("hidden");
-            specialMessageDescription.textContent = "Your actions led the colony to its demise. The queen's mind does not belong to her anymore, she is but a vessel for countless larvae who wil be carrying the demonic disease since the very moment they are conceived. They will grow into an army of infectious warrior unified under the banner of a mysterious King.";
+            specialMessageDescription.textContent = "Your actions led the colony to its demise. The queen's mind does not belong to her anymore; she is but a vessel for countless larvae who will be carrying the demonic disease from the very moment they are conceived. They will grow into an army of infectious warriors, unified under the banner of a mysterious King";
 
             let continueButton = createContinueButton();
             specialMessageOptions.prepend(continueButton);
@@ -69,7 +69,7 @@ export function isAntColonyInfected() {
             && gameData.npcs.find(npc => npc.id === "agra-warchief").isAlive === false) {
             gameData.isEventActive = true;
             specialMessageWindow.classList.remove("hidden");
-            specialMessageDescription.textContent = "Although the mighty warchief has been slain, the colony now has a chance to survive. The infected attack was not the last one, but the local ants have learnt how to fight the demonic disease. And the queens mind, not entirely at ease, will work toward creating ants immune to the demonic illness.";
+            specialMessageDescription.textContent = "Although the mighty warchief has been slain, the colony now has a chance to survive. The infected attack was not the last one, but the local ants have learned how to fight the demonic disease. And the queen's mind, not entirely at ease, will work toward creating ants immune to the demonic illness.";
 
             let continueButton = createContinueButton();
             specialMessageOptions.prepend(continueButton);
@@ -83,7 +83,7 @@ export function isAntColonyInfected() {
             && gameData.npcs.find(npc => npc.id === "agra-warchief").isAlive) {
             gameData.isEventActive = true;
             specialMessageWindow.classList.remove("hidden");
-            specialMessageDescription.textContent = "Thanks to your timely interference, the colony has repelled an unexpected attack, and the ant behind it has turned into dust. The local ants are now fully prepared for more attacks, feeling secured under the banners of the mighty Agra. And the queens mind, although not entirely at ease, will work toward creating ants immune to the demonic illness.";
+            specialMessageDescription.textContent = "Thanks to your timely interference, the colony has repelled an unexpected attack, and the ant behind it has turned into dust. The local ants are now fully prepared for more attacks, feeling secure under the banners of the mighty Agra. And the queen's mind, although not entirely at ease, will work toward creating ants immune to the demonic illness.";
 
             let continueButton = createContinueButton();
             specialMessageOptions.prepend(continueButton);

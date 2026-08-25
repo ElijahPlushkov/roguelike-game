@@ -202,8 +202,8 @@ export const dialogueData =   {
                 "label": "Indeed it sounds unusual. I need to investigate this.",
                 "key": "investigate",
                 "quest": {
-                    "id": "ants_and_queens",
-                    "state": "start"
+                    "id": "ants-and-queens",
+                    "state": "spider-request"
                 }
             },
             {
@@ -323,16 +323,10 @@ export const dialogueData =   {
     },
     "appreciate": {
         "description": "Heildin nods back.",
-        "options": [],
-        "characteristics": {}
+        "options": []
     },
     "leave": {
         "description": "You leave.",
-        "options": [],
-        "characteristics": {}
-    },
-    "finalOutcome": {
-        "description": "",
-        "characteristics": {}
+        "options": []
     }
 }

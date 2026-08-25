@@ -153,7 +153,7 @@ export const dialogueData = {
                 "optionConditions": {
                     "quest": {
                         "id": "ants-and-queens",
-                        "state": "start"
+                        "state": "deal-with-warchief"
                     }
                 }
             },
