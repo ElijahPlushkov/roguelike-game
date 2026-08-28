@@ -1,6 +1,6 @@
 import { mapRender } from "../mapRender.js";
 import { Player } from "../Player.js";
-import { getLevel } from './levels/levelsData.js';
+import { getLocation } from './levels/locationsData.js';
 
 export const gameData = {
     playerCoordinates: {x: 0, y: 1},
@@ -138,7 +138,7 @@ let tileSet = {};
 
 export function parseLevelData(id, spawnPosition) {
 
-    let level = getLevel(id);
+    let level = getLocation(id);
 
     levelData = level;
     chapterName = level.name;

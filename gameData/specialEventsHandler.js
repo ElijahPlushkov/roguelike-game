@@ -5,7 +5,7 @@ import {
 } from "./data/gameData.js";
 import { createContinueButton, markEventSeen } from "./helperFunctions.js";
 import { mapRender } from "./mapRender.js";
-import { levelData } from "./data/levels/ant-colony.js";
+import { locationData } from "./data/levels/ant-colony.js";
 import { changeTileType } from "./mapHandler.js";
 import { QuestJournalUpdater } from "./QuestJournalUpdater.js";
 
@@ -57,7 +57,7 @@ export function isAntColonyInfected() {
                 gameData.playerCoordinates.y = 2;
                 playerCoordinates.x = 11;
                 playerCoordinates.y = 2;
-                levelData.tileData.enemies.push({ "type": "enemy", "id": "ant-col-diseased-ant-9", "enemyType": "random-weak", "race": "ant", "x": 11, "y": 3 });
+                locationData.tileData.enemies.push({ "type": "enemy", "id": "ant-col-diseased-ant-9", "enemyType": "random-weak", "race": "ant", "x": 11, "y": 3 });
                 changeTileType(11, 3, "e");
                 mapRender();
                 specialMessageWindow.classList.add("hidden");

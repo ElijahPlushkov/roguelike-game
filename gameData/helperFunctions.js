@@ -137,3 +137,7 @@ export function markLocationSeen(info) {
         console.log(gameData.locations);
     }
 }
+
+export function hasDiscoveredLocation(locationId) {
+    return gameData.locations.find(location => location.id === locationId);
+}

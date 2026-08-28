@@ -1,8 +1,10 @@
 import { gameData, parseLevelData, dungeonWindow } from "./data/gameData.js";
-import { getLevel } from "./data/levels/levelsData.js";
-import { markLocationSeen } from "./helperFunctions.js";
+import { getLocation } from "./data/levels/locationsData.js";
+import { hasDiscoveredLocation, markLocationSeen } from "./helperFunctions.js";
 import { initCombat } from "./combatHandler.js";
 import { AdventureLogHandler } from "./AdventureLogHandler.js";
+
+let locationName = document.querySelector(".location-name");
 
 let adventureLogHandler = new AdventureLogHandler();
 
@@ -17,14 +19,23 @@ let bashBtn = dungeonWindow.querySelector(".bash-button");
 export function handleDungeonAccess(id, locationCoordinates) {
     gameData.isEventActive = true;
     dungeonWindow.classList.remove("hidden");
-    let level = getLevel(id);
-    markLocationSeen({id: level.id, name: level.name, type: level.type, locationCoordinates: locationCoordinates});
-    adventureLogHandler.appendLocationDiscoveryMessage(level.name);
+    let location = getLocation(id);
+
+    let hasDiscovered = hasDiscoveredLocation(location.id);
+
+    if (!hasDiscovered) {
+        adventureLogHandler.appendLocationDiscoveryMessage(location.name);
+    } else {
+        adventureLogHandler.appendLocationVisitingMessage(location.name);
+    }
+
+    markLocationSeen({id: location.id, name: location.name, type: location.type, locationCoordinates: locationCoordinates});
 
     yesBtn.onclick = () => {
         gameData.isEventActive = false;
         dungeonWindow.classList.add("hidden");
         loadDungeon(id);
+        locationName.textContent = location.name;
     };
 
     noBtn.onclick = () => {
@@ -32,16 +43,20 @@ export function handleDungeonAccess(id, locationCoordinates) {
         dungeonWindow.classList.add("hidden");
     };
 
-    let isGuardianDefeated = gameData.eventOutcomes.find(e => e.event === level.isGuarded.id);
+    let isGuardianDefeated = gameData.eventOutcomes.find(e => e.event === location.isGuarded.id);
 
-    if (level.isGuarded && !isGuardianDefeated && level.isLocked) {
-        handleGuardian(isGuardianDefeated, level);
-    } else if (level.isGuarded && !isGuardianDefeated) {
-        handleGuardian(isGuardianDefeated, level);
-    } else if (level.isLocked) {
-        handleLock(level);
+    if (location.isGuarded && !isGuardianDefeated && location.isLocked) {
+        handleGuardian(isGuardianDefeated, location);
+    } else if (location.isGuarded && !isGuardianDefeated) {
+        handleGuardian(isGuardianDefeated, location);
+    } else if (location.isLocked) {
+        handleLock(location);
     } else {
-        dungeonDescription.textContent = "You found a " + level.type + " called " + level.name + ". Do you wish to enter?";
+        if (hasDiscovered) {
+            dungeonDescription.textContent = "Do you wish to enter " + location.name + "?";
+        } else {
+            dungeonDescription.textContent = "You found a " + location.type + " called " + location.name + ". Do you wish to enter?";
+        }
     }
 }
 
@@ -50,6 +65,7 @@ export function loadDungeon(id) {
 }
 
 export function exitDungeon(id, spawnPosition) {
+    locationName.textContent = "Chyceen Borderlands";
     parseLevelData(id, spawnPosition);
 }
 
@@ -61,24 +77,24 @@ export function canBashDoor(might, lock) {
     return (might + Math.floor(Math.random() * might)) > lock;
 }
 
-function handleGuardian(isGuardianDefeated, level) {
-    dungeonDescription.textContent = "You found a " + level.type + " called " + level.name + ". It has a guardian." +
+function handleGuardian(isGuardianDefeated, location) {
+    dungeonDescription.textContent = "You found a " + location.type + " called " + location.name + ". It has a guardian." +
         " Do you wish to fight them?";
     fightGuardianBtn.classList.remove("hidden");
     yesBtn.classList.add("hidden");
 
     fightGuardianBtn.onclick = () => {
-        initCombat(level.isGuarded.id, level.isGuarded.enemyType);
+        initCombat(location.isGuarded.id, location.isGuarded.enemyType);
     };
 
     document.addEventListener("combatEnded", () => {
-        isGuardianDefeated = gameData.eventOutcomes.find(e => e.event === level.isGuarded.id);
+        isGuardianDefeated = gameData.eventOutcomes.find(e => e.event === location.isGuarded.id);
         if (isGuardianDefeated) {
             fightGuardianBtn.classList.add("hidden");
-            if (level.isLocked) {
-                dungeonDescription.textContent = "You found a " + level.type + " called " + level.name + ". You have defeated its guardian." +
-                    " The door is locked." + " The lock level is " + level.isLocked;
-                handleLock(level);
+            if (location.isLocked) {
+                dungeonDescription.textContent = "You found a " + location.type + " called " + location.name + ". You have defeated its guardian." +
+                    " The door is locked." + " The lock level is " + location.isLocked;
+                handleLock(location);
             } else {
                 yesBtn.classList.remove("hidden");
             }
@@ -86,36 +102,36 @@ function handleGuardian(isGuardianDefeated, level) {
     });
 }
 
-function handleLock(level) {
+function handleLock(location) {
     unlockBtn.classList.remove("hidden");
     bashBtn.classList.remove("hidden");
     yesBtn.classList.add("hidden");
 
     unlockBtn.onclick = () => {
-        let isUnlocked = canPickLock(gameData.playerCharacteristics.agility, level.isLocked);
+        let isUnlocked = canPickLock(gameData.playerCharacteristics.agility, location.isLocked);
         if (isUnlocked) {
-            level.isLocked = "";
+            location.isLocked = "";
             yesBtn.classList.remove("hidden");
 
             unlockBtn.classList.add("hidden");
             bashBtn.classList.add("hidden");
             adventureLogHandler.appendSuccessfulMessage("You successfully unlocked the door.");
-            dungeonDescription.textContent = "You found a " + level.type + " called " + level.name + ". It's unlocked. Do you wish to enter?";
+            dungeonDescription.textContent = "You found a " + location.type + " called " + location.name + ". It's unlocked. Do you wish to enter?";
         } else {
             adventureLogHandler.appendFailMessage("You failed to unlock the door.");
         }
     }
 
     bashBtn.onclick = () => {
-        let isBashed = canBashDoor(gameData.playerCharacteristics.might, level.isLocked);
+        let isBashed = canBashDoor(gameData.playerCharacteristics.might, location.isLocked);
         if (isBashed) {
-            level.isLocked = "";
+            location.isLocked = "";
             yesBtn.classList.remove("hidden");
 
             unlockBtn.classList.add("hidden");
             bashBtn.classList.add("hidden");
             adventureLogHandler.appendSuccessfulMessage("You bashed the door with all your might.");
-            dungeonDescription.textContent = "You found a " + level.type + " called " + level.name + ". The door is destroyed. Do you wish to enter?";
+            dungeonDescription.textContent = "You found a " + location.type + " called " + location.name + ". The door is destroyed. Do you wish to enter?";
         } else {
             adventureLogHandler.appendFailMessage("You are too weak to bash this door.");
         }

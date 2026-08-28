@@ -122,6 +122,10 @@ export function mapRender() {
                         tile.textContent = "⁜";
                         tile.dataset.type = "trap";
                         break;
+                    case "⇄":
+                        tile.classList.add("dirt");
+                        tile.textContent = "⇄";
+                        tile.dataset.type = "signpost"
                     default:
                         tile.classList.add("unknown");
                         break;

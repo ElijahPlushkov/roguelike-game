@@ -111,6 +111,13 @@ export class AdventureLogHandler {
         this.adventureLog.prepend(locationMessage);
     }
 
+    appendLocationVisitingMessage(locationName) {
+        const locationMessage = this.createDomElementMessage();
+        locationMessage.className = "dialogue-text-color";
+        locationMessage.textContent = "You enter: " + locationName;
+        this.adventureLog.prepend(locationMessage);
+    }
+
     clearAdventureLog() {
         this.adventureLog.innerHTML = "";
     }
