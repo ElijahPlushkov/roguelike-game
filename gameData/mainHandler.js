@@ -17,6 +17,7 @@ import { handleDungeonAccess, exitDungeon } from "./locationHandler.js";
 import { AdventureLogHandler } from "./AdventureLogHandler.js";
 import { initTrap, isTrapDetected } from "./trapHandler.js";
 import { displayStaticEvent, removeStaticEvent } from "./staticEventsHandler.js";
+import { initActivator } from "./activatorHandler.js";
 
 let spawnPosition;
 let spawnChapter;
@@ -107,7 +108,8 @@ function  findAllEvents() {
         ...(levelData.tileData.locations || []),
         ...(levelData.tileData.locationExit || []),
         ...(levelData.tileData.traps || []),
-        ...(levelData.tileData.staticEvents || [])
+        ...(levelData.tileData.staticEvents || []),
+        ...(levelData.tileData.activators || [])
     ]
 }
 
@@ -189,6 +191,11 @@ function checkForAnyEvent(x, y) {
         if (newEvent.type === "staticEvent") {
             const staticEventId = newEvent.id;
             displayStaticEvent(staticEventId);
+        }
+
+        if (newEvent.type === "activator") {
+            const activatorId = newEvent.id;
+            initActivator(activatorId);
         }
     }
 }

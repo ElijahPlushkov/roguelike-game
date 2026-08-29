@@ -84,7 +84,10 @@ export class Combat {
 
         markEventSeen(this.enemyId);
         this.clearCombatState();
-        changeTileType(this.enemyCoordinates.x, this.enemyCoordinates.y, ".");
+
+        if (this.enemyCoordinates) {
+            changeTileType(this.enemyCoordinates.x, this.enemyCoordinates.y, ".");
+        }
 
         document.dispatchEvent(
             new CustomEvent("combatEnded")

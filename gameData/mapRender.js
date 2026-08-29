@@ -125,7 +125,11 @@ export function mapRender() {
                     case "⇄":
                         tile.classList.add("dirt");
                         tile.textContent = "⇄";
-                        tile.dataset.type = "signpost"
+                        tile.dataset.type = "signpost";
+                    case "⊡":
+                        tile.classList.add("cobble");
+                        tile.textContent = "⊡";
+                        tile.dataset.type = "button";
                     default:
                         tile.classList.add("unknown");
                         break;

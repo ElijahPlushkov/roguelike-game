@@ -78,6 +78,7 @@ function updateGameProgress(id, finalState, eventType) {
                 outcome: finalState
             })
         }
+        console.log(gameData.combatOutcomes);
     }
     if (eventType === "event") {
         let event = gameData.eventOutcomes.find(event => event.id === id);
@@ -118,6 +119,20 @@ function updateGameProgress(id, finalState, eventType) {
             })
         }
     }
+    if (eventType === "activator") {
+        let activator = gameData.activatorStatuses.find(activator => activator.id === id);
+        if (activator) {
+            if (activator.status !== finalState) {
+                activator.status = finalState
+            }
+        } else {
+            gameData.activatorStatuses.push({
+                id: id,
+                status: finalState
+            })
+        }
+    }
+    console.log(gameData.activatorStatuses);
 }
 
 export function hasSeenEvent(id) {

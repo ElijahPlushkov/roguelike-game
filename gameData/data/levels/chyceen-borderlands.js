@@ -86,12 +86,16 @@ export const locationData = {
         "⇄": {
             "type": "signpost",
             "walkable": true
+        },
+        "⊡": {
+            "type": "button",
+            "walkable": true
         }
     },
     "player": {
         "type": "player",
         "x": 0,
-        "y": 0
+        "y": 12
     },
     "tileData": {
         "npcs": [],
@@ -118,8 +122,15 @@ export const locationData = {
                 "id": "ant-colony",
                 "x": 6,
                 "y": 9
+            },
+            {
+                "type": "location",
+                "id": "first-kingdom-site",
+                "x": 0,
+                "y": 14
             }
         ],
+        "activators": [],
         "staticEvents": [
             {
                 "type": "staticEvent",

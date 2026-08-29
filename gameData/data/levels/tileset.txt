@@ -78,5 +78,13 @@
     "⁜": {
         "type": "trap",
         "walkable": true
-    }
+    },
+     "⇄": {
+         "type": "signpost",
+         "walkable": true
+     },
+     "⊡": {
+         "type": "button",
+         "walkable": true
+     }
 },

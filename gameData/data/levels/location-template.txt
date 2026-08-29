@@ -1,0 +1,110 @@
+{
+    "id": "",
+    "name": "",
+    "isLocked": "",
+    "isGuarded": "",
+    "type": "dungeon",
+    "tilemap": [[]],
+    "tileset": {
+        "#": {
+            "type": "stonewall",
+            "walkable": false
+        },
+        "=": {
+            "type": "woodenwall",
+            "walkable": false
+        },
+        ".": {
+            "type": "floor",
+            "walkable": true
+        },
+        "α": {
+            "type": "boulder",
+            "walkable": true
+        },
+        "□": {
+            "type": "cobble",
+            "walkable": true
+        },
+        "П": {
+            "type": "door",
+            "walkable": true
+        },
+        "Ω": {
+            "type": "altar",
+            "walkable": true
+        },
+        "T": {
+            "type": "tree",
+            "walkable": false
+        },
+        "t": {
+            "type": "shorttree",
+            "walkable": false
+        },
+        "*": {
+            "type": "pinetree",
+            "walkable": false
+        },
+        "▲": {
+            "type": "mountain",
+            "walkable": false
+        },
+        "≈": {
+            "type": "water",
+            "walkable": false
+        },
+        "e": {
+            "type": "enemy",
+            "walkable": true
+        },
+        "c": {
+            "type": "npc",
+            "walkable": true
+        },
+        "Δ": {
+            "type": "camp",
+            "walkable": true
+        },
+        "⌂": {
+            "type": "dungeon",
+            "walkable": true
+        },
+        "F": {
+            "type": "building",
+            "walkable": true
+        },
+        "▣": {
+            "type": "chest",
+            "walkable": true
+        },
+        "<": {
+            "type": "locationExit",
+            "walkable": true
+        },
+        "⁜": {
+            "type": "trap",
+            "walkable": true
+        },
+        "⇄": {
+            "type": "signpost",
+            "walkable": true
+        },
+        "⊡": {
+            "type": "button",
+            "walkable": true
+        }
+    },
+    "player": {},
+    "tileData": {
+        "locationExit": [],
+        "npcs": [],
+        "dialogues": [],
+        "events": [],
+        "enemies": [],
+        "doors": [],
+        "locations": [],
+        "activators": [],
+        "staticEvents": []
+    }
+}

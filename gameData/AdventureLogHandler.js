@@ -118,6 +118,13 @@ export class AdventureLogHandler {
         this.adventureLog.prepend(locationMessage);
     }
 
+    appendActivatorMessage(message) {
+        const activatorMessage = this.createDomElementMessage();
+        activatorMessage.className = "log-entry";
+        activatorMessage.textContent = message;
+        this.adventureLog.prepend(activatorMessage);
+    }
+
     clearAdventureLog() {
         this.adventureLog.innerHTML = "";
     }

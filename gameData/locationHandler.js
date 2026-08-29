@@ -43,7 +43,7 @@ export function handleDungeonAccess(id, locationCoordinates) {
         dungeonWindow.classList.add("hidden");
     };
 
-    let isGuardianDefeated = gameData.eventOutcomes.find(e => e.event === location.isGuarded.id);
+    let isGuardianDefeated = gameData.combatOutcomes.find(enemy => enemy.id === location.isGuarded.id);
 
     if (location.isGuarded && !isGuardianDefeated && location.isLocked) {
         handleGuardian(isGuardianDefeated, location);
@@ -88,7 +88,7 @@ function handleGuardian(isGuardianDefeated, location) {
     };
 
     document.addEventListener("combatEnded", () => {
-        isGuardianDefeated = gameData.eventOutcomes.find(e => e.event === location.isGuarded.id);
+        isGuardianDefeated = gameData.combatOutcomes.find(enemy => enemy.id === location.isGuarded.id);
         if (isGuardianDefeated) {
             fightGuardianBtn.classList.add("hidden");
             if (location.isLocked) {

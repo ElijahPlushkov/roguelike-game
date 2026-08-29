@@ -40,6 +40,7 @@ export const gameData = {
     doorOutcomes: [],
     trapOutcomes: [],
     seenEvents: [],
+    activatorStatuses: [],
 
     isEventActive: false,
 };
