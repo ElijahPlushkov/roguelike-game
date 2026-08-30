@@ -118,7 +118,7 @@ export const locationData = {
             {
                 "type": "enemy",
                 "id": "feral-dog-rose-1",
-                "enemyType": "unique",
+                "enemyType": "stationary",
                 "aggressive": 1,
                 "x": 4,
                 "y": 7
@@ -126,7 +126,7 @@ export const locationData = {
             {
                 "type": "enemy",
                 "id": "feral-dog-rose-2",
-                "enemyType": "unique",
+                "enemyType": "stationary",
                 "aggressive": 1,
                 "x": 8,
                 "y": 7

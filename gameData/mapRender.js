@@ -23,6 +23,7 @@ export function mapRender() {
             if (x === playerCoordinates.x && y === playerCoordinates.y) {
                 tile.classList.add("player");
                 tile.textContent = "Ж";
+                tile.dataset.type = "player";
             } else {
                 switch (tileType) {
                     case "#":
@@ -126,10 +127,12 @@ export function mapRender() {
                         tile.classList.add("dirt");
                         tile.textContent = "⇄";
                         tile.dataset.type = "signpost";
+                        break;
                     case "⊡":
                         tile.classList.add("cobble");
                         tile.textContent = "⊡";
                         tile.dataset.type = "button";
+                        break;
                     default:
                         tile.classList.add("unknown");
                         break;

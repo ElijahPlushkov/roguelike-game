@@ -45,6 +45,7 @@ export function initActivator(activatorId) {
     leaveButton.onclick = () => {
         activatorBox.classList.add("hidden");
         activatorOptions.innerHTML = "";
+        gameData.isEventActive = false;
     }
 }
 

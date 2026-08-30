@@ -1,6 +1,7 @@
 import { mapRender } from "../mapRender.js";
 import { Player } from "../Player.js";
 import { getLocation } from './levels/locationsData.js';
+import { StationaryEnemy } from "../StationaryEnemy.js";
 
 export const gameData = {
     playerCoordinates: {x: 0, y: 1},
@@ -137,6 +138,8 @@ let map = [];
 let playerCoordinates = {x: 0, y: 0};
 let tileSet = {};
 
+let stationaryEnemies = [];
+
 export function parseLevelData(id, spawnPosition) {
 
     let level = getLocation(id);
@@ -151,6 +154,13 @@ export function parseLevelData(id, spawnPosition) {
     tileSet = level.tileset;
 
     mapRender(map, playerCoordinates);
+
+    stationaryEnemies = createStationaryEnemies();
 }
 
-export { levelData, chapterId, chapterName, map, playerCoordinates, tileSet };
+export { levelData, chapterId, chapterName, map, playerCoordinates, tileSet, stationaryEnemies };
+
+function createStationaryEnemies() {
+    const stationaryEnemies = levelData.tileData.enemies.filter(enemy => enemy.enemyType === "stationary");
+    return stationaryEnemies.map(enemy => new StationaryEnemy({x: enemy.x, y: enemy.y}));
+}

@@ -30,6 +30,6 @@ export class Movement {
             if (parseInt(tile.dataset.y) === (y - 1) && parseInt(tile.dataset.x) === (x - 1)) {
                 tile.classList.add("tile-fov");
             }
-        })
+        });
     }
 }

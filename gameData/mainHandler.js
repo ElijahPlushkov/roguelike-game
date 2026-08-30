@@ -1,6 +1,6 @@
 import {
     gameData, journalClose, levelData, map, playerCoordinates, tileSet,
-    parseLevelData, eventWindow, chapterId, player
+    parseLevelData, eventWindow, chapterId, player, stationaryEnemies
 } from "./data/gameData.js";
 import { initEvent } from "./eventHandler.js";
 import { mapRender } from "./mapRender.js";
@@ -32,8 +32,6 @@ const adventureLogHandler = new AdventureLogHandler();
 document.addEventListener("DOMContentLoaded", () => {
     parseLevelData("chyceen-borderlands");
 
-    console.log(player);
-
     //movement
     document.addEventListener("keydown", (e) => {
         checkMight();
@@ -42,6 +40,10 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         removeStaticEvent();
+
+        stationaryEnemies.forEach(enemy => {
+            enemy.detectPlayer();
+        })
 
         let dx = 0, dy = 0;
 
