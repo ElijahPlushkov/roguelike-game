@@ -162,5 +162,5 @@ export { levelData, chapterId, chapterName, map, playerCoordinates, tileSet, sta
 
 function createStationaryEnemies() {
     const stationaryEnemies = levelData.tileData.enemies.filter(enemy => enemy.enemyType === "stationary");
-    return stationaryEnemies.map(enemy => new StationaryEnemy({x: enemy.x, y: enemy.y}));
+    return stationaryEnemies.map(enemy => new StationaryEnemy(enemy.id,{x: enemy.x, y: enemy.y}));
 }

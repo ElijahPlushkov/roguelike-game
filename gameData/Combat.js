@@ -11,7 +11,7 @@ import { ChangeStats } from "./ChangeStats.js";
 import { handleDeath } from "./deathHandler.js";
 import { previousCoordinates } from "./mainHandler.js";
 import { mapRender } from "./mapRender.js";
-import { AdventureLogHandler } from "./AdventureLogHandler.js";
+import { AdventureLog } from "./AdventureLog.js";
 import { changeTileType } from "./mapHandler.js";
 import { npcDialogueWindowDescription, npcDialogueWindowOptions, npcBox, registerNpcDeath } from "./npcHandler.js";
 
@@ -26,7 +26,7 @@ export class Combat {
     enemyCoordinates = null;
 
     statChanger = new ChangeStats();
-    adventureLogHandler = new AdventureLogHandler();
+    adventureLogHandler = new AdventureLog();
 
     actionTypes = document.querySelector(".combat-action-types");
     attackTypes = document.querySelector(".combat-attack-types");
@@ -318,6 +318,10 @@ export class Combat {
     }
 
     enemyAttack() {
+        let attackTypes;
+        let attackType;
+        let weaponDamage;
+
         // calculate if an attack was successful
         let hitChance = Math.floor((this.enemy.characteristics.agility / (this.player.agility * 1.5)) * 100 + (this.enemy.accuracy / 2));
         let dodgeChance = Math.floor((this.player.agility / this.enemy.characteristics.agility)  * 10 + (this.player.evasion / 2));
@@ -335,10 +339,15 @@ export class Combat {
         if (roll > chance && luckyRoll > luckyStrikeChance) {
             this.displayEnemyCombatMessage("Enemy misses");
         } else {
+            // define attack type ranged / melee
             // calculate damage
-            let attackTypes = Object.keys(this.enemy.weapon.attackTypes);
-            let attackType = attackTypes[Math.floor(Math.random() * attackTypes.length)];
-            let weaponDamage = this.enemy.weapon.attackTypes[attackType];
+            if (this.enemy.weapon.attackTypes.ranged < 0) {
+                attackType = "ranged";
+            } else {
+                attackTypes = Object.keys(this.enemy.weapon.attackTypes);
+                attackType = attackTypes[Math.floor(Math.random() * attackTypes.length)];
+            }
+            weaponDamage = this.enemy.weapon.attackTypes[attackType];
 
             let damageReduction = this.calculateDamageReduction(attackType, "enemy");
             let damageDealt = (weaponDamage - this.player.armor.armorRate) * this.enemy.characteristics.might;

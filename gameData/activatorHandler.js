@@ -1,5 +1,5 @@
 import { activatorData } from "./data/activatorData.js";
-import { AdventureLogHandler } from "./AdventureLogHandler.js";
+import { AdventureLog } from "./AdventureLog.js";
 import { gameData } from "./data/gameData.js";
 import { endEvent } from "./helperFunctions.js";
 
@@ -7,7 +7,7 @@ const activatorBox = document.querySelector(".activator-box");
 const activatorDescription = document.querySelector(".activator-description");
 const activatorOptions = document.querySelector(".activator-options");
 
-const adventureLog = new AdventureLogHandler();
+const adventureLog = new AdventureLog();
 
 export function initActivator(activatorId) {
     gameData.isEventActive = true;

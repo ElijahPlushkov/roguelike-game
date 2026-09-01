@@ -7,9 +7,9 @@ import { displayMight,
     playerCoordinates } from "./data/gameData.js";
 import { mapRender } from "./mapRender.js";
 import { QuestJournalUpdater } from "./QuestJournalUpdater.js";
-import { AdventureLogHandler } from "./AdventureLogHandler.js";
+import { AdventureLog } from "./AdventureLog.js";
 
-const adventureLogHandler = new AdventureLogHandler();
+const adventureLogHandler = new AdventureLog();
 
 export async function loadSavedGame() {
     if (gameData.isEventActive) {

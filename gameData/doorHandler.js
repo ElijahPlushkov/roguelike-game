@@ -2,14 +2,14 @@ import { doorData } from "./data/doorData.js";
 import { gameData, levelData } from "./data/gameData.js";
 import { endEvent, hasSeenEvent, hasSpecialRequirements, markEventSeen } from "./helperFunctions.js";
 import { ChangeStats } from "./ChangeStats.js";
-import { AdventureLogHandler } from "./AdventureLogHandler.js";
+import { AdventureLog } from "./AdventureLog.js";
 import { canBashDoor, canPickLock } from "./locationHandler.js";
 
 const doorWindow = document.querySelector(".door-box");
 const doorDescription = document.querySelector(".door-description");
 const doorOptions = document.querySelector(".door-options");
 
-const adventureLogHandler = new AdventureLogHandler();
+const adventureLogHandler = new AdventureLog();
 
 export function accessDoor(x, y) {
     const doors = [...(levelData.tileData.doors) || []];

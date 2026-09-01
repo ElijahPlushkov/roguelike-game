@@ -2,11 +2,11 @@ import { gameData, parseLevelData, dungeonWindow } from "./data/gameData.js";
 import { getLocation } from "./data/levels/locationsData.js";
 import { hasDiscoveredLocation, markLocationSeen } from "./helperFunctions.js";
 import { initCombat } from "./combatHandler.js";
-import { AdventureLogHandler } from "./AdventureLogHandler.js";
+import { AdventureLog } from "./AdventureLog.js";
 
 let locationName = document.querySelector(".location-name");
 
-let adventureLogHandler = new AdventureLogHandler();
+let adventureLogHandler = new AdventureLog();
 
 let dungeonDescription = dungeonWindow.querySelector(".dungeon-description");
 

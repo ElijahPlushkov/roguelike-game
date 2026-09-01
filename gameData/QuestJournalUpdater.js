@@ -1,11 +1,11 @@
 import { gameData, journalWindow } from "./data/gameData.js";
 import { ChangeStats } from "./ChangeStats.js";
-import { AdventureLogHandler } from "./AdventureLogHandler.js";
+import { AdventureLog } from "./AdventureLog.js";
 import { getQuest } from "./data/questData/questManager.js";
 
 export class QuestJournalUpdater {
     journalBox = journalWindow;
-    adventureLogHandler = new AdventureLogHandler();
+    adventureLogHandler = new AdventureLog();
 
     toggleJournal() {
         this.journalBox.classList.toggle("hidden");

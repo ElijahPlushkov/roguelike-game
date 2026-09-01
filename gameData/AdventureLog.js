@@ -1,4 +1,4 @@
-export class AdventureLogHandler {
+export class AdventureLog {
 
     adventureLog = document.querySelector(".adventure-log");
 
@@ -123,6 +123,13 @@ export class AdventureLogHandler {
         activatorMessage.className = "log-entry";
         activatorMessage.textContent = message;
         this.adventureLog.prepend(activatorMessage);
+    }
+
+    appendStationaryEnemyAttackMessage(message) {
+        const attackMessage = this.createDomElementMessage();
+        attackMessage.className = "log-entry";
+        attackMessage.textContent = message;
+        this.adventureLog.prepend(attackMessage);
     }
 
     clearAdventureLog() {

@@ -5,10 +5,10 @@ import { QuestJournalUpdater } from "./QuestJournalUpdater.js";
 import { npcBox, npcDialogueWindowDescription, npcDialogueWindowOptions, registerNpcDeath } from "./npcHandler.js";
 import { ChangeStats } from "./ChangeStats.js";
 import { initCombat } from "./combatHandler.js";
-import { AdventureLogHandler } from "./AdventureLogHandler.js";
+import { AdventureLog } from "./AdventureLog.js";
 import { getDialogue } from "./data/dialogueData/dialogueDataManager.js";
 
-const adventureLogHandler = new AdventureLogHandler();
+const adventureLogHandler = new AdventureLog();
 const journalUpdater = new QuestJournalUpdater();
 
 export function initDialogue(dialogueId, stateKey, dialogueSource = null) {

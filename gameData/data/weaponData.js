@@ -12,7 +12,8 @@ export const weaponData = {
             "attackTypes": {
                 "chop": 2,
                 "slash": 1,
-                "thrust": 3
+                "thrust": 3,
+                "ranged": 0
             }
         },
         {
@@ -26,7 +27,8 @@ export const weaponData = {
             "attackTypes": {
                 "chop": 1,
                 "slash": 2,
-                "thrust": 5
+                "thrust": 5,
+                "ranged": 0
             }
         },
         {
@@ -40,7 +42,8 @@ export const weaponData = {
             "attackTypes": {
                 "chop": 1,
                 "slash": 2,
-                "thrust": 3
+                "thrust": 3,
+                "ranged": 0
             }
         },
         {
@@ -54,7 +57,8 @@ export const weaponData = {
             "attackTypes": {
                 "chop": 2,
                 "slash": 3,
-                "thrust": 10
+                "thrust": 10,
+                "ranged": 0
             }
         },
         {
@@ -68,7 +72,8 @@ export const weaponData = {
             "attackTypes": {
                 "chop": 2,
                 "slash": 1,
-                "thrust": 1
+                "thrust": 1,
+                "ranged": 0
             }
         },
         {
@@ -82,7 +87,8 @@ export const weaponData = {
             "attackTypes": {
                 "chop": 2,
                 "slash": 4,
-                "thrust": 3
+                "thrust": 3,
+                "ranged": 0
             }
         },
         {
@@ -96,7 +102,8 @@ export const weaponData = {
             "attackTypes": {
                 "chop": 5,
                 "slash": 1,
-                "thrust": 1
+                "thrust": 1,
+                "ranged": 0
             }
         },
         {
@@ -110,7 +117,8 @@ export const weaponData = {
             "attackTypes": {
                 "chop": 15,
                 "slash": 15,
-                "thrust": 50
+                "thrust": 50,
+                "ranged": 0
             }
         },
         {
@@ -124,7 +132,8 @@ export const weaponData = {
             "attackTypes": {
                 "chop": 5,
                 "slash": 10,
-                "thrust": 25
+                "thrust": 25,
+                "ranged": 0
             }
         },
         {
@@ -138,7 +147,8 @@ export const weaponData = {
             "attackTypes": {
                 "chop": 4,
                 "slash": 4,
-                "thrust": 2
+                "thrust": 2,
+                "ranged": 0
             }
         },
         {
@@ -152,7 +162,23 @@ export const weaponData = {
             "attackTypes": {
                 "chop": 10,
                 "slash": 12,
-                "thrust": 9
+                "thrust": 9,
+                "ranged": 0
+            }
+        },
+        {
+            "name": "Spikes",
+            "id": "spikes",
+            "type": "ranged",
+            "enchantment": "poison/fire",
+            "durability": 1,
+            "weight": 1,
+            "value": 10,
+            "attackTypes": {
+                "chop": 0,
+                "slash": 0,
+                "thrust": 0,
+                "ranged": 3
             }
         }
     ]

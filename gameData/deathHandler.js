@@ -1,7 +1,7 @@
 import { gameData } from "./data/gameData.js";
-import { AdventureLogHandler } from "./AdventureLogHandler.js";
+import { AdventureLog } from "./AdventureLog.js";
 
-const adventureLogHandler = new AdventureLogHandler();
+const adventureLogHandler = new AdventureLog();
 
 export function handleDeath() {
     adventureLogHandler.appendDeathMessage("You are dead.");

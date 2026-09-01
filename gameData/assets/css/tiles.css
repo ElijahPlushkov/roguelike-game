@@ -1,4 +1,3 @@
-
 .tile-grid {
     display: flex;
     flex-direction: column;
@@ -18,6 +17,12 @@
     background: #5a5a5a;
     filter: brightness(0.8);
     cursor: pointer;
+    position: relative;
+    overflow: visible;
+}
+
+.projectile {
+    position: absolute;
 }
 
 .tile:hover {
@@ -93,6 +98,7 @@
 .player {
     background-color: var(--player-tile);
     filter: brightness(1);
+    z-index: -1;
 }
 
 .camp {

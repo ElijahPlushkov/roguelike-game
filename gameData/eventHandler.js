@@ -2,10 +2,10 @@ import { eventDescription, eventOptions, eventWindow } from "./data/gameData.js"
 import { createContinueButton, endEvent } from "./helperFunctions.js";
 import { QuestJournalUpdater } from "./QuestJournalUpdater.js";
 import { ChangeStats } from "./ChangeStats.js";
-import { AdventureLogHandler } from "./AdventureLogHandler.js";
+import { AdventureLog } from "./AdventureLog.js";
 import { getEvent } from "./data/eventData/eventDataManager.js";
 
-const adventureLogHandler = new AdventureLogHandler();
+const adventureLogHandler = new AdventureLog();
 
 export function initEvent(eventId) {
 

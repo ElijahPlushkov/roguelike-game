@@ -1,11 +1,11 @@
 import { trapData } from "./data/trapData.js";
 import { displayCurrentHealth, displayCurrentMysticism, gameData, player } from "./data/gameData.js";
 import { changeTileType } from "./mapHandler.js";
-import { AdventureLogHandler } from "./AdventureLogHandler.js";
+import { AdventureLog } from "./AdventureLog.js";
 import { endEvent, markEventSeen } from "./helperFunctions.js";
 import { ChangeStats } from "./ChangeStats.js";
 
-const adventureLogHandler = new AdventureLogHandler();
+const adventureLogHandler = new AdventureLog();
 
 const trapWindow = document.querySelector(".trap-box");
 const trapDescription = document.querySelector(".trap-description");

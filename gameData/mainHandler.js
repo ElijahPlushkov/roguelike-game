@@ -14,7 +14,7 @@ import { loadSavedGame } from "./loadGame.js";
 import { QuestJournalUpdater } from "./QuestJournalUpdater.js";
 import { handleDeath } from "./deathHandler.js";
 import { handleDungeonAccess, exitDungeon } from "./locationHandler.js";
-import { AdventureLogHandler } from "./AdventureLogHandler.js";
+import { AdventureLog } from "./AdventureLog.js";
 import { initTrap, isTrapDetected } from "./trapHandler.js";
 import { displayStaticEvent, removeStaticEvent } from "./staticEventsHandler.js";
 import { initActivator } from "./activatorHandler.js";
@@ -27,23 +27,19 @@ export let previousCoordinates = {
     y: 0
 }
 
-const adventureLogHandler = new AdventureLogHandler();
+const adventureLogHandler = new AdventureLog();
 
 document.addEventListener("DOMContentLoaded", () => {
-    parseLevelData("chyceen-borderlands");
+    parseLevelData("first-kingdom-site");
 
     //movement
     document.addEventListener("keydown", (e) => {
-        checkMight();
+        checkDeathConditions();
         if (gameData.isEventActive) {
             return;
         }
 
         removeStaticEvent();
-
-        stationaryEnemies.forEach(enemy => {
-            enemy.detectPlayer();
-        })
 
         let dx = 0, dy = 0;
 
@@ -98,6 +94,10 @@ document.addEventListener("DOMContentLoaded", () => {
             mapRender();
             checkForAnyEvent(playerCoordinates.x, playerCoordinates.y);
         }
+
+        stationaryEnemies.forEach(enemy => {
+            enemy.detectPlayer();
+        })
     });
 });
 
@@ -217,8 +217,11 @@ function isWalkable(x, y) {
     return true;
 }
 
-function checkMight() {
+function checkDeathConditions() {
     if (player.getMight() <= -3) {
+        handleDeath();
+    }
+    if (player.currentHealth <= 0) {
         handleDeath();
     }
 }
