@@ -17,7 +17,7 @@ import { handleDungeonAccess, exitDungeon } from "./locationHandler.js";
 import { AdventureLog } from "./AdventureLog.js";
 import { initTrap, isTrapDetected } from "./trapHandler.js";
 import { displayStaticEvent, removeStaticEvent } from "./staticEventsHandler.js";
-import { initActivator } from "./activatorHandler.js";
+import { initActivator, isActivatorDetected } from "./activatorHandler.js";
 
 let spawnPosition;
 let spawnChapter;
@@ -31,6 +31,7 @@ const adventureLogHandler = new AdventureLog();
 
 document.addEventListener("DOMContentLoaded", () => {
     parseLevelData("first-kingdom-site");
+    console.log(player);
 
     //movement
     document.addEventListener("keydown", (e) => {
@@ -130,6 +131,10 @@ function scanSurroundingsForDangers(x, y) {
         if (newEvent.type === "trap") {
             const trapId = newEvent.id;
             isTrapDetected(x, y, trapId);
+        }
+        if (newEvent.type === "activator") {
+            const activatorId = newEvent.id;
+            isActivatorDetected(x, y, activatorId);
         }
     }
 }

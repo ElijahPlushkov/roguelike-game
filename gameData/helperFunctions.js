@@ -21,6 +21,11 @@ export function hasSpecialRequirements(event) {
                 ? condition.dialogueOutcome === dialogueOutcome.outcome
                 : false;
         }
+
+        if (condition.activatorStatus) {
+            const activator = gameData.activatorStatuses.find(activator => activator.id === condition.id);
+            return activator ? activator.status === condition.activatorStatus : false;
+        }
         return false;
     });
 
@@ -49,7 +54,6 @@ export function endEvent(id, status, description, options, activeWindow, eventTy
     if (!hasSeenEvent("antColonyOutcome")) {
         isAntColonyInfected();
     }
-
 }
 
 function updateGameProgress(id, finalState, eventType) {

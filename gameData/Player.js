@@ -6,9 +6,9 @@ import { rangedWeaponsData } from "./data/rangedWeaponsData.js";
 
 export class Player {
 
-    BASE_HEALTH = 10;
-    BASE_MYSTICISM = 10;
-    BASE_WILLPOWER = 10;
+    BASE_HEALTH = 100;
+    BASE_MYSTICISM = 100;
+    BASE_WILLPOWER = 100;
 
     HEALTH_MODIFIER = 2;
     MYSTICISM_MODIFIER = 1;

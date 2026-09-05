@@ -1,6 +1,7 @@
 export const doorData = {
     "id": "chapter_1_doors",
     "doors": [
+        // spider liar
         {
             "id": "spider-liar-door-1",
             "type": "door",
@@ -31,6 +32,7 @@ export const doorData = {
                 "pollen": 3
             }
         },
+        // ant colony
         {
             "id": "ant-col-door-1",
             "type": "door",
@@ -137,16 +139,23 @@ export const doorData = {
             "description": "You open the door to an ant colony. It's poorly lit and looks miserable.",
             "reward": {}
         },
+        // first kingdom fort
         {
-            "id": "wasp_lair_gates",
+            "id": "first-kingdom-site-bridge-door-1",
             "type": "door",
             "tileType": "door",
             "requirements": {
-                "might": 10
+                "anyOf": [
+                    {
+                        "id": "first-kingdom-site-door-activator",
+                        "activatorStatus": true
+                    }
+                ]
             },
-            "rejection": "You see tall castle gates guarding an old fortification. Great walls outspread on both sides with their time-worn merlons look like preybird wings. Something about the gates seems off. The longer you look at them, the more uncomfortable it feels. You try to push the gates, but they won't surrender to your strength. The ancient castle gates remain silent.",
-            "description": "You see tall castle gates guarding an old fortification. Great walls outspread on both sides with their time-worn merlons look like preybird wings. Something about the gates seems off. The longer you look at them, the more uncomfortable it feels. You try to push the gates, and hear loud rusty echo. You keep pushing. At some point the rusty echo grows into metal screaching, but you persevere. Finally, the gates are open. Enter if you dare.",
+            "isLocked": "",
+            "rejection": "You cannot bash or unlock this door.",
+            "description": "The corridor behind the door smells like rotten plants.",
             "reward": {}
-        }
+        },
     ]
 }

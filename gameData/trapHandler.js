@@ -60,7 +60,7 @@ function resolveTrapEncounter(trap, trapId, status, trapDescription, trapOptions
 }
 
 function canDisarm(agility, disarm) {
-    return (agility + Math.floor(Math.random() * agility)) > disarm;
+    return (agility + Math.floor(Math.random() * agility)) > disarm; //TODO seems very easy to disarm
 }
 
 export function isTrapDetected(x, y, trapId) {

@@ -23,6 +23,11 @@
 
 .projectile {
     position: absolute;
+    width: 5px;
+    height: 5px;
+    left: 10px;
+    top: 10px;
+    background-color: var(--combat-text-color);
 }
 
 .tile:hover {
