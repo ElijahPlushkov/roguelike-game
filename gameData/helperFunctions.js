@@ -1,5 +1,9 @@
 import { gameData } from "./data/gameData.js";
-import { antColonyAreInfectedAntsDefeated, isAntColonyInfected } from "./specialEventsHandler.js";
+import {
+    antColonyAreInfectedAntsDefeated,
+    FirstKingdomFortLightTorch,
+    isAntColonyInfected
+} from "./specialEventsHandler.js";
 
 export function hasSpecialRequirements(event) {
     let isConditionMet = event.requirements.anyOf.some(condition => {
@@ -53,6 +57,10 @@ export function endEvent(id, status, description, options, activeWindow, eventTy
 
     if (!hasSeenEvent("antColonyOutcome")) {
         isAntColonyInfected();
+    }
+
+    if (!hasSeenEvent("light-torch")) {
+        FirstKingdomFortLightTorch();
     }
 }
 

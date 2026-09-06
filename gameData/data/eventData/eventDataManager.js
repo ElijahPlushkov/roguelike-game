@@ -2,12 +2,14 @@ import { eventData as spiderLairTunnel } from "./spider-lair-tunnel.js";
 import { eventData as spiderLairDesc} from "./spider-lair-desc.js";
 import { eventData as spiderLairPreyAnt } from "./spider-lair-prey-ant.js"
 import { eventData as spiderLairPreyFly } from "./spider-lair-prey-fly.js";
+import { eventData as lightingTorch } from "./lighting-torch.js";
 
 const eventRegistry = {
     "spider-lair-tunnel": spiderLairTunnel,
     "spider-lair-desc": spiderLairDesc,
     "spider-lair-prey-ant": spiderLairPreyAnt,
-    "spider-lair-prey-fly": spiderLairPreyFly
+    "spider-lair-prey-fly": spiderLairPreyFly,
+    "lighting-torch": lightingTorch
 }
 
 export function getEvent(id) {

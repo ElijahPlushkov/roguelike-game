@@ -18,6 +18,7 @@ import { AdventureLog } from "./AdventureLog.js";
 import { initTrap, isTrapDetected } from "./trapHandler.js";
 import { displayStaticEvent, removeStaticEvent } from "./staticEventsHandler.js";
 import { initActivator, isActivatorDetected } from "./activatorHandler.js";
+import { initTeleport } from "./teleportHandler.js";
 
 let spawnPosition;
 let spawnChapter;
@@ -112,7 +113,8 @@ function  findAllEvents() {
         ...(levelData.tileData.locationExit || []),
         ...(levelData.tileData.traps || []),
         ...(levelData.tileData.staticEvents || []),
-        ...(levelData.tileData.activators || [])
+        ...(levelData.tileData.activators || []),
+        ...(levelData.tileData.teleports || [])
     ]
 }
 
@@ -203,6 +205,11 @@ function checkForAnyEvent(x, y) {
         if (newEvent.type === "activator") {
             const activatorId = newEvent.id;
             initActivator(activatorId);
+        }
+
+        if (newEvent.type === "teleport") {
+            const teleportId = newEvent.id;
+            initTeleport(teleportId);
         }
     }
 }

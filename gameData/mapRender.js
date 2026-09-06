@@ -133,6 +133,11 @@ export function mapRender() {
                         tile.textContent = "⊡";
                         tile.dataset.type = "button";
                         break;
+                    case "θ":
+                        tile.classList.add("altar");
+                        tile.textContent = "θ";
+                        tile.dataset.type = "teleport";
+                        break;
                     default:
                         tile.classList.add("unknown");
                         break;
