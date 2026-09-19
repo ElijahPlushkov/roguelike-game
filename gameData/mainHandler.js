@@ -1,6 +1,6 @@
 import {
     gameData, journalClose, levelData, map, playerCoordinates, tileSet,
-    parseLevelData, eventWindow, chapterId, player, stationaryEnemies
+    parseLevelData, eventWindow, levelId, player, stationaryEnemies
 } from "./data/gameData.js";
 import { initEvent } from "./eventHandler.js";
 import { mapRender } from "./mapRender.js";
@@ -31,8 +31,9 @@ export let previousCoordinates = {
 const adventureLogHandler = new AdventureLog();
 
 document.addEventListener("DOMContentLoaded", () => {
-    parseLevelData("first-kingdom-site");
-    console.log(player);
+    parseLevelData("chyceen-borderlands");
+    console.log(levelData);
+
 
     //movement
     document.addEventListener("keydown", (e) => {
@@ -97,9 +98,11 @@ document.addEventListener("DOMContentLoaded", () => {
             checkForAnyEvent(playerCoordinates.x, playerCoordinates.y);
         }
 
-        stationaryEnemies.forEach(enemy => {
-            enemy.detectPlayer();
-        })
+        if (stationaryEnemies) {
+            stationaryEnemies.forEach(enemy => {
+                enemy.detectPlayer();
+            })
+        }
     });
 });
 
@@ -183,7 +186,7 @@ function checkForAnyEvent(x, y) {
 
         if (newEvent.type === "location") {
             spawnPosition = {x: newEvent.x, y: newEvent.y};
-            spawnChapter = chapterId;
+            spawnChapter = levelId;
             const locationId = newEvent.id;
             handleDungeonAccess(locationId, {x: newEvent.x, y: newEvent.y});
         }
@@ -215,15 +218,34 @@ function checkForAnyEvent(x, y) {
 }
 
 function isWalkable(x, y) {
-    const tileType = map[y][x];
+    // const tileType = map[y][x];
+    //
+    // const currentTile = tileSet[tileType];
+    //
+    // if (currentTile.walkable === false) {
+    //     adventureLogHandler.appendFailMessage("You can't walk here!");
+    //     return false;
+    // }
+    // if (currentTile.type === "door") {
+    //     return accessDoor(x, y);
+    // }
+    // return true;
 
-    const currentTile = tileSet[tileType];
 
-    if (currentTile.walkable === false) {
+    let tiles = document.querySelectorAll(".tile");
+    let tile;
+
+    tiles.forEach(domTile => {
+        if (parseInt(domTile.dataset.x) === x && parseInt(domTile.dataset.y) === y) {
+            tile = domTile;
+        }
+    });
+
+    if (tile.dataset.walkable === "false") {
         adventureLogHandler.appendFailMessage("You can't walk here!");
         return false;
     }
-    if (currentTile.type === "door") {
+    if (tile.dataset.type === "door") {
         return accessDoor(x, y);
     }
     return true;

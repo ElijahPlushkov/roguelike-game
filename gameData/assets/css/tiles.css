@@ -30,14 +30,6 @@
     background-color: var(--combat-text-color);
 }
 
-.tile:hover {
-    filter: brightness(1);
-}
-
-.tile-fov {
-    filter: brightness(1);
-}
-
 .wall {
     background-color: var(--wall-tile);
 }
@@ -123,6 +115,10 @@
     background-color: var(--rejection-text-color);
 }
 
+.unknown {
+    background: #5a5a5a;
+}
+
 .tooltip {
     position:fixed;
     background:#000;
@@ -132,4 +128,12 @@
     border-radius:4px;
     pointer-events:none;
     z-index:1000;
+}
+
+.tile:hover {
+    filter: brightness(1);
+}
+
+.tile-fov {
+    filter: brightness(1);
 }

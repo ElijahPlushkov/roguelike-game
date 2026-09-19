@@ -90,6 +90,22 @@ export const locationData = {
         "⊡": {
             "type": "button",
             "walkable": true
+        },
+        "θ": {
+            "type": "teleport",
+            "walkable": true
+        },
+        "ʘ": {
+            "type": "chlorophius cellia",
+            "walkable": true
+        },
+        "ħ": {
+            "type": "grave",
+            "walkable": true
+        },
+        "": {
+            "type": "unknown",
+            "walkable": false
         }
     },
     "player": {
@@ -138,6 +154,7 @@ export const locationData = {
                 "x": 8,
                 "y": 2
             }
-        ]
+        ],
+        "teleports": []
     }
 }

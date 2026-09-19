@@ -130,14 +130,14 @@ export { displayMaxHealth, displayCurrentHealth, displayMaxMysticism, displayCur
 
 let levelData = {};
 
-let chapterId = "";
+let levelId = "";
 
 let chapterName = "";
 
 let map = [];
+let sections = [];
 let playerCoordinates = {x: 0, y: 0};
 let tileSet = {};
-
 let stationaryEnemies = [];
 
 export function parseLevelData(id, spawnPosition) {
@@ -146,8 +146,9 @@ export function parseLevelData(id, spawnPosition) {
 
     levelData = level;
     chapterName = level.name;
-    chapterId = level.id;
+    levelId = level.id;
     map = level.tilemap;
+    sections = level.sections || [];
     playerCoordinates = spawnPosition || level.player;
     gameData.playerCoordinates.x = playerCoordinates.x;
     gameData.playerCoordinates.y = playerCoordinates.y;
@@ -155,10 +156,10 @@ export function parseLevelData(id, spawnPosition) {
 
     mapRender(map, playerCoordinates);
 
-    stationaryEnemies = createStationaryEnemies();
+    stationaryEnemies = createStationaryEnemies() || [];
 }
 
-export { levelData, chapterId, chapterName, map, playerCoordinates, tileSet, stationaryEnemies };
+export { levelData, levelId, chapterName, map, sections, playerCoordinates, tileSet, stationaryEnemies };
 
 function createStationaryEnemies() {
     const stationaryEnemies = levelData.tileData.enemies.filter(enemy => enemy.enemyType === "stationary");

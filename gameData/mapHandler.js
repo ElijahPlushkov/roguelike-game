@@ -38,7 +38,7 @@ function showTileInfo(tile, event) {
             tooltipText = `Position: ${tileX}, ${tileY} | Unknown`;
         }
     } else {
-        tooltipText = `Position: ${tileX}, ${tileY} | You see ${tile.dataset.type || 'Unknown'}`;
+        tooltipText = `Position: ${tileX}, ${tileY} | You see ${tile.dataset.type || 'unknown'}`;
     }
 
     tooltip.textContent = tooltipText;
