@@ -9,17 +9,17 @@ export const activatorData = {
     "id": "activators",
     "activators": [
         {
-            "id": "first-kingdom-site-bridge-activator",
+            "id": "first-kingdom-site-broken-bridge-activator",
             "type": "toggleable",
             "isActive": false,
             "detected": true,
             "activate": 0,
             "requirements": 0,
-            "activatedMessage": "The bridge rises from the water.",
-            "deactivatedMessage": "The bridge sinks back underwater.",
-            "description": "This is an old stone button. Do you wish to press it?",
-            "scriptActivate": () => firstKingdomSiteBridgeActivate(),
-            "scriptDeactivate": () => firstKingdomSiteBridgeDeactivate()
+            "activatedMessage": "Nothing changes.",
+            "deactivatedMessage": "Nothing changes.",
+            "description": "This bridge activator seems to be broken.",
+            "scriptActivate": () => emptyScript(),
+            "scriptDeactivate": () => emptyScript()
         },
         {
             "id": "first-kingdom-site-door-activator",

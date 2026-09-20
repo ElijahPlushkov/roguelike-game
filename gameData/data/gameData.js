@@ -135,9 +135,11 @@ let levelId = "";
 let chapterName = "";
 
 let map = [];
+
 let sections = [];
+
 let playerCoordinates = {x: 0, y: 0};
-let tileSet = {};
+
 let stationaryEnemies = [];
 
 export function parseLevelData(id, spawnPosition) {
@@ -152,14 +154,13 @@ export function parseLevelData(id, spawnPosition) {
     playerCoordinates = spawnPosition || level.player;
     gameData.playerCoordinates.x = playerCoordinates.x;
     gameData.playerCoordinates.y = playerCoordinates.y;
-    tileSet = level.tileset;
 
     mapRender(map, playerCoordinates);
 
     stationaryEnemies = createStationaryEnemies() || [];
 }
 
-export { levelData, levelId, chapterName, map, sections, playerCoordinates, tileSet, stationaryEnemies };
+export { levelData, levelId, chapterName, map, sections, playerCoordinates, stationaryEnemies };
 
 function createStationaryEnemies() {
     const stationaryEnemies = levelData.tileData.enemies.filter(enemy => enemy.enemyType === "stationary");

@@ -14,7 +14,7 @@ export class AdventureLog {
         this.adventureLog.prepend(rejection);
     }
 
-    appendEventMessage(reward) {
+    appendEventResolutionMessage(reward) {
         for (const [key, value] of Object.entries(reward)) {
 
             const eventMessage = this.createDomElementMessage();
@@ -95,6 +95,13 @@ export class AdventureLog {
         systemMessage.className = "dialogue-text-color";
         systemMessage.textContent = message;
         this.adventureLog.prepend(systemMessage);
+    }
+
+    appendEventMessage(message) {
+        const eventMessage = this.createDomElementMessage();
+        eventMessage.className = "dialogue-text-color";
+        eventMessage.textContent = message;
+        this.adventureLog.prepend(eventMessage);
     }
 
     appendFailMessage(message) {

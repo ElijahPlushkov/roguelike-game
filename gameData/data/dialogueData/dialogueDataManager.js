@@ -8,9 +8,11 @@ import { dialogueData as antColAsaLaDialogue } from "./ant-col-asa-la-dialogue.j
 import { dialogueData as agraWarchiefDialogue } from "./agra-warchief-dialogue.js";
 import { dialogueData as muaRanuAntQueenDialogue } from "./mua-ranu-ant-queen-dialogue.js";
 import { dialogueData as butterflyEncounter1 } from "./butterfly-encounter-1.js";
+import { dialogueData as firstKingdomFortHunterEncounter } from "./first-kingdom-fort-hunter-encounter.js";
+import { dialogueData as cindelGuattaFirstKingdomSiteHunterDialogue } from "./cindel-guatta-first-kingdom-site-hunter-dialogue.js";
 
 const dialogueRegistry = {
-    //chapter-1
+    //borderlands
     "butterfly-encounter-1": butterflyEncounter1,
     //spider lair
     "heildin-wise-encounter-1": heildinWiseEncounter1,
@@ -22,7 +24,10 @@ const dialogueRegistry = {
     "ant-col-ancient-moss": antColAncientMoss,
     "ant-col-asa-la-dialogue": antColAsaLaDialogue,
     "agra-warchief-dialogue": agraWarchiefDialogue,
-    "mua-ranu-ant-queen-dialogue": muaRanuAntQueenDialogue
+    "mua-ranu-ant-queen-dialogue": muaRanuAntQueenDialogue,
+    //first-kingdom-fort
+    "first-kingdom-fort-hunter-encounter": firstKingdomFortHunterEncounter,
+    "cindel-guatta-first-kingdom-site-hunter-dialogue": cindelGuattaFirstKingdomSiteHunterDialogue
 }
 
 export function getDialogue(id) {

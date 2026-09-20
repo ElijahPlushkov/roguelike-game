@@ -1,5 +1,5 @@
 import {
-    gameData, journalClose, levelData, map, playerCoordinates, tileSet,
+    gameData, journalClose, levelData, playerCoordinates,
     parseLevelData, eventWindow, levelId, player, stationaryEnemies
 } from "./data/gameData.js";
 import { initEvent } from "./eventHandler.js";
@@ -31,9 +31,7 @@ export let previousCoordinates = {
 const adventureLogHandler = new AdventureLog();
 
 document.addEventListener("DOMContentLoaded", () => {
-    parseLevelData("chyceen-borderlands");
-    console.log(levelData);
-
+    parseLevelData("first-kingdom-site");
 
     //movement
     document.addEventListener("keydown", (e) => {
@@ -218,34 +216,20 @@ function checkForAnyEvent(x, y) {
 }
 
 function isWalkable(x, y) {
-    // const tileType = map[y][x];
-    //
-    // const currentTile = tileSet[tileType];
-    //
-    // if (currentTile.walkable === false) {
-    //     adventureLogHandler.appendFailMessage("You can't walk here!");
-    //     return false;
-    // }
-    // if (currentTile.type === "door") {
-    //     return accessDoor(x, y);
-    // }
-    // return true;
-
-
     let tiles = document.querySelectorAll(".tile");
-    let tile;
+    let currentTile;
 
-    tiles.forEach(domTile => {
-        if (parseInt(domTile.dataset.x) === x && parseInt(domTile.dataset.y) === y) {
-            tile = domTile;
+    tiles.forEach(tile => {
+        if (parseInt(tile.dataset.x) === x && parseInt(tile.dataset.y) === y) {
+            currentTile = tile;
         }
     });
 
-    if (tile.dataset.walkable === "false") {
+    if (currentTile.dataset.walkable === "false") {
         adventureLogHandler.appendFailMessage("You can't walk here!");
         return false;
     }
-    if (tile.dataset.type === "door") {
+    if (currentTile.dataset.type === "door") {
         return accessDoor(x, y);
     }
     return true;

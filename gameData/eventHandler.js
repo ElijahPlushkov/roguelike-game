@@ -30,6 +30,6 @@ export function initEvent(eventId) {
         console.log(reward);
         let statChanger = new ChangeStats();
         statChanger.changeStats(reward);
-        adventureLogHandler.appendEventMessage(reward);
+        adventureLogHandler.appendEventResolutionMessage(reward);
     });
 }

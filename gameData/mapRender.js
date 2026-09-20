@@ -28,7 +28,7 @@ export function mapRender() {
                     if (!inWidth || !inHeight || !section.isVisible) {
                         drawTiles(tile, x, y, "unknown");
                     }
-                    if (inWidth || inHeight || section.isVisible) {
+                    else if (inWidth || inHeight || section.isVisible) {
                         drawTiles(tile, x, y, tileType);
                     }
                 }

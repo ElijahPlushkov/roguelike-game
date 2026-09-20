@@ -13,7 +13,7 @@ export function firstKingdomSiteBridgeDeactivate() {
 }
 
 export function emptyScript() {
-    console.log("the empty script activated. it does nothing");
+    console.log("the empty script activated. it does absolutely nothing save for displaying this message.");
 }
 
 export function firstKingdomSiteWallRemover() {

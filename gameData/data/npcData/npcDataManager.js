@@ -5,6 +5,7 @@ import { npcData as ahRuhnAntShaman } from "./ah-ruhn-ant-shaman.js";
 import { npcData as antColAsaLa } from "./ant-col-asa-la.js";
 import { npcData as agraWarchief} from "./agra-warchief.js";
 import { npcData as muaRanuAntQueen } from "./mua-ranu-ant-queen.js";
+import {npcData as cindelGuattaFirstKingdomSiteHunter} from "./cindel-guatta-first-kingdom-site-hunter.js"
 
 const npcRegistry = {
     "ant-col-agim-sa": antColAgimSa,
@@ -13,7 +14,8 @@ const npcRegistry = {
     "ah-ruhn-ant-shaman": ahRuhnAntShaman,
     "ant-col-asa-la": antColAsaLa,
     "agra-warchief": agraWarchief,
-    "mua-ranu-ant-queen": muaRanuAntQueen
+    "mua-ranu-ant-queen": muaRanuAntQueen,
+    "cindel-guatta-first-kingdom-site-hunter": cindelGuattaFirstKingdomSiteHunter
 }
 export function getNpc(id) {
     const npc = npcRegistry[id];

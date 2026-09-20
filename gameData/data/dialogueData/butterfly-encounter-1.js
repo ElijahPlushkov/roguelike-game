@@ -7,7 +7,7 @@ export const dialogueData = {
         "description": "As you step on the bridge, you see a butterfly appear from the morning mist. So graceful and light-footed, she seems to be carried by the whispering waves of the weightless air. Gently, she touches the ground without making even a slight noise; the mist recedes. The water under the bridge falls silent.",
         "options": [
             {
-                "label": "Meet the butterfly",
+                "label": "Meet the butterfly.",
                 "key": "meetButterfly"
             }
         ]
@@ -204,7 +204,6 @@ export const dialogueData = {
     },
     "farewell": {
         "description": "—Farewell. I will be looking forward to our next meeting, Sir Knight.",
-        "options": [],
-        "characteristics": {}
+        "options": []
     }
 }

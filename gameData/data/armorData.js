@@ -154,6 +154,19 @@ export const armorData = {
             "durability": 60,
             "weight": 1,
             "value": 1000
+        },
+        {
+            "name": "Leather Cuirass",
+            "id": "leather-cuirass",
+            "armorRate": 3,
+            "type": "light",
+            "effect": {
+                "agility": 2
+            },
+            "enchantment": "none",
+            "durability": 70,
+            "weight": 3,
+            "value": 600
         }
     ]
 }

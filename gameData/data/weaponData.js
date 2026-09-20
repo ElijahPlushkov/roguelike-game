@@ -180,6 +180,21 @@ export const weaponData = {
                 "thrust": 0,
                 "ranged": 3
             }
+        },
+        {
+            "name": "Bone Longbow",
+            "id": "bone-longbow",
+            "type": "ranged",
+            "enchantment": "none",
+            "durability": 300,
+            "weight": 3,
+            "value": 250,
+            "attackTypes": {
+                "chop": 0,
+                "slash": 0,
+                "thrust": 0,
+                "ranged": 8
+            }
         }
     ]
 }

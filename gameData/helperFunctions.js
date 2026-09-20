@@ -1,7 +1,6 @@
 import { gameData } from "./data/gameData.js";
 import {
-    antColonyAreInfectedAntsDefeated,
-    FirstKingdomFortLightTorch,
+    antColonyAreInfectedAntsDefeated, firstKingdomHunterEncounter,
     isAntColonyInfected
 } from "./specialEventsHandler.js";
 
@@ -59,8 +58,8 @@ export function endEvent(id, status, description, options, activeWindow, eventTy
         isAntColonyInfected();
     }
 
-    if (!hasSeenEvent("light-torch")) {
-        FirstKingdomFortLightTorch();
+    if (hasSeenEvent("first-kingdom-fort-hunter-encounter")) {
+        firstKingdomHunterEncounter("first-kingdom-fort-hunter-encounter");
     }
 }
 

@@ -96,7 +96,7 @@ function applyEffect(effect) {
         if (attributes.includes(key)) {
             let statChanger = new ChangeStats();
             statChanger.changeStats(effect);
-            adventureLogHandler.appendEventMessage(effect);
+            adventureLogHandler.appendEventResolutionMessage(effect);
         }
     }
 }

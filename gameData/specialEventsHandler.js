@@ -8,12 +8,17 @@ import { mapRender } from "./mapRender.js";
 import { locationData } from "./data/levels/ant-colony.js";
 import { changeTileType } from "./mapHandler.js";
 import { QuestJournalUpdater } from "./QuestJournalUpdater.js";
+import { revealSection } from "./dynamicSectionHandler.js";
+import { getNpc } from "./data/npcData/npcDataManager.js";
+import { AdventureLog } from "./AdventureLog.js";
 
 let journalUpdater = new QuestJournalUpdater();
 
 // list of special events
 const antColonyAreInfectedAntsDefeatedEvent = "antColonyAreInfectedAntsDefeatedEvent";
 const antColonyOutcome = "antColonyOutcome"; //TODO what kind of outcome?
+
+const adventureLogHandler = new AdventureLog();
 
 export function antColonyAreInfectedAntsDefeated() {
     const requirements = [
@@ -99,13 +104,23 @@ export function isAntColonyInfected() {
     }
 }
 
-export function FirstKingdomFortLightTorch() {
-    let event = gameData.eventOutcomes.find(event => event.id === "lighting-torch");
-    if (event && event.outcome === "completed") {
-        map.splice(16, 1, ["","","","","","#","#","#","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""]);
-        map.splice(15, 1, ["","","","","","#","θ","#","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""]);
-        map.splice(14, 1, ["","","","","","#",".","#","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""]);
-        map.splice(13, 1, ["","","","","","#",".","#","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""]);
-        mapRender();
+export function firstKingdomHunterEncounter(id) {
+    let dialogue = gameData.dialogueOutcomes.find(dialogue => dialogue.id === id);
+    if (dialogue.outcome === "consent") {
+        changeTileType(33, 5, ".");
+        revealSection("revealedTunnel");
+
+        adventureLogHandler.appendEventMessage("You hear a wall crumbling down, revealing a passage.");
+    } else {
+        changeTileType(33, 5, ".");
+        changeTileType(27, 3, ".");
+        changeTileType(27, 4, ".");
+
+        let npc = getNpc("cindel-guatta-first-kingdom-site-hunter");
+        npc.isAlive = false;
+        changeTileType(npc.coordinates.x, npc.coordinates.y, ".");
+
+        revealSection("revealedTunnel");
+        adventureLogHandler.appendEventMessage("You hear a wall crumbling down, revealing a passage.");
     }
 }
