@@ -95,4 +95,5 @@ export function registerNpcDeath(npcId) {
     deadNpc.isAlive = false;
     let npc = getNpc(npcId);
     changeTileType(npc.coordinates.x, npc.coordinates.y, ".");
+    npc.isAlive = false;
 }

@@ -14,42 +14,62 @@ export const locationData = {
             "width": [26, 34],
             "height": [1, 5],
             "isVisible": true,
-            "conditions": {}
+            "requirements": {}
         },
         {
             "id": "revealedTunnel",
             "width": [32, 34],
             "height": [6, 9],
             "isVisible": false,
-            "conditions": {}
+            "requirements": {
+                "anyOf": [
+                    {
+                        "id": "first-kingdom-fort-hunter-encounter",
+                        "dialogueOutcome": "consent"
+                    },
+                    {
+                        "id": "first-kingdom-fort-hunter-encounter",
+                        "dialogueOutcome": "refuse"
+                    }
+                ]
+            }
         },
         {
             "id": "oldRoom",
             "width": [31, 35],
             "height": [10, 17],
             "isVisible": false,
-            "conditions": {}
+            "requirements": {
+                "anyOf": [
+                    {
+                        "playerCoordinates": {
+                            "x": 33,
+                            "y": 12
+                        }
+                    }
+                ]
+            }
         },
         {
             "id": "mainHalls",
             "width": [4, 30],
             "height": [10, 20],
             "isVisible": false,
-            "conditions": {}
+            "requirements": {}
         },
         {
             "id": "altarRoom",
             "width": [11, 19],
             "height": [0, 8],
             "isVisible": false,
-            "conditions": {}
+            "requirements": {}
         },
         {
             "id": "graveYard",
             "width": [21, 28],
             "height": [1, 9],
             "isVisible": false,
-            "conditions": {}
+            "requirements": {}
         }
     ],
     "player": {

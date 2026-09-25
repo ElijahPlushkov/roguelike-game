@@ -1,4 +1,4 @@
-import { gameData } from "./data/gameData.js";
+import {gameData, playerCoordinates} from "./data/gameData.js";
 import {
     antColonyAreInfectedAntsDefeated, firstKingdomHunterEncounter,
     isAntColonyInfected
@@ -17,17 +17,22 @@ export function hasSpecialRequirements(event) {
         }
 
         if (condition.dialogueOutcome) {
-            const dialogueOutcome = gameData.dialogueOutcomes.find(
-                outcome => outcome.dialogue === condition.id
-            );
-            return dialogueOutcome
-                ? condition.dialogueOutcome === dialogueOutcome.outcome
-                : false;
+            const dialogue = gameData.dialogueOutcomes.find(dialogue => dialogue.id === condition.id);
+            return dialogue ? dialogue.outcome === condition.dialogueOutcome : false;
+            // const dialogueOutcome = gameData.dialogueOutcomes.find(
+            //     outcome => outcome.dialogue === condition.id
+            // );
+            // return dialogueOutcome ? condition.dialogueOutcome === dialogueOutcome.outcome : false;
         }
 
         if (condition.activatorStatus) {
             const activator = gameData.activatorStatuses.find(activator => activator.id === condition.id);
             return activator ? activator.status === condition.activatorStatus : false;
+        }
+
+        if (condition.playerCoordinates) {
+            return playerCoordinates.x === condition.playerCoordinates.x &&
+                playerCoordinates.y === condition.playerCoordinates.y;
         }
         return false;
     });
@@ -59,7 +64,7 @@ export function endEvent(id, status, description, options, activeWindow, eventTy
     }
 
     if (hasSeenEvent("first-kingdom-fort-hunter-encounter")) {
-        firstKingdomHunterEncounter("first-kingdom-fort-hunter-encounter");
+        firstKingdomHunterEncounter();
     }
 }
 
@@ -76,6 +81,7 @@ function updateGameProgress(id, finalState, eventType) {
                 outcome: finalState
             })
         }
+        console.log(gameData.dialogueOutcomes);
     }
     if (eventType === "combat") {
         let enemy = gameData.combatOutcomes.find(enemy => enemy.id === id);
@@ -144,6 +150,15 @@ function updateGameProgress(id, finalState, eventType) {
         }
     }
     console.log(gameData.activatorStatuses);
+}
+
+export function findDialogue(id) {
+    return gameData.dialogueOutcomes.find(dialogue => dialogue.id === id);
+}
+
+export function isDialogueOutcomeEqual(id, dialogueOutcome) {
+    let dialogue = findDialogue(id);
+    return dialogueOutcome === dialogue.outcome;
 }
 
 export function hasSeenEvent(id) {

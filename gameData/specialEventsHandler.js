@@ -3,7 +3,7 @@ import {
     specialMessageDescription, specialMessageOptions,
     specialMessageWindow
 } from "./data/gameData.js";
-import { createContinueButton, markEventSeen } from "./helperFunctions.js";
+import {createContinueButton, isDialogueOutcomeEqual, markEventSeen} from "./helperFunctions.js";
 import { mapRender } from "./mapRender.js";
 import { locationData } from "./data/levels/ant-colony.js";
 import { changeTileType } from "./mapHandler.js";
@@ -104,23 +104,18 @@ export function isAntColonyInfected() {
     }
 }
 
-export function firstKingdomHunterEncounter(id) {
-    let dialogue = gameData.dialogueOutcomes.find(dialogue => dialogue.id === id);
-    if (dialogue.outcome === "consent") {
-        changeTileType(33, 5, ".");
-        revealSection("revealedTunnel");
-
-        adventureLogHandler.appendEventMessage("You hear a wall crumbling down, revealing a passage.");
-    } else {
-        changeTileType(33, 5, ".");
-        changeTileType(27, 3, ".");
-        changeTileType(27, 4, ".");
-
-        let npc = getNpc("cindel-guatta-first-kingdom-site-hunter");
-        npc.isAlive = false;
-        changeTileType(npc.coordinates.x, npc.coordinates.y, ".");
-
-        revealSection("revealedTunnel");
-        adventureLogHandler.appendEventMessage("You hear a wall crumbling down, revealing a passage.");
+export function firstKingdomHunterEncounter() {
+    if (revealSection("revealedTunnel")) {
+        if (isDialogueOutcomeEqual("first-kingdom-fort-hunter-encounter", "consent")) {
+            changeTileType(33, 5, ".");
+        } else {
+            changeTileType(33, 5, ".");
+            changeTileType(27, 3, ".");
+            changeTileType(27, 4, ".");
+            let npc = getNpc("cindel-guatta-first-kingdom-site-hunter");
+            npc.isAlive = false;
+            changeTileType(npc.coordinates.x, npc.coordinates.y, ".");
+        }
     }
+    adventureLogHandler.appendEventMessage("You hear a wall crumbling down, revealing a passage.");
 }
