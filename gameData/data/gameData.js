@@ -13,7 +13,7 @@ export const gameData = {
         agility: 100
     },
 
-    pollen: 0,
+    pollen: 350,
 
     health: 10,
     currentHealth: 10,
