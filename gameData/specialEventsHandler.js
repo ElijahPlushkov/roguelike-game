@@ -1,22 +1,26 @@
 import {
-    gameData, map, playerCoordinates,
+    gameData, playerCoordinates,
     specialMessageDescription, specialMessageOptions,
     specialMessageWindow
 } from "./data/gameData.js";
 import {createContinueButton, isDialogueOutcomeEqual, markEventSeen} from "./helperFunctions.js";
 import { mapRender } from "./mapRender.js";
-import { locationData } from "./data/levels/ant-colony.js";
+import { locationData as antColonyLocationData } from "./data/levels/ant-colony.js";
+import { locationData as firstKingdomSiteLocationData } from "./data/levels/first-kingdom-site.js";
 import { changeTileType } from "./mapHandler.js";
 import { QuestJournalUpdater } from "./QuestJournalUpdater.js";
 import { revealSection } from "./dynamicSectionHandler.js";
 import { getNpc } from "./data/npcData/npcDataManager.js";
 import { AdventureLog } from "./AdventureLog.js";
+import { teleportData } from "./data/teleportData.js";
 
 let journalUpdater = new QuestJournalUpdater();
 
 // list of special events
 const antColonyAreInfectedAntsDefeatedEvent = "antColonyAreInfectedAntsDefeatedEvent";
 const antColonyOutcome = "antColonyOutcome"; //TODO what kind of outcome?
+
+const firstKingdomSiteChlorophiusCelliaSwitchersEvent = "firstKingdomSiteChlorophiusCelliaSwitchersEvent";
 
 const adventureLogHandler = new AdventureLog();
 
@@ -62,7 +66,7 @@ export function isAntColonyInfected() {
                 gameData.playerCoordinates.y = 2;
                 playerCoordinates.x = 11;
                 playerCoordinates.y = 2;
-                locationData.tileData.enemies.push({ "type": "enemy", "id": "ant-col-diseased-ant-9", "enemyType": "random-weak", "race": "ant", "x": 11, "y": 3 });
+                antColonyLocationData.tileData.enemies.push({ "type": "enemy", "id": "ant-col-diseased-ant-9", "enemyType": "random-weak", "race": "ant", "x": 11, "y": 3 });
                 changeTileType(11, 3, "e");
                 mapRender();
                 specialMessageWindow.classList.add("hidden");
@@ -118,4 +122,27 @@ export function firstKingdomHunterEncounter() {
         }
     }
     adventureLogHandler.appendEventMessage("You hear a wall crumbling down, revealing a passage.");
+}
+
+export function firstKingdomSiteChlorophiusCelliaSwitchers() {
+    const requirements = [
+        {id: 'first-kingdom-site-portal-activator-1', status: true},
+        {id: 'first-kingdom-site-portal-activator-2', status: true},
+        {id: 'first-kingdom-site-portal-activator-3', status: true}
+    ]
+
+    const activatorStatuses = gameData.activatorStatuses;
+    const strActivatorStatuses = new Set(activatorStatuses.map(status => JSON.stringify(status)));
+
+    if (requirements.every(status => strActivatorStatuses.has(JSON.stringify(status)))) {
+        markEventSeen(firstKingdomSiteChlorophiusCelliaSwitchersEvent);
+
+        let teleport = teleportData.teleports.find(teleport => teleport.id === "first-kingdom-site-teleport-3");
+        teleport.charges = 1;
+        adventureLogHandler.appendSuccessfulMessage("You charge a teleport.");
+
+        firstKingdomSiteLocationData.tileData.enemies.push({ "type": "enemy", "id": "mold-undead-8", "enemyType": "random-average", "race": "mold undead", "aggressive": 1, "x": 9, "y": 15 });
+        changeTileType(9, 15, "e");
+        adventureLogHandler.appendFailMessage("A mold undead awakens.");
+    }
 }

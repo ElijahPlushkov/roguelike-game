@@ -141,7 +141,7 @@ export const doorData = {
         },
         // first kingdom fort
         {
-            "id": "first-kingdom-site-bridge-door-1",
+            "id": "first-kingdom-site-door-1",
             "type": "door",
             "tileType": "door",
             "requirements": {
@@ -154,8 +154,41 @@ export const doorData = {
             },
             "isLocked": "",
             "rejection": "You cannot bash or unlock this door.",
-            "description": "The corridor behind the door smells like rotten plants.",
+            "description": "You hear water flowing behind the door.",
             "reward": {}
+        },
+        {
+            "id": "first-kingdom-site-door-2",
+            "type": "door",
+            "tileType": "door",
+            "isLocked": "6",
+            "rejection": "An ancient door is sealed.",
+            "description": "You sense a strong smell of stagnant water and a faint odor of roses.",
+            "reward": {
+                "pollen": 5
+            }
+        },
+        {
+            "id": "first-kingdom-site-door-3",
+            "type": "door",
+            "tileType": "door",
+            "isLocked": "7",
+            "rejection": "An ancient door is sealed.",
+            "description": "The stone door is covered with moisture and decayed plants.",
+            "reward": {
+                "pollen": 5
+            }
+        },
+        {
+            "id": "first-kingdom-site-door-4",
+            "type": "door",
+            "tileType": "door",
+            "isLocked": "7",
+            "rejection": "An ancient door is sealed.",
+            "description": "You can see a short inscription on the door, but the script is so ancient you cannot decipher it.",
+            "reward": {
+                "pollen": 5
+            }
         },
     ]
 }

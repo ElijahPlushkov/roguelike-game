@@ -1,6 +1,7 @@
 export const trapData = {
     "id": "chapter_1_traps",
     "traps": [
+        //ant-colony
         {
             "id": "ant-col-trap-1",
             "type": "trap",
@@ -47,6 +48,55 @@ export const trapData = {
             },
             "reward": {
                 "pollen": 2
+            }
+        },
+        //first-kingdom-site
+        {
+            "id": "first-kingdom-site-trap-1",
+            "type": "trap",
+            "active": true,
+            "detected": false,
+            "disarm": 3,
+            "requirements": {
+                "prayer": 3
+            },
+            "effect": {
+                "health": 8
+            },
+            "reward": {
+                "pollen": 3
+            }
+        },
+        {
+            "id": "first-kingdom-site-trap-2",
+            "type": "trap",
+            "active": true,
+            "detected": false,
+            "disarm": 5,
+            "requirements": {
+                "prayer": 5
+            },
+            "effect": {
+                "health": 10
+            },
+            "reward": {
+                "pollen": 8
+            }
+        },
+        {
+            "id": "first-kingdom-site-trap-3",
+            "type": "trap",
+            "active": true,
+            "detected": false,
+            "disarm": 5,
+            "requirements": {
+                "prayer": 5
+            },
+            "effect": {
+                "health": 11
+            },
+            "reward": {
+                "pollen": 9
             }
         }
     ]

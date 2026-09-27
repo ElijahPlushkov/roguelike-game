@@ -4,12 +4,19 @@ import { hasSpecialRequirements } from "./helperFunctions.js";
 
 export function revealSection(id) {
     let section = sections.find(section => section.id === id);
-    if (hasSpecialRequirements(section)) {
+    if (Object.keys(section.requirements).length !== 0) {
+        if (hasSpecialRequirements(section)) {
+            section.isVisible = true;
+            mapRender();
+            return true;
+        } else {
+            console.log("the requirements are not met. don't reveal.");
+            return false;
+        }
+    } else {
         section.isVisible = true;
         mapRender();
         return true;
-    } else {
-        console.log("the requirements are not met. don't reveal.");
-        return false;
     }
+
 }

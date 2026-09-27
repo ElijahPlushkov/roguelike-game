@@ -1,6 +1,6 @@
 import {gameData, playerCoordinates} from "./data/gameData.js";
 import {
-    antColonyAreInfectedAntsDefeated, firstKingdomHunterEncounter,
+    antColonyAreInfectedAntsDefeated, firstKingdomHunterEncounter, firstKingdomSiteChlorophiusCelliaSwitchers,
     isAntColonyInfected
 } from "./specialEventsHandler.js";
 
@@ -47,6 +47,8 @@ export function createContinueButton() {
     return continueButton;
 }
 
+let firstKingdomHunterEncounterFlag = false;
+
 export function endEvent(id, status, description, options, activeWindow, eventType) {
     gameData.isEventActive = false;
     updateGameProgress(id, status, eventType);
@@ -63,8 +65,13 @@ export function endEvent(id, status, description, options, activeWindow, eventTy
         isAntColonyInfected();
     }
 
-    if (hasSeenEvent("first-kingdom-fort-hunter-encounter")) {
+    if (hasSeenEvent("first-kingdom-fort-hunter-encounter") && !firstKingdomHunterEncounterFlag) {
         firstKingdomHunterEncounter();
+        firstKingdomHunterEncounterFlag = true;
+    }
+
+    if (!hasSeenEvent("firstKingdomSiteChlorophiusCelliaSwitchersEvent")) {
+        firstKingdomSiteChlorophiusCelliaSwitchers();
     }
 }
 

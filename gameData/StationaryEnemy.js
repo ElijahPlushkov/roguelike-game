@@ -19,13 +19,15 @@ export class StationaryEnemy {
         this.enemyAmmoQuantity = this.giveRandomAmmoQuantity();
     }
 
-    giveRandomAmmoQuantity(min = 3, max = 5) {
+    giveRandomAmmoQuantity(min = 10, max = 15) {
         return Math.floor(Math.random() * (max - min + 1) + min);
     }
 
     detectPlayer() {
-        if (Math.abs(gameData.playerCoordinates.x - this.enemyCoordinates.x) <= 3
-        && this.enemyCoordinates.y === gameData.playerCoordinates.y) {
+        let playerDetectX = Math.abs(gameData.playerCoordinates.x - this.enemyCoordinates.x)
+        let playerDetectY = Math.abs(gameData.playerCoordinates.y - this.enemyCoordinates.y)
+
+        if (playerDetectX <= 3 && playerDetectY <= 3) {
             if (this.enemyAmmoQuantity <= 0) {
                 adventureLog.appendStationaryEnemyAttackMessage("Enemy is out of ammo.");
             } else {
@@ -34,25 +36,28 @@ export class StationaryEnemy {
             }
         }
 
-        else if (this.enemyCoordinates.y === (gameData.playerCoordinates.y - 1)
-            && (Math.abs(gameData.playerCoordinates.x - this.enemyCoordinates.x) <= 3)) {
-            if (this.enemyAmmoQuantity <= 0) {
-                adventureLog.appendStationaryEnemyAttackMessage("Enemy is out of ammo.");
-            } else {
-                this.setProjectilePosition();
-                this.stationaryEnemyRangedAttack();
-            }
-        }
-
-        else if (this.enemyCoordinates.y === (gameData.playerCoordinates.y + 1)
-            && (Math.abs(gameData.playerCoordinates.x - this.enemyCoordinates.x) <= 3)) {
-            if (this.enemyAmmoQuantity <= 0) {
-                adventureLog.appendStationaryEnemyAttackMessage("Enemy is out of ammo.");
-            } else {
-                this.setProjectilePosition();
-                this.stationaryEnemyRangedAttack();
-            }
-        }
+        // else if (this.enemyCoordinates.y === (gameData.playerCoordinates.y - 1) &&
+        //     (Math.abs(gameData.playerCoordinates.x - this.enemyCoordinates.x) <= 3)) {
+        //     if (this.enemyAmmoQuantity <= 0) {
+        //         adventureLog.appendStationaryEnemyAttackMessage("Enemy is out of ammo.");
+        //     } else {
+        //         this.setProjectilePosition();
+        //         this.stationaryEnemyRangedAttack();
+        //     }
+        //     console.log("detectPlayer-2");
+        // }
+        //
+        // else if (this.enemyCoordinates.y === (gameData.playerCoordinates.y + 1)
+        //     && (Math.abs(gameData.playerCoordinates.x - this.enemyCoordinates.x) <= 3)) {
+        //     if (this.enemyAmmoQuantity <= 0) {
+        //         adventureLog.appendStationaryEnemyAttackMessage("Enemy is out of ammo.");
+        //     } else {
+        //         this.setProjectilePosition();
+        //         this.stationaryEnemyRangedAttack();
+        //     }
+        //
+        //     console.log("detectPlayer-3");
+        // }
     }
 
     stationaryEnemyRangedAttack() {

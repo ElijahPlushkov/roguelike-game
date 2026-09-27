@@ -32,6 +32,7 @@ const adventureLogHandler = new AdventureLog();
 
 document.addEventListener("DOMContentLoaded", () => {
     parseLevelData("first-kingdom-site");
+    console.log(stationaryEnemies);
 
     //movement
     document.addEventListener("keydown", (e) => {
@@ -96,11 +97,10 @@ document.addEventListener("DOMContentLoaded", () => {
             checkForAnyEvent(playerCoordinates.x, playerCoordinates.y);
         }
 
-        if (stationaryEnemies) {
-            stationaryEnemies.forEach(enemy => {
-                enemy.detectPlayer();
-            })
-        }
+        stationaryEnemies.forEach(enemy => {
+            enemy.detectPlayer();
+        });
+
     });
 });
 
@@ -210,7 +210,8 @@ function checkForAnyEvent(x, y) {
 
         if (newEvent.type === "teleport") {
             const teleportId = newEvent.id;
-            initTeleport(teleportId);
+            const teleportCoordinates = {x: newEvent.x, y: newEvent.y};
+            initTeleport(teleportId, teleportCoordinates);
         }
     }
 }

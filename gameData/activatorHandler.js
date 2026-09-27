@@ -28,18 +28,23 @@ export function initActivator(activatorId) {
             activateButton = createActionButton("activate", activationRequirement);
             deactivateButton = createActionButton("deactivate");
             leaveButton = createActionButton("leave");
+
+            if (!activator.isActive) {
+                deactivateButton.classList.add("hidden");
+            } else {
+                activateButton.classList.add("hidden");
+            }
+
         } else {
             activateButton = createActionButton("activate", activationRequirement);
             leaveButton = createActionButton("leave");
+
+            if (activator.isActive) {
+                activateButton.classList.add("hidden");
+            }
         }
 
         activatorDescription.textContent = activator.description;
-
-        if (!activator.isActive) {
-            deactivateButton.classList.add("hidden");
-        } else {
-            activateButton.classList.add("hidden");
-        }
 
         activatorBox.classList.remove("hidden");
 
@@ -55,11 +60,13 @@ export function initActivator(activatorId) {
             }
         }
 
-        deactivateButton.onclick = () => {
-            activator.scriptDeactivate();
-            activator.isActive = false;
-            adventureLog.appendActivatorMessage(activator.deactivatedMessage);
-            endEvent(activator.id, activator.isActive, activatorDescription, activatorOptions, activatorBox, "activator");
+        if (deactivateButton) {
+            deactivateButton.onclick = () => {
+                activator.scriptDeactivate();
+                activator.isActive = false;
+                adventureLog.appendActivatorMessage(activator.deactivatedMessage);
+                endEvent(activator.id, activator.isActive, activatorDescription, activatorOptions, activatorBox, "activator");
+            }
         }
 
         leaveButton.onclick = () => {

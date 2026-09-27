@@ -1,4 +1,4 @@
-import {revealSection} from "../dynamicSectionHandler.js";
+import { revealSection } from "../dynamicSectionHandler.js";
 
 export const teleportData = {
     "id": "teleports",
@@ -25,11 +25,12 @@ export const teleportData = {
         {
             "id": "first-kingdom-site-teleport-3",
             "isPowered": false,
-            "charges": 1,
+            "charges": 0,
             "endPointCoordinates": {
                 "x": 15,
                 "y": 7
-            }
+            },
+            "script": () => revealSection("altarRoom")
         },
         {
             "id": "first-kingdom-site-teleport-4",
@@ -47,7 +48,8 @@ export const teleportData = {
             "endPointCoordinates": {
                 "x": 22,
                 "y": 8
-            }
+            },
+            "script": () => revealSection("graveYard")
         },
         {
             "id": "first-kingdom-site-teleport-6",

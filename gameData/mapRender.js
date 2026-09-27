@@ -18,7 +18,7 @@ export function mapRender() {
             const tile = document.createElement("div");
             tile.dataset.x = x;
             tile.dataset.y = y;
-            tile.dataset.walkable = true;
+            tile.dataset.walkable = false;
 
             if (sections.length !== 0) {
                 for (let section of sections) {
@@ -190,7 +190,7 @@ function drawTiles(tile, x, y, tileType) {
             case "ʘ":
                 tile.classList.add("npc");
                 tile.textContent = "ʘ";
-                tile.dataset.type = "chlorophius cellia" //TODO think of another name
+                tile.dataset.type = "chlorophius cellium"
                 tile.dataset.walkable = true;
                 break;
             case "ħ":

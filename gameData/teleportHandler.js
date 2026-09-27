@@ -11,7 +11,7 @@ const teleportOptions = document.querySelector(".teleport-options");
 let chargeButton;
 let leaveButton;
 
-export function initTeleport(teleportId) {
+export function initTeleport(teleportId, teleportCoordinates) {
     let teleport = teleportData.teleports.find(teleport => teleport.id === teleportId);
     if (teleport) {
         if (teleport.charges > 0) {
@@ -21,18 +21,19 @@ export function initTeleport(teleportId) {
             if (teleport.script) {
                 teleport.script();
             }
-            mapRender()
+            mapRender();
         } else {
+            let chargeCost = calculateChargeCost(teleport, teleportCoordinates);
             gameData.isEventActive = true;
             teleportBox.classList.remove("hidden");
-            teleportDescription.textContent = "The teleport has run out of charges. Do you wish to charge it? You need 100 pollen.";
+            teleportDescription.textContent = "The teleport has run out of charges. Do you wish to charge it? You need " + chargeCost + " pollen.";
             chargeButton = createActionButton("charge");
             leaveButton = createActionButton("leave");
 
             chargeButton.onclick = () => {
-                if (gameData.pollen >= 100) {
+                if (gameData.pollen >= chargeCost) {
                     teleport.charges = 1;
-                    gameData.pollen = gameData.pollen - 100;
+                    gameData.pollen = gameData.pollen - chargeCost;
                     displayPollen.textContent = gameData.pollen;
                     hideTeleportBox();
                     adventureLogHandler.appendSuccessfulMessage("You charge the teleport.");
@@ -47,6 +48,24 @@ export function initTeleport(teleportId) {
             }
         }
     }
+}
+
+function calculateChargeCost(teleport, teleportCoordinates) {
+    let finalCost;
+    const costPerTile = 20;
+
+    let distanceX = Math.abs(teleportCoordinates.x - teleport.endPointCoordinates.x);
+    let distanceY = Math.abs(teleportCoordinates.y - teleport.endPointCoordinates.y);
+
+    if (distanceX > distanceY) {
+        finalCost = distanceX * costPerTile;
+    } else if (distanceX < distanceY) {
+        finalCost = distanceY * costPerTile;
+    } else {
+        finalCost = distanceX * costPerTile;
+    }
+
+    return finalCost
 }
 
 function createActionButton(type) {
