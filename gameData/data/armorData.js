@@ -1,4 +1,4 @@
-export const armorData = {
+export const armorData = 	{
     "id": "armors",
     "armors": [
         {

@@ -1,8 +1,11 @@
 import {gameData, playerCoordinates} from "./data/gameData.js";
 import {
     antColonyAreInfectedAntsDefeated, firstKingdomHunterEncounter, firstKingdomSiteChlorophiusCelliaSwitchers,
+    firstKingdomSiteCindelGuattaRescued,
+    firstKingdomSitePriestSlain,
     isAntColonyInfected
 } from "./specialEventsHandler.js";
+import { isNpcAlive } from "./npcHandler.js";
 
 export function hasSpecialRequirements(event) {
     let isConditionMet = event.requirements.anyOf.some(condition => {
@@ -48,6 +51,9 @@ export function createContinueButton() {
 }
 
 let firstKingdomHunterEncounterFlag = false;
+let firstKingdomSitePriestSlainFlag = false;
+let firstKingdomSiteCindelGuattaRescuedFlag = false;
+
 
 export function endEvent(id, status, description, options, activeWindow, eventType) {
     gameData.isEventActive = false;
@@ -72,6 +78,16 @@ export function endEvent(id, status, description, options, activeWindow, eventTy
 
     if (!hasSeenEvent("firstKingdomSiteChlorophiusCelliaSwitchersEvent")) {
         firstKingdomSiteChlorophiusCelliaSwitchers();
+    }
+
+    if (hasSeenEvent("first-kingdom-site-mold-undead-priest") && !firstKingdomSitePriestSlainFlag) {
+        firstKingdomSitePriestSlain();
+        firstKingdomSitePriestSlainFlag = true;
+    }
+
+    if (isNpcAlive("cindel-guatta-first-kingdom-site-hunter") && !firstKingdomSiteCindelGuattaRescuedFlag) {
+        firstKingdomSiteCindelGuattaRescued();
+        firstKingdomSiteCindelGuattaRescuedFlag = true;
     }
 }
 

@@ -94,7 +94,7 @@ export const dialogueData = {
         "description": "—Whacha want from ma Queen?",
         "options": [
             {
-                "label": "Sorry, for disturbing you",
+                "label": "Sorry, for disturbing you.",
                 "key": "leave"
             },
             {

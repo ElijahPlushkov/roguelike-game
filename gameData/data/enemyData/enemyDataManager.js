@@ -4,6 +4,7 @@ import { enemyData as mosquitoGuardSpiderGang2 } from "./mosquito-guard-spider-g
 import { enemyData as mosquitoChiefSpiderGang } from "./mosquito-chief-spider-gang.js";
 import { enemyData as feralDogRose1 } from "./feral-dog-rose-1.js";
 import { enemyData as feralDogRose2 } from "./feral-dog-rose-2.js";
+import { enemyData as firstKingdomSiteMoldUndeadPriest } from "./first-kingdom-site-mold-undead-priest.js";
 
 const enemyRegistry = {
     "mosquito-scout-spider-gang": mosquitoScoutSpiderGang,
@@ -11,7 +12,8 @@ const enemyRegistry = {
     "mosquito-guard-spider-gang-2": mosquitoGuardSpiderGang2,
     "mosquito-chief-spider-gang": mosquitoChiefSpiderGang,
     "feral-dog-rose-1": feralDogRose1,
-    "feral-dog-rose-2": feralDogRose2
+    "feral-dog-rose-2": feralDogRose2,
+    "first-kingdom-site-mold-undead-priest": firstKingdomSiteMoldUndeadPriest
 }
 
 export function getEnemy(id) {

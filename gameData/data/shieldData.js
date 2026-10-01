@@ -33,6 +33,17 @@ export const shieldData = {
             "durability": 200,
             "weight": 5,
             "value": 3000
+        },
+        {
+            "name": "Bone Shield",
+            "id": "bone-shield",
+            "armorRate": 4,
+            "type": "medium",
+            "effect": 30,
+            "enchantment": "none",
+            "durability": 300,
+            "weight": 5,
+            "value": 700
         }
     ]
 }

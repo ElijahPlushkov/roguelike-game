@@ -14,7 +14,7 @@ export const npcData = {
     "disposition": 40,
     "characterClass": "barbarian",
     "characterDescription": "A muscular female warchief is standing in front of you. She is twice as big as you are and clasping a bone bident.",
-    "combatDescription": "With a chilling war cry, Ag'Ra leaps at you.",
+    "combatDescription": "With a chilling war cry, Ag'Ra charges at you.",
     "combatDifficulty": "average",
     "weapon": "bone-bident",
     "armor": "fur-cuirass",

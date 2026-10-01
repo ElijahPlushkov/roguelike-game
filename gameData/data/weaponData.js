@@ -195,6 +195,21 @@ export const weaponData = {
                 "thrust": 0,
                 "ranged": 8
             }
+        },
+        {
+            "name": "Bone Mace",
+            "id": "bone-mace",
+            "type": "blunt",
+            "enchantment": "none",
+            "durability": 400,
+            "weight": 5,
+            "value": 400,
+            "attackTypes": {
+                "chop": 5,
+                "slash": 4,
+                "thrust": 3,
+                "ranged": 0
+            }
         }
     ]
 }

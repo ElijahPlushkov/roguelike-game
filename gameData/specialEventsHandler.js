@@ -146,3 +146,28 @@ export function firstKingdomSiteChlorophiusCelliaSwitchers() {
         adventureLogHandler.appendFailMessage("A mold undead awakens.");
     }
 }
+
+export function firstKingdomSitePriestSlain() {
+    let priest = gameData.combatOutcomes.find(enemy => enemy.id === "first-kingdom-site-mold-undead-priest");
+    if (priest.outcome) {
+        changeTileType(27, 3, ".");
+        changeTileType(27, 4, ".");
+    } else {
+        return;
+    }
+}
+
+export function firstKingdomSiteCindelGuattaRescued() {
+    if (isDialogueOutcomeEqual("cindel-guatta-first-kingdom-site-hunter-dialogue", "gladHelp") ||
+    isDialogueOutcomeEqual("cindel-guatta-first-kingdom-site-hunter-dialogue", "anythingForMe")) {
+
+        changeTileType(29, 3, ".");
+        changeTileType(30, 3, ".");
+        changeTileType(31, 3, ".");
+
+        let npc = firstKingdomSiteLocationData.tileData.npcs.find(npc => npc.id === "cindel-guatta-first-kingdom-site-hunter");
+        npc.x = 1;
+        npc.y = 1;
+        changeTileType(28, 3, ".");
+    }
+}

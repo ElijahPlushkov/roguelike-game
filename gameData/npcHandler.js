@@ -83,7 +83,7 @@ function hasMetNpc(npc) {
     return false;
 }
 
-function isNpcAlive(npcId) {
+export function isNpcAlive(npcId) {
     let n = gameData.npcs.find(npc => npc.id === npcId);
     if (n) {
         return n.isAlive;
