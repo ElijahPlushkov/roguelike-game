@@ -1,14 +1,14 @@
 export const dialogueData = {
     "id": "jaemah-roseborn-dialogue",
     "type": "dialogue",
-    // "requirements": {
-    //     "anyOf": [
-    //         {
-    //             "id": "strike-back",
-    //             "state": "siege-lifted"
-    //         }
-    //     ]
-    // },
+    "requirements": {
+        "anyOf": [
+            {
+                "id": "strike-back",
+                "state": "siege-lifted"
+            }
+        ]
+    },
     "rejection": "—I cannot speak with you now, as we are resisting the attack. Join or leave.",
     "start": "greetings",
     "entryPoints": [
@@ -294,7 +294,7 @@ export const dialogueData = {
         ]
     },
     "warchiefSlain": {
-        "description": "—That was the stupidest thing to do. She was supposed to become our ally! We must act quickly now. I suspect that with the warchief on our side, the local shaman will make his next move. Some of the ants are wary of him, but they refuse to speak with me on the matter. Perhaps, you will have more luck. Talk to me when you are done.",
+        "description": "—That was the stupidest thing to do! She was supposed to become our ally! We must act quickly now. I suspect that with the warchief out of the game, the local shaman will make his next move. Some of the ants are wary of him, but they refuse to speak with me on the matter. Perhaps, you will have more luck. Talk to me when you are done.",
         "options": []
     },
     "warchiefDealtWith": {
@@ -409,7 +409,7 @@ export const dialogueData = {
         "options": []
     },
     "aftermath": {
-        "description": "—Knight, I am grateful to you for your professional and timely assistance. Without you, the colony would not have survived. Unfortunately, we have won only one battle, not the war. That is the reason why I need your assistance once more. Go to an abandoned altar in the east of here and confront any ants who are occupied with its diassabling.",
+        "description": "—Knight, I am grateful to you for your professional and timely assistance. Without you, the colony would not have survived. Unfortunately, we have won only one battle, not the war. That is the reason why I need your assistance once more. Go to an abandoned altar in the east of here and confront any ants who are occupied with its disassembling.",
         "options": [
             {
                 "label": "Say that you set off immediately.",

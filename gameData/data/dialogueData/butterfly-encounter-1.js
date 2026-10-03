@@ -117,7 +117,11 @@ export const dialogueData = {
         "options": [
             {
                 "label": "Tell the lady that you will deal with the spider.",
-                "key": "dealSpider"
+                "key": "dealSpider",
+                "quest": {
+                    "id": "spider-threats",
+                    "state": "start"
+                }
             },
             {
                 "label": "Tell the lady that you want to focus on your quest.",

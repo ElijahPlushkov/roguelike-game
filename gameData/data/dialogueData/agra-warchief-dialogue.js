@@ -1,14 +1,14 @@
 export const dialogueData = {
     "id": "agra-warchief-dialogue",
     "type": "dialogue",
-    // "requirements": {
-    //     "anyOf": [
-    //         {
-    //             "id": "strike-back",
-    //             "state": "siege-lifted"
-    //         }
-    //     ]
-    // },
+    "requirements": {
+        "anyOf": [
+            {
+                "id": "strike-back",
+                "state": "siege-lifted"
+            }
+        ]
+    },
     "rejection": "—Look how I squeeze this infected bastard. Gruaaagh! Stay away, Ag'Ra doesn't need your help!",
     "start": "greetings",
     "entryPoints": [

@@ -1,14 +1,14 @@
 export const dialogueData = {
     "id": "ah-ruhn-ant-shaman-dialogue",
     "type": "dialogue",
-    // "requirements": {
-    //     "anyOf": [
-    //         {
-    //             "id": "strike-back",
-    //             "state": "siege-lifted"
-    //         }
-    //     ]
-    // },
+    "requirements": {
+        "anyOf": [
+            {
+                "id": "strike-back",
+                "state": "siege-lifted"
+            }
+        ]
+    },
     "rejection": "—We are doomed. My magic is not able to stop this horde.",
     "start": "greetings",
     "entryPoints": [

@@ -20,20 +20,22 @@ export function mapRender() {
             tile.dataset.y = y;
             tile.dataset.walkable = false;
 
-            if (sections.length !== 0) {
-                for (let section of sections) {
-                    const inWidth = x >= section.width[0] && x <= section.width[section.width.length - 1];
-                    const inHeight = y >= section.height[0] && y <= section.height[section.height.length - 1];
+            const section = sections.find(section => {
+                const inWidth =
+                    x >= section.width[0] &&
+                    x <= section.width[1];
 
-                    if (!inWidth || !inHeight || !section.isVisible) {
-                        drawTiles(tile, x, y, "unknown");
-                    }
-                    else if (inWidth || inHeight || section.isVisible) {
-                        drawTiles(tile, x, y, tileType);
-                    }
-                }
-            } else {
+                const inHeight =
+                    y >= section.height[0] &&
+                    y <= section.height[1];
+
+                return inWidth && inHeight;
+            });
+
+            if (!section || section.isVisible) {
                 drawTiles(tile, x, y, tileType);
+            } else {
+                drawTiles(tile, x, y, "unknown");
             }
             row.appendChild(tile);
         }
@@ -116,12 +118,6 @@ function drawTiles(tile, x, y, tileType) {
                 tile.dataset.type = "birch";
                 tile.dataset.walkable = false;
                 break;
-            case "*":
-                tile.classList.add("pine-tree");
-                tile.textContent = "*";
-                tile.dataset.type = "pine-tree";
-                tile.dataset.walkable = false;
-                break;
             case "▲":
                 tile.classList.add("mountain");
                 tile.textContent = "▲";
@@ -190,13 +186,25 @@ function drawTiles(tile, x, y, tileType) {
             case "ʘ":
                 tile.classList.add("npc");
                 tile.textContent = "ʘ";
-                tile.dataset.type = "chlorophius cellium"
+                tile.dataset.type = "chlorophius cellium";
                 tile.dataset.walkable = true;
                 break;
             case "ħ":
                 tile.classList.add("boulder");
                 tile.textContent = "ħ";
-                tile.dataset.type = "grave"
+                tile.dataset.type = "grave";
+                tile.dataset.walkable = true;
+                break;
+            case "Đ":
+                tile.classList.add("dungeon-door");
+                tile.textContent = "Đ";
+                tile.dataset.type = "wormway";
+                tile.dataset.walkable = true;
+                break;
+            case "*":
+                tile.classList.add("dirt");
+                tile.textContent = "*";
+                tile.dataset.type = "moss";
                 tile.dataset.walkable = true;
                 break;
             case "":

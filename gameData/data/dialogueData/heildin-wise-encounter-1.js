@@ -25,17 +25,10 @@ export const dialogueData =   {
             "stateConditions": {
                 "anyOf": [
                     {
-                        "dialogueOutcome": "investigate"
-                    }
-                ]
-            }
-        },
-        {
-            "state": "agreedToInvestigate",
-            "stateConditions": {
-                "anyOf": [
-                    {
                         "dialogueOutcome": "appreciate"
+                    },
+                    {
+                        "dialogueOutcome": "investigate"
                     }
                 ]
             }
@@ -49,17 +42,17 @@ export const dialogueData =   {
                 "key": "demand"
             },
             {
-                "label": "Greetings! I am a knight of the Pine Order",
+                "label": "Greetings! I am a knight of the Pine Order.",
                 "key": "introduce"
             },
             {
-                "label": "Wait patiently",
+                "label": "Wait patiently.",
                 "key": "wait"
             }
         ]
     },
     "demand": {
-        "description": "—Impatient visitor. You come to my abode and demand something. How impetious. Let me have a closer look at you. *You see a large shadow descending from the ceiling.* —Ah, young knight. Yes, I was expecting you. Perhaps my dinner should be postponed for a while. Tell me, what is it that you have come for?",
+        "description": "—Impatient visitor. You come to my abode and demand something. How impetuous. Let me have a closer look at you. *You see a large shadow descending from the ceiling.* —Ah, young knight. Yes, I was expecting you. Perhaps my dinner should be postponed for a while. Tell me, what is it that you have come for?",
         "options": [
             {
                 "label": "I want to talk.",
@@ -110,7 +103,7 @@ export const dialogueData =   {
         ]
     },
     "talk": {
-        "description": "—I must admit I feel joy hearing you say that. I spend most of my time in solitude. The ones I usually talk to are my preys, but, as you might have guessed, they are not much of interlocutors. But let us first be properly introduce. My name is Heildin the Wise. And this is my humble keep where I dwell away from the rest of the world.",
+        "description": "—I must admit I feel joy hearing you say that. I spend most of my time in solitude. The ones I usually talk to are my preys, but, as you might have guessed, they are not much of interlocutors. But let us first be properly introduced. My name is Heildin the Wise. And this is my humble keep where I dwell away from the rest of the world.",
         "options": [
             {
                 "label": "Politely introduce yourself.",
@@ -121,8 +114,8 @@ export const dialogueData =   {
                 "key": "refuse"
             },
             {
-                "label": "Demand spider leave this land.",
-                "key": "demandLeave"
+                "label": "I was assigned to get rid of you.",
+                "key": "getRid"
             }
         ]
     },
@@ -138,8 +131,8 @@ export const dialogueData =   {
                 "key": "business"
             },
             {
-                "label": "Demand spider leave this land.",
-                "key": "demandLeave"
+                "label": "I was assigned to get rid of you.",
+                "key": "getRid"
             }
         ]
     },
@@ -155,83 +148,8 @@ export const dialogueData =   {
                 "key": "business"
             },
             {
-                "label": "Demand spider leave this land.",
-                "key": "demandLeave"
-            }
-        ]
-    },
-    "demandLeave": {
-        "description": "—How preposterous! And how utterly mindless of you. You either forgot that only a spider can evict another spider or you are playing a fool. Either way I do not appreciate it. I was of higher respect of you.",
-        "options": [
-            {
-                "label": "What do you mean?",
-                "key": "business"
-            },
-            {
                 "label": "I was assigned to get rid of you.",
                 "key": "getRid"
-            }
-        ]
-    },
-    "listen": {
-        "description": "—And after the battle, Sir Grassmore himself decorated me with a medal I have been proudly wearing till this day. *He touches a faded medal on his chest.* He told me to look for his folks. This is what I devoted my life to. This is what I have been doing lately.",
-        "options": [
-            {
-                "label": "What have you been doing?",
-                "key": "business"
-            },
-            {
-                "label": "Demand spider leave this land.",
-                "key": "demandLeave"
-            }
-        ]
-    },
-    "business": {
-        "description": "The spider comes closer. You can now see his old half-blind eyes, some of which became completely white, and a long, but sparse white beard. All his body used to be coal-black, but now it’s dark-gray. Heildin lowers his voice and speaks. —Unlike you, young knight, I dream in winter. My dreams used to be tranquil and uneventful, but since I moved to this land, my dreams have changed. Five winters I see the same dream over and over. I see a shapeless devourer, a deceiver, shapeshifter. I try to hunt it, but it eludes me every time. Something flies, but I cannot see it. I set traps, I wait, I hunt, but all in vain. Something evil, invisible, too quick to be caught is residing here. I know for sure that it’s a powerful shapeshifter. And it’s likely diseased. But as to its plans I am yet to figure it out.",
-        "options": [
-            {
-                "label": "How do you know?",
-                "key": "know"
-            }
-        ]
-    },
-    "know": {
-        "description": "—I have hunted a number of drowsy ants from the nearby colony. I have seen their insides. Some of them were diseased. But some of them were not. Last cycle, I saw them demolishing an ancient altar down by the river. That doesn’t seem like their usual behavior. What do you think?",
-        "options": [
-            {
-                "label": "Indeed it sounds unusual. I need to investigate this.",
-                "key": "investigate",
-                "quest": {
-                    "id": "ants-and-queens",
-                    "state": "spider-request"
-                }
-            },
-            {
-                "label": "There might be other reasons behind it. I won't side with you.",
-                "key": "refuseInvestigate"
-            },
-            {
-                "label": "Demand spider leave this land.",
-                "key": "demandLeave"
-            }
-        ]
-    },
-    "investigate": {
-        "description": "—That is a wise decision! Go to the small ant colony south of here. See it for yourself. But be careful, the deceiver is somewhere out there. Take care, young knight. Heildin the Wise disappears in the dark corners of the room. You no longer feel his presence.",
-        "characteristics": {
-            "reputation": 1
-        },
-        "options": []
-    },
-    "refuseInvestigate": {
-        "description": "—That is an unwise decision! I hope you will learn how to be more sagacious. Take care, young knight. *Heildin the Wise disappears in the dark corners of the room. You no longer feel his presence.*",
-        "characteristics": {
-            "reputation": -1
-        },
-        "options": [
-            {
-                "label": "Leave.",
-                "key": "leave"
             }
         ]
     },
@@ -252,17 +170,100 @@ export const dialogueData =   {
             }
         ]
     },
+    "listen": {
+        "description": "—And after the battle, Sir Grassmore himself decorated me with a medal I have been proudly wearing till this day. *He touches a faded medal on his chest.* He told me to look after his folks. This is what I devoted my life to. This is what I have been doing lately.",
+        "options": [
+            {
+                "label": "What have you been doing?",
+                "key": "business"
+            },
+            {
+                "label": "I was assigned to get rid of you.",
+                "key": "getRid"
+            }
+        ]
+    },
+    "business": {
+        "description": "The spider comes closer. You can now see his old half-blind eyes, some of which became completely white, and a long, but sparse white beard. All his body used to be coal-black, but now it’s dark-gray. Heildin lowers his voice and speaks. —Unlike you, young knight, I dream in winter. My dreams used to be tranquil and uneventful, but since I moved to these lands, my dreams have changed. For five winters I see the same dream over and over. I see a shapeless devourer, a deceiver, shapeshifter. I try to hunt it, but it eludes me every time. Something flies, but I cannot see it. I set traps, I wait, I hunt, but all in vain. Something evil, invisible, too quick to be caught is residing here. I know for sure that it’s a powerful shapeshifter. And it’s likely diseased. But as to its plans I am yet to figure it out.",
+        "options": [
+            {
+                "label": "How do you know?",
+                "key": "know"
+            }
+        ]
+    },
+    "know": {
+        "description": "—I have hunted a number of drowsy ants from the nearby colony. I have seen their insides. Some of them were diseased. But some of them were not. Last cycle, I saw them demolishing an ancient altar down by the river. That doesn’t seem like their usual behavior. What do you think?",
+        "options": [
+            {
+                "label": "Indeed it sounds unusual. I need to investigate this.",
+                "key": "agreeInvestigate",
+                "quest": {
+                    "id": "ants-and-queens",
+                    "state": "spider-request"
+                }
+            },
+            {
+                "label": "There might be other reasons behind it. I won't side with you.",
+                "key": "refuseInvestigate",
+                "quest": {
+                    "id": "spider-threats",
+                    "state": "spider-escapes",
+                }
+            },
+            {
+                "label": "Lady Butterfly tasked me to deal with you.",
+                "key": "lady"
+            },
+        ]
+    },
+    "agreeInvestigate": {
+        "description": "—That is a wise decision! Go to the small ant colony south of here. See it for yourself. But be watchful, the deceiver is somewhere out there. Take care, young knight. *Heildin the Wise disappears in the dark corners of the room. You no longer feel his presence.*",
+        "characteristics": {
+            "reputation": 1
+        },
+        "options": [
+            {
+                "label": "On my way.",
+                "key": "investigate",
+                "quest": {
+                    "id": "spider-threats",
+                    "state": "mercy",
+                }
+            }
+        ]
+    },
+    "investigate": {
+        "description": "Heildin disappears.",
+        "options": []
+    },
+    "refuseInvestigate": {
+        "description": "—That is an unwise decision! I hope you will learn how to be more sagacious. Take care, young knight. *Heildin the Wise disappears in the dark corners of the room. You no longer feel his presence.*",
+        "characteristics": {
+            "reputation": -1
+        },
+        "options": [
+            {
+                "label": "Leave.",
+                "key": "leave"
+            }
+        ]
+    },
     "slay": {
         "description": "-Such an unwise decision. Not many of your comrades have fallen victims of a spider.",
         "options": [
             {
                 "label": "Fight Heildin.",
-                "key": "death"
+                "key": "death",
+                "quest": {
+                    "id": "spider-threats",
+                    "state": "execute",
+                }
             }
         ]
     },
     "lady": {
-        "description": "Heildin thinks for a moment. —Young knight, sheath your weapon otherwise you leave me no choice.",
+        "description": "Heildin seems puzzled for a moment. —Young knight, sheath your weapon otherwise you leave me no choice.",
         "options": [
             {
                 "label": "Never! Defend yourself.",
@@ -270,14 +271,17 @@ export const dialogueData =   {
             },
             {
                 "label": "Sheath your spear.",
-                "key": "escape"
+                "key": "escape",
+                "quest": {
+                    "id": "spider-threats",
+                    "state": "spider-escapes",
+                }
             }
         ]
     },
     "escape": {
         "description": "Heildin the Wise suddenly disappears in the dark corners of the room. You no longer feel his presence.",
         "characteristics": {
-            "reputation": -1,
             "prayer": -1
         },
         "options": []
@@ -298,8 +302,8 @@ export const dialogueData =   {
                 "key": "refuse"
             },
             {
-                "label": "Demand spider leave this land.",
-                "key": "demandLeave"
+                "label": "I was assigned to get rid of you.",
+                "key": "getRid"
             }
         ]
     },

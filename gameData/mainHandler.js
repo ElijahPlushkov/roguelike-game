@@ -31,7 +31,7 @@ export let previousCoordinates = {
 const adventureLogHandler = new AdventureLog();
 
 document.addEventListener("DOMContentLoaded", () => {
-    parseLevelData("first-kingdom-site");
+    parseLevelData("chyceen-borderlands");
     console.log(stationaryEnemies);
 
     //movement

@@ -3,7 +3,7 @@ import {
     specialMessageDescription, specialMessageOptions,
     specialMessageWindow
 } from "./data/gameData.js";
-import {createContinueButton, isDialogueOutcomeEqual, markEventSeen} from "./helperFunctions.js";
+import { createContinueButton, isDialogueOutcomeEqual, markEventSeen } from "./helperFunctions.js";
 import { mapRender } from "./mapRender.js";
 import { locationData as antColonyLocationData } from "./data/levels/ant-colony.js";
 import { locationData as firstKingdomSiteLocationData } from "./data/levels/first-kingdom-site.js";
@@ -15,14 +15,12 @@ import { AdventureLog } from "./AdventureLog.js";
 import { teleportData } from "./data/teleportData.js";
 
 let journalUpdater = new QuestJournalUpdater();
+const adventureLogHandler = new AdventureLog();
 
 // list of special events
 const antColonyAreInfectedAntsDefeatedEvent = "antColonyAreInfectedAntsDefeatedEvent";
 const antColonyOutcome = "antColonyOutcome"; //TODO what kind of outcome?
-
 const firstKingdomSiteChlorophiusCelliaSwitchersEvent = "firstKingdomSiteChlorophiusCelliaSwitchersEvent";
-
-const adventureLogHandler = new AdventureLog();
 
 export function antColonyAreInfectedAntsDefeated() {
     const requirements = [
@@ -50,6 +48,10 @@ export function antColonyAreInfectedAntsDefeated() {
     }
 }
 
+export function isAbandonedHallsDoorOpened() {
+    revealSection("abandonedHalls");
+}
+
 export function isAntColonyInfected() {
     let antsAndQueens = gameData.quests.find(quest => quest.id === "ants-and-queens");
     if (antsAndQueens) {
@@ -66,7 +68,8 @@ export function isAntColonyInfected() {
                 gameData.playerCoordinates.y = 2;
                 playerCoordinates.x = 11;
                 playerCoordinates.y = 2;
-                antColonyLocationData.tileData.enemies.push({ "type": "enemy", "id": "ant-col-diseased-ant-9", "enemyType": "random-weak", "race": "ant", "x": 11, "y": 3 });
+                antColonyLocationData.tileData.enemies.push({ "type": "enemy", "id": "ant-col-diseased-ant-9", "enemyType": "random-average", "race": "ant", "x": 11, "y": 3 });
+                antColonyLocationData.tileData.enemies.push({ "type": "enemy", "id": "ant-col-diseased-ant-9", "enemyType": "random-average", "race": "ant", "x": 24, "y": 17 });
                 changeTileType(11, 3, "e");
                 mapRender();
                 specialMessageWindow.classList.add("hidden");
@@ -88,6 +91,10 @@ export function isAntColonyInfected() {
                 markEventSeen(antColonyOutcome);
                 gameData.isEventActive = false;
             });
+
+            revealSection("tradingPost");
+            changeTileType(14, 3, "□");
+
         } else if (antsAndQueens.states.includes("aftermath-colony-saved")
             && gameData.npcs.find(npc => npc.id === "agra-warchief").isAlive) {
             gameData.isEventActive = true;
@@ -102,6 +109,8 @@ export function isAntColonyInfected() {
                 markEventSeen(antColonyOutcome);
                 gameData.isEventActive = false;
             });
+
+            revealSection("tradingPost");
         }
     } else {
         return;

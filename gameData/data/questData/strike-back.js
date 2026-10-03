@@ -18,9 +18,7 @@ export const questData = {
                 "pollen": 30,
                 "reputation": 2
             },
-            "outcomes": {
-                "ant-colony": "development progress++"
-            }
+            "outcomes": {}
         }
     ]
 }
