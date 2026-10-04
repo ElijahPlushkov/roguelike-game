@@ -13,6 +13,7 @@ import { revealSection } from "./dynamicSectionHandler.js";
 import { getNpc } from "./data/npcData/npcDataManager.js";
 import { AdventureLog } from "./AdventureLog.js";
 import { teleportData } from "./data/teleportData.js";
+import { specialEventData } from "./data/specialEventData.js";
 
 let journalUpdater = new QuestJournalUpdater();
 const adventureLogHandler = new AdventureLog();
@@ -21,6 +22,16 @@ const adventureLogHandler = new AdventureLog();
 const antColonyAreInfectedAntsDefeatedEvent = "antColonyAreInfectedAntsDefeatedEvent";
 const antColonyOutcome = "antColonyOutcome"; //TODO what kind of outcome?
 const firstKingdomSiteChlorophiusCelliaSwitchersEvent = "firstKingdomSiteChlorophiusCelliaSwitchersEvent";
+
+export function initSpecialEvent(id) {
+    let specialEvent = specialEventData.specialEvents.find(specialEvent => specialEvent.id === id);
+    if (!specialEvent.hasOccurred) {
+        specialEvent.script();
+        specialEvent.hasOccured = true;
+    } else {
+        return;
+    }
+}
 
 export function antColonyAreInfectedAntsDefeated() {
     const requirements = [
@@ -46,10 +57,6 @@ export function antColonyAreInfectedAntsDefeated() {
     } else {
         return;
     }
-}
-
-export function isAbandonedHallsDoorOpened() {
-    revealSection("abandonedHalls");
 }
 
 export function isAntColonyInfected() {
@@ -94,6 +101,7 @@ export function isAntColonyInfected() {
 
             revealSection("tradingPost");
             changeTileType(14, 3, "□");
+            changeTileType(12, 1, ".");
 
         } else if (antsAndQueens.states.includes("aftermath-colony-saved")
             && gameData.npcs.find(npc => npc.id === "agra-warchief").isAlive) {
@@ -111,6 +119,7 @@ export function isAntColonyInfected() {
             });
 
             revealSection("tradingPost");
+            changeTileType(12, 1, ".");
         }
     } else {
         return;

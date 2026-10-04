@@ -2,7 +2,7 @@ import {gameData, playerCoordinates} from "./data/gameData.js";
 import {
     antColonyAreInfectedAntsDefeated, firstKingdomHunterEncounter, firstKingdomSiteChlorophiusCelliaSwitchers,
     firstKingdomSiteCindelGuattaRescued,
-    firstKingdomSitePriestSlain, isAbandonedHallsDoorOpened,
+    firstKingdomSitePriestSlain, initSpecialEvent,
     isAntColonyInfected
 } from "./specialEventsHandler.js";
 import { isNpcAlive } from "./npcHandler.js";
@@ -53,14 +53,18 @@ export function createContinueButton() {
 let firstKingdomHunterEncounterFlag = false;
 let firstKingdomSitePriestSlainFlag = false;
 let firstKingdomSiteCindelGuattaRescuedFlag = false;
-let isAbandonedHallsDoorOpenedEvent = false;
 
-export function endEvent(id, status, description, options, activeWindow, eventType) {
+export function endEvent(id, status, description, options, activeWindow, eventType, specialEventScript = null) {
     gameData.isEventActive = false;
     updateGameProgress(id, status, eventType);
     description.textContent = "";
     options.textContent = "";
     activeWindow.classList.add("hidden");
+
+    if (specialEventScript) {
+        console.log(specialEventScript);
+        initSpecialEvent(specialEventScript);
+    }
 
     // TODO this is a temporary solution
    if (!hasSeenEvent("antColonyAreInfectedAntsDefeatedEvent")) {
@@ -88,11 +92,6 @@ export function endEvent(id, status, description, options, activeWindow, eventTy
     if (isNpcAlive("cindel-guatta-first-kingdom-site-hunter") && !firstKingdomSiteCindelGuattaRescuedFlag) {
         firstKingdomSiteCindelGuattaRescued();
         firstKingdomSiteCindelGuattaRescuedFlag = true;
-    }
-
-    if (hasSeenEvent("ant-col-door-2") && !isAbandonedHallsDoorOpenedEvent) {
-        isAbandonedHallsDoorOpened();
-        isAbandonedHallsDoorOpenedEvent = true;
     }
 }
 

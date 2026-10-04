@@ -45,7 +45,7 @@ export const doorData = {
             }
         },
         {
-            "id": "ant-col-door-2",
+            "id": "ant-col-door-2-abandoned-halls",
             "type": "door",
             "tileType": "door",
             "isLocked": "10",
@@ -53,7 +53,8 @@ export const doorData = {
             "description": "You see a study door made of stone.",
             "reward": {
                 "pollen": 10
-            }
+            },
+            "script": "reveal-abandoned-hall"
         },
         {
             "id": "ant-col-door-3",

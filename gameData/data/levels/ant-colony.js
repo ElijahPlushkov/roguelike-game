@@ -65,52 +65,52 @@ export const locationData = {
         ],
         "doors": [
             {
+                "id": "ant-col-door-1",
+                "type": "door",
                 "x": 8,
-                "y": 5,
-                "type": "door",
-                "id": "ant-col-door-1"
+                "y": 5
             },
             {
+                "id": "ant-col-door-2-abandoned-halls",
+                "type": "door",
                 "x": 12,
-                "y": 6,
-                "type": "door",
-                "id": "ant-col-door-2"
+                "y": 6
             },
             {
+                "id": "ant-col-door-3",
+                "type": "door",
                 "x": 12,
-                "y": 11,
-                "type": "door",
-                "id": "ant-col-door-3"
+                "y": 11
             },
             {
+                "id": "ant-col-door-4",
+                "type": "door",
                 "x": 12,
-                "y": 16,
-                "type": "door",
-                "id": "ant-col-door-4"
+                "y": 16
             },
             {
+                "id": "ant-col-door-5",
+                "type": "door",
                 "x": 23,
-                "y": 11,
-                "type": "door",
-                "id": "ant-col-door-5"
+                "y": 11
             },
             {
+                "id": "ant-col-door-6",
+                "type": "door",
                 "x": 22,
-                "y": 16,
-                "type": "door",
-                "id": "ant-col-door-6"
+                "y": 16
             },
             {
+                "id": "ant-col-door-7",
+                "type": "door",
                 "x": 24,
-                "y": 18,
-                "type": "door",
-                "id": "ant-col-door-7"
+                "y": 18
             },
             {
-                "x": 11,
-                "y": 4,
+                "id": "ant-col-door-8",
                 "type": "door",
-                "id": "ant-col-door-8"
+                "x": 11,
+                "y": 4
             }
         ],
         "npcs": [

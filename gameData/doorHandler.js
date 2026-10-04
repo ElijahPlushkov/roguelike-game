@@ -54,7 +54,7 @@ export function accessDoor(x, y) {
                     bashButton.classList.add("hidden");
                     adventureLogHandler.appendSuccessfulMessage("You successfully unlocked the door. You gained " + door.reward.pollen + " pollen.");
 
-                    resolveDoorEncounter(door, doorId, status, doorDescription, doorOptions, doorWindow);
+                    resolveDoorEncounter(door, doorId, status, doorDescription, doorOptions, doorWindow, door.script);
                 } else {
                     adventureLogHandler.appendFailMessage("You failed to unlock the door.");
                     doorTile.type = "unwalkable";
@@ -71,7 +71,7 @@ export function accessDoor(x, y) {
                     bashButton.classList.add("hidden");
                     adventureLogHandler.appendSuccessfulMessage("You bashed the door with all your might. You gained " + door.reward.pollen + " pollen.");
 
-                    resolveDoorEncounter(door, doorId, status, doorDescription, doorOptions, doorWindow);
+                    resolveDoorEncounter(door, doorId, status, doorDescription, doorOptions, doorWindow, door.script);
                 } else {
                     adventureLogHandler.appendFailMessage("You are too weak to bash this door.");
                     doorTile.type = "unwalkable";
@@ -79,15 +79,15 @@ export function accessDoor(x, y) {
                 }
             }
         } else {
-            resolveDoorEncounter(door, doorId, status, doorDescription, doorOptions, doorWindow);
+            resolveDoorEncounter(door, doorId, status, doorDescription, doorOptions, doorWindow, door.script);
         }
     } else {
         return true;
     }
 }
 
-function resolveDoorEncounter(door, doorId, status, doorDescription, doorOptions, doorWindow) {
-    endEvent(doorId, status, doorDescription, doorOptions, doorWindow, "door");
+function resolveDoorEncounter(door, doorId, status, doorDescription, doorOptions, doorWindow, doorScript = null) {
+    endEvent(doorId, status, doorDescription, doorOptions, doorWindow, "door", doorScript);
     const reward = door.reward;
     let statChanger = new ChangeStats();
     statChanger.changeStats(reward);
