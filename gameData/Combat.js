@@ -24,6 +24,7 @@ export class Combat {
     enemyId = null;
     isShieldEquipped = false;
     enemyCoordinates = null;
+    script = null; // in case enemy's death has certain consequences
 
     statChanger = new ChangeStats();
     adventureLogHandler = new AdventureLog();
@@ -39,6 +40,7 @@ export class Combat {
         this.enemyId = enemyId;
         this.enemyCoordinates = enemyCoordinates;
         this.enemyType = enemyType
+        this.script = enemyId;
     }
 
     startCombat() {
@@ -75,11 +77,11 @@ export class Combat {
         this.isCombatOn = false;
         if (this.enemyType === "npc") {
             this.resolveCombat(this.enemy.difficulty, this.enemy.name);
-            endEvent(this.enemyId, true, npcDialogueWindowDescription, npcDialogueWindowOptions, npcBox, "combat");
+            endEvent(this.enemyId, true, npcDialogueWindowDescription, npcDialogueWindowOptions, npcBox, "combat", this.script);
             registerNpcDeath(this.enemyId);
         } else {
             this.resolveCombat(this.enemy.difficulty, this.enemy.race);
-            endEvent(this.enemyId, true, eventDescription, eventOptions, eventWindow, "combat");
+            endEvent(this.enemyId, true, eventDescription, eventOptions, eventWindow, "combat", this.script);
         }
 
         markEventSeen(this.enemyId);

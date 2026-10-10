@@ -1,6 +1,7 @@
 export const dialogueData = {
     "id": "mua-ranu-ant-queen-dialogue",
     "type": "dialogue",
+    "script": "ant-colony-outcome",
     "requirements": {
         "anyOf": [
             {

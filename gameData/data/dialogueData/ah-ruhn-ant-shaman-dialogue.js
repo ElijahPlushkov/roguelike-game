@@ -1,6 +1,7 @@
 export const dialogueData = {
     "id": "ah-ruhn-ant-shaman-dialogue",
     "type": "dialogue",
+    "script": "ant-colony-outcome",
     "requirements": {
         "anyOf": [
             {
@@ -67,7 +68,7 @@ export const dialogueData = {
         }
     ],
     "greetings": {
-        "description": "—The day has come. I was expecting you, divine spirit. My dreams foretold your arrival. Please, welcome to my humble shack. Be seated. My name is Ah'Ruhn. I am the spiritual leader, the shaman, of my god-forgotten colony like my father was before me, and his father before him. Please, you must be weary after your journey. Drink this. *Ah'Rugn ladles something from a pot. It's hot and smells like herbs.*",
+        "description": "—The day has come. I was expecting you, divine spirit. My dreams foretold your arrival. Please, welcome to my humble shack. Be seated. My name is Ah'Ruhn. I am the spiritual leader, the shaman, of my god-forgotten colony like my father was before me, and his father before him. Please, you must be weary after your journey. Drink this. *Ah'Ruhn ladles something from a pot. It's hot and smells like herbs.*",
         "options": [
             {
                 "label": "Accept the shaman's treat and thank him.",
@@ -616,7 +617,7 @@ export const dialogueData = {
         ]
     },
     "notWholeStory": {
-        "description": "*Ah'Ruhn sighs wearily.* —You want to hear the whole story. Let it be. Five cycles ago a new king took the throne in Chyceen. In the same cycle the demonic disease penerated the kingdom. It came from the east, and we were among the first to have been hit. At that time I prayed, I went to Chyceen to ask for help, but the new king didn't heed me. I left ignored. Then in winter I slept. And I saw him.",
+        "description": "*Ah'Ruhn sighs wearily.* —You want to hear the whole story. Let it be. Five cycles ago a new king took the throne in Chyceen. In the same cycle the demonic disease penetrated the kingdom. It came from the east, and we were among the first to have been hit. At that time I prayed, I went to Chyceen to ask for help, but the new king didn't heed me. I left ignored. Then in winter I slept. And I saw him.",
         "options": [
             {
                 "label": "Keep listening.",
@@ -632,7 +633,7 @@ export const dialogueData = {
         ]
     },
     "keepListening": {
-        "description": "—Yes, I saw Him. The new King, the rightful King who will establish a new kingdom on the ambers of the ancient. He told me everything. It wasn't a dream, but a sublime vision. I felt blissfull, gleefull. My new King also granted me with the divine disease. That's not what you think it is. You call it demonic, but it is divine. I don't feel the presence of gods, nor my former queen. Only His pure, divine, blissful power. He will save us.",
+        "description": "—Yes, I saw Him. The new King, the rightful King who will establish a new kingdom on the ambers of the ancient. He told me everything. It wasn't a dream, but a sublime vision. I felt blissful, gleeful. My new King also granted me with the divine disease. That's not what you think it is. You call it demonic, but it is divine. I don't feel the presence of gods, nor my former queen. Only His pure, divine, blissful power. He will save us.",
         "options": [
             {
                 "label": "Sentence the shaman to death for his betrayal.",
@@ -690,7 +691,7 @@ export const dialogueData = {
         ]
     },
     "moss": {
-        "description": "Ah'Ruhn wants to say something, but stops mid-sentence. You look at his face and notice how old he is. His face is scared by wrinkles, his antanae are covered in colorless hair. He sits heavily on the floor. —I hear you, my queen. Yes, I still remember the warmth of your womb and the joy of being born. I went astray because I wanted to save us. There is no forgiveness for me I know. I know. *The shaman bursts into tears. After a minute he stands up.* —Leave unless you want to burn with me. *He falls silent.*.",
+        "description": "Ah'Ruhn wants to say something, but stops mid-sentence. You look at his face and notice how old he is. His face is scared by wrinkles, his antennae are covered in colorless hair. He sits heavily on the floor. —I hear you, my queen. Yes, I still remember the warmth of your womb and the joy of being born. I went astray because I wanted to save us. There is no forgiveness for me I know. I know. *The shaman bursts into tears. After a minute he stands up.* —Leave unless you want to burn with me. *He falls silent.*.",
         "options": [
             {
                 "label": "Leave hastily.",

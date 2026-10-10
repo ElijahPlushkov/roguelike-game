@@ -7,6 +7,7 @@ import { ChangeStats } from "./ChangeStats.js";
 import { initCombat } from "./combatHandler.js";
 import { AdventureLog } from "./AdventureLog.js";
 import { getDialogue } from "./data/dialogueData/dialogueDataManager.js";
+import { initSpecialEvent } from "./specialEventsHandler.js";
 
 const adventureLogHandler = new AdventureLog();
 const journalUpdater = new QuestJournalUpdater();
@@ -134,7 +135,7 @@ export function initDialogue(dialogueId, stateKey, dialogueSource = null) {
         dialogueOptions.prepend(continueButton);
 
         continueButton.addEventListener("click", function () {
-            endEvent(dialogueId, finalStateKey, dialogueDescription, dialogueOptions, dialogueWindow, "dialogue");
+            endEvent(dialogueId, finalStateKey, dialogueDescription, dialogueOptions, dialogueWindow, "dialogue", dialogue.script);
             console.log(gameData.dialogueOutcomes);
             if (dialogue.quest) {
                 journalUpdater.journalUpdater(dialogue.quest);
@@ -146,6 +147,7 @@ export function initDialogue(dialogueId, stateKey, dialogueSource = null) {
             }
         });
 
+        //TODO there is bug with too rapid death window
         if (stateKey === "death") {
             handleDeath();
         }
@@ -189,7 +191,6 @@ function checkOptionConditions(optionConditions) {
     if (optionConditions.dialogueOutcome) {
         const { id, outcome } = optionConditions.dialogueOutcome;
         const dialogue = gameData.dialogueOutcomes.find(dialogue => dialogue.id === id);
-        console.log(dialogue);
         return dialogue ? dialogue.outcome === outcome : false;
     }
 
@@ -216,9 +217,7 @@ function checkOptionConditions(optionConditions) {
 }
 
 function displayStatRequirementsInfo(option) {
-
     let requirementInfo = "";
-
     if (option.requirements) {
         for (const [requirement, value] of Object.entries(option.requirements)) {
             let abbreviations = requirement.slice(0, 1).toUpperCase();

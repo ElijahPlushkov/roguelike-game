@@ -1,11 +1,8 @@
-import {gameData, playerCoordinates} from "./data/gameData.js";
+import { gameData, playerCoordinates } from "./data/gameData.js";
 import {
-    antColonyAreInfectedAntsDefeated, firstKingdomHunterEncounter, firstKingdomSiteChlorophiusCelliaSwitchers,
-    firstKingdomSiteCindelGuattaRescued,
-    firstKingdomSitePriestSlain, initSpecialEvent,
-    isAntColonyInfected
+    antColonyAreInfectedAntsDefeated, firstKingdomSiteChlorophiusCelliaSwitchers,
+    initSpecialEvent
 } from "./specialEventsHandler.js";
-import { isNpcAlive } from "./npcHandler.js";
 
 export function hasSpecialRequirements(event) {
     let isConditionMet = event.requirements.anyOf.some(condition => {
@@ -50,10 +47,6 @@ export function createContinueButton() {
     return continueButton;
 }
 
-let firstKingdomHunterEncounterFlag = false;
-let firstKingdomSitePriestSlainFlag = false;
-let firstKingdomSiteCindelGuattaRescuedFlag = false;
-
 export function endEvent(id, status, description, options, activeWindow, eventType, specialEventScript = null) {
     gameData.isEventActive = false;
     updateGameProgress(id, status, eventType);
@@ -62,7 +55,6 @@ export function endEvent(id, status, description, options, activeWindow, eventTy
     activeWindow.classList.add("hidden");
 
     if (specialEventScript) {
-        console.log(specialEventScript);
         initSpecialEvent(specialEventScript);
     }
 
@@ -71,27 +63,8 @@ export function endEvent(id, status, description, options, activeWindow, eventTy
        antColonyAreInfectedAntsDefeated();
    }
 
-    if (!hasSeenEvent("antColonyOutcome")) {
-        isAntColonyInfected();
-    }
-
-    if (hasSeenEvent("first-kingdom-fort-hunter-encounter") && !firstKingdomHunterEncounterFlag) {
-        firstKingdomHunterEncounter();
-        firstKingdomHunterEncounterFlag = true;
-    }
-
     if (!hasSeenEvent("firstKingdomSiteChlorophiusCelliaSwitchersEvent")) {
         firstKingdomSiteChlorophiusCelliaSwitchers();
-    }
-
-    if (hasSeenEvent("first-kingdom-site-mold-undead-priest") && !firstKingdomSitePriestSlainFlag) {
-        firstKingdomSitePriestSlain();
-        firstKingdomSitePriestSlainFlag = true;
-    }
-
-    if (isNpcAlive("cindel-guatta-first-kingdom-site-hunter") && !firstKingdomSiteCindelGuattaRescuedFlag) {
-        firstKingdomSiteCindelGuattaRescued();
-        firstKingdomSiteCindelGuattaRescuedFlag = true;
     }
 }
 

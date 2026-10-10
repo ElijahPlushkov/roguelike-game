@@ -2,6 +2,7 @@ export const dialogueData = {
     "id": "first-kingdom-fort-hunter-encounter",
     "type": "dialogue",
     "rejection": "",
+    "script": "first-kingdom-fort-hunter-encounter",
     "start": "greetings",
     "greetings": {
         "description": "You see a male beetle dressed in damaged bright-green leather armor. He is standing behind a wooden barricade and shooting arrows at someone coming from the dark. His left wing is broken.",
@@ -34,11 +35,7 @@ export const dialogueData = {
         "options": [
             {
                 "label": "I will try to do my best.",
-                "key": "consent",
-                "quest": {
-                    "id": "mold-eradication",
-                    "state": "hunter-request"
-                }
+                "key": "consent"
             },
             {
                 "label": "There is nothing I can do..",

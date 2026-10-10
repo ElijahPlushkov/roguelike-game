@@ -43,7 +43,7 @@ export const gameData = {
     seenEvents: [],
     activatorStatuses: [],
 
-    isEventActive: false,
+    isEventActive: false
 };
 
 export let player = new Player(

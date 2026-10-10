@@ -2,6 +2,7 @@ export const dialogueData = {
     "id": "cindel-guatta-first-kingdom-site-hunter-dialogue",
     "type": "dialogue",
     "rejection": "",
+    "script": "firstKingdomSiteCindelGuattaRescued",
     "start": "greetings",
     "entryPoints": [],
     "greetings": {

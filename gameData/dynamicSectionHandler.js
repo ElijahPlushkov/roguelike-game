@@ -8,15 +8,11 @@ export function revealSection(id) {
         if (hasSpecialRequirements(section)) {
             section.isVisible = true;
             mapRender();
-            return true;
         } else {
             console.log("the requirements are not met. don't reveal.");
-            return false;
         }
     } else {
         section.isVisible = true;
         mapRender();
-        return true;
     }
-
 }
