@@ -1,6 +1,8 @@
 import { revealSection } from "../dynamicSectionHandler.js";
 import {
+    antColonyAreInfectedAntsDefeated,
     firstKingdomHunterEncounter,
+    firstKingdomSiteChlorophiusCelliaSwitchers,
     firstKingdomSiteCindelGuattaRescued,
     firstKingdomSitePriestSlain,
     isAntColonyInfected
@@ -9,6 +11,11 @@ import {
 export const specialEventData = {
     "id": "special-events",
     "specialEvents": [
+        {
+          "id": "antColonyAreInfectedAntsDefeated",
+          "hasOccurred": false,
+          "script": () => antColonyAreInfectedAntsDefeated()
+        },
         {
             "id": "reveal-abandoned-hall",
             "hasOccurred": false,
@@ -25,6 +32,11 @@ export const specialEventData = {
             "script": () => firstKingdomHunterEncounter()
         },
         {
+            "id": "firstKingdomSiteChlorophiusCelliaSwitchers",
+            "hasOccurred": false,
+            "script": () => firstKingdomSiteChlorophiusCelliaSwitchers()
+        },
+        {
             "id": "firstKingdomSiteCindelGuattaRescued",
             "hasOccurred": false,
             "script": () => firstKingdomSiteCindelGuattaRescued()
@@ -36,3 +48,5 @@ export const specialEventData = {
         }
     ]
 }
+
+export const collectionQuests = ["antColonyAreInfectedAntsDefeated", "firstKingdomSiteChlorophiusCelliaSwitchers"];

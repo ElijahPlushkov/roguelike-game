@@ -8,8 +8,11 @@ import { getNpc } from "./npcData/npcDataManager.js";
 import { AdventureLog } from "../AdventureLog.js";
 import { locationData as firstKingdomSiteLocationData } from "./levels/first-kingdom-site.js";
 import { displaySpecialMessage } from "../specialEventsHandler.js";
+import { teleportData } from "./teleportData.js";
+import { QuestJournalUpdater } from "../QuestJournalUpdater.js";
 
 const adventureLogHandler = new AdventureLog();
+let journalUpdater = new QuestJournalUpdater();
 
 export function isAntColonyInfected() {
     let antsAndQueens = gameData.quests.find(quest => quest.id === "ants-and-queens");
@@ -91,5 +94,54 @@ export function firstKingdomSitePriestSlain() {
         changeTileType(27, 4, ".");
     } else {
         return;
+    }
+}
+
+export function antColonyAreInfectedAntsDefeated() {
+    const requirements = [
+        {id: "ant-col-diseased-ant-1", outcome: true},
+        {id: "ant-col-diseased-ant-2", outcome: true},
+        {id: "ant-col-diseased-ant-3", outcome: true},
+        {id: "ant-col-diseased-ant-4", outcome: true},
+        {id: "ant-col-diseased-ant-5", outcome: true},
+        {id: "ant-col-diseased-ant-6", outcome: true},
+        {id: "ant-col-diseased-ant-7", outcome: true},
+        {id: "ant-col-diseased-ant-8", outcome: true}
+    ]
+
+    const combatOutcomes = gameData.combatOutcomes;
+    const strCombatOutcomes = new Set(combatOutcomes.map(combat => JSON.stringify(combat)));
+
+    if (requirements.every(combat => strCombatOutcomes.has(JSON.stringify(combat)))
+        && getNpc("ant-col-agim-sa").isAlive) {
+        journalUpdater.journalUpdater({id: "strike-back", state: "diseased-ants-killed"});
+        return true;
+    } else {
+        return false;
+    }
+}
+
+export function firstKingdomSiteChlorophiusCelliaSwitchers() {
+    const requirements = [
+        {id: 'first-kingdom-site-portal-activator-1', status: true},
+        {id: 'first-kingdom-site-portal-activator-2', status: true},
+        {id: 'first-kingdom-site-portal-activator-3', status: true}
+    ]
+
+    const activatorStatuses = gameData.activatorStatuses;
+    const strActivatorStatuses = new Set(activatorStatuses.map(status => JSON.stringify(status)));
+
+    if (requirements.every(status => strActivatorStatuses.has(JSON.stringify(status)))) {
+
+        let teleport = teleportData.teleports.find(teleport => teleport.id === "first-kingdom-site-teleport-3");
+        teleport.charges = 1;
+        adventureLogHandler.appendSuccessfulMessage("You charge a teleport.");
+
+        firstKingdomSiteLocationData.tileData.enemies.push({ "type": "enemy", "id": "mold-undead-8", "enemyType": "random-average", "race": "mold undead", "aggressive": 1, "x": 9, "y": 15 });
+        changeTileType(9, 15, "e");
+        adventureLogHandler.appendFailMessage("A mold undead awakens.");
+        return true;
+    } else {
+        return false;
     }
 }

@@ -1,8 +1,5 @@
 import { gameData, playerCoordinates } from "./data/gameData.js";
-import {
-    antColonyAreInfectedAntsDefeated, firstKingdomSiteChlorophiusCelliaSwitchers,
-    initSpecialEvent
-} from "./specialEventsHandler.js";
+import { initCollectionQuests, initSpecialEvent } from "./specialEventsHandler.js";
 
 export function hasSpecialRequirements(event) {
     let isConditionMet = event.requirements.anyOf.some(condition => {
@@ -58,14 +55,7 @@ export function endEvent(id, status, description, options, activeWindow, eventTy
         initSpecialEvent(specialEventScript);
     }
 
-    // TODO this is a temporary solution
-   if (!hasSeenEvent("antColonyAreInfectedAntsDefeatedEvent")) {
-       antColonyAreInfectedAntsDefeated();
-   }
-
-    if (!hasSeenEvent("firstKingdomSiteChlorophiusCelliaSwitchersEvent")) {
-        firstKingdomSiteChlorophiusCelliaSwitchers();
-    }
+    initCollectionQuests();
 }
 
 function updateGameProgress(id, finalState, eventType) {
