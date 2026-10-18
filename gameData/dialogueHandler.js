@@ -1,4 +1,4 @@
-import { gameData, eventDescription, eventOptions, eventWindow } from "./data/gameData.js";
+import { gameData } from "./data/gameData.js";
 import { endEvent, createContinueButton, hasSpecialRequirements } from "./helperFunctions.js";
 import { handleDeath } from "./deathHandler.js";
 import { QuestJournalUpdater } from "./QuestJournalUpdater.js";
@@ -7,12 +7,16 @@ import { ChangeStats } from "./ChangeStats.js";
 import { initCombat } from "./combatHandler.js";
 import { AdventureLog } from "./AdventureLog.js";
 import { getDialogue } from "./data/dialogueData/dialogueDataManager.js";
-import { initSpecialEvent } from "./specialEventsHandler.js";
 
 const adventureLogHandler = new AdventureLog();
 const journalUpdater = new QuestJournalUpdater();
 
+const dialogueWindowElement = document.querySelector(".dialogue-box");
+const dialogueDescriptionElement = document.querySelector(".dialogue-description");
+const dialogueOptionsElement = document.querySelector(".dialogue-options");
+
 export function initDialogue(dialogueId, stateKey, dialogueSource = null) {
+    gameData.isEventActive = true;
     //find the dialogue
     const dialogue = getDialogue(dialogueId);
 
@@ -25,10 +29,12 @@ export function initDialogue(dialogueId, stateKey, dialogueSource = null) {
         dialogueDescription = npcDialogueWindowDescription;
         dialogueOptions = npcDialogueWindowOptions;
     } else {
-        dialogueWindow = eventWindow;
-        dialogueDescription = eventDescription;
-        dialogueOptions = eventOptions;
+        dialogueWindow = dialogueWindowElement;
+        dialogueDescription = dialogueDescriptionElement;
+        dialogueOptions = dialogueOptionsElement;
     }
+
+    dialogueWindow.classList.remove("hidden");
 
     if (dialogue.requirements) {
         if (!hasSpecialRequirements(dialogue)) {
@@ -119,11 +125,8 @@ export function initDialogue(dialogueId, stateKey, dialogueSource = null) {
         });
         //if no options left, register the final outcome
     } else {
-
         const finalStateKey = stateKey || currentStateKey;
-        console.log(finalStateKey);
         const finalState = dialogue[finalStateKey];
-        console.log(finalState);
 
         if (!finalState) {
             console.error("Invalid final state:", finalStateKey);
@@ -136,7 +139,6 @@ export function initDialogue(dialogueId, stateKey, dialogueSource = null) {
 
         continueButton.addEventListener("click", function () {
             endEvent(dialogueId, finalStateKey, dialogueDescription, dialogueOptions, dialogueWindow, "dialogue", dialogue.script);
-            console.log(gameData.dialogueOutcomes);
             if (dialogue.quest) {
                 journalUpdater.journalUpdater(dialogue.quest);
             }

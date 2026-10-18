@@ -100,14 +100,6 @@ const armorRateModifier = document.querySelector(".armor-rate-modifier");
 
 const agilityModifier = document.querySelector(".agility-modifier");
 
-const eventWindow = document.querySelector(".event-box");
-
-const eventDescription = document.querySelector(".event-description");
-
-const eventOptions = document.querySelector(".event-options");
-
-const eventInfo = document.querySelector(".event-info");
-
 const journalWindow = document.querySelector(".journal-box");
 
 const journalClose = document.querySelector(".journal-close");
@@ -124,7 +116,6 @@ const specialMessageOptions = document.querySelector(".special-message-options")
 export { displayMaxHealth, displayCurrentHealth, displayMaxMysticism, displayCurrentMysticism, displayWillpower,
     displayReputation, displayMight, displayPrayer, displayAgility, displayPollen, displayArmorRate, armorRateModifier,
     agilityModifier,
-    eventWindow, eventDescription, eventOptions, eventInfo,
     journalWindow, journalClose, combatWindow, combatLog, dungeonWindow,
     specialMessageWindow, specialMessageDescription, specialMessageOptions };
 

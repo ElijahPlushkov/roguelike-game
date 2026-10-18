@@ -75,7 +75,8 @@
     overflow-y: auto;
 }
 
-.event-box {
+.event-box,
+.dialogue-box {
     position: fixed;
     top: 93px;
     right: 500px;
@@ -86,20 +87,23 @@
     padding: 5px;
 }
 
-.event-content {
+.event-content,
+.dialogue-content {
     display: grid;
     grid-template-rows: 1fr 1fr;
     height: 95%;
     gap: 10px;
 }
 
-.event-description {
+.event-description,
+.dialogue-description {
     font-size: 16px;
     overflow-y: auto;
     min-height: 0;
 }
 
-.event-options {
+.event-options,
+.dialogue-options {
     display: flex;
     flex-direction: column;
     gap: 8px;

@@ -47,8 +47,12 @@ export function createContinueButton() {
 export function endEvent(id, status, description, options, activeWindow, eventType, specialEventScript = null) {
     gameData.isEventActive = false;
     updateGameProgress(id, status, eventType);
-    description.textContent = "";
-    options.textContent = "";
+    if (description) {
+        description.textContent = "";
+    }
+    if (options) {
+        options.textContent = "";
+    }
     activeWindow.classList.add("hidden");
 
     if (specialEventScript) {

@@ -1,3 +1,4 @@
+import { eventData as startingMessage } from "./starting-message.js";
 import { eventData as spiderLairTunnel } from "./spider-lair-tunnel.js";
 import { eventData as spiderLairDesc} from "./spider-lair-desc.js";
 import { eventData as spiderLairPreyAnt } from "./spider-lair-prey-ant.js"
@@ -6,6 +7,7 @@ import { eventData as firstKingdomSiteSwitcherRoom } from "./first-kingdom-site-
 import { eventData as firstKingdomSiteMosaic } from "./first-kingdom-site-mosaic.js";
 
 const eventRegistry = {
+    "starting-message": startingMessage,
     "spider-lair-tunnel": spiderLairTunnel,
     "spider-lair-desc": spiderLairDesc,
     "spider-lair-prey-ant": spiderLairPreyAnt,

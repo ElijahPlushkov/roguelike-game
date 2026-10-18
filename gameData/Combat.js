@@ -1,10 +1,7 @@
 import {
     gameData,
     displayCurrentHealth,
-    eventDescription,
-    eventOptions,
-    combatWindow, combatLog, displayPollen, armorRateModifier, agilityModifier, playerCoordinates, dungeonWindow,
-    eventWindow
+    combatWindow, combatLog, displayPollen, armorRateModifier, agilityModifier, playerCoordinates, dungeonWindow
 } from "./data/gameData.js";
 import { endEvent, markEventSeen } from "./helperFunctions.js";
 import { ChangeStats } from "./ChangeStats.js";
@@ -14,6 +11,7 @@ import { mapRender } from "./mapRender.js";
 import { AdventureLog } from "./AdventureLog.js";
 import { changeTileType } from "./mapHandler.js";
 import { npcDialogueWindowDescription, npcDialogueWindowOptions, npcBox, registerNpcDeath } from "./npcHandler.js";
+import { eventWindow } from "./eventHandler.js";
 
 export class Combat {
 
@@ -81,7 +79,7 @@ export class Combat {
             registerNpcDeath(this.enemyId);
         } else {
             this.resolveCombat(this.enemy.difficulty, this.enemy.race);
-            endEvent(this.enemyId, true, eventDescription, eventOptions, eventWindow, "combat", this.script);
+            endEvent(this.enemyId, true, null, null, combatWindow, "combat", this.script);
         }
 
         markEventSeen(this.enemyId);
@@ -97,7 +95,7 @@ export class Combat {
     }
 
     clearCombatState() {
-        this.hideCombatWindow();
+        combatWindow.classList.add("hidden");
         combatLog.innerHTML = "";
         this.enemy = null;
         this.unequipShield();
@@ -367,13 +365,9 @@ export class Combat {
         combatWindow.classList.remove("hidden");
     }
 
-    hideCombatWindow() {
-        combatWindow.classList.add("hidden");
-    }
-
     displayPlayerInfo(player) {
-        let playerWeapon = document.querySelector(".combat-weapon");
-        playerWeapon.textContent = player.weapon.name;
+        // let playerWeapon = document.querySelector(".combat-weapon");
+        // playerWeapon.textContent = player.weapon.name;
 
         let chopDamage = document.querySelector(".weapon-chop-damage");
         chopDamage.textContent = player.weapon.attackTypes.chop;

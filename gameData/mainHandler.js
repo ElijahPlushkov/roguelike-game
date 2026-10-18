@@ -1,6 +1,6 @@
 import {
     gameData, journalClose, levelData, playerCoordinates,
-    parseLevelData, eventWindow, levelId, player, stationaryEnemies
+    parseLevelData, levelId, player, stationaryEnemies
 } from "./data/gameData.js";
 import { initEvent } from "./eventHandler.js";
 import { mapRender } from "./mapRender.js";
@@ -32,7 +32,11 @@ const adventureLogHandler = new AdventureLog();
 
 document.addEventListener("DOMContentLoaded", () => {
     parseLevelData("chyceen-borderlands");
-    console.log(stationaryEnemies);
+
+    if (levelId === "chyceen-borderlands") {
+        initEvent("starting-message");
+        markEventSeen("starting-message");
+    }
 
     //movement
     document.addEventListener("keydown", (e) => {
@@ -150,8 +154,6 @@ function checkForAnyEvent(x, y) {
         if (newEvent.type === "event") {
             const eventId = newEvent.id;
             if (!hasSeenEvent(eventId)) {
-                eventWindow.classList.toggle("hidden");
-                gameData.isEventActive = true;
                 initEvent(eventId);
                 markEventSeen(eventId);
             }
@@ -160,8 +162,6 @@ function checkForAnyEvent(x, y) {
         if (newEvent.type === "dialogue") {
             const dialogueId = newEvent.id;
             if (!hasSeenEvent(dialogueId)) {
-                eventWindow.classList.toggle("hidden");
-                gameData.isEventActive = true;
                 initDialogue(dialogueId, gameData.stateKey);
                 markEventSeen(dialogueId);
             }
