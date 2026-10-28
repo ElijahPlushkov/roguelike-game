@@ -52,24 +52,16 @@
 
 .tree {
     background-color: var(--tree-tile);
-    background-image: url("../tileImages/tree-tile-img.png");
-}
-
-.birch {
-    background-color: var(--bush-tile);
-    background-image: url("../tileImages/birch-tile-img.png");
-}
-
-.pine-tree {
-    background-color: var(--tree-tile);
+    background-image: url("../tileImages/tree-tile.png");
 }
 
 .mountain {
-    background-color: var(--mountain-tile);
+    /*background-color: var(--mountain-tile);*/
+    background-image: url("../tileImages/mountain-tile.png");
 }
 
 .water {
-    background-color: var(--water-tile);
+    background-image: url("../tileImages/water-tile.png");
 }
 
 .npc {
@@ -78,6 +70,7 @@
 
 .enemy {
     background-color: var(--enemy-tile);
+    background-image: url("../tileImages/enemy-tile.png");
 }
 
 .item {
@@ -86,6 +79,7 @@
 
 .door {
     background-color: var(--door-tile);
+    /*background-image: url("../tileImages/door-tile.png");*/
 }
 
 .altar {
@@ -100,19 +94,33 @@
 
 .camp {
     background-color: var(--camp-tile);
-    background-image: url("../tileImages/camp-tile-img.png");
+    background-image: url("../tileImages/camp-tile.png");
 }
 
 .dungeon-door {
-    background-color: var(--door-tile);
+    /*background-color: var(--door-tile);*/
+    background-image: url("../tileImages/dungeon-tile.png");
 }
 
 .building {
     background-color: var(--boulder-tile);
+    background-image: url("../tileImages/building-tile.png");
+}
+
+.village {
+    background-image: url("../tileImages/village-tile.png");
+}
+
+.town {
+    background-image: url("../tileImages/town-tile.png");
 }
 
 .trap {
     background-color: var(--rejection-text-color);
+}
+
+.uncharged-teleport {
+    background-color: #5a5a5a;
 }
 
 .unknown {

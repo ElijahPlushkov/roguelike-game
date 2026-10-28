@@ -17,7 +17,6 @@ const dialogueOptionsElement = document.querySelector(".dialogue-options");
 
 export function initDialogue(dialogueId, stateKey, dialogueSource = null) {
     gameData.isEventActive = true;
-    //find the dialogue
     const dialogue = getDialogue(dialogueId);
 
     let dialogueWindow;
@@ -149,7 +148,7 @@ export function initDialogue(dialogueId, stateKey, dialogueSource = null) {
             }
         });
 
-        //TODO there is bug with too rapid death window
+        //TODO there is a bug with too rapid death window
         if (stateKey === "death") {
             handleDeath();
         }

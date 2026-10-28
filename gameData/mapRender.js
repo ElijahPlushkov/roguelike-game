@@ -97,7 +97,7 @@ function drawTiles(tile, x, y, tileType) {
                 break;
             case "e":
                 tile.classList.add("enemy");
-                tile.textContent = "e";
+                // tile.textContent = "e";
                 tile.dataset.type = "enemy";
                 tile.dataset.walkable = true;
                 break;
@@ -107,9 +107,9 @@ function drawTiles(tile, x, y, tileType) {
                 tile.dataset.type = "altar";
                 tile.dataset.walkable = true;
                 break;
-            case "П":
+            case "⋂":
                 tile.classList.add("door");
-                tile.textContent = "П";
+                tile.textContent = "⋂";
                 tile.dataset.type = "door";
                 tile.dataset.walkable = true;
                 break;
@@ -120,13 +120,13 @@ function drawTiles(tile, x, y, tileType) {
                 break;
             case "▲":
                 tile.classList.add("mountain");
-                tile.textContent = "▲";
+                // tile.textContent = "▲";
                 tile.dataset.type = "mountain";
                 tile.dataset.walkable = false;
                 break;
             case "≈":
                 tile.classList.add("water");
-                tile.textContent = "≈";
+                // tile.textContent = "≈";
                 tile.dataset.type = "water";
                 tile.dataset.walkable = false;
                 break;
@@ -137,19 +137,19 @@ function drawTiles(tile, x, y, tileType) {
                 break;
             case "⌂":
                 tile.classList.add("dungeon-door");
-                tile.textContent = "⌂";
+                // tile.textContent = "⌂";
                 tile.dataset.type = "dungeon";
                 tile.dataset.walkable = true;
                 break;
             case "F":
                 tile.classList.add("building");
-                tile.textContent = "F";
+                // tile.textContent = "F";
                 tile.dataset.type = "building";
                 tile.dataset.walkable = true;
                 break;
-            case "<":
+            case "⩍":
                 // tile.classList.add("");
-                tile.textContent = "<";
+                tile.textContent = "⩍";
                 tile.dataset.type = "exit";
                 tile.dataset.walkable = true;
                 break;
@@ -205,6 +205,11 @@ function drawTiles(tile, x, y, tileType) {
                 tile.classList.add("dirt");
                 tile.textContent = "*";
                 tile.dataset.type = "moss";
+                tile.dataset.walkable = true;
+                break;
+            case "▢":
+                tile.classList.add("town");
+                tile.dataset.type = "town";
                 tile.dataset.walkable = true;
                 break;
             case "":

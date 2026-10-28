@@ -26,7 +26,7 @@ export function initTeleport(teleportId, teleportCoordinates) {
             let chargeCost = calculateChargeCost(teleport, teleportCoordinates);
             gameData.isEventActive = true;
             teleportBox.classList.remove("hidden");
-            teleportDescription.textContent = "The teleport has run out of charges. Do you wish to charge it? You need " + chargeCost + " pollen.";
+            teleportDescription.textContent = "The teleport has run out of charge. Do you wish to charge it? You need " + chargeCost + " pollen grains.";
             chargeButton = createActionButton("charge");
             leaveButton = createActionButton("leave");
 
