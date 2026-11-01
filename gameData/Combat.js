@@ -51,10 +51,7 @@ export class Combat {
 
         //TODO this is a temporary solution, later fights and flights will affect npcs' disposition
         if (this.enemyType === "npc") {
-            let fightButton = this.createActionButtons("fight-btn", "Fight.", "fight");
-            let negotiateButton = this.createActionButtons("negotiate-btn", "Negotiate.", "negotiate");
-            this.actionTypes.append(fightButton, negotiateButton);
-            // this.toggleCombatButtons();
+            this.toggleCombatButtons();
         } else {
             let fightButton = this.createActionButtons("fight-btn", "Fight.", "fight");
             let negotiateButton = this.createActionButtons("negotiate-btn", "Negotiate.", "negotiate");
@@ -121,6 +118,7 @@ export class Combat {
         this.playerAttack(weaponDamage, attackType);
 
         if (this.enemy.health <= 0) {
+            this.displayEnemyCombatMessage("Your enemy perishes.");
             this.finishCombat(this.enemy.id);
             return;
         }
@@ -128,6 +126,7 @@ export class Combat {
         this.enemyAttack();
 
         if (this.player.currentHealth <= 0) {
+            this.displayPlayerCombatMessage("You perish.");
             handleDeath();
             this.shield.removeEventListener("click", this.toggleShield);
             this.attackTypes.removeEventListener("click", this.handleAttackButtons);
@@ -452,6 +451,7 @@ export class Combat {
         newMessage.textContent = message;
         newMessage.classList.add("combat-player-message");
         combatLog.append(newMessage);
+        combatLog.scrollTop = combatLog.scrollHeight;
     }
 
     displayEnemyCombatMessage(message) {
@@ -459,10 +459,10 @@ export class Combat {
         newMessage.textContent = message;
         newMessage.classList.add("combat-enemy-message");
         combatLog.append(newMessage);
+        combatLog.scrollTop = combatLog.scrollHeight;
     }
 
     resolveCombat(enemyDifficulty, race) {
-
         let increase;
         let pollenChange;
 

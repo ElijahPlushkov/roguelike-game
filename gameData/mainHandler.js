@@ -19,6 +19,7 @@ import { initTrap, isTrapDetected } from "./trapHandler.js";
 import { displayStaticEvent, removeStaticEvent } from "./staticEventsHandler.js";
 import { initActivator, isActivatorDetected } from "./activatorHandler.js";
 import { initTeleport } from "./teleportHandler.js";
+import { PrayerBookUpdater } from "./PrayerBookUpdater.js";
 
 let spawnPosition;
 let spawnChapter;
@@ -265,12 +266,15 @@ function isRequirementPassed(requirements, event) {
     return true;
 }
 
+//menu buttons
 const saveGameButton = document.getElementById("saveGame");
 saveGameButton.addEventListener("click", saveGame);
 
 const loadGameButton = document.getElementById("loadGame");
 loadGameButton.addEventListener("click", loadSavedGame);
 
+
+// quest journal
 const questJournal = document.getElementById("questJournal");
 let journalUpdater = new QuestJournalUpdater();
 
@@ -280,4 +284,17 @@ questJournal.addEventListener("click", () => {
 
 journalClose.addEventListener("click", () => {
     journalUpdater.closeJournal();
+});
+
+//prayers book
+const prayerBook = document.getElementById("prayerBook");
+let prayerBookUpdater = new PrayerBookUpdater();
+
+prayerBook.addEventListener("click", () => {
+    prayerBookUpdater.togglePrayersBook();
+});
+
+const prayerBookClose = document.querySelector(".prayer-book-close");
+prayerBookClose.addEventListener("click", () => {
+   prayerBookUpdater.closePrayersBook();
 });

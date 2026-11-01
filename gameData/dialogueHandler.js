@@ -146,12 +146,11 @@ export function initDialogue(dialogueId, stateKey, dialogueSource = null) {
                 statChanger.changeStats(finalState.characteristics);
                 adventureLogHandler.appendEventResolutionMessage(finalState.characteristics);
             }
-        });
 
-        //TODO there is a bug with too rapid death window
-        if (stateKey === "death") {
-            handleDeath();
-        }
+            if (finalStateKey === "death") {
+                handleDeath();
+            }
+        });
     }
 }
 

@@ -11,7 +11,7 @@ export function handleDeath() {
     try{
         setTimeout(function() {
             window.location.replace("death-screen.html");
-        }, 1000);
+        }, 3000);
     } catch (e) {
         console.log("an error occurred");
     }
