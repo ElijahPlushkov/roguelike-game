@@ -6,9 +6,9 @@ import { rangedWeaponsData } from "./data/rangedWeaponsData.js";
 
 export class Player {
 
-    BASE_HEALTH = 100;
-    BASE_MYSTICISM = 100;
-    BASE_WILLPOWER = 100;
+    BASE_HEALTH = 20;
+    BASE_MYSTICISM = 20;
+    BASE_WILLPOWER = 1;
 
     HEALTH_MODIFIER = 2;
     MYSTICISM_MODIFIER = 1;
@@ -26,14 +26,15 @@ export class Player {
     agility = 0;
     pollen = 0;
 
+    prayers = [];
+
     accuracy = 0;
     evasion = 0;
     spellChance = 15;
 
     ammunition = 0;
 
-    constructor(might, reputation, prayer, agility, pollen, weaponId, armorId, shieldId, rangedWeaponId, ammunition) {
-        /* TO DO */
+    constructor(might, reputation, prayer, agility, pollen, prayers, weaponId, armorId, shieldId, rangedWeaponId, ammunition) {
         this.health = this.BASE_HEALTH * this.HEALTH_MODIFIER;
         this.currentHealth = this.health;
         this.mysticism = this.BASE_MYSTICISM * this.MYSTICISM_MODIFIER;

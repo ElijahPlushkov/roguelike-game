@@ -19,7 +19,7 @@ import { initTrap, isTrapDetected } from "./trapHandler.js";
 import { displayStaticEvent, removeStaticEvent } from "./staticEventsHandler.js";
 import { initActivator, isActivatorDetected } from "./activatorHandler.js";
 import { initTeleport } from "./teleportHandler.js";
-import { PrayerBookUpdater } from "./PrayerBookUpdater.js";
+import { PrayerBook } from "./PrayerBook.js";
 
 let spawnPosition;
 let spawnChapter;
@@ -30,9 +30,21 @@ export let previousCoordinates = {
 }
 
 const adventureLogHandler = new AdventureLog();
+const journalUpdater = new QuestJournalUpdater();
+const prayerBookUpdater = new PrayerBook();
 
 document.addEventListener("DOMContentLoaded", () => {
     parseLevelData("chyceen-borderlands");
+
+    // displaying prayers in the prayer book
+    prayerBookUpdater.displayPrayers();
+
+    document.querySelectorAll(".prayer-book-prayer").forEach(prayer => {
+        prayer.addEventListener('click', () => {
+            const spellId = prayer.id;
+            prayerBookUpdater.invokePrayer(spellId);
+        });
+    });
 
     if (levelId === "chyceen-borderlands") {
         initEvent("starting-message");
@@ -273,10 +285,8 @@ saveGameButton.addEventListener("click", saveGame);
 const loadGameButton = document.getElementById("loadGame");
 loadGameButton.addEventListener("click", loadSavedGame);
 
-
 // quest journal
 const questJournal = document.getElementById("questJournal");
-let journalUpdater = new QuestJournalUpdater();
 
 questJournal.addEventListener("click", () => {
     journalUpdater.toggleJournal();
@@ -286,9 +296,8 @@ journalClose.addEventListener("click", () => {
     journalUpdater.closeJournal();
 });
 
-//prayers book
+//prayer book
 const prayerBook = document.getElementById("prayerBook");
-let prayerBookUpdater = new PrayerBookUpdater();
 
 prayerBook.addEventListener("click", () => {
     prayerBookUpdater.togglePrayersBook();

@@ -7,13 +7,15 @@ export const gameData = {
     playerCoordinates: {x: 0, y: 1},
 
     playerCharacteristics: {
-        reputation: 100,
-        might: 100,
-        prayer: 100,
-        agility: 100
+        reputation: 1,
+        might: 1,
+        prayer: 1,
+        agility: 1
     },
 
-    pollen: 350,
+    pollen: 10,
+
+    prayers: ["modus-domini", "divina-intervention", "acid-arrow"],
 
     health: 10,
     currentHealth: 10,
@@ -52,6 +54,7 @@ export let player = new Player(
         gameData.playerCharacteristics.prayer,
         gameData.playerCharacteristics.agility,
         gameData.pollen,
+        gameData.prayers,
         gameData.weapon,
         gameData.armor,
         gameData.shield,

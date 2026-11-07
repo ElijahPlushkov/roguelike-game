@@ -1,0 +1,11 @@
+.combat-prayer-button {
+    font-size: 14px;
+    color: var(--main-text-color);
+    border: 1px solid black;
+    border-radius: 3px;
+    margin: 5px;
+    padding: 3px;
+    text-align: left;
+    background: var(--water-tile);
+    width: 85px;
+}

@@ -47,6 +47,6 @@
     border-color: var(--player-tile);
 }
 
-.prayer-book-list ul li {
+.prayer-book-list li {
     cursor: pointer;
 }

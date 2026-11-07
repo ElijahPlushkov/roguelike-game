@@ -29,7 +29,8 @@
 }
 
 .combat-attack-types,
-.combat-action-types {
+.combat-action-types,
+.combat-prayers {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;

@@ -1,5 +1,5 @@
 export const doorData = {
-    "id": "chapter_1_doors",
+    "id": "doors",
     "doors": [
         // spider liar
         {

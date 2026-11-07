@@ -12,6 +12,7 @@ import { AdventureLog } from "./AdventureLog.js";
 import { changeTileType } from "./mapHandler.js";
 import { npcDialogueWindowDescription, npcDialogueWindowOptions, npcBox, registerNpcDeath } from "./npcHandler.js";
 import { eventWindow } from "./eventHandler.js";
+import { PrayerBook } from "./PrayerBook.js";
 
 export class Combat {
 
@@ -26,9 +27,11 @@ export class Combat {
 
     statChanger = new ChangeStats();
     adventureLogHandler = new AdventureLog();
+    prayerBookHandler = new PrayerBook();
 
     actionTypes = document.querySelector(".combat-action-types");
     attackTypes = document.querySelector(".combat-attack-types");
+    combatPrayers = document.querySelector(".combat-prayers");
     shield = document.querySelector(".shield");
     ammunitionCounter = document.querySelector(".ammunition-counter");
 
@@ -51,20 +54,21 @@ export class Combat {
 
         //TODO this is a temporary solution, later fights and flights will affect npcs' disposition
         if (this.enemyType === "npc") {
-            this.toggleCombatButtons();
+            this.toggleCombatButtons(); // engaging in an npc fight doesn't have a negotiate or flee option
+            this.prayerBookHandler.displayCombatPrayers();
         } else {
             let fightButton = this.createActionButtons("fight-btn", "Fight.", "fight");
             let negotiateButton = this.createActionButtons("negotiate-btn", "Negotiate.", "negotiate");
             let fleeButton = this.createActionButtons("flee-btn", "Flee.", "flee");
             this.actionTypes.append(fightButton, negotiateButton, fleeButton);
         }
-
         this.initRounds();
     }
 
     initRounds() {
         this.actionTypes.addEventListener("click", this.handleActionButtons);
         this.attackTypes.addEventListener("click", this.handleAttackButtons);
+        this.combatPrayers.addEventListener("click", this.handleCombatPrayerButtons);
         this.shield.addEventListener("click", this.toggleShield);
     }
 
@@ -95,14 +99,26 @@ export class Combat {
         combatWindow.classList.add("hidden");
         combatLog.innerHTML = "";
         this.enemy = null;
-        this.unequipShield();
         gameData.isEventActive = false;
         this.removeActionButtons();
         this.actionTypes.removeEventListener("click", this.handleActionButtons);
         this.attackTypes.removeEventListener("click", this.handleAttackButtons);
+        this.unequipShield();
         this.shield.removeEventListener("click", this.toggleShield);
+        this.combatPrayers.removeEventListener("click", this.handleCombatPrayerButtons);
+        this.prayerBookHandler.removeCombatPrayers();
         this.actionTypes.classList.remove("hidden");
         this.attackTypes.classList.add("hidden");
+    }
+
+    handleCombatPrayerButtons = (event) => {
+        const button = event.target.closest(".combat-prayer-button");
+        if (!button) return;
+
+        const prayerDamage = Number(button.dataset.damage);
+        const damageType = button.dataset.damageType;
+
+        this.executeAttackRound(prayerDamage, damageType, "prayer");
     }
 
     handleAttackButtons = (event) => {
@@ -114,8 +130,8 @@ export class Combat {
         this.executeAttackRound(weaponDamage, attackType);
     }
 
-    executeAttackRound(weaponDamage, attackType) {
-        this.playerAttack(weaponDamage, attackType);
+    executeAttackRound(weaponDamage, attackType, magic = null) {
+        this.playerAttack(weaponDamage, attackType, magic);
 
         if (this.enemy.health <= 0) {
             this.displayEnemyCombatMessage("Your enemy perishes.");
@@ -141,6 +157,7 @@ export class Combat {
 
         if (action === "fight") {
             this.toggleCombatButtons();
+            this.prayerBookHandler.displayCombatPrayers();
             if (!this.initiative) {
                 this.enemyAttack();
                 if (this.player.health <= 0) {
@@ -247,7 +264,14 @@ export class Combat {
         this.shield.classList.remove("shield-active");
     }
 
-    playerAttack(weaponDamage, attackType) {
+    playerAttack(weaponDamage, attackType, magic = null) {
+        if (magic) {
+            let damageDealt = weaponDamage;
+            this.decreaseEnemyHealth(damageDealt);
+            this.displayPlayerCombatMessage("You deal " + damageDealt + " " + attackType + " D.");
+            return;
+        }
+
         if (attackType === "ranged" && this.player.ammunition <= 0) {
             this.displayPlayerCombatMessage("Your ammunition is depleted.");
             return;
