@@ -1,6 +1,6 @@
 import { AdventureLog } from "./AdventureLog.js";
 import { prayerData } from "./data/prayerData.js";
-import { gameData, player } from "./data/gameData.js";
+import {displayCurrentMysticism, gameData, player} from "./data/gameData.js";
 
 const adventureLogHandler = new AdventureLog();
 
@@ -62,13 +62,37 @@ export class PrayerBook {
         return combatPrayers;
     }
 
+    hasEnoughMysticismCombatPrayer(combatPrayerId) {
+        let combatPrayer = this.findPrayer(combatPrayerId);
+        return player.currentMysticism >= combatPrayer.cost;
+    }
+
+    decreasePlayerCurrentMysticismInCombat(combatPrayerId) {
+        let prayer = this.findPrayer(combatPrayerId);
+        this.decreaseCurrentMysticism(prayer);
+    }
+
     invokePrayer(id) {
         let prayer = this.findPrayer(id);
         if (player.currentMysticism < prayer.cost) {
-            adventureLogHandler.appendFailMessage("You fail to invoke this prayer.");
+            adventureLogHandler.appendFailMessage("Not enough mysticism.");
+        } else if (!this.checkSpellChance()) {
+            this.decreaseCurrentMysticism(prayer);
+            adventureLogHandler.appendFailMessage("You fail to cast the spell.");
         } else {
+            this.decreaseCurrentMysticism(prayer);
             prayer.effect();
         }
+    }
+
+    decreaseCurrentMysticism(prayer) {
+        player.setCurrentMysticism(player.currentMysticism -= prayer.cost);
+        displayCurrentMysticism.textContent = player.getCurrentMysticism();
+        gameData.currentMysticism = player.getCurrentMysticism();
+    }
+
+    checkSpellChance() {
+        return Math.floor(Math.random() * 100) < player.spellChance;
     }
 
     findPrayer(id) {

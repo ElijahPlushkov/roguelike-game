@@ -30,7 +30,7 @@ export class Player {
 
     accuracy = 0;
     evasion = 0;
-    spellChance = 15;
+    spellChance = 50;
 
     ammunition = 0;
 

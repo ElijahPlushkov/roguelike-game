@@ -212,6 +212,12 @@ function drawTiles(tile, x, y, tileType) {
                 tile.dataset.type = "town";
                 tile.dataset.walkable = true;
                 break;
+            case "?":
+                tile.classList.add("dirt");
+                tile.textContent = "?";
+                tile.dataset.type = "";
+                tile.dataset.walkable = true;
+                break;
             case "":
                 tile.classList.add("unknown");
                 tile.textContent = "";

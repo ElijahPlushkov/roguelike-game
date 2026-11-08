@@ -7,20 +7,20 @@ export const gameData = {
     playerCoordinates: {x: 0, y: 1},
 
     playerCharacteristics: {
-        reputation: 1,
-        might: 1,
-        prayer: 1,
-        agility: 1
+        reputation: 5,
+        might: 5,
+        prayer: 5,
+        agility: 5
     },
 
     pollen: 10,
 
     prayers: ["modus-domini", "divina-intervention", "acid-arrow"],
 
-    health: 10,
-    currentHealth: 10,
-    mysticism: 10,
-    currentMysticism: 10,
+    health: 20,
+    currentHealth: 20,
+    mysticism: 20,
+    currentMysticism: 20,
     willpower: 10,
     statusEffects: 'none',
 
@@ -32,7 +32,7 @@ export const gameData = {
 
     accuracy: 1,
     evasion: 1,
-    spellChance: 1,
+    spellChance: 50,
 
     npcs: [],
     quests: [],

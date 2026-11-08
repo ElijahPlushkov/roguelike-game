@@ -118,7 +118,7 @@ export class Combat {
         const prayerDamage = Number(button.dataset.damage);
         const damageType = button.dataset.damageType;
 
-        this.executeAttackRound(prayerDamage, damageType, "prayer");
+        this.executeAttackRound(prayerDamage, damageType, {"id": button.id, "magic": true});
     }
 
     handleAttackButtons = (event) => {
@@ -266,10 +266,22 @@ export class Combat {
 
     playerAttack(weaponDamage, attackType, magic = null) {
         if (magic) {
-            let damageDealt = weaponDamage;
-            this.decreaseEnemyHealth(damageDealt);
-            this.displayPlayerCombatMessage("You deal " + damageDealt + " " + attackType + " D.");
-            return;
+            if (this.prayerBookHandler.hasEnoughMysticismCombatPrayer(magic.id)) {
+                if (this.prayerBookHandler.checkSpellChance()) {
+                    let damageDealt = weaponDamage;
+                    this.decreaseEnemyHealth(damageDealt);
+                    this.prayerBookHandler.decreasePlayerCurrentMysticismInCombat(magic.id);
+                    this.displayPlayerCombatMessage("You deal " + damageDealt + " " + attackType + " D.");
+                    return;
+                } else {
+                    this.prayerBookHandler.decreasePlayerCurrentMysticismInCombat(magic.id);
+                    this.displayPlayerCombatMessage("You fail to cast the spell.");
+                    return;
+                }
+            } else {
+                this.displayPlayerCombatMessage("Not enough mysticism.");
+                return;
+            }
         }
 
         if (attackType === "ranged" && this.player.ammunition <= 0) {
